@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    oor:name="Addons"
+                    oor:package="org.openoffice.Office">
+    <node oor:name="AddonUI">
+        <node oor:name="OfficeMenuBarMerging">
+            <node oor:name="org.creativecommons.openoffice.ccooo" oor:op="replace">
+                <node oor:name="S1" oor:op="replace">
+                    <prop oor:name="MergePoint">
+                        <!--<value>.uno:InsertMenu\.uno:InsertDoc</value>-->
+                        <value>.uno:InsertMenu\.uno:GraphicMenu</value>
+                    </prop>
+                    <prop oor:name="MergeCommand">
+                        <value>AddAfter</value>
+                    </prop>
+                    <prop oor:name="MergeFallback">
+                        <value>AddPath</value>
+                    </prop>
+                    <prop oor:name="MergeContext">
+                        <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                    </prop>
+                    <node oor:name="MenuItems">
+                        <node oor:name="M1" oor:op="replace">
+                            <prop oor:name="Title">
+                                <value xml:lang="en-US">Creative Commons</value>
+                            </prop>
+                            <prop oor:name="Target" oor:type="xs:string">
+                                <value>_self</value>
+                            </prop>
+                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                <value/>
+                            </prop>
+
+                            <prop oor:name="Context" oor:type="xs:string">
+                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                            </prop>
+                            <node oor:name="Submenu">
+                                <node oor:name="m1" oor:op="replace">
+                                    <prop oor:name="URL" oor:type="xs:string">
+                                        <value>org.creativecommons.openoffice.ccooo:InsertStatement</value>
+                                    </prop>
+                                    <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                        <value/>
+                                    </prop>
+                                    <prop oor:name="Target" oor:type="xs:string">
+                                        <value>_self</value>
+                                    </prop>
+                                    <prop oor:name="Context" oor:type="xs:string">
+                                        <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                                    </prop>
+                                    <prop oor:name="Title" oor:type="xs:string">
+                                        <value/>
+                                        <value xml:lang="en">Insert Sharing &amp; Reuse Permissions Statement</value>
+                                    </prop>
+                                </node>
+                                <node oor:name="m2" oor:op="replace">
+                                    <prop oor:name="URL" oor:type="xs:string">
+                                        <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
+                                    </prop>
+                                    <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                        <value/>
+                                    </prop>
+                                    <prop oor:name="Target" oor:type="xs:string">
+                                        <value>_self</value>
+                                    </prop>
+                                    <prop oor:name="Context" oor:type="xs:string">
+                                        <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                                    </prop>
+                                    <prop oor:name="Title" oor:type="xs:string">
+                                        <value/>
+                                        <value xml:lang="en">Set Sharing &amp; Reuse Permissions</value>
+                                    </prop>
+                                </node>
+                            </node>
+
+                        </node>
+                    </node>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr" oor:op="replace">
+                <node oor:name="S1" oor:op="replace">
+                    <prop oor:name="MergePoint">
+                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
+                    </prop>
+                    <prop oor:name="MergeCommand">
+                        <value>AddBefore</value>
+                    </prop>
+                    <prop oor:name="MergeFallback">
+                        <value>AddPath</value>
+                    </prop>
+                    <node oor:name="MenuItems">
+                        <node oor:name="m1" oor:op="replace">
+                            <prop oor:name="URL" oor:type="xs:string">
+                                <value>org.creativecommons.openoffice.ccooo:InsertPictureFlickr</value>
+                            </prop>
+                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                <value/>
+                            </prop>
+                            <prop oor:name="Target" oor:type="xs:string">
+                                <value>_self</value>
+                            </prop>
+                            <prop oor:name="Context" oor:type="xs:string">
+                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                            </prop>
+                            <prop oor:name="Title" oor:type="xs:string">
+                                <value/>
+                                <value xml:lang="en">From Flickr ... </value>
+                            </prop>
+                        </node>
+                    </node>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertOpenClipArt" oor:op="replace">
+                <node oor:name="S1" oor:op="replace">
+                    <prop oor:name="MergePoint">
+                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
+                    </prop>
+                    <prop oor:name="MergeCommand">
+                        <value>AddBefore</value>
+                    </prop>
+                    <prop oor:name="MergeFallback">
+                        <value>AddPath</value>
+                    </prop>
+                    <node oor:name="MenuItems">
+                        <node oor:name="m1" oor:op="replace">
+                            <prop oor:name="URL" oor:type="xs:string">
+                                <value>org.creativecommons.openoffice.ccooo:InsertOpenClipArt</value>
+                            </prop>
+                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                <value/>
+                            </prop>
+                            <prop oor:name="Target" oor:type="xs:string">
+                                <value>_self</value>
+                            </prop>
+                            <prop oor:name="Context" oor:type="xs:string">
+                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                            </prop>
+                            <prop oor:name="Title" oor:type="xs:string">
+                                <value/>
+                                <value xml:lang="en">From Open Clip Art ... </value>
+                            </prop>
+                        </node>
+                    </node>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertWikimediaCommons" oor:op="replace">
+                <node oor:name="S1" oor:op="replace">
+                    <prop oor:name="MergePoint">
+                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
+                    </prop>
+                    <prop oor:name="MergeCommand">
+                        <value>AddBefore</value>
+                    </prop>
+                    <prop oor:name="MergeFallback">
+                        <value>AddPath</value>
+                    </prop>
+                    <node oor:name="MenuItems">
+                        <node oor:name="m1" oor:op="replace">
+                            <prop oor:name="URL" oor:type="xs:string">
+                                <value>org.creativecommons.openoffice.ccooo:InsertWikimediaCommons</value>
+                            </prop>
+                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                <value/>
+                            </prop>
+                            <prop oor:name="Target" oor:type="xs:string">
+                                <value>_self</value>
+                            </prop>
+                            <prop oor:name="Context" oor:type="xs:string">
+                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                            </prop>
+                            <prop oor:name="Title" oor:type="xs:string">
+                                <value/>
+                                <value xml:lang="en">From Wikimedia Commons ... </value>
+                            </prop>
+                        </node>
+                    </node>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPicasa" oor:op="replace">
+                <node oor:name="S1" oor:op="replace">
+                    <prop oor:name="MergePoint">
+                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
+                    </prop>
+                    <prop oor:name="MergeCommand">
+                        <value>AddBefore</value>
+                    </prop>
+                    <prop oor:name="MergeFallback">
+                        <value>AddPath</value>
+                    </prop>
+                    <node oor:name="MenuItems">
+                        <node oor:name="m1" oor:op="replace">
+                            <prop oor:name="URL" oor:type="xs:string">
+                                <value>org.creativecommons.openoffice.ccooo:InsertPicasa</value>
+                            </prop>
+                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                                <value/>
+                            </prop>
+                            <prop oor:name="Target" oor:type="xs:string">
+                                <value>_self</value>
+                            </prop>
+                            <prop oor:name="Context" oor:type="xs:string">
+                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                            </prop>
+                            <prop oor:name="Title" oor:type="xs:string">
+                                <value/>
+                                <value xml:lang="en">From Picasa ... </value>
+                            </prop>
+                        </node>
+                    </node>
+                </node>
+            </node>
+        </node>
+        <node oor:name="Images">
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr.images" oor:op="replace">
+                <prop oor:name="URL" oor:type="xs:string">
+                    <value>org.creativecommons.openoffice.ccooo:InsertPictureFlickr</value>
+                </prop>
+                <node oor:name="UserDefinedImages">
+                    <prop oor:name="ImageSmallURL">
+                        <value>%origin%/images/insert_image_16.png</value>
+                    </prop>
+                    <prop oor:name="ImageBigURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageSmallHCURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageBigHCURL">
+                        <value/>
+                    </prop>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.SelectLicense.images" oor:op="replace">
+                <prop oor:name="URL" oor:type="xs:string">
+                    <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
+                </prop>
+                <node oor:name="UserDefinedImages">
+                    <prop oor:name="ImageSmallURL">
+                        <value>%origin%/images/CC_16.png</value>
+                    </prop>
+                    <prop oor:name="ImageBigURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageSmallHCURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageBigHCURL">
+                        <value/>
+                    </prop>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertStatement.images" oor:op="replace">
+                <prop oor:name="URL" oor:type="xs:string">
+                    <value>org.creativecommons.openoffice.ccooo:InsertStatement</value>
+                </prop>
+                <node oor:name="UserDefinedImages">
+                    <prop oor:name="ImageSmallURL">
+                        <value>%origin%/images/CC_16.png</value>
+                    </prop>
+                    <prop oor:name="ImageBigURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageSmallHCURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageBigHCURL">
+                        <value/>
+                    </prop>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertOpenClipArt.images" oor:op="replace">
+                <prop oor:name="URL" oor:type="xs:string">
+                    <value>org.creativecommons.openoffice.ccooo:InsertOpenClipArt</value>
+                </prop>
+                <node oor:name="UserDefinedImages">
+                    <prop oor:name="ImageSmallURL">
+                        <value>%origin%/images/insert_image_16.png</value>
+                    </prop>
+                    <prop oor:name="ImageBigURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageSmallHCURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageBigHCURL">
+                        <value/>
+                    </prop>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertWikimediaCommons.images" oor:op="replace">
+                <prop oor:name="URL" oor:type="xs:string">
+                    <value>org.creativecommons.openoffice.ccooo:InsertWikimediaCommons</value>
+                </prop>
+                <node oor:name="UserDefinedImages">
+                    <prop oor:name="ImageSmallURL">
+                        <value>%origin%/images/insert_image_16.png</value>
+                    </prop>
+                    <prop oor:name="ImageBigURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageSmallHCURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageBigHCURL">
+                        <value/>
+                    </prop>
+                </node>
+            </node>
+            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPicasa.images" oor:op="replace">
+                <prop oor:name="URL" oor:type="xs:string">
+                    <value>org.creativecommons.openoffice.ccooo:InsertPicasa</value>
+                </prop>
+                <node oor:name="UserDefinedImages">
+                    <prop oor:name="ImageSmallURL">
+                        <value>%origin%/images/insert_image_16.png</value>
+                    </prop>
+                    <prop oor:name="ImageBigURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageSmallHCURL">
+                        <value/>
+                    </prop>
+                    <prop oor:name="ImageBigHCURL">
+                        <value/>
+                    </prop>
+                </node>
+            </node>
+        </node>
+
+        <!-- Below un commented for OOo 3 Changes, Couldn't get in Insert menu
+        <node oor:name="AddonMenu">
+            <node oor:name="org.creativecommons.openoffice.CcOOoAddin" oor:op="replace">
+                <prop oor:name="Title" oor:type="xs:string">
+                    <value xml:lang="en">Creative Commons</value>
+                </prop>
+                <prop oor:name="Target" oor:type="xs:string">
+                    <value>_self</value>
+                </prop>
+                <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                    <value/>
+                </prop>
+                <node oor:name="Submenu">
+                    <node oor:name="m1" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
+                        </prop>
+                        <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                            <value/>
+                        </prop>
+                        <prop oor:name="Target" oor:type="xs:string">
+                            <value>_self</value>
+                        </prop>
+                        <prop oor:name="Context" oor:type="xs:string">
+                            <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
+                        </prop>
+                        <prop oor:name="Title" oor:type="xs:string">
+                            <value>Select License</value>
+                            <value xml:lang="en">Select License</value>
+                        </prop>
+                    </node>
+                    <node oor:name="m2" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>org.creativecommons.openoffice.ccooo:InsertStatement</value>
+                        </prop>
+                        <prop oor:name="ImageIdentifier" oor:type="xs:string">
+                            <value/>
+                        </prop>
+                        <prop oor:name="Target" oor:type="xs:string">
+                            <value>_self</value>
+                        </prop>
+                        <prop oor:name="Context" oor:type="xs:string">
+                            <value>com.sun.star.text.TextDocument</value>
+                        </prop>
+                        <prop oor:name="Title" oor:type="xs:string">
+                            <value>Insert License Statement</value>
+                            <value xml:lang="en">Insert License Statement</value>
+                        </prop>
+                    </node>
+                </node>
+            </node>
+        </node>
+
+        Above un commented for OOo 3 Changes, Couldn't get in Insert menu-->
+
+    </node>
+</oor:component-data>
