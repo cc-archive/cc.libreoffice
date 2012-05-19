@@ -8,6 +8,7 @@ from com.sun.star.task import XJobExecutor
 
 import module.module1 as Module
 
+from  com.sun.star.frame import XDispatch
 
 
 
@@ -46,7 +47,19 @@ class InsertSharing( unohelper.Base, XJobExecutor ):
         print Module.testMethod()
      
         	
-       
+
+
+class addin(unohelper.Base, XDispatch):
+    """
+    """
+    
+    def __init__(self,ctx ):
+        """
+        """
+        self.ctx=ctx
+        
+    def dispatch(url, arguments):
+        print 'in dispatch'
 
 
        
@@ -63,4 +76,9 @@ g_ImplementationHelper.addImplementation(
 g_ImplementationHelper.addImplementation(
         SetSharing,
         "org.creativecommons.openoffice.ccooo.SetSharing",
+        ("com.sun.star.task.Job",),)
+
+g_ImplementationHelper.addImplementation(
+        addin,
+        "org.creativecommons.openoffice.ccooo:InsertPictureFlickr",
         ("com.sun.star.task.Job",),)
