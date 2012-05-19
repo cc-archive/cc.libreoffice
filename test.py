@@ -3,8 +3,10 @@ import uno
 import unohelper
 
 
+
 from com.sun.star.task import XJobExecutor
 
+import module.module1 as Module
 
 
 
@@ -40,6 +42,8 @@ class InsertSharing( unohelper.Base, XJobExecutor ):
 
         print 'hi from InsertSharing!'
         print args
+
+        print Module.testMethod()
      
         	
        
