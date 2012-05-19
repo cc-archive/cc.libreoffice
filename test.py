@@ -8,7 +8,7 @@ from com.sun.star.task import XJobExecutor
 
 import module.module1 as Module
 
-from  com.sun.star.frame import XDispatch
+from  com.sun.star.frame import XDispatchProvider, XDispatch
 
 
 
@@ -49,7 +49,7 @@ class InsertSharing( unohelper.Base, XJobExecutor ):
         	
 
 
-class addin(unohelper.Base, XDispatch):
+class addin(unohelper.Base, XDispatchProvider, XDispatch):
     """
     """
     
@@ -61,6 +61,8 @@ class addin(unohelper.Base, XDispatch):
     def dispatch(url, arguments):
         print 'in dispatch'
 
+    def queryDispatch(url, name, flags):
+        return self
 
        
             
