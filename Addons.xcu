@@ -39,7 +39,7 @@
                             <node oor:name="Submenu">
                                 <node oor:name="m1" oor:op="replace">
                                     <prop oor:name="URL" oor:type="xs:string">
-                                        <value>service:org.creativecommons.openoffice.ccooo.Import?</value>
+                                        <value>org.creativecommons.openoffice.ccooo:InsertStatement</value>
                                     </prop>
                                     <prop oor:name="ImageIdentifier" oor:type="xs:string">
                                         <value/>
@@ -57,7 +57,7 @@
                                 </node>
                                 <node oor:name="m2" oor:op="replace">
                                     <prop oor:name="URL" oor:type="xs:string">
-                                        <value>service:org.creativecommons.openoffice.ccooo.SetSharing?</value>
+                                        <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
                                     </prop>
                                     <prop oor:name="ImageIdentifier" oor:type="xs:string">
                                         <value/>
