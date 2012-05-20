@@ -1,29 +1,31 @@
-import unohelper 
+import unohelper
 
-from com.sun.star.frame import XDispatch, XDispatchProvider 
-from com.sun.star.lang import XInitialization, XServiceInfo 
+from com.sun.star.frame import XDispatch, XDispatchProvider
+from com.sun.star.lang import XInitialization, XServiceInfo
 
 
-SERVICE_NAME = "com.sun.star.frame.ProtocolHandler" 
-IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin" 
+SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
+IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
 
-class Example(unohelper.Base, XInitialization, XServiceInfo, XDispatchProvider, XDispatch): 
-    
-    def __init__(self, ctx, *args): 
-        self.ctx = ctx 
-        self.frame = None 
-        self.initialize(args) 
-    
-    def supportsService(self,name): 
-        return (name == SERVICE_NAME) 
-    
-    def getImplementationName(self): 
+
+class Example(unohelper.Base, XInitialization, XServiceInfo,
+              XDispatchProvider, XDispatch):
+
+    def __init__(self, ctx, *args):
+        self.ctx = ctx
+        self.frame = None
+        self.initialize(args)
+
+    def supportsService(self, name):
+        return (name == SERVICE_NAME)
+
+    def getImplementationName(self):
         return IMPLE_NAME
-    
-    def getSupportedServiceNames(self): 
-        return (SERVICE_NAME,) 
-    
-    # XInitialization 
+
+    def getSupportedServiceNames(self):
+        return (SERVICE_NAME,)
+
+    # XInitialization
     def initialize(self, args): 
         if args: 
             self.frame = args[0] 
