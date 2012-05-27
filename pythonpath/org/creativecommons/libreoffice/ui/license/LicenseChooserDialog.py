@@ -184,6 +184,11 @@ class LicenseChooserDialog():
         ## TODO: move all the Constants near to the top of the class
         LBL_SELECTED_LICENSE_LABEL = "lblSelectedLicense_lbl"
         LBL_SELECTED_LICENSE = "lblSelectedLicense"
+        LBL_ALLOW_COMERCIAL_USE = "allowCommercialUse"
+        RDO_ALLOW_COMERCIAL_YES = "rdoAllowCommercial_Yes"
+        RDO_ALLOW_COMERCIAL_NO = "rdoAllowCommercial_No"
+        LBL_ALLOW_MODIFICATIONS = "allowModifications"
+        RDO_ALLOW_MODIFICATIONS_YES = "rdoAllowModifications_Yes"
         
         try:
             #create the current license information
@@ -195,7 +200,47 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             xpsSelectedLicense = self.__createAWTControl(lblSelectedLicense, LBL_SELECTED_LICENSE,
                 None, self.__makeRectangle(60, 20, 145, 30), 1)
+            xpsSelectedLicense.setPropertyValue("MultiLine", True)
 
+            #Allow commercial uses of your work?
+            lblAllowCommercialUse = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            #TODO:The next line needs localization support.
+            self.__createAWTControl(lblAllowCommercialUse, LBL_ALLOW_COMERCIAL_USE,
+                "commercial", self.__makeRectangle(15, 45, 100, 12), 1)
+
+            radioCommercialYes = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlRadioButtonModel")
+            #TODO:The next line needs localization support.
+            xpsRadioCommercialYes = self.__createAWTControl(
+                radioCommercialYes, RDO_ALLOW_COMERCIAL_YES,
+                "Yes", self.__makeRectangle(20, 60, 30, 12), 1)
+            #TODO: Original line was  new Short((short) 1))
+            xpsRadioCommercialYes.setPropertyValue("State", 1)
+
+            radioCommercialNo = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlRadioButtonModel")
+            xpsRadioCommercialNo = self.__createAWTControl(
+                radioCommercialNo, RDO_ALLOW_COMERCIAL_NO,
+                "No", self.__makeRectangle(20, 75, 30, 12), 1)
+            #TODO: Original line was  new Short((short) 1))
+            xpsRadioCommercialNo.setPropertyValue("State", 0)
+
+            #Allow modifications of your work?
+            lblAllowModifications = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            self.__createAWTControl(lblAllowModifications, LBL_ALLOW_MODIFICATIONS,
+                "derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
+            radioModificationsYes = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlRadioButtonModel")
+            xpsRadioModificationYes = self.__createAWTControl(
+                radioModificationsYes, RDO_ALLOW_MODIFICATIONS_YES,
+                "Yes", self.__makeRectangle(20, 105, 30, 12), 1)
+            #TODO: was new Short((short) 1)
+            xpsRadioModificationYes.setPropertyValue("State", 1)
+
+            #l-379
+            
             
         except Exception,ex:
             print 'Exception in LicenseChooserDialog.__createCCLicenseTab'
@@ -223,6 +268,7 @@ class LicenseChooserDialog():
         BTN_OK = "finishbt"
         BTN_CANCEL = "cancelbt"
         cancelButtonLabel = "Cancel"
+        CMB_JURISDICTION = "cmbJurisdiction"
        
         try:
 
@@ -356,13 +402,20 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlDialog", self.m_xContext)
             # xControl = dialog
             #xControlModel =  dlgLicenseSelector
-            #xControlCont=dialog
+            
             dialog.setModel(self.dlgLicenseSelector)
 
             ##add an action listener to the Previous button control
+            #xControlCont=dialog
+            ####cmbJList=dialog.getControl(CMB_JURISDICTION)
+            #TODO: Add the items to the cmbJList properly (Line 227-230)
+
+            count=0
 
             ##add Unported, which isn't actually a jurisdiction'
-
+            count+=1
+            ####cmbJList.addItem("Unported", count)
+            
             ##add a bogus place-holder for Unported in the JurisdictionList to
             ##ensure indices match up when determining the item selectedJurisdiction
 
