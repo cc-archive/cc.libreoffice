@@ -189,6 +189,12 @@ class LicenseChooserDialog():
         RDO_ALLOW_COMERCIAL_NO = "rdoAllowCommercial_No"
         LBL_ALLOW_MODIFICATIONS = "allowModifications"
         RDO_ALLOW_MODIFICATIONS_YES = "rdoAllowModifications_Yes"
+        RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE = "rdoAllowModifications_ShareAlike"
+        RDO_ALLOW_MODIFICATIONS_NO = "rdoAllowModifications_No"
+        LBL_JURISDICTION_LIST = "lblJurisdictionList"
+        CMB_JURISDICTION = "cmbJurisdiction"
+        LBL_INSTRUCTIONS_CC = "lblInstructionsCC"
+        
         
         try:
             #create the current license information
@@ -239,8 +245,56 @@ class LicenseChooserDialog():
             #TODO: was new Short((short) 1)
             xpsRadioModificationYes.setPropertyValue("State", 1)
 
-            #l-379
+            radioModificationsShareAlike = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlRadioButtonModel")
+            xpsRadioModificationsShareAlike = self.__createAWTControl(
+                radioModificationsShareAlike, RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                "Yes, as long as others share alike", self.__makeRectangle(20, 120, 100, 12), 1)
+            #TODO: was new Short((short) 1)
+            xpsRadioModificationsShareAlike.setPropertyValue("State", 0)
+
+            radioModificationsNo = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlRadioButtonModel")
+            xpsRadioModificationsNo = self.__createAWTControl(
+                radioModificationsNo, RDO_ALLOW_MODIFICATIONS_NO,
+                "No", self.__makeRectangle(20, 135, 30, 12), 1)
+            #TODO: was new Short((short) 1)
+            xpsRadioModificationsNo.setPropertyValue("State", 0)
+
+            #Create the jurisdiction drop-down list
+            lblJurisdictionList = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            xpsLblJurisdictionList =self.__createAWTControl(lblJurisdictionList, LBL_JURISDICTION_LIST,
+                "license.jurisdiction_question",self.__makeRectangle(15, 150, 75, 15), 1)
+
+            cmbJurisdictionList = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlListBoxModel")
+            xPSetList = self.__createAWTControl(cmbJurisdictionList, CMB_JURISDICTION,
+                None, self.__makeRectangle(90, 150, 60, 12), 1)
+            #TODO: Next two lines are different from the source- new Boolean()
+            xPSetList.setPropertyValue("Dropdown", True)
+            xPSetList.setPropertyValue("MultiSelection", False)
+
+            hrLine = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedLineModel")
+            xpshrLine = self.__createAWTControl(hrLine, "hrLine",
+                None, self.__makeRectangle(5, 165, 200, 5), 1)
+            xpshrLine.setPropertyValue("Orientation", 0)
+
+            lblInstructions = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            xpsLblInstructions = self.__createAWTControl(lblInstructions, LBL_INSTRUCTIONS_CC,
+                "With a Creative Commons license, you keep your copyright but allow "
+                + "people to copy and distribute your work provided they give you credit  "
+                + "  and only on the conditions you specify here. "
+                + "\n\nIf you want to offer your work with no conditions or you"
+                + " want to certify a work as public domain, choose one of the "
+                + "public domain tools.(CC0 & Public Domain)", self.__makeRectangle(10, 175, 195, 80), 1)
             
+            xpsLblInstructions.setPropertyValue("MultiLine", True)
+            fontDes = xpsLblInstructions.getPropertyValue("FontDescriptor")
+            fontDes.Weight = 75
+            xpsLblInstructions.setPropertyValue("FontDescriptor", fontDes)
             
         except Exception,ex:
             print 'Exception in LicenseChooserDialog.__createCCLicenseTab'
