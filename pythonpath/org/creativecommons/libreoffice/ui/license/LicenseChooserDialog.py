@@ -96,6 +96,7 @@ class LicenseChooserDialog():
         CHK_WAIVE = "chkWaive"
         TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
         CHK_YES_CC0 = "chkYesCC0"
+        CMB_TERRITORY = "cmbTerritory"
         
         try:
             
@@ -153,6 +154,20 @@ class LicenseChooserDialog():
                     + "and hereby voluntarily elect to apply it to this work.",
                     self.__makeRectangle(10, 210, 190, 20), 2)
             xpsChkYes.setPropertyValue("MultiLine", True)
+
+            ##Territory
+            lblJurisdictionList = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            xpsLblJurisdictionList = self.__createAWTControl(lblJurisdictionList, "lbltrritory",
+                "Territory", self.__makeRectangle(10, 230, 45, 15), 2)
+
+            #TODO: This list currently contains nothing. Add items to the list
+            cmbTerritoryList = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlListBoxModel")
+            xPSetList = self.__createAWTControl(cmbTerritoryList, CMB_TERRITORY,
+                None, self.__makeRectangle(55, 230, 120, 12), 2)
+            xPSetList.setPropertyValue("Dropdown", True)
+            xPSetList.setPropertyValue("MultiSelection", False)
             
         except Exception,ex:
             print 'Exception in LicenseChooserDialog.__crateCC0LicenseTab'
