@@ -21,7 +21,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         self.initialize(args)
 
     def supportsService(self, name):
-        return (name == SERVICE_NAME)
+        return (name == SERVICE_NAME) 
 
     def getImplementationName(self):
         return IMPLE_NAME
