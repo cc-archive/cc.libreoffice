@@ -461,19 +461,27 @@ class LicenseChooserDialog():
 
             ##add an action listener to the Previous button control
             #xControlCont=dialog
-            ####cmbJList=dialog.getControl(CMB_JURISDICTION)
+            cmbJList=dialog.getControl(CMB_JURISDICTION)
             #TODO: Add the items to the cmbJList properly (Line 227-230)
 
             count=0
 
             ##add Unported, which isn't actually a jurisdiction'
             count+=1
-            ####cmbJList.addItem("Unported", count)
+            cmbJList.addItem("Unported", count)
+            #TODO: add line 236-239
+            
             
             ##add a bogus place-holder for Unported in the JurisdictionList to
             ##ensure indices match up when determining the item selectedJurisdiction
-
+            #TODO: add line 243
+            
             ##Pre-select Unported
+            #TODO: bit different from the origianl code
+            cmbJList.selectItemPos(0,True)
+            cmbJList.makeVisible(0)
+
+            ##Resume point
 
             ##listen for license selection changes
 
