@@ -108,17 +108,35 @@ class LicenseChooserDialog():
             self.dlgLicenseSelector = self.xMultiComponentFactory.createInstanceWithContext(
                 "com.sun.star.awt.UnoControlDialogModel", self.m_xContext)
 
+
+            ###
+            #The following part was changed from the origianl code
+            ###
+            
+            #rect=self.__makeRectangle(100, 80, 210, 275)
       
-            rect=self.__makeRectangle(100, 80, 210, 275)
+            self.dlgLicenseSelector.Width=210
+            self.dlgLicenseSelector.Height=275
+            self.dlgLicenseSelector.PositionX=100
+            self.dlgLicenseSelector.PositionY=80
+            self.dlgLicenseSelector.Title="Sharing & Reuse Permissions"
       
 
-      
-      
-            xPSetDialog=self.__createAWTControl(self.dlgLicenseSelector, "cc", None,rect,1)
-            xPSetDialog.setPropertyValue("Title", "Sharing & Reuse Permissions")
+            ##--due to the following commment the following code in __createAWTControl is not run
 
-            ##Tabs
-            #CC
+            ##if ( not self.dlgLicenseSelector.hasByName(ctrlName)):
+            ##    self.dlgLicenseSelector.insertByName(ctrlName,xpsProperties)
+
+            
+            #xPSetDialog=self.__createAWTControl(self.dlgLicenseSelector, "cc", None,rect,1)
+            #xPSetDialog.setPropertyValue("Title", "Sharing & Reuse Permissions")
+
+            #--
+            ###
+            ###
+            
+            ###Tabs
+            ##CC
             ccButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
 
@@ -136,12 +154,58 @@ class LicenseChooserDialog():
             xPSetCCButton.setPropertyValue("Label", "Creative_Commons")
             xPSetCCButton.setPropertyValue("Toggle", True)
 
-            #fontDes = xPSetCCButton.getPropertyValue("FontDescriptor")
-            #fontDes.Weight = 150
-            #xPSetCCButton.setPropertyValue("FontDescriptor", fontDes)
-            #xPSetCCButton.setPropertyValue("State", 1)
+            fontDes = xPSetCCButton.getPropertyValue("FontDescriptor")
+            fontDes.Weight = 150
+            xPSetCCButton.setPropertyValue("FontDescriptor", fontDes)
+            #TODO: Original code had (short)1
+            xPSetCCButton.setPropertyValue("State", 1)
 
+            ##CC0
+            
+            ##PD
 
+            ##Create Tabs
+
+            ##create the button model - FAQ and set the properties
+
+            ##create the button model - OK and set the properties
+
+            ## create the button model - Cancel and set the properties
+
+            ##create the dialog control and set the model
+            dialog = self.xMultiComponentFactory.createInstanceWithContext(
+                "com.sun.star.awt.UnoControlDialog", self.m_xContext)
+            # xControl = dialog
+            #xControlModel =  dlgLicenseSelector
+            
+            dialog.setModel(self.dlgLicenseSelector)
+
+            ##add an action listener to the Previous button control
+
+            ##add Unported, which isn't actually a jurisdiction'
+
+            ##add a bogus place-holder for Unported in the JurisdictionList to
+            ##ensure indices match up when determining the item selectedJurisdiction
+
+            ##Pre-select Unported
+
+            ##listen for license selection changes
+
+            ##add an action listeners to buttons
+
+            ##Set the initial license
+
+            ##create a peer
+
+            
+            ##execute the dialog
+            dialog.setVisible(True)
+            dialog.execute()
+            
+
+            ##dispose the dialog
+            #dialog.dispose()
+            
             
         except Exception,ex:
             print "Exception in LicenseChooserDialog.showDialog:"
