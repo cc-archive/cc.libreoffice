@@ -174,6 +174,34 @@ class LicenseChooserDialog():
             print type(ex)
             print ex
             raise ex
+
+
+    #TODO: Method is not fully implemented.
+    def __createCCLicenseTab(self, ):
+        """
+        """
+
+        ## TODO: move all the Constants near to the top of the class
+        LBL_SELECTED_LICENSE_LABEL = "lblSelectedLicense_lbl"
+        LBL_SELECTED_LICENSE = "lblSelectedLicense"
+        
+        try:
+            #create the current license information
+            lblSelectedLicenseLabel = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            self.__createAWTControl(lblSelectedLicenseLabel, LBL_SELECTED_LICENSE_LABEL,
+                "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1)
+            lblSelectedLicense = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            xpsSelectedLicense = self.__createAWTControl(lblSelectedLicense, LBL_SELECTED_LICENSE,
+                None, self.__makeRectangle(60, 20, 145, 30), 1)
+
+            
+        except Exception,ex:
+            print 'Exception in LicenseChooserDialog.__createCCLicenseTab'
+            print type(ex)
+            print ex
+            raise ex
         
 
 
@@ -187,6 +215,14 @@ class LicenseChooserDialog():
 
         #Constants
         BTN_CC = "btnCC"
+        BTN_CC0 = "btnCC0"
+        BTN_PUBLICDOMAIN = "btnPublicdomain"
+        BTN_FAQ = "faqbt"
+        faqButtonLabel = "FAQ"
+        finishButtonLabel = "OK"
+        BTN_OK = "finishbt"
+        BTN_CANCEL = "cancelbt"
+        cancelButtonLabel = "Cancel"
        
         try:
 
@@ -250,24 +286,77 @@ class LicenseChooserDialog():
             xPSetCCButton.setPropertyValue("State", 1)
 
             ##CC0
+
+            cc0Button = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlButtonModel")
+            xPSetCC0Button = self.__createAWTControl(cc0Button, BTN_CC0,
+                None, self.__makeRectangle(73, 3, 20, 12), 0)
+            xPSetCC0Button.setPropertyValue("DefaultButton", True)
+            xPSetCC0Button.setPropertyValue("Label", "CC0")
+            xPSetCC0Button.setPropertyValue("Toggle", True)
+            fontDes = xPSetCC0Button.getPropertyValue("FontDescriptor")
+            fontDes.Weight = 75
+            xPSetCC0Button.setPropertyValue("FontDescriptor", fontDes)
+            #TODO: Original code had (short)0
+            xPSetCC0Button.setPropertyValue("State", 0)
             
             ##PD
 
+            pdButton = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlButtonModel")
+            xPSetPDButton = self.__createAWTControl(pdButton, BTN_PUBLICDOMAIN,
+                None,self.__makeRectangle(92, 3, 60, 12), 0)
+            xPSetPDButton.setPropertyValue("DefaultButton", True)
+            #TODO: The next line needs localization support.
+            xPSetPDButton.setPropertyValue("Label","Public Domain")
+            xPSetPDButton.setPropertyValue("Toggle", True)
+            fontDes = xPSetPDButton.getPropertyValue("FontDescriptor")
+            fontDes.Weight = 75
+            xPSetPDButton.setPropertyValue("FontDescriptor", fontDes)
+            #TODO: Original code had (short)0
+            xPSetPDButton.setPropertyValue("State", 0)
+
+            ##Creates the outer frame like box of the window
+            oGBResults = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlGroupBoxModel")
+            xpsBox =self.__createAWTControl(
+                oGBResults, "box", None, self.__makeRectangle(2, 15, 206, 243), 0)
+
             ##Create Tabs
             self.__crateCC0LicenseTab()
+            self.__createCCLicenseTab()
+            print 'passed'
 
             ##create the button model - FAQ and set the properties
+            faqButton = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlButtonModel")
+            xPSetFaqButton = self.__createAWTControl(faqButton, BTN_FAQ,
+                None, self.__makeRectangle(70, 260, 40, 14), 0)
+            xPSetFaqButton.setPropertyValue("DefaultButton", True)
+            xPSetFaqButton.setPropertyValue("Label", faqButtonLabel)
 
             ##create the button model - OK and set the properties
+            finishButton = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlButtonModel")
+            xPSetFinishButton = self.__createAWTControl(finishButton, BTN_OK,
+                None, self.__makeRectangle(115, 260, 40, 14), 0)
+            xPSetFinishButton.setPropertyValue("DefaultButton", True)
+            xPSetFinishButton.setPropertyValue("Label", finishButtonLabel)
 
             ## create the button model - Cancel and set the properties
-
+            cancelButton = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlButtonModel")
+            xPSetCancelButton = self.__createAWTControl(cancelButton, BTN_CANCEL,
+                None, self.__makeRectangle(160, 260, 40, 14), 0)
+            xPSetCancelButton.setPropertyValue("Name", BTN_CANCEL)
+            xPSetCancelButton.setPropertyValue("Label", cancelButtonLabel)
+            
             ##create the dialog control and set the model
             dialog = self.xMultiComponentFactory.createInstanceWithContext(
                 "com.sun.star.awt.UnoControlDialog", self.m_xContext)
             # xControl = dialog
             #xControlModel =  dlgLicenseSelector
-            
+            #xControlCont=dialog
             dialog.setModel(self.dlgLicenseSelector)
 
             ##add an action listener to the Previous button control
