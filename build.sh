@@ -11,7 +11,7 @@ mv test.zip out.oxt
 /usr/lib/libreoffice/program/unopkg add out.oxt
 
 #Starts LibreOffice
-libreoffice --writer
+libreoffice --writer --nofirststartwizard
 
 #Removes the extension when quitting
 /usr/lib/libreoffice/program/unopkg remove org.creativecommons.openoffice.CcOOoAddin

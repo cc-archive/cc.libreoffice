@@ -3,6 +3,9 @@ import unohelper
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
+from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
+import module.module1 as Module
+
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
@@ -53,7 +56,13 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
             elif url.Path == "InsertStatement":
                 print 'calling selectLicense'
-                self.selectLicense()
+
+                Module.testMethod()
+                lcd=LicenseChooserDialog(self, self.ctx)
+                #print type(lcd)
+                #print dir(lcd)
+                lcd.showDialog()
+                
 
             elif url.Path == "InsertPictureFlickr":
                 print "InsertPictureFlickr"
@@ -77,7 +86,8 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         pass 
 
     def selectLicense(self):
-        
+
+        #This code fragment creates a sample window
         oDialogModel = self.ctx.ServiceManager.createInstanceWithContext( 
             "com.sun.star.awt.UnoControlDialogModel", self.ctx )
 
