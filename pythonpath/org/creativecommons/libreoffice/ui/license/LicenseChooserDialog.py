@@ -1,3 +1,5 @@
+import os
+
 class LicenseChooserDialog():
     """Creates a new instance of LicenseChooserDialog
     """
@@ -87,6 +89,78 @@ class LicenseChooserDialog():
             print type(ex)
             raise ex
 
+    def __crateCC0LicenseTab(self):
+        
+        ## TODO: move all the Constants near to the top of the class
+        LBL_INSTRUCTIONS_CC0 = "lblInstructionsCC0"
+        CHK_WAIVE = "chkWaive"
+        TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
+        CHK_YES_CC0 = "chkYesCC0"
+        
+        try:
+            
+            lblWarning = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlFixedTextModel")
+
+            ##TODO: add the Java.util support to the following line
+            xpsLblWarning = self.__createAWTControl(lblWarning, LBL_INSTRUCTIONS_CC0,"Are you certain you wish to waive all rights to your work? "
+                                + "Once these rights are waived, you cannot reclaim them."+ "\n\nIn particular, if you are an artist or author who depends "
+                + "upon copyright for your income, "
+                + "Creative Commons does not recommend that you use this tool."
+                + "\n\nIf you don't own the rights to this work, then do not use CC0. "
+                + "\nIf you believe that nobody owns rights to the work, then the "
+                + "Public Domain Certification may be what you're looking for.",
+                self.__makeRectangle(10, 25, 195, 80), 2)
+
+            xpsLblWarning.setPropertyValue("MultiLine", True)
+            fontDes =  xpsLblWarning.getPropertyValue("FontDescriptor")
+            fontDes.Weight = 150
+            xpsLblWarning.setPropertyValue("FontDescriptor", fontDes)
+
+            chkWaive = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlCheckBoxModel")
+
+            ##TODO:Add java.util support to the following line
+            xpsChkWaive = self.__createAWTControl(chkWaive, CHK_WAIVE,
+                                "I hereby waive all copyright and related or neighboring rights "
+                                + "together with all associated claims and causes of action with "
+                                + "respect to this work to the extent possible under the law.",
+                                self.__makeRectangle(10, 110, 190, 30), 2)
+            
+
+            xpsChkWaive.setPropertyValue("MultiLine", True)
+
+            
+            ##Legal code
+            path=os.path.join(os.path.dirname(__file__), '../../../license/legalcodes/cc0')
+            f=open(path,'r')
+            cc0LegalCode=f.read()
+
+            txtDeed = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlEditModel")
+            xpsTxtDeed = self.__createAWTControl(txtDeed, TXT_LEGAL_CODE_CC0, None,
+                self.__makeRectangle(10, 145, 190, 60), 2)
+            xpsTxtDeed.setPropertyValue("MultiLine", True)
+            xpsTxtDeed.setPropertyValue("ReadOnly", True)
+            xpsTxtDeed.setPropertyValue("VScroll", True)
+            xpsTxtDeed.setPropertyValue("Text", cc0LegalCode)
+
+
+            chkYes = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlCheckBoxModel")
+            ##TODO:Add java.util support to the following line
+            xpsChkYes = self.__createAWTControl(chkYes, CHK_YES_CC0,
+                    "I have read and understand the terms and intended legal effect of CC0, "
+                    + "and hereby voluntarily elect to apply it to this work.",
+                    self.__makeRectangle(10, 210, 190, 20), 2)
+            xpsChkYes.setPropertyValue("MultiLine", True)
+            
+        except Exception,ex:
+            print 'Exception in LicenseChooserDialog.__crateCC0LicenseTab'
+            print type(ex)
+            print ex
+            raise ex
+        
+
 
     def showDialog(self):
         """Shows the LicenseChooserDialog 
@@ -165,6 +239,7 @@ class LicenseChooserDialog():
             ##PD
 
             ##Create Tabs
+            self.__crateCC0LicenseTab()
 
             ##create the button model - FAQ and set the properties
 
