@@ -7,7 +7,37 @@ class LicenseChooserDialog():
     #TODO: add the global Constants support
     
     #Constants
-    #BTN_CC = "btnCC"
+    
+    BTN_CC = "btnCC"
+    BTN_CC0 = "btnCC0"
+    BTN_PUBLICDOMAIN = "btnPublicdomain"
+    BTN_FAQ = "faqbt"
+    faqButtonLabel = "FAQ"
+    finishButtonLabel = "OK"
+    BTN_OK = "finishbt"
+    BTN_CANCEL = "cancelbt"
+    cancelButtonLabel = "Cancel"
+    CMB_JURISDICTION = "cmbJurisdiction"
+
+    LBL_SELECTED_LICENSE_LABEL = "lblSelectedLicense_lbl"
+    LBL_SELECTED_LICENSE = "lblSelectedLicense"
+    LBL_ALLOW_COMERCIAL_USE = "allowCommercialUse"
+    RDO_ALLOW_COMERCIAL_YES = "rdoAllowCommercial_Yes"
+    RDO_ALLOW_COMERCIAL_NO = "rdoAllowCommercial_No"
+    LBL_ALLOW_MODIFICATIONS = "allowModifications"
+    RDO_ALLOW_MODIFICATIONS_YES = "rdoAllowModifications_Yes"
+    RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE = "rdoAllowModifications_ShareAlike"
+    RDO_ALLOW_MODIFICATIONS_NO = "rdoAllowModifications_No"
+    LBL_JURISDICTION_LIST = "lblJurisdictionList"
+    CMB_JURISDICTION = "cmbJurisdiction"
+    LBL_INSTRUCTIONS_CC = "lblInstructionsCC"
+
+    
+    LBL_INSTRUCTIONS_CC0 = "lblInstructionsCC0"
+    CHK_WAIVE = "chkWaive"
+    TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
+    CHK_YES_CC0 = "chkYesCC0"
+    CMB_TERRITORY = "cmbTerritory"
     
     def __init__(self, ccLoAddin, ctx):
         """
@@ -91,19 +121,14 @@ class LicenseChooserDialog():
 
     def __crateCC0LicenseTab(self):
         
-        ## TODO: move all the Constants near to the top of the class
-        LBL_INSTRUCTIONS_CC0 = "lblInstructionsCC0"
-        CHK_WAIVE = "chkWaive"
-        TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
-        CHK_YES_CC0 = "chkYesCC0"
-        CMB_TERRITORY = "cmbTerritory"
+       
         
         try:
             
             lblWarning = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlFixedTextModel")
 
             ##TODO: add the Java.util support to the following line
-            xpsLblWarning = self.__createAWTControl(lblWarning, LBL_INSTRUCTIONS_CC0,"Are you certain you wish to waive all rights to your work? "
+            xpsLblWarning = self.__createAWTControl(lblWarning, self.LBL_INSTRUCTIONS_CC0,"Are you certain you wish to waive all rights to your work? "
                                 + "Once these rights are waived, you cannot reclaim them."+ "\n\nIn particular, if you are an artist or author who depends "
                 + "upon copyright for your income, "
                 + "Creative Commons does not recommend that you use this tool."
@@ -121,7 +146,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlCheckBoxModel")
 
             ##TODO:Add java.util support to the following line
-            xpsChkWaive = self.__createAWTControl(chkWaive, CHK_WAIVE,
+            xpsChkWaive = self.__createAWTControl(chkWaive, self.CHK_WAIVE,
                                 "I hereby waive all copyright and related or neighboring rights "
                                 + "together with all associated claims and causes of action with "
                                 + "respect to this work to the extent possible under the law.",
@@ -138,7 +163,7 @@ class LicenseChooserDialog():
 
             txtDeed = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed = self.__createAWTControl(txtDeed, TXT_LEGAL_CODE_CC0, None,
+            xpsTxtDeed = self.__createAWTControl(txtDeed, self.TXT_LEGAL_CODE_CC0, None,
                 self.__makeRectangle(10, 145, 190, 60), 2)
             xpsTxtDeed.setPropertyValue("MultiLine", True)
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
@@ -149,7 +174,7 @@ class LicenseChooserDialog():
             chkYes = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
             ##TODO:Add java.util support to the following line
-            xpsChkYes = self.__createAWTControl(chkYes, CHK_YES_CC0,
+            xpsChkYes = self.__createAWTControl(chkYes, self.CHK_YES_CC0,
                     "I have read and understand the terms and intended legal effect of CC0, "
                     + "and hereby voluntarily elect to apply it to this work.",
                     self.__makeRectangle(10, 210, 190, 20), 2)
@@ -164,7 +189,7 @@ class LicenseChooserDialog():
             #TODO: This list currently contains nothing. Add items to the list
             cmbTerritoryList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControl(cmbTerritoryList, CMB_TERRITORY,
+            xPSetList = self.__createAWTControl(cmbTerritoryList, self.CMB_TERRITORY,
                 None, self.__makeRectangle(55, 230, 120, 12), 2)
             xPSetList.setPropertyValue("Dropdown", True)
             xPSetList.setPropertyValue("MultiSelection", False)
@@ -181,30 +206,18 @@ class LicenseChooserDialog():
         """
         """
 
-        ## TODO: move all the Constants near to the top of the class
-        LBL_SELECTED_LICENSE_LABEL = "lblSelectedLicense_lbl"
-        LBL_SELECTED_LICENSE = "lblSelectedLicense"
-        LBL_ALLOW_COMERCIAL_USE = "allowCommercialUse"
-        RDO_ALLOW_COMERCIAL_YES = "rdoAllowCommercial_Yes"
-        RDO_ALLOW_COMERCIAL_NO = "rdoAllowCommercial_No"
-        LBL_ALLOW_MODIFICATIONS = "allowModifications"
-        RDO_ALLOW_MODIFICATIONS_YES = "rdoAllowModifications_Yes"
-        RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE = "rdoAllowModifications_ShareAlike"
-        RDO_ALLOW_MODIFICATIONS_NO = "rdoAllowModifications_No"
-        LBL_JURISDICTION_LIST = "lblJurisdictionList"
-        CMB_JURISDICTION = "cmbJurisdiction"
-        LBL_INSTRUCTIONS_CC = "lblInstructionsCC"
+        
         
         
         try:
             #create the current license information
             lblSelectedLicenseLabel = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControl(lblSelectedLicenseLabel, LBL_SELECTED_LICENSE_LABEL,
+            self.__createAWTControl(lblSelectedLicenseLabel, self.LBL_SELECTED_LICENSE_LABEL,
                 "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1)
             lblSelectedLicense = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsSelectedLicense = self.__createAWTControl(lblSelectedLicense, LBL_SELECTED_LICENSE,
+            xpsSelectedLicense = self.__createAWTControl(lblSelectedLicense, self.LBL_SELECTED_LICENSE,
                 None, self.__makeRectangle(60, 20, 145, 30), 1)
             xpsSelectedLicense.setPropertyValue("MultiLine", True)
 
@@ -212,14 +225,14 @@ class LicenseChooserDialog():
             lblAllowCommercialUse = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
             #TODO:The next line needs localization support.
-            self.__createAWTControl(lblAllowCommercialUse, LBL_ALLOW_COMERCIAL_USE,
+            self.__createAWTControl(lblAllowCommercialUse, self.LBL_ALLOW_COMERCIAL_USE,
                 "commercial", self.__makeRectangle(15, 45, 100, 12), 1)
 
             radioCommercialYes = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             #TODO:The next line needs localization support.
             xpsRadioCommercialYes = self.__createAWTControl(
-                radioCommercialYes, RDO_ALLOW_COMERCIAL_YES,
+                radioCommercialYes, self.RDO_ALLOW_COMERCIAL_YES,
                 "Yes", self.__makeRectangle(20, 60, 30, 12), 1)
             #TODO: Original line was  new Short((short) 1))
             xpsRadioCommercialYes.setPropertyValue("State", 1)
@@ -227,7 +240,7 @@ class LicenseChooserDialog():
             radioCommercialNo = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioCommercialNo = self.__createAWTControl(
-                radioCommercialNo, RDO_ALLOW_COMERCIAL_NO,
+                radioCommercialNo, self.RDO_ALLOW_COMERCIAL_NO,
                 "No", self.__makeRectangle(20, 75, 30, 12), 1)
             #TODO: Original line was  new Short((short) 1))
             xpsRadioCommercialNo.setPropertyValue("State", 0)
@@ -235,12 +248,12 @@ class LicenseChooserDialog():
             #Allow modifications of your work?
             lblAllowModifications = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControl(lblAllowModifications, LBL_ALLOW_MODIFICATIONS,
+            self.__createAWTControl(lblAllowModifications, self.LBL_ALLOW_MODIFICATIONS,
                 "derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
             radioModificationsYes = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioModificationYes = self.__createAWTControl(
-                radioModificationsYes, RDO_ALLOW_MODIFICATIONS_YES,
+                radioModificationsYes, self.RDO_ALLOW_MODIFICATIONS_YES,
                 "Yes", self.__makeRectangle(20, 105, 30, 12), 1)
             #TODO: was new Short((short) 1)
             xpsRadioModificationYes.setPropertyValue("State", 1)
@@ -248,7 +261,7 @@ class LicenseChooserDialog():
             radioModificationsShareAlike = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioModificationsShareAlike = self.__createAWTControl(
-                radioModificationsShareAlike, RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                radioModificationsShareAlike, self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
                 "Yes, as long as others share alike", self.__makeRectangle(20, 120, 100, 12), 1)
             #TODO: was new Short((short) 1)
             xpsRadioModificationsShareAlike.setPropertyValue("State", 0)
@@ -256,7 +269,7 @@ class LicenseChooserDialog():
             radioModificationsNo = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioModificationsNo = self.__createAWTControl(
-                radioModificationsNo, RDO_ALLOW_MODIFICATIONS_NO,
+                radioModificationsNo, self.RDO_ALLOW_MODIFICATIONS_NO,
                 "No", self.__makeRectangle(20, 135, 30, 12), 1)
             #TODO: was new Short((short) 1)
             xpsRadioModificationsNo.setPropertyValue("State", 0)
@@ -264,12 +277,12 @@ class LicenseChooserDialog():
             #Create the jurisdiction drop-down list
             lblJurisdictionList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList =self.__createAWTControl(lblJurisdictionList, LBL_JURISDICTION_LIST,
+            xpsLblJurisdictionList =self.__createAWTControl(lblJurisdictionList, self.LBL_JURISDICTION_LIST,
                 "license.jurisdiction_question",self.__makeRectangle(15, 150, 75, 15), 1)
 
             cmbJurisdictionList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControl(cmbJurisdictionList, CMB_JURISDICTION,
+            xPSetList = self.__createAWTControl(cmbJurisdictionList, self.CMB_JURISDICTION,
                 None, self.__makeRectangle(90, 150, 60, 12), 1)
             #TODO: Next two lines are different from the source- new Boolean()
             xPSetList.setPropertyValue("Dropdown", True)
@@ -283,7 +296,7 @@ class LicenseChooserDialog():
 
             lblInstructions = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblInstructions = self.__createAWTControl(lblInstructions, LBL_INSTRUCTIONS_CC,
+            xpsLblInstructions = self.__createAWTControl(lblInstructions, self.LBL_INSTRUCTIONS_CC,
                 "With a Creative Commons license, you keep your copyright but allow "
                 + "people to copy and distribute your work provided they give you credit  "
                 + "  and only on the conditions you specify here. "
@@ -312,17 +325,7 @@ class LicenseChooserDialog():
         """
        
 
-        #Constants
-        BTN_CC = "btnCC"
-        BTN_CC0 = "btnCC0"
-        BTN_PUBLICDOMAIN = "btnPublicdomain"
-        BTN_FAQ = "faqbt"
-        faqButtonLabel = "FAQ"
-        finishButtonLabel = "OK"
-        BTN_OK = "finishbt"
-        BTN_CANCEL = "cancelbt"
-        cancelButtonLabel = "Cancel"
-        CMB_JURISDICTION = "cmbJurisdiction"
+        
        
         try:
 
@@ -366,9 +369,9 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlButtonModel")
 
            
-           
             
-            xPSetCCButton = self.__createAWTControl(ccButton, BTN_CC,
+            
+            xPSetCCButton = self.__createAWTControl(ccButton, self.BTN_CC,
                 None, self.__makeRectangle(4, 3, 70, 12), 0)
 
             xPSetCCButton.setPropertyValue("DefaultButton", True)
@@ -389,7 +392,7 @@ class LicenseChooserDialog():
 
             cc0Button = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetCC0Button = self.__createAWTControl(cc0Button, BTN_CC0,
+            xPSetCC0Button = self.__createAWTControl(cc0Button, self.BTN_CC0,
                 None, self.__makeRectangle(73, 3, 20, 12), 0)
             xPSetCC0Button.setPropertyValue("DefaultButton", True)
             xPSetCC0Button.setPropertyValue("Label", "CC0")
@@ -404,7 +407,7 @@ class LicenseChooserDialog():
 
             pdButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetPDButton = self.__createAWTControl(pdButton, BTN_PUBLICDOMAIN,
+            xPSetPDButton = self.__createAWTControl(pdButton, self.BTN_PUBLICDOMAIN,
                 None,self.__makeRectangle(92, 3, 60, 12), 0)
             xPSetPDButton.setPropertyValue("DefaultButton", True)
             #TODO: The next line needs localization support.
@@ -430,26 +433,26 @@ class LicenseChooserDialog():
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetFaqButton = self.__createAWTControl(faqButton, BTN_FAQ,
+            xPSetFaqButton = self.__createAWTControl(faqButton, self.BTN_FAQ,
                 None, self.__makeRectangle(70, 260, 40, 14), 0)
             xPSetFaqButton.setPropertyValue("DefaultButton", True)
-            xPSetFaqButton.setPropertyValue("Label", faqButtonLabel)
+            xPSetFaqButton.setPropertyValue("Label", self.faqButtonLabel)
 
             ##create the button model - OK and set the properties
             finishButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetFinishButton = self.__createAWTControl(finishButton, BTN_OK,
+            xPSetFinishButton = self.__createAWTControl(finishButton, self.BTN_OK,
                 None, self.__makeRectangle(115, 260, 40, 14), 0)
             xPSetFinishButton.setPropertyValue("DefaultButton", True)
-            xPSetFinishButton.setPropertyValue("Label", finishButtonLabel)
+            xPSetFinishButton.setPropertyValue("Label", self.finishButtonLabel)
 
             ## create the button model - Cancel and set the properties
             cancelButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetCancelButton = self.__createAWTControl(cancelButton, BTN_CANCEL,
+            xPSetCancelButton = self.__createAWTControl(cancelButton, self.BTN_CANCEL,
                 None, self.__makeRectangle(160, 260, 40, 14), 0)
-            xPSetCancelButton.setPropertyValue("Name", BTN_CANCEL)
-            xPSetCancelButton.setPropertyValue("Label", cancelButtonLabel)
+            xPSetCancelButton.setPropertyValue("Name", self.BTN_CANCEL)
+            xPSetCancelButton.setPropertyValue("Label", self.cancelButtonLabel)
             
             ##create the dialog control and set the model
             dialog = self.xMultiComponentFactory.createInstanceWithContext(
@@ -461,7 +464,7 @@ class LicenseChooserDialog():
 
             ##add an action listener to the Previous button control
             #xControlCont=dialog
-            cmbJList=dialog.getControl(CMB_JURISDICTION)
+            cmbJList=dialog.getControl(self.CMB_JURISDICTION)
             #TODO: Add the items to the cmbJList properly (Line 227-230)
 
             count=0
