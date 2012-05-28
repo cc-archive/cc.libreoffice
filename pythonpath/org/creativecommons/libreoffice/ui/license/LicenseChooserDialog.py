@@ -316,6 +316,24 @@ class LicenseChooserDialog():
             raise ex
         
 
+    def __addListners(self,classType,controlName,listner):
+        
+        """Creates event listners
+    
+        Arguments:
+        - `classType`: The type of the class
+        - `controlName`: String
+        - `listner`: XEventListener
+        """
+        if (classType == 'XButton'):
+            print "XButton"
+
+        elif (classType=='XRadioButton'):
+            print 'XRadioButton'
+
+        elif (classType == 'XCheckBox'):
+            print 'XCheckBox'
+
 
     def showDialog(self):
         """Shows the LicenseChooserDialog 
@@ -487,6 +505,9 @@ class LicenseChooserDialog():
             ##Resume point
 
             ##listen for license selection changes
+            self.__addListners("XCheckBox", None,None)
+            self.__addListners("XRadioButton",None,None)
+            self.__addListners("XButton",None,None)
 
             ##add an action listeners to buttons
 
