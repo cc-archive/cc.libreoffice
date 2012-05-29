@@ -338,7 +338,15 @@ class LicenseChooserDialog():
             #print 'XCheckBox'
             self.dialog.getControl(controlName).addItemListener(listner)
 
+    
 
+    def updateSelectedLicense(self, ):
+        """
+        """
+        xpsSelectedLicense=self.getNameContainer().getByName(self.LBL_SELECTED_LICENSE)
+        ##TODO:Complete the method
+        
+            
     def showDialog(self):
         """Shows the LicenseChooserDialog 
         
@@ -384,6 +392,9 @@ class LicenseChooserDialog():
             #--
             ###
             ###
+
+            #get the name container for the dialog for inserting other elements
+            self.xNameCont=self.dlgLicenseSelector
             
             ###Tabs
             ##CC
