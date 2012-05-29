@@ -326,13 +326,17 @@ class LicenseChooserDialog():
         - `listner`: XEventListener
         """
         if (classType == 'XButton'):
-            print "XButton"
+            #print "XButton"
+            objectButton = self.dialog.getControl(controlName)
+            objectButton.addActionListener( listener)
 
         elif (classType=='XRadioButton'):
-            print 'XRadioButton'
+            #print 'XRadioButton'
+            self.dialog.getControl(controlName).addItemListener(listener)
 
         elif (classType == 'XCheckBox'):
-            print 'XCheckBox'
+            #print 'XCheckBox'
+            self.dialog.getControl(controlName).addItemListener(listner)
 
 
     def showDialog(self):
