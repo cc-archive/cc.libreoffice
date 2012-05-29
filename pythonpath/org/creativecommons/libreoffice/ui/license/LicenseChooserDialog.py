@@ -473,16 +473,16 @@ class LicenseChooserDialog():
             xPSetCancelButton.setPropertyValue("Label", self.cancelButtonLabel)
             
             ##create the dialog control and set the model
-            dialog = self.xMultiComponentFactory.createInstanceWithContext(
+            self.dialog  = self.xMultiComponentFactory.createInstanceWithContext(
                 "com.sun.star.awt.UnoControlDialog", self.m_xContext)
             # xControl = dialog
             #xControlModel =  dlgLicenseSelector
             
-            dialog.setModel(self.dlgLicenseSelector)
+            self.dialog .setModel(self.dlgLicenseSelector)
 
             ##add an action listener to the Previous button control
-            #xControlCont=dialog
-            cmbJList=dialog.getControl(self.CMB_JURISDICTION)
+            #xControlCont=self.dialog 
+            cmbJList=self.dialog .getControl(self.CMB_JURISDICTION)
             #TODO: Add the items to the cmbJList properly (Line 227-230)
 
             count=0
@@ -517,12 +517,12 @@ class LicenseChooserDialog():
 
             
             ##execute the dialog
-            dialog.setVisible(True)
-            dialog.execute()
+            self.dialog .setVisible(True)
+            self.dialog .execute()
             
 
             ##dispose the dialog
-            #dialog.dispose()
+            #self.dialog .dispose()
             
             
         except Exception,ex:
