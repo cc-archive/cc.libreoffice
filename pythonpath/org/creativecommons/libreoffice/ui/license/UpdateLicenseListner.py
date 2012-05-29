@@ -1,0 +1,44 @@
+from com.sun.star.awt.XItemListener import XItemListener
+
+class UpdateLicenseListener(XItemListener):
+    """Updates the selected license Label
+    """
+    
+    def __init__(self, dialog):
+        """
+        
+        Arguments:
+        - `dialog`:LicenseChooserDialog
+        """
+        self.dialog = dialog
+        
+
+
+    def disposing(self, event):
+        """
+        
+        Arguments:
+        - `event`:EventObject
+        """
+        pass
+
+    def getDialog(self, ):
+        """
+        """
+        return self.dialog
+
+    def setDialog(self, dialog):
+        """
+        
+        Arguments:
+        - `dialog`:LicenseChooserDialog
+        """
+        self.dialog=dialog
+
+    def itemStateChanged(self, event):
+        """
+        
+        Arguments:
+        - `event`:ItemEvent
+        """
+        self.getDialog().updateSelectedLicense()
