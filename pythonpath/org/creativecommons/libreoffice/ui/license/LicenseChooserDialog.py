@@ -1,5 +1,6 @@
 import os
 
+
 from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
 from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener import JurisdictionSelectListener
 from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener import AcceptWaiveListener
@@ -342,11 +343,12 @@ class LicenseChooserDialog():
         if (classType == 'XButton'):
             #print "XButton"
             objectButton = self.dialog.getControl(controlName)
-            objectButton.addActionListener( listener)
+            objectButton.addActionListener( listner)
 
         elif (classType=='XRadioButton'):
             #print 'XRadioButton'
-            self.dialog.getControl(controlName).addItemListener(listener)
+            self.dialog.getControl(controlName).addItemListener(listner)
+            
 
         elif (classType == 'XCheckBox'):
             #print 'XCheckBox'
@@ -538,15 +540,15 @@ class LicenseChooserDialog():
             
 
             ##listen for license selection changes
-            self.__addListners("XCheckBox", None,None)
+            #self.__addListners("XCheckBox", None,None)
             #self.__addListners("XRadioButton",None,None)
-            self.__addListners("XButton",None,None)
+            #self.__addListners("XButton",None,None)
 
-            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_YES,UpdateLicenseListener(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_NO,UpdateLicenseListener(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_YES,UpdateLicenseListener(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,UpdateLicenseListener(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_NO,UpdateLicenseListener(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_YES,UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_NO,UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_YES,UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_NO,UpdateLicenseListner(self))
 
             cmbJList.addItemListener(JurisdictionSelectListener(self))
 

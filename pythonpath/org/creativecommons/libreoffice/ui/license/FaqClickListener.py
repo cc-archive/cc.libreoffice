@@ -1,5 +1,5 @@
-from com.sun.star.awt.XActionListener import XActionListener
-from com.sun.star.system.SystemShellExecuteFlags import SystemShellExecuteFlags
+from com.sun.star.awt import XActionListener
+#from com.sun.star.system import SystemShellExecuteFlags
 
 class FaqClickListener(XActionListener):
     """Go to Creative Commons FAQ site.
@@ -38,8 +38,9 @@ class FaqClickListener(XActionListener):
                     "com.sun.star.system.SystemShellExecute", m_xContext)
             aURLString = "http://wiki.creativecommons.org/Frequently_Asked_Questions"
 
+            ##TODO: Original code used SystemShellExecuteFlags.DEFAULTS
             xSystemShellExecute.execute(
-                aURLString, "",SystemShellExecuteFlags.DEFAULTS)
+                aURLString, "",0)
 
         except Exception, ex:
             print 'Exception in FaqClickListener.actionPerformed'

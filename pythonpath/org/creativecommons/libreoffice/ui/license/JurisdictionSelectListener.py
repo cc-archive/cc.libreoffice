@@ -1,7 +1,7 @@
-from com.sun.star.awt.XItemListener import XItemListener
-from org.creativecommons.libreoffice.ui.license.UpdateLicenseListener import UpdateLicenseListener
+from com.sun.star.awt import XItemListener
+from org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
 
-class JurisdictionSelectListener(XItemListener,UpdateLicenseListener):
+class JurisdictionSelectListener(XItemListener,UpdateLicenseListner):
     """Get the user selected jurisdiction.
     """
     

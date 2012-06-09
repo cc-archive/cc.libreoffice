@@ -1,4 +1,4 @@
-from com.sun.star.awt.XActionListener import XActionListener
+from com.sun.star.awt import XActionListener
 
 class PDClickListener(XActionListener):
     """Show Creative Commons tab.

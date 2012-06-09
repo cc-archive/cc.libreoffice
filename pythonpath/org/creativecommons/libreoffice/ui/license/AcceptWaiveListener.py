@@ -1,11 +1,11 @@
-from com.sun.star.awt.XItemListener import XItemListener
-from com.sun.star.beans.PropertyVetoException import PropertyVetoException
-from com.sun.star.beans.UnknownPropertyException import UnknownPropertyException
-from com.sun.star.container.NoSuchElementException import NoSuchElementException
-from com.sun.star.lang.WrappedTargetException import WrappedTargetException
-from com.sun.star.lang.IllegalArgumentException import IllegalArgumentException
+from com.sun.star.awt import XItemListener
+from com.sun.star.beans import PropertyVetoException
+from com.sun.star.beans import UnknownPropertyException
+from com.sun.star.container import NoSuchElementException
+from com.sun.star.lang import WrappedTargetException
+from com.sun.star.lang import IllegalArgumentException
 
-from LicenseChooserDialog import LicenseChooserDialog
+# from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
 
 class AcceptWaiveListener(XItemListener):
     """Enable CC0 deed and territory etc. after accepting to waive.
@@ -40,35 +40,35 @@ class AcceptWaiveListener(XItemListener):
             #enable disable dialog controls accoring to the state
             if (waive.getState()==0):
                 self.dialog.xNameCont.getByName(
-                    LicenseChooserDialog.CHK_YES_CC0).setPropertyValue(
+                    self.dialog.CHK_YES_CC0).setPropertyValue(
                         "Enabled", False)
 
                 ##TODO: was (short)0
                 self.dialog.xNameCont.getByName(LicenseChooserDialog.CHK_YES_CC0).setPropertyValue("State", 0)
 
                 self.dialog.xNameCont.getByName(
-                    LicenseChooserDialog.TXT_LEGAL_CODE_CC0).setPropertyValue(
+                    self.dialog.TXT_LEGAL_CODE_CC0).setPropertyValue(
                         "Enabled", False)
 
                 self.dialog.xNameCont.getByName(
-                    LicenseChooserDialog.CMB_TERRITORY).setPropertyValue(
+                    self.dialog.CMB_TERRITORY).setPropertyValue(
                         "Enabled", False)
 
                 self.dialog.xNameCont.getByName(
-                    LicenseChooserDialog.BTN_OK).setPropertyValue(
+                    self.dialog.BTN_OK).setPropertyValue(
                         "Enabled", False)
 
             else:
                  self.dialog.xNameCont.getByName(
-                     LicenseChooserDialog.CHK_YES_CC0).setPropertyValue(
+                     self.dialog.CHK_YES_CC0).setPropertyValue(
                          "Enabled", True)
 
                  self.dialog.xNameCont.getByName(
-                     LicenseChooserDialog.TXT_LEGAL_CODE_CC0).setPropertyValue(
+                     self.dialog.TXT_LEGAL_CODE_CC0).setPropertyValue(
                          "Enabled", True)
 
                  self.dialog.xNameCont.getByName(
-                     LicenseChooserDialog.CMB_TERRITORY).setPropertyValue(
+                     self.dialog.CMB_TERRITORY).setPropertyValue(
                          "Enabled", True)
 
                  

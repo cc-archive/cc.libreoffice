@@ -1,4 +1,4 @@
-from com.sun.star.awt.XItemListener import XItemListener
+from com.sun.star.awt import XItemListener
 
 class UpdateLicenseListner(XItemListener):
     """Updates the selected license Label
