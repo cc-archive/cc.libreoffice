@@ -38,6 +38,8 @@ class LicenseChooserDialog():
     TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
     CHK_YES_CC0 = "chkYesCC0"
     CMB_TERRITORY = "cmbTerritory"
+
+    cancelled=True
     
     def __init__(self, ccLoAddin, ctx):
         """
@@ -338,7 +340,11 @@ class LicenseChooserDialog():
             #print 'XCheckBox'
             self.dialog.getControl(controlName).addItemListener(listner)
 
-    
+
+    def close(self, ):
+        """End the excution of the dialog
+        """
+        self.dialog.endExecute()
 
     def updateSelectedLicense(self, ):
         """
@@ -546,3 +552,5 @@ class LicenseChooserDialog():
 
             #TODO: match the raising exception with the origianl source
             raise ex
+
+        
