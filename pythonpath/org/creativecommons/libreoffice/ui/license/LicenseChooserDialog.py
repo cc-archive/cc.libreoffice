@@ -3,6 +3,13 @@ import os
 from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListener import UpdateLicenseListener
 from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener import JurisdictionSelectListener
 from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener import AcceptWaiveListener
+from org.creativecommons.libreoffice.ui.license.AcceptListener import AcceptListener
+from org.creativecommons.libreoffice.ui.license.FaqClickListener import FaqClickListener
+from org.creativecommons.libreoffice.ui.license.OKClickListener import OKClickListener
+from org.creativecommons.libreoffice.ui.license.CancelClickListener import CancelClickListener
+from org.creativecommons.libreoffice.ui.license.CCClickListener import CCClickListener
+from org.creativecommons.libreoffice.ui.license.CC0ClickListener import CC0ClickListener
+from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickListener
 
 
 class LicenseChooserDialog():
