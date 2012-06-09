@@ -1,6 +1,6 @@
 import os
 
-from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListener import UpdateLicenseListener
+from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
 from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener import JurisdictionSelectListener
 from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener import AcceptWaiveListener
 from org.creativecommons.libreoffice.ui.license.AcceptListener import AcceptListener
@@ -539,9 +539,24 @@ class LicenseChooserDialog():
 
             ##listen for license selection changes
             self.__addListners("XCheckBox", None,None)
-            self.__addListners("XRadioButton",None,None)
+            #self.__addListners("XRadioButton",None,None)
             self.__addListners("XButton",None,None)
 
+            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_YES,UpdateLicenseListener(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_NO,UpdateLicenseListener(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_YES,UpdateLicenseListener(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,UpdateLicenseListener(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_NO,UpdateLicenseListener(self))
+
+            cmbJList.addItemListener(JurisdictionSelectListener(self))
+
+            self.__addListners("XCheckBox", self.CHK_WAIVE,AcceptWaiveListener(self))
+            self.__addListners("XCheckBox", self.CHK_YES_CC0,AcceptListener(self))
+            self.__addListners("XCheckBox", self.CHK_YES_PD,AcceptListener(self))
+
+            
+
+            
             ##add an action listeners to buttons
 
             ##Set the initial license
