@@ -1,5 +1,10 @@
 import os
 
+from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListener import UpdateLicenseListener
+from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener import JurisdictionSelectListener
+from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener import AcceptWaiveListener
+
+
 class LicenseChooserDialog():
     """Creates a new instance of LicenseChooserDialog
     """
@@ -523,7 +528,7 @@ class LicenseChooserDialog():
             cmbJList.selectItemPos(0,True)
             cmbJList.makeVisible(0)
 
-            ##Resume point
+            
 
             ##listen for license selection changes
             self.__addListners("XCheckBox", None,None)
