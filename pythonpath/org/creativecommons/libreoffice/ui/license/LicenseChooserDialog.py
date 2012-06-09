@@ -480,10 +480,10 @@ class LicenseChooserDialog():
             ##create the button model - OK and set the properties
             finishButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetFinishButton = self.__createAWTControl(finishButton, self.BTN_OK,
+            self.xPSetFinishButton = self.__createAWTControl(finishButton, self.BTN_OK,
                 None, self.__makeRectangle(115, 260, 40, 14), 0)
-            xPSetFinishButton.setPropertyValue("DefaultButton", True)
-            xPSetFinishButton.setPropertyValue("Label", self.finishButtonLabel)
+            self.xPSetFinishButton.setPropertyValue("DefaultButton", True)
+            self.xPSetFinishButton.setPropertyValue("Label", self.finishButtonLabel)
 
             ## create the button model - Cancel and set the properties
             cancelButton = self.dlgLicenseSelector.createInstance(
@@ -553,4 +553,60 @@ class LicenseChooserDialog():
             #TODO: match the raising exception with the origianl source
             raise ex
 
+    def setLicenseType(self, type):
+        """Set license type according to the tab selected.
+    
+        Arguments:
+        - `type`: Integer
+        """
+
+        btnArray=[BTN_CC, BTN_CC0, BTN_PUBLICDOMAIN]
+
+        try:
+            for index, entry in enumerate(btnArray):
+                xPSetLicenseButton=self.xNameCont.getByName(entry)
+                fontDes=xPSetLicenseButton.getPropertyValue("FontDescriptor")
+
+                if (index+1 == type):
+                    fontDes.Weight = 150
+                    ##TODO: was (short)1
+                    xPSetLicenseButton.setPropertyValue("State", 1)
+                else:
+                    fontDes.Weight = 50
+                    ##TODO: was (short)0
+                    xPSetLicenseButton.setPropertyValue("State", 0)
+                    
+                xPSetLicenseButton.setPropertyValue("FontDescriptor", fontDes)
+
+            if (type != 1):
+                self.xPSetFinishButton.setPropertyValue("Enabled", False)
+            else:
+                self.xPSetFinishButton.setPropertyValue("Enabled", True)
+
+            self.xNameCont.getByName(CHK_YES_CC0).setPropertyValue("Enabled",False)
+            self.xNameCont.getByName(TXT_LEGAL_CODE_CC0).setPropertyValue("Enabled",False)
+            ##TODO: was (short)0
+            self.xNameCont.getByName(CHK_WAIVE).setPropertyValue("State", 0)
+            self.xNameCont.getByName(CHK_YES_CC0).setPropertyValue("State", 0)
+            self.xNameCont.getByName(CMB_TERRITORY).setPropertyValue("Enabled",False)
+
+            ##TODO: Implement
+            #cmbTList.selectItemPos((short) 0, true);
+
+            self.xNameCont.getByName(CHK_YES_PD).setPropertyValue("State", 0)
+
+            ##Note: It seems like that self.dlgLicenseSelector and 
+            ##xPSetDialog are equal
+            self.dlgLicenseSelector.setPropertyValue("Step", type)
+
+            
+            
+            
+            
+
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.setLicenseType'
+            print type(ex)
+            print ex
+            raise ex
         
