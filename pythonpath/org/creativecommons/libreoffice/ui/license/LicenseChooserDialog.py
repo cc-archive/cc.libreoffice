@@ -615,7 +615,7 @@ class LicenseChooserDialog():
 
             self.__addListners("XCheckBox", self.CHK_WAIVE,AcceptWaiveListener(self))
             self.__addListners("XCheckBox", self.CHK_YES_CC0,AcceptListener(self))
-            #self.__addListners("XCheckBox", self.CHK_YES_PD,AcceptListener(self))
+            self.__addListners("XCheckBox", self.CHK_YES_PD,AcceptListener(self))
 
             
 
