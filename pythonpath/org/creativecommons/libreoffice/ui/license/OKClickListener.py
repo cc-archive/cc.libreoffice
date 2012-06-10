@@ -1,6 +1,8 @@
+import unohelper
+
 from com.sun.star.awt import XActionListener
 
-class OKClickListener(XActionListener):
+class OKClickListener(XActionListener,unohelper.Base):
     """
     """
     

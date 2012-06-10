@@ -1,6 +1,8 @@
+import unohelper
+
 from com.sun.star.awt import XActionListener
 
-class CC0ClickListener(XActionListener):
+class CC0ClickListener(XActionListener,unohelper.Base):
     """Show Creative Commons tab.
     """
     

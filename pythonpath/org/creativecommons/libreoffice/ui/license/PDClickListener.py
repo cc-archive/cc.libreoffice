@@ -1,6 +1,8 @@
+import unohelper
+
 from com.sun.star.awt import XActionListener
 
-class PDClickListener(XActionListener):
+class PDClickListener(XActionListener,unohelper.Base):
     """Show Creative Commons tab.
     """
     

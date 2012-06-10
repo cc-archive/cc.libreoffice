@@ -1,6 +1,8 @@
+import unohelper
+
 from com.sun.star.awt import XActionListener
 
-class CancelClickListener(XActionListener):
+class CancelClickListener(XActionListener,unohelper.Base):
     """
     """
     

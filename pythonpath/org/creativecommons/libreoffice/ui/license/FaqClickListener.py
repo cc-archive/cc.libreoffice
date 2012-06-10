@@ -1,7 +1,9 @@
+import unohelper
+
 from com.sun.star.awt import XActionListener
 #from com.sun.star.system import SystemShellExecuteFlags
 
-class FaqClickListener(XActionListener):
+class FaqClickListener(XActionListener,unohelper.Base):
     """Go to Creative Commons FAQ site.
     """
     
