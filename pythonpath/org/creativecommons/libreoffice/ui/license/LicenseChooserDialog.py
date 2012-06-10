@@ -1,3 +1,7 @@
+#Author: Ishan Thilina Somasiri
+#E-mail: ishan@ishans.info
+#Blog: www.blog.ishans.info
+
 import os
 
 
@@ -264,7 +268,7 @@ class LicenseChooserDialog():
             xpsRadioCommercialNo = self.__createAWTControl(
                 radioCommercialNo, self.RDO_ALLOW_COMERCIAL_NO,
                 "No", self.__makeRectangle(20, 75, 30, 12), 1)
-            #TODO: Original line was  new Short((short) 1))
+            #TODO: Original line was  new Short((short) 0))
             xpsRadioCommercialNo.setPropertyValue("State", 0)
 
             #Allow modifications of your work?

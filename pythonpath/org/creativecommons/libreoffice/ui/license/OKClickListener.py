@@ -1,3 +1,7 @@
+#Author: Ishan Thilina Somasiri
+#E-mail: ishan@ishans.info
+#Blog: www.blog.ishans.info
+
 import unohelper
 
 from com.sun.star.awt import XActionListener

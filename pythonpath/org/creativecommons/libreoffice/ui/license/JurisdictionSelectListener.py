@@ -1,3 +1,7 @@
+#Author: Ishan Thilina Somasiri
+#E-mail: ishan@ishans.info
+#Blog: www.blog.ishans.info
+
 from com.sun.star.awt import XItemListener
 from org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
 
