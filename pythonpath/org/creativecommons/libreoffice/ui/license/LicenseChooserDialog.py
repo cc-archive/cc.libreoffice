@@ -49,6 +49,7 @@ class LicenseChooserDialog():
     LBL_INSTRUCTIONS_CC0 = "lblInstructionsCC0"
     CHK_WAIVE = "chkWaive"
     TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
+    TXT_LEGAL_CODE_PD = "txtLegalCodePD"
     CHK_YES_CC0 = "chkYesCC0"
     CHK_YES_PD = "chkYesPD"
     CMB_TERRITORY = "cmbTerritory"
@@ -330,7 +331,64 @@ class LicenseChooserDialog():
             print type(ex)
             print ex
             raise ex
-        
+
+    def __cratePDLicenseTab(self, ):
+        """
+    """
+        try:
+            
+            lblWarning=self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+            
+            xpsLblWarning = self.__createAWTControl(lblWarning, "pdwarning",
+                "You have selected the Public Domain Certification. "
+                + "The Public Domain Certification should only be used to certify "
+                + "a work that is already in the public domain. "
+                + "\n\nCreative Commons does not recommend you use the "
+                + "Public Domain Certification for dedicating a work still "
+                + "protected by copyright to the public domain. "
+                + "To dedicate a work to the public domain, consider using CC0. "
+                + "\n\nPlease note that if you use the Public Domain Certification to "
+                + "dedicate a work to the public domain, it may not be valid outside "
+                + "of the United States.",
+                self.__makeRectangle(10, 25, 190, 100), 3)
+
+            xpsLblWarning.setPropertyValue("MultiLine", True)
+
+            fontDes =  xpsLblWarning.getPropertyValue("FontDescriptor")
+            fontDes.Weight = 150;
+            xpsLblWarning.setPropertyValue("FontDescriptor", fontDes)
+
+            path=os.path.join(os.path.dirname(__file__), '../../../license/legalcodes/pd')
+            f=open(path,'r')
+            pdLegalCode=f.read()
+
+            #Legal code
+            txtDeed=self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlEditModel")
+            xpsTxtDeed=self.__createAWTControl(txtDeed, self.TXT_LEGAL_CODE_PD, None,
+                self.__makeRectangle(10, 130, 190, 75), 3)
+
+            xpsTxtDeed.setPropertyValue("MultiLine", True)
+            xpsTxtDeed.setPropertyValue("ReadOnly", True)
+            xpsTxtDeed.setPropertyValue("VScroll", True)
+            xpsTxtDeed.setPropertyValue("Text", pdLegalCode)
+
+            chkYes=self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlCheckBoxModel")
+
+            xpsChkYes=self.__createAWTControl(chkYes, self.CHK_YES_PD,
+                                "I have read and understand the terms and intended legal effect of "
+                                + "this tool, and hereby voluntarily elect to apply it to this work.",
+                                self.__makeRectangle(10, 210, 190, 30), 3)
+            xpsChkYes.setPropertyValue("MultiLine", True)
+            
+
+        except Exception,ex:
+            print 'Exception in LicenseChooserDialog.__cratePDLicenseTab'
+            print type(ex)
+            print ex
+            raise ex
 
     def __addListners(self,classType,controlName,listner):
         
@@ -482,6 +540,7 @@ class LicenseChooserDialog():
             ##Create Tabs
             self.__crateCC0LicenseTab()
             self.__createCCLicenseTab()
+            self.__cratePDLicenseTab()
             
             
 
