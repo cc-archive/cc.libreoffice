@@ -1,3 +1,5 @@
+import unohelper
+
 from com.sun.star.awt import XItemListener
 from com.sun.star.beans import PropertyVetoException
 from com.sun.star.beans import UnknownPropertyException
@@ -7,7 +9,7 @@ from com.sun.star.lang import IllegalArgumentException
 
 # from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
 
-class AcceptWaiveListener(XItemListener):
+class AcceptWaiveListener(XItemListener,unohelper.Base):
     """Enable CC0 deed and territory etc. after accepting to waive.
     """
     

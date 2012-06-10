@@ -1,3 +1,5 @@
+import unohelper
+
 from com.sun.star.awt import XItemListener
 from com.sun.star.beans import PropertyVetoException
 from com.sun.star.beans import UnknownPropertyException
@@ -5,7 +7,7 @@ from com.sun.star.container import NoSuchElementException
 from com.sun.star.lang import WrappedTargetException
 from com.sun.star.lang import IllegalArgumentException
 
-class AcceptListener(XItemListener):
+class AcceptListener(XItemListener,unohelper.Base):
     """Enable OK button after accepting the deed.
     """
     

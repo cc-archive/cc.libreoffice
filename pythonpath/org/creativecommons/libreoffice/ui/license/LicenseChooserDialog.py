@@ -50,6 +50,7 @@ class LicenseChooserDialog():
     CHK_WAIVE = "chkWaive"
     TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
     CHK_YES_CC0 = "chkYesCC0"
+    CHK_YES_PD = "chkYesPD"
     CMB_TERRITORY = "cmbTerritory"
 
     cancelled=True
@@ -481,7 +482,8 @@ class LicenseChooserDialog():
             ##Create Tabs
             self.__crateCC0LicenseTab()
             self.__createCCLicenseTab()
-            print 'passed'
+            
+            
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -552,8 +554,8 @@ class LicenseChooserDialog():
 
             cmbJList.addItemListener(JurisdictionSelectListener(self))
 
-            #self.__addListners("XCheckBox", self.CHK_WAIVE,AcceptWaiveListener(self))
-            #self.__addListners("XCheckBox", self.CHK_YES_CC0,AcceptListener(self))
+            self.__addListners("XCheckBox", self.CHK_WAIVE,AcceptWaiveListener(self))
+            self.__addListners("XCheckBox", self.CHK_YES_CC0,AcceptListener(self))
             #self.__addListners("XCheckBox", self.CHK_YES_PD,AcceptListener(self))
 
             
