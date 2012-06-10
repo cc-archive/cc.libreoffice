@@ -377,6 +377,7 @@ class LicenseChooserDialog():
             chkYes=self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
 
+            ##TODO: add internationalization support
             xpsChkYes=self.__createAWTControl(chkYes, self.CHK_YES_PD,
                                 "I have read and understand the terms and intended legal effect of "
                                 + "this tool, and hereby voluntarily elect to apply it to this work.",
@@ -628,10 +629,16 @@ class LicenseChooserDialog():
             self.__addListners("XButton",self.BTN_CC,CCClickListener(self))
             self.__addListners("XButton",self.BTN_CC0,CC0ClickListener(self))
             self.__addListners("XButton",self.BTN_PUBLICDOMAIN,PDClickListener(self))
+
+            
             ##Set the initial license
-
+            ##TODO: Implement this
+            
             ##create a peer
-
+            toolkit=self.xMultiComponentFactory.createInstanceWithContext(
+                "com.sun.star.awt.Toolkit", self.m_xContext)
+            self.dialog.setVisible(False)
+            self.dialog.createPeer(toolkit,None)
             
             ##execute the dialog
             self.dialog .setVisible(True)
