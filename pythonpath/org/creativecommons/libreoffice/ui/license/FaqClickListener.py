@@ -36,8 +36,8 @@ class FaqClickListener(XActionListener,unohelper.Base):
         """
         try:
             xMcFact=self.m_xContext.getServiceManager()
-            xSystemShellExecute = xFact.createInstanceWithContext(
-                    "com.sun.star.system.SystemShellExecute", m_xContext)
+            xSystemShellExecute = xMcFact.createInstanceWithContext(
+                    "com.sun.star.system.SystemShellExecute", self.m_xContext)
             aURLString = "http://wiki.creativecommons.org/Frequently_Asked_Questions"
 
             ##TODO: Original code used SystemShellExecuteFlags.DEFAULTS
