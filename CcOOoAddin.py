@@ -1,7 +1,14 @@
+#Author: Ishan Thilina Somasiri
+#E-mail: ishan@ishans.info
+#Blog: www.blog.ishans.info
+
 import unohelper
 
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
+
+from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
+import module.module1 as Module
 
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
@@ -11,13 +18,14 @@ IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
 class Example(unohelper.Base, XInitialization, XServiceInfo,
               XDispatchProvider, XDispatch):
 
+    
     def __init__(self, ctx, *args):
         self.ctx = ctx
         self.frame = None
         self.initialize(args)
 
     def supportsService(self, name):
-        return (name == SERVICE_NAME)
+        return (name == SERVICE_NAME) 
 
     def getImplementationName(self):
         return IMPLE_NAME
@@ -51,7 +59,14 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
                 print "SelectLicense"
 
             elif url.Path == "InsertStatement":
-                print "InsertStatement"
+                print 'calling selectLicense'
+
+                Module.testMethod()
+                lcd=LicenseChooserDialog(self, self.ctx)
+                #print type(lcd)
+                #print dir(lcd)
+                lcd.showDialog()
+                
 
             elif url.Path == "InsertPictureFlickr":
                 print "InsertPictureFlickr"
@@ -74,6 +89,31 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
     def do(self): 
         pass 
 
+    def selectLicense(self):
+
+        #This code fragment creates a sample window
+        oDialogModel = self.ctx.ServiceManager.createInstanceWithContext( 
+            "com.sun.star.awt.UnoControlDialogModel", self.ctx )
+
+        # Initialize the dialog model's properties.
+        oDialogModel.PositionX = 200
+        oDialogModel.PositionY = 200
+        oDialogModel.Width = 200
+        oDialogModel.Height = 200
+        oDialogModel.Title = "Title"
+
+
+        oDialogControl = self.ctx.ServiceManager.createInstanceWithContext( 
+            "com.sun.star.awt.UnoControlDialog", self.ctx )
+        oDialogControl.setModel( oDialogModel )
+        print "setModel Ok"
+
+        #segfault on next line
+        oDialogControl.setVisible( True )
+        print "visible"
+        oDialogControl.execute()
+        print "execute"
+        
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation( 
     Example, 
