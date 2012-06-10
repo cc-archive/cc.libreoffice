@@ -23,6 +23,31 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         self.ctx = ctx
         self.frame = None
         self.initialize(args)
+        self.mxRemoteServiceManager=self.ctx.getServiceManager()
+        
+
+    def updateCurrentComponent(self, ):
+        """Updates the Desktop current component in case of opening, creating or swapping
+        to other document
+        """
+        ret=None
+
+        try:
+
+            #TODO: original code had mxComponentContext,but it seems "Null"
+            desktop = self.mxRemoteServiceManager.createInstanceWithContext(
+                    "com.sun.star.frame.Desktop", self.ctx)
+            ret = desktop.getCurrentComponent()
+            self.xMultiComponentFactory=self.ctx.getServiceManager()
+            
+            
+        except Exception, ex:
+            print "Exception in CcOOoAddin.updateCurrentComponent: "
+            print ex
+            print type(ex)
+            raise ex
+
+        self.xCurrentComponent=ret
 
     def supportsService(self, name):
         return (name == SERVICE_NAME) 
@@ -57,6 +82,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
             if url.Path == "SelectLicense":
                 print "SelectLicense"
+                self.selectLicense()
 
             elif url.Path == "InsertStatement":
                 print 'calling selectLicense'
@@ -91,28 +117,48 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
     def selectLicense(self):
 
-        #This code fragment creates a sample window
-        oDialogModel = self.ctx.ServiceManager.createInstanceWithContext( 
-            "com.sun.star.awt.UnoControlDialogModel", self.ctx )
+        try:
+            ##TODO: following part was not Implemented
+            # if (mxRemoteServiceManager == null) {
+            #     System.out.println("not available");
+            #     return;
+            # }
 
-        # Initialize the dialog model's properties.
-        oDialogModel.PositionX = 200
-        oDialogModel.PositionY = 200
-        oDialogModel.Width = 200
-        oDialogModel.Height = 200
-        oDialogModel.Title = "Title"
+            self.updateCurrentComponent()
+
+        except Exception, ex:
+            print "Exception in CcOOoAddin.selectLicense: "
+            print ex
+            print type(ex)
+            raise ex
+        ###################################################################
+        ###################################################################
+
+        # # #This code fragment creates a sample window
+        # # oDialogModel = self.ctx.ServiceManager.createInstanceWithContext( 
+        # #     "com.sun.star.awt.UnoControlDialogModel", self.ctx )
+
+        # # # Initialize the dialog model's properties.
+        # # oDialogModel.PositionX = 200
+        # # oDialogModel.PositionY = 200
+        # # oDialogModel.Width = 200
+        # # oDialogModel.Height = 200
+        # # oDialogModel.Title = "Title"
 
 
-        oDialogControl = self.ctx.ServiceManager.createInstanceWithContext( 
-            "com.sun.star.awt.UnoControlDialog", self.ctx )
-        oDialogControl.setModel( oDialogModel )
-        print "setModel Ok"
+        # # oDialogControl = self.ctx.ServiceManager.createInstanceWithContext( 
+        # #     "com.sun.star.awt.UnoControlDialog", self.ctx )
+        # # oDialogControl.setModel( oDialogModel )
+        # # print "setModel Ok"
 
-        #segfault on next line
-        oDialogControl.setVisible( True )
-        print "visible"
-        oDialogControl.execute()
-        print "execute"
+        # # #segfault on next line
+        # # oDialogControl.setVisible( True )
+        # # print "visible"
+        # # oDialogControl.execute()
+        # # print "execute"
+
+        #####################################################################
+        ####################################################################
         
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation( 
