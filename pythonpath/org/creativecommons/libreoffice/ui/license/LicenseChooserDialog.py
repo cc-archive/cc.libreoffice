@@ -798,7 +798,7 @@ class LicenseChooserDialog():
             
 
             ##dispose the dialog
-            #self.dialog .dispose()
+            self.dialog .dispose()
             
             
         except Exception,ex:
