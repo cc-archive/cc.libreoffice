@@ -1,6 +1,8 @@
 import os
 
 
+from com.sun.star.beans import PropertyValue
+
 from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
 from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener import JurisdictionSelectListener
 from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener import AcceptWaiveListener
@@ -11,6 +13,8 @@ from org.creativecommons.libreoffice.ui.license.CancelClickListener import Cance
 from org.creativecommons.libreoffice.ui.license.CCClickListener import CCClickListener
 from org.creativecommons.libreoffice.ui.license.CC0ClickListener import CC0ClickListener
 from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickListener
+
+
 
 
 class LicenseChooserDialog():
@@ -65,6 +69,7 @@ class LicenseChooserDialog():
         """
         self._ccLoAddin = ccLoAddin
         self.m_xContext = ctx
+        self.xNameCont=None
         
         # get the service manager from the component context
         self.xMultiComponentFactory = self.m_xContext.getServiceManager()
@@ -425,6 +430,103 @@ class LicenseChooserDialog():
         """
         xpsSelectedLicense=self.getNameContainer().getByName(self.LBL_SELECTED_LICENSE)
         ##TODO:Complete the method
+        pass
+
+    def __getGraphic(self, sImageUrl):
+        """
+    
+        Arguments:
+        - `sImageUrl`:String
+        """
+        xGraphic=None
+
+        try:
+
+            #create a GraphicProvider at the global service manager...
+            oGraphicProvider = self.xMultiComponentFactory.createInstanceWithContext(
+                    "com.sun.star.graphic.GraphicProvider", self.m_xContext)
+            aPropertyValue=PropertyValue()
+            aPropertyValue.Name = "URL";
+            aPropertyValue.Value = sImageUrl
+            #Create an array
+            aPropertyValues=()
+            aPropertyValues+=(aPropertyValue,)
+
+            xGraphic=oGraphicProvider.queryGraphic(aPropertyValues)
+            return xGraphic
+            
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.__getGraphic'
+            print type(ex)
+            print ex
+            raise ex
+    
+
+    def __setInfoImage(self, rect, item,title, step):
+        """Set "i" image for tips on each license option.
+    
+    Arguments:
+    - `rect`:Rectangle
+    - `item`:String
+    - `title`:String
+    - `step`:Integer
+    """
+        try:
+
+            oICModel=None
+            ##print 'ss'
+            #print dir(self.xN)
+
+            ##TODO: original was "ImageControl" + item
+            if (self.xNameCont.getByName( item)):
+                
+                try:
+                    xImageControl=self.dialog.getControl("ImageControl" + item)
+
+                    if (xImageControl != None):
+                        xImageControl.dispose()
+
+                        #TODO: original was "ImageControl" +item
+                    self.xNameCont.removeByName( item)
+
+                                   
+                except Exception, ex:
+                    print 'Exception in LicenseChooserDialog.__setInfoImage- Inside the If statement'
+                    print type(ex)
+                    print ex
+                    raise ex
+
+            oICModel = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlImageControlModel")
+            xGraphic=None
+            
+
+            #get the path for the images folder
+            path=os.path.join(os.path.dirname(__file__), '../../../../../../images/information.png')
+            #print "path:"+path
+
+            xGraphic=self.__getGraphic(path)
+
+            ##TODO: was (short)0
+            oICModel.setPropertyValue("Border",  0)
+            oICModel.setPropertyValue("Height", rect.Height)
+            oICModel.setPropertyValue("Name", "ImageControl" + item);
+            oICModel.setPropertyValue("PositionX", rect.X)
+            oICModel.setPropertyValue("PositionY", rect.Y)
+            oICModel.setPropertyValue("Width", rect.Width)
+            oICModel.setPropertyValue("Step", step)
+
+            self.xNameCont.insertByName("ImageControl" + item, oICModel)
+            oICModel.setPropertyValue("HelpText", title)
+            oICModel.setPropertyValue("Graphic", xGraphic)
+            
+
+                    
+                
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.__setInfoImage'
+            print type(ex)
+            print ex
+            raise ex
         
             
     def showDialog(self):
@@ -639,6 +741,11 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.Toolkit", self.m_xContext)
             self.dialog.setVisible(False)
             self.dialog.createPeer(toolkit,None)
+
+            self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),self.RDO_ALLOW_COMERCIAL_YES,
+                                "The licensor permits others to copy, distribute,"
+                                + "\ndisplay and perform the work,"
+                                + "\nas well as make derivative works based on it.", 1)
             
             ##execute the dialog
             self.dialog .setVisible(True)
