@@ -778,15 +778,15 @@ class LicenseChooserDialog():
             trritories=()
             trritories+=('1',)
             trritories+=('2',)
-            cmbTList=self.dialog.getControl(self.CMB_TERRITORY)
+            self.cmbTList=self.dialog.getControl(self.CMB_TERRITORY)
             ##TODO: was (short) 
-            cmbTList.addItem("",  0)
+            self.cmbTList.addItem("",  0)
             ##TODO: was (short) 
-            cmbTList.addItems(trritories,  1)
+            self.cmbTList.addItems(trritories,  1)
             ##TODO: was (short) 
-            cmbTList.selectItemPos( 0, True)
+            self.cmbTList.selectItemPos( 0, True)
             ##TODO: was (short) 
-            cmbTList.makeVisible( 0)
+            self.cmbTList.makeVisible( 0)
 
 
             ##TODO: add the line
@@ -815,7 +815,7 @@ class LicenseChooserDialog():
         - `type`: Integer
         """
 
-        btnArray=[BTN_CC, BTN_CC0, BTN_PUBLICDOMAIN]
+        btnArray=[self.BTN_CC, self.BTN_CC0, self.BTN_PUBLICDOMAIN]
 
         try:
             for index, entry in enumerate(btnArray):
@@ -838,17 +838,20 @@ class LicenseChooserDialog():
             else:
                 self.xPSetFinishButton.setPropertyValue("Enabled", True)
 
-            self.xNameCont.getByName(CHK_YES_CC0).setPropertyValue("Enabled",False)
-            self.xNameCont.getByName(TXT_LEGAL_CODE_CC0).setPropertyValue("Enabled",False)
+             
+            self.xNameCont.getByName(self.CHK_YES_CC0).setPropertyValue("Enabled",False)
+            self.xNameCont.getByName(self.TXT_LEGAL_CODE_CC0).setPropertyValue("Enabled",False)
             ##TODO: was (short)0
-            self.xNameCont.getByName(CHK_WAIVE).setPropertyValue("State", 0)
-            self.xNameCont.getByName(CHK_YES_CC0).setPropertyValue("State", 0)
-            self.xNameCont.getByName(CMB_TERRITORY).setPropertyValue("Enabled",False)
+            self.xNameCont.getByName(self.CHK_WAIVE).setPropertyValue("State", 0)
+            self.xNameCont.getByName(self.CHK_YES_CC0).setPropertyValue("State", 0)
+            self.xNameCont.getByName(self.CMB_TERRITORY).setPropertyValue("Enabled",False)
 
-            ##TODO: Implement
-            #cmbTList.selectItemPos((short) 0, true);
+            ##TODO: was (short)
+            self.cmbTList.selectItemPos( 0, True);
+            
 
-            self.xNameCont.getByName(CHK_YES_PD).setPropertyValue("State", 0)
+            self.xNameCont.getByName(self.CHK_YES_PD).setPropertyValue("State", 0)
+            
 
             ##Note: It seems like that self.dlgLicenseSelector and 
             ##xPSetDialog are equal
