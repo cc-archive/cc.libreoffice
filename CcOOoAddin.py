@@ -126,6 +126,14 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
             self.updateCurrentComponent()
 
+            #Create the dialog for license selection
+            dialog=LicenseChooserDialog(self,self.ctx)
+            dialog.showDialog()
+
+            if not dialog.cancelled:
+                ##TODO: Complete the method
+                
+
         except Exception, ex:
             print "Exception in CcOOoAddin.selectLicense: "
             print ex
