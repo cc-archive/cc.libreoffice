@@ -11,7 +11,7 @@ class JurisdictionSelectListener(XItemListener,UpdateLicenseListner):
         Arguments:
         - `dialog`:LicenseChooserDialog
         """
-        super(JurisdictionSelectListener,self).__init__(dialog)
+        UpdateLicenseListner.__init__(self,dialog)
 
     def itemStateChanged(self, event):
         """@override

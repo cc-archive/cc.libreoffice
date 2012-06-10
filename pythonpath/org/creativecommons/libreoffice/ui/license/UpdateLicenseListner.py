@@ -1,6 +1,7 @@
+import unohelper
 from com.sun.star.awt import XItemListener
 
-class UpdateLicenseListner(XItemListener):
+class UpdateLicenseListner(XItemListener,unohelper.Base):
     """Updates the selected license Label
     """
     
