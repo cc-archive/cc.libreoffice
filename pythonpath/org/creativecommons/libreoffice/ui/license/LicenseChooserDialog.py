@@ -742,10 +742,55 @@ class LicenseChooserDialog():
             self.dialog.setVisible(False)
             self.dialog.createPeer(toolkit,None)
 
+            ##TODO: all the following info images needs internationalization support
+
             self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),self.RDO_ALLOW_COMERCIAL_YES,
                                 "The licensor permits others to copy, distribute,"
                                 + "\ndisplay and perform the work,"
                                 + "\nas well as make derivative works based on it.", 1)
+
+            self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),self.RDO_ALLOW_COMERCIAL_NO,
+                                "The licensor permits others to copy, "
+                                + "\ndistribute, display, and perform the work "
+                                + "\nfor non-commercial purposes only", 1)
+
+            self.__setInfoImage(self.__makeRectangle(55, 103, 9, 10),self.RDO_ALLOW_MODIFICATIONS_YES,
+                                "The licensor permits others to copy, "
+                                + "\ndistribute, display and perform the work, "
+                                + "\nas well as make derivative works based on it.", 1)
+
+            self.__setInfoImage(self.__makeRectangle(125, 118, 9, 10),self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                                "The licensor permits others to distribute derivative works "
+                                + "\nonly under the same license or one compatible "
+                                + "\nwith the one that governs the licensor's work.", 1)
+
+            self.__setInfoImage(self.__makeRectangle(55, 133, 9, 10),self.RDO_ALLOW_MODIFICATIONS_NO,
+                                "The licensor permits others to copy, "
+                                + "\ndistribute and transmit only unaltered copies of the "
+                                + "\nwork - not derivative works based on it.", 1)
+
+            self.__setInfoImage(self.__makeRectangle(155, 148, 9, 10),self.CMB_JURISDICTION,
+                                "Use the option \"Unported\" if you desire a license using "
+                                + "\nlanguage and terminology from international treaties. ", 1)
+
+            ##TODO: Implement the Territories correctly
+
+            trritories=()
+            trritories+=('1',)
+            trritories+=('2',)
+            cmbTList=self.dialog.getControl(self.CMB_TERRITORY)
+            ##TODO: was (short) 
+            cmbTList.addItem("",  0)
+            ##TODO: was (short) 
+            cmbTList.addItems(trritories,  1)
+            ##TODO: was (short) 
+            cmbTList.selectItemPos( 0, True)
+            ##TODO: was (short) 
+            cmbTList.makeVisible( 0)
+
+
+            ##TODO: add the line
+            #cmbTList.addItemListener(new TerritorySelectListener(this));
             
             ##execute the dialog
             self.dialog .setVisible(True)
