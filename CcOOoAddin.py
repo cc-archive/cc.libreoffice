@@ -8,7 +8,7 @@ from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
 from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
-#from org.creativecommons.license.Store import Store
+from org.creativecommons.license.Store import Store
 import module.module1 as Module
 
 #import org.creativecommons.libs.rdflib.graph #import Graph

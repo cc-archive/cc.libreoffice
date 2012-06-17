@@ -4,7 +4,7 @@
 
 
 #import isodate
-#import rdflib
+import rdflib
 
 class Store():
     """
@@ -16,6 +16,8 @@ class Store():
         
         #model=graph=g
         g = rdflib.Graph()
+        result = g.parse("http://www.w3.org/People/Berners-Lee/card")
+        print("graph has %s statements." % len(g))
         
         
         
