@@ -8,11 +8,21 @@ from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
 from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
+#from org.creativecommons.license.Store import Store
 import module.module1 as Module
+
+#import org.creativecommons.libs.rdflib.graph #import Graph
+#import org.creativecommons.libs.rdflib.term #import URIRef
+
+#import rdflib
 
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
+
+def createInstance(ctx):
+    import org.creativecommons.license.Store
+    return org.creativecommons.license.Store.Store()
 
 
 class Example(unohelper.Base, XInitialization, XServiceInfo,
@@ -24,6 +34,23 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         self.frame = None
         self.initialize(args)
         self.mxRemoteServiceManager=self.ctx.getServiceManager()
+
+
+    ##A meyhod for testing purposes
+    def testMethod(self,):
+        """
+        """
+        try:
+            #passs
+            store =Store()
+            #g=rdflib.Graph()
+            # print 'in'
+            
+        except Exception, ex:
+            print "Exception in CcOOoAddin.TestMethod: "
+            print ex
+            print type(ex)
+            #raise ex
         
 
     def updateCurrentComponent(self, ):
@@ -96,6 +123,8 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
             elif url.Path == "InsertPictureFlickr":
                 print "InsertPictureFlickr"
+                ##Test code
+                self.testMethod()
 
             elif url.Path == "InsertOpenClipArt":
                 print "InsertOpenClipArt"
@@ -132,6 +161,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
             if not dialog.cancelled:
                 ##TODO: Complete the method
+                pass
                 
 
         except Exception, ex:
@@ -173,3 +203,7 @@ g_ImplementationHelper.addImplementation(
     Example, 
     IMPLE_NAME, 
     (SERVICE_NAME,),)
+
+g_ImplementationHelper.addImplementation( \
+	createInstance,"org.creativecommons.license.Store",
+        (SERVICE_NAME,),)
