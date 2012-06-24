@@ -10,6 +10,8 @@ import rdflib
 from rdflib import plugin
 from rdflib.graph import Graph
 from rdflib import RDF
+from rdflib import Literal
+from rdflib.resource import Resource
 
 from org.creativecommons.license.CC import CC
 
@@ -28,6 +30,16 @@ plugin.register(
 class Store():
     """
     """
+
+    _instance=None
+
+    def __new__(cls, *args, **kwargs):
+        """
+        """
+        if not cls._instance:
+            cls._instance = super(Store, cls).__new__(
+                                cls, *args, **kwargs)
+        return cls._instance
     
     def __init__(self, ):
         """
@@ -62,6 +74,69 @@ class Store():
         jurList.sort()
 
         return jurList
+
+
+    def literal(self, subject, predicate, lang):
+        """Returns a Literal object
+        
+        Arguments:
+        - `subject`:String
+        - `predicate`:String
+        - `lang`:String
+        """
+                
+        #get generator over the objects in case there's more than one
+        gen=self.g.objects(subject,predicate)
+        
+        for it in gen:
+            if isinstance(it,Literal):
+                if it.language == lang:
+                    #this is a literal, in the language we care about
+                    return it
+
+        return None
+
+
+    def object(self, subject, predicate):
+        """Get the object of the RDF triple
+        
+        Arguments:
+        - `subject`: String
+        - `predicate`: String
+        """
+        #get generator over the objects in case there's more than one
+        gen=self.g.objects(subject,predicate)
+        
+        for it in gen:
+            
+            if isinstance(it,Resource):
+                #this is a literal, in the language we care about
+                return it
+            
+        return None
+
+    def exists(self, subject,predicate,resource):
+        """
+    
+        Arguments:
+        - `subject`:
+        - `predicate`:
+        - `object`:
+        """
+        gen=self.g.triples((subject,predicate,resource))
+
+        #TODO: find a better way to do this checking
+
+        exists=False
+
+        #check for elements in the generator
+        for dd in gen:
+            #if an element exists, a triple exists
+            exists=True
+            #checking for one triple is enough
+            break
+
+        return exists
        
         
         
