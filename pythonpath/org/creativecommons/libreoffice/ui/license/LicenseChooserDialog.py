@@ -19,6 +19,7 @@ from org.creativecommons.libreoffice.ui.license.CC0ClickListener import CC0Click
 from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickListener
 
 from org.creativecommons.license.Store import Store
+from org.creativecommons.license.Jurisdiction import Jurisdiction
 
 
 
@@ -690,22 +691,25 @@ class LicenseChooserDialog():
             cmbJList=self.dialog .getControl(self.CMB_JURISDICTION)
             #TODO: Add the items to the cmbJList properly (Line 227-230)
 
+            juriList=Store().jurisdictions()
+
             count=0
 
             ##add Unported, which isn't actually a jurisdiction'
             count+=1
             cmbJList.addItem("Unported", count)
-            #TODO: add line 236-239 - next few lines are test code
+            #TODO: add line 236-239
             
 
-            #test code
-            s=Store()
-            l=s.jurisdictions()
             
-            for uri in l:
-                cmbJList.addItem(uri, count)
+            
+            for uri in juriList:
+                print "adding "+uri
+                title=Jurisdiction(uri).getTitle()
+                print title
+                cmbJList.addItem(title, count)
                 count+=1
-            #test code
+            
             
             ##add a bogus place-holder for Unported in the JurisdictionList to
             ##ensure indices match up when determining the item selectedJurisdiction

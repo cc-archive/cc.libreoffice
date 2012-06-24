@@ -84,10 +84,11 @@ class Store():
         - `predicate`:String
         - `lang`:String
         """
-                
+
+        print "before gen"
         #get generator over the objects in case there's more than one
         gen=self.g.objects(subject,predicate)
-        
+        print "affter"
         for it in gen:
             if isinstance(it,Literal):
                 if it.language == lang:
