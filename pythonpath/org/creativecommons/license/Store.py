@@ -129,7 +129,7 @@ class Store():
         for it in gen:
             
             if isinstance(it,Resource):
-                #this is a literal, in the language we care about
+                #this is a Resource
                 return it
             
         return None
