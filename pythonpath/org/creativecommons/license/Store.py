@@ -30,32 +30,50 @@ plugin.register(
 class Store():
     """
     """
+    g = rdflib.Graph()
+
+    path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+    g.parse(path)
+
+    path=os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+    g.parse(path)
+
+    path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+    g.parse(path)
 
     _instance=None
 
     def __new__(cls, *args, **kwargs):
         """
         """
-        if not cls._instance:
-            cls._instance = super(Store, cls).__new__(
-                                cls, *args, **kwargs)
+        # if not cls._instance:
+        #     cls._instance = super(Store, cls).__new__(
+        #                         cls, *args, **kwargs)
+        # return cls._instance
+
+        if cls._instance is not None:
+            return cls._instance
+
+        cls._inst = object.__new__(cls, *args, **kwargs)
         return cls._instance
     
     def __init__(self, ):
         """
         """
+        pass
+        
         
         #model=graph=g
-        self.g = rdflib.Graph()
+        #self.g = rdflib.Graph()
 
-        path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
-        self.g.parse(path)
+        # path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+        # self.g.parse(path)
 
-        path=os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
-        self.g.parse(path)
+        # path=os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+        # self.g.parse(path)
 
-        path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
-        self.g.parse(path)
+        # path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+        # self.g.parse(path)
 
 
 
@@ -88,7 +106,7 @@ class Store():
         print "before gen"
         #get generator over the objects in case there's more than one
         gen=self.g.objects(subject,predicate)
-        print "affter"
+        
         for it in gen:
             if isinstance(it,Literal):
                 if it.language == lang:
