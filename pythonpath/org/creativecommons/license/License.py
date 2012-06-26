@@ -37,9 +37,9 @@ class License():
         DC= Namespace("http://purl.org/dc/elements/1.1/")
         DCTerms=Namespace("http://purl.org/dc/terms/")
         
-        return str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+
-    ""+str(self.licenseStore.literal(self.license_uri,DCTerms['hasVersion'],""))+
-    ""+self.getJurisdiction().getTitle()
+        return str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+""
+        +str(self.licenseStore.literal(self.license_uri,DCTerms['hasVersion'],""))+""
+        +self.getJurisdiction().getTitle()
 
 
     def getJurisdiction(self, ):
