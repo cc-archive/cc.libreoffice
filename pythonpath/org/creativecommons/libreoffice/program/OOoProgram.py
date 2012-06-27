@@ -199,13 +199,16 @@ class OOoProgram(IVisibleNotice):
                 print ex
                 print type(ex)
                 #raise ex
+                
             xType = URI.create(self.m_xContext, self.component.getStringValue())
             xTypeRights = URI.create(self.m_xContext, "http://purl.org/dc/elements/1.1/rights")
-            xGraphName = self.component.addMetadataFile("meta.rdf", new XURI[]{xTypeRights})
+            #TODO:Line 179 - Implement correctly
+            xGraphName = self.component.addMetadataFile("meta.rdf", None)
             xGraph = self.component.getRDFRepository().getGraph(xGraphName)
 
             nodeRights = URI.create(self.m_xContext, "http://purl.org/dc/elements/1.1/rights")
-            valRights = Literal.create(self.m_xContext, "© " + author
+            #TODO: Line 191- Implement correctly
+            valRights = Literal.create(self.m_xContext, "-ASCII C- " + author
                     + " licensed to the public under the " + license.getName() + " license")
             xGraph.addStatement(xType, nodeRights, valRights)
 
