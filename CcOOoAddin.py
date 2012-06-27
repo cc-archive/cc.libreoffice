@@ -14,7 +14,8 @@ import module.module1 as Module
 #import org.creativecommons.libs.rdflib.graph #import Graph
 #import org.creativecommons.libs.rdflib.term #import URIRef
 
-from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
+#from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
+from org.creativecommons.libreoffice.program.Writer import Writer
 #import rdflib
 
 
