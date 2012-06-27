@@ -9,7 +9,9 @@ from com.sun.star.beans import PropertyVetoException
 from com.sun.star.beans import UnknownPropertyException
 from com.sun.star.lang import WrappedTargetException
 
-from com.sun.star.rdf import URI
+#from com.sun.star.rdf import URI
+#import com.sun.star.rdf.URI
+#import com.sun.star.rdf.Literal
 
 #from com.sun.star.beans import PropertyAttribute
 
@@ -197,6 +199,25 @@ class OOoProgram(IVisibleNotice):
                 print ex
                 print type(ex)
                 #raise ex
+            xType = URI.create(self.m_xContext, self.component.getStringValue())
+            xTypeRights = URI.create(self.m_xContext, "http://purl.org/dc/elements/1.1/rights")
+            xGraphName = self.component.addMetadataFile("meta.rdf", new XURI[]{xTypeRights})
+            xGraph = self.component.getRDFRepository().getGraph(xGraphName)
+
+            nodeRights = URI.create(self.m_xContext, "http://purl.org/dc/elements/1.1/rights")
+            valRights = Literal.create(self.m_xContext, "© " + author
+                    + " licensed to the public under the " + license.getName() + " license")
+            xGraph.addStatement(xType, nodeRights, valRights)
+
+            nodeLicense = URI.create(self.m_xContext, "http://purl.org/dc/terms/license")
+            valLicense = Literal.create(self.m_xContext, license.getLicenseUri())
+            xGraph.addStatement(xType, nodeLicense, valLicense)
+
+            noderightsHolder = URI.create(self.m_xContext, "http://purl.org/dc/terms/rightsHolder")
+            valrightsHolder = Literal.create(self.m_xContext, author)
+            xGraph.addStatement(xType, noderightsHolder, valrightsHolder)
+
+            
                 
         except Exception, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
