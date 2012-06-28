@@ -77,9 +77,14 @@ class LicenseChooserDialog():
         self._ccLoAddin = ccLoAddin
         self.m_xContext = ctx
         self.xNameCont=None
-        
+
+       
+       
+       
+       
         # get the service manager from the component context
         self.xMultiComponentFactory = self.m_xContext.getServiceManager()
+        
 
     # The CoreReflection object. 
     def __createUnoStruct(self, cTypeName):
@@ -887,3 +892,4 @@ class LicenseChooserDialog():
             print ex
             raise ex
         
+import CcOOoAddin

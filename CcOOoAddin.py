@@ -7,7 +7,7 @@ import unohelper
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
-from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
+
 from org.creativecommons.license.Store import Store
 import module.module1 as Module
 
@@ -144,6 +144,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         pass 
     
     def do(self): 
+        print "Test"
         pass 
 
     def selectLicense(self):
@@ -209,3 +210,5 @@ g_ImplementationHelper.addImplementation(
 g_ImplementationHelper.addImplementation( \
 	createInstance,"org.creativecommons.license.Store",
         (SERVICE_NAME,),)
+
+from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
