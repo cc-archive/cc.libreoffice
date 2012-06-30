@@ -103,7 +103,7 @@ class Store():
         - `lang`:String
         """
 
-        print "before gen"
+        
         #get generator over the objects in case there's more than one
         gen=self.g.objects(subject,predicate)
         

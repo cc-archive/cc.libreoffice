@@ -49,11 +49,11 @@ class Jurisdiction():
             lang="en"
             
         DC= Namespace("http://purl.org/dc/elements/1.1/")
-        print "1"
+        
         dcTitle=DC['title']
-        print "2"
+
         title=Store().literal(self.uri,dcTitle,lang)
-        print "3"
+
 
         if title:
             return str(title)

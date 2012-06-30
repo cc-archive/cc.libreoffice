@@ -709,9 +709,9 @@ class LicenseChooserDialog():
             
             
             for uri in juriList:
-                print "adding "+uri
+                
                 title=Jurisdiction(uri).getTitle()
-                print title
+                
                 cmbJList.addItem(title, count)
                 count+=1
             
@@ -759,6 +759,8 @@ class LicenseChooserDialog():
             
             ##Set the initial license
             ##TODO: Implement this
+            print "getProgramWrapper"
+            self._ccLoAddin.getProgramWrapper()
             
             ##create a peer
             toolkit=self.xMultiComponentFactory.createInstanceWithContext(

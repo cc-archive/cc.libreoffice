@@ -16,6 +16,8 @@ import module.module1 as Module
 
 #from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.program.Writer import Writer
+from org.creativecommons.libreoffice.program.Calc import Calc
+
 #import rdflib
 
 
@@ -107,7 +109,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
         if url.Protocol == "org.creativecommons.openoffice.ccooo:":
 
-            #this.updateComponent()
+            self.updateCurrentComponent()
 
             if url.Path == "SelectLicense":
                 print "SelectLicense"
@@ -200,6 +202,14 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
         #####################################################################
         ####################################################################
+
+    def getProgramWrapper(self, ):
+        """
+        """
+        #xServiceInfo=self.xCurrentComponent
+
+        if (self.xCurrentComponent.supportsService("com.sun.star.sheet.SpreadsheetDocument")):
+            print "Excel"
         
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation( 
