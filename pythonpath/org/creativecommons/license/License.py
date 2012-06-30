@@ -4,8 +4,8 @@
 
 from rdflib import Namespace
 
-from org.creativecommons.license import Store
-from org.creativecommons.license import Unported
+from org.creativecommons.license.Store import Store
+from org.creativecommons.license.Unported import Unported
 
 class License():
     """

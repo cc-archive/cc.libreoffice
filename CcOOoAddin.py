@@ -2,6 +2,8 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 
+import traceback
+
 import unohelper
 
 from com.sun.star.frame import XDispatch, XDispatchProvider
@@ -19,6 +21,8 @@ from org.creativecommons.libreoffice.program.Writer import Writer
 from org.creativecommons.libreoffice.program.Calc import Calc
 from org.creativecommons.libreoffice.program.Draw import Draw
 #import rdflib
+
+from org.creativecommons.license.Chooser import Chooser
 
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
@@ -44,17 +48,18 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
     def testMethod(self,):
         """
         """
+        print "in test method-CcOOoAddin"
         try:
-            #passs
-            store =Store()
-            #g=rdflib.Graph()
-            # print 'in'
+            chs=Chooser()
+            chs.selectPDTools("United States",2)
+            chs.selectLicense(True,False,False,None)
             
         except Exception, ex:
-            print "Exception in CcOOoAddin.TestMethod: "
-            print ex
-            print type(ex)
-            #raise ex
+            # print "Exception in CcOOoAddin.TestMethod: "
+            # print ex
+            # 
+            traceback.print_exc()
+            #
         
 
     def updateCurrentComponent(self, ):
@@ -74,9 +79,9 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
             
         except Exception, ex:
             print "Exception in CcOOoAddin.updateCurrentComponent: "
-            print ex
-            print type(ex)
-            raise ex
+            traceback.print_exec()
+            
+            
 
         self.xCurrentComponent=ret
 
@@ -118,7 +123,8 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
             elif url.Path == "InsertStatement":
                 print 'calling selectLicense'
 
-                Module.testMethod()
+                #Module.testMethod()
+                self.testMethod()
                 lcd=LicenseChooserDialog(self, self.ctx)
                 #print type(lcd)
                 #print dir(lcd)
@@ -171,9 +177,9 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
 
         except Exception, ex:
             print "Exception in CcOOoAddin.selectLicense: "
-            print ex
-            print type(ex)
-            raise ex
+            traceback.print_exec() 
+            
+            
         ###################################################################
         ###################################################################
 

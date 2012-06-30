@@ -3,27 +3,14 @@
 #Blog: www.blog.ishans.info
 
 import os
-
-
-#import isodate
 import rdflib
-from rdflib import plugin
+
 from rdflib.graph import Graph
 from rdflib import RDF
 from rdflib import Literal
 from rdflib.resource import Resource
 
 from org.creativecommons.license.CC import CC
-
-#register the plugins
-
-plugin.register(
-    'sparql', rdflib.query.Processor,
-    'rdfextras.sparql.processor', 'Processor')
-
-plugin.register(
-    'sparql', rdflib.query.Result,
-    'rdfextras.sparql.query', 'SPARQLQueryResult')
 
 
 
