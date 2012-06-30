@@ -4,17 +4,17 @@
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 
-class Calc(OOoProgram):
+class Draw(OOoProgram):
     """
     """
     
-    def __init__(self, component,m_xContext):
+    def __init__(self,component,m_xContext):
         """
         
         Arguments:
         - `component`:XComponent
         - `m_xContext`:XComponentContext
         """
-        super(Calc,self).__init__(component,m_xContext)
+        super(Draw,self).__init__(component,m_xContext)
         
         

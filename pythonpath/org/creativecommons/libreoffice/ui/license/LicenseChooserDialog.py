@@ -21,6 +21,9 @@ from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickLi
 from org.creativecommons.license.Store import Store
 from org.creativecommons.license.Jurisdiction import Jurisdiction
 
+from org.creativecommons.libreoffice.program.Writer import Writer
+from org.creativecommons.libreoffice.program.Calc import Calc
+
 
 
 

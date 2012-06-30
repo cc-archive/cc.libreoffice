@@ -19,7 +19,7 @@ from org.creativecommons.libreoffice.program.IVisibleNotice import IVisibleNotic
 from org.creativecommons.libreoffice.program.Constants import Constants
 from org.creativecommons.license.License import License
 
-class OOoProgram(IVisibleNotice):
+class OOoProgram(object):
     """
     """
     
@@ -30,6 +30,7 @@ class OOoProgram(IVisibleNotice):
         - `component`: XComponent
         - `m_xContext`: XComponentContext
         """
+        
         self.component = component
         self.m_xContext = m_xContext
 

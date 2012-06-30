@@ -17,7 +17,7 @@ import module.module1 as Module
 #from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.program.Writer import Writer
 from org.creativecommons.libreoffice.program.Calc import Calc
-
+from org.creativecommons.libreoffice.program.Draw import Draw
 #import rdflib
 
 
@@ -209,8 +209,21 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         #xServiceInfo=self.xCurrentComponent
 
         if (self.xCurrentComponent.supportsService("com.sun.star.sheet.SpreadsheetDocument")):
-            print "Excel"
-        
+            return Calc(self.xCurrentComponent,self.ctx)
+            
+        elif (self.xCurrentComponent.supportsService("com.sun.star.text.TextDocument")):
+            return  Writer(self.xCurrentComponent,self.ctx)
+            
+            
+        elif (self.xCurrentComponent.supportsService("com.sun.star.presentation.PresentationDocument")):
+            return Draw(self.xCurrentComponent,self.ctx)
+
+        elif (self.xCurrentComponent.supportsService("com.sun.star.drawing.DrawingDocument")):
+            return Draw(self.xCurrentComponent,self.ctx)
+
+        return None
+
+    
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation( 
     Example, 

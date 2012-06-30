@@ -16,7 +16,7 @@ class Writer(OOoProgram):
         - `component`:
         - `m_xContext`:
         """
-        super(component,m_xContext)
+        super(Writer,self).__init__(component,m_xContext)
 
     def insertPicture(self, img):
         """Insert pictures from the internet.
