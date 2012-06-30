@@ -542,6 +542,55 @@ class LicenseChooserDialog():
             print type(ex)
             print ex
             raise ex
+
+    def __getRadioButtonValue(self, rdoName):
+        """
+    
+        Arguments:
+        - `rdoName`:String
+        """
+        try:
+
+            xPSetList=self.xNameCont.getByName(rdoName)
+            if (xPSetList.getPropertyValue("State")==1):
+                return True
+            else:
+                return False
+            
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.__getRadioButtonValue'
+            print type(ex)
+            print ex
+            return None
+            #raise ex
+
+    def __getSelectedLicense(self, ):
+        """
+        """
+        try:
+            pass
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.__getSelectedLicense'
+            print type(ex)
+            print ex
+
+        return None
+
+    def __setCRadioButtonValue(self, controlName,bValue):
+        """
+    
+    Arguments:
+    - `controlName`: String
+    - `bValue`: Boolean
+    """
+        try:
+            xpsSelectedLicense=self.xNameCont.getByName(LBL_SELECTED_LICENSE)
+            #TODO:Implement
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.__setCRadioButtonValue'
+            print type(ex)
+            print ex
+            #raise ex
         
             
     def showDialog(self):
@@ -762,8 +811,12 @@ class LicenseChooserDialog():
             
             ##Set the initial license
             ##TODO: Implement this
-            print "getProgramWrapper"
-            self._ccLoAddin.getProgramWrapper()
+            if (self._ccLoAddin.getProgramWrapper().getDocumentLicense()):
+                print "in exists"
+            else:
+                print "in does not exist"
+
+            
             
             ##create a peer
             toolkit=self.xMultiComponentFactory.createInstanceWithContext(
