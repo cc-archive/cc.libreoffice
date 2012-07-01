@@ -465,7 +465,7 @@ class LicenseChooserDialog():
             return None
             #raise ex
 
-    def __getSelectedLicense(self, ):
+    def getSelectedLicense(self, ):
         """
         """
         try:
@@ -499,7 +499,7 @@ class LicenseChooserDialog():
         """
         try:
             xpsSelectedLicense=self.xNameCont.getByName(self.LBL_SELECTED_LICENSE)
-            xpsSelectedLicense.setPropertyValue("Label", self.__getSelectedLicense().getName())
+            xpsSelectedLicense.setPropertyValue("Label", self.getSelectedLicense().getName())
             ##TODO:Complete the method
         except Exception, ex:
             traceback.print_exc()
@@ -621,11 +621,14 @@ class LicenseChooserDialog():
     - `controlName`: String
     - `bValue`: Boolean
     """
-        print "in __setCRadioButtonValue"
+        
         try:
-            xpsSelectedLicense=self.xNameCont.getByName(self.LBL_SELECTED_LICENSE)
-            print "ccc"
-            #TODO:Implement
+            xPSetList=self.xNameCont.getByName(controlName)
+            if bValue:
+                xPSetList.setPropertyValue("State",1)
+            else:
+                xPSetList.setPropertyValue("State",0)
+            
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__setCRadioButtonValue'
             print type(ex)

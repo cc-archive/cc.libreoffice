@@ -171,8 +171,14 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
             dialog.showDialog()
 
             if not dialog.cancelled:
-                ##TODO: Complete the method
-                pass
+                #retrieve the selected License
+                selected = dialog.getSelectedLicense()
+                document = self.getProgramWrapper()
+
+                #store the license information in the document
+                document.setDocumentLicense(selected)
+                ##TODO: Add the line 290
+
                 
 
         except Exception, ex:
