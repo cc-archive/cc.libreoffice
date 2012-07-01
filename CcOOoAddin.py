@@ -184,6 +184,36 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         except Exception, ex:
             print "Exception in CcOOoAddin.selectLicense: "
             traceback.print_exec() 
+
+    def getProgramWrapper(self, ):
+        """
+        """
+        #xServiceInfo=self.xCurrentComponent
+
+        if (self.xCurrentComponent.supportsService("com.sun.star.sheet.SpreadsheetDocument")):
+            return Calc(self.xCurrentComponent,self.ctx)
+            
+        elif (self.xCurrentComponent.supportsService("com.sun.star.text.TextDocument")):
+            return  Writer(self.xCurrentComponent,self.ctx)
+            
+            
+        elif (self.xCurrentComponent.supportsService("com.sun.star.presentation.PresentationDocument")):
+            return Draw(self.xCurrentComponent,self.ctx)
+
+        elif (self.xCurrentComponent.supportsService("com.sun.star.drawing.DrawingDocument")):
+            return Draw(self.xCurrentComponent,self.ctx)
+
+        return None
+
+
+    def insertStatement(self, ):
+        """
+    """
+        if (self.getProgramWrapper().getDocumentLicense() is not None):
+            self.selectLicense()
+
+        #TODO- Implement the following (line 309 )
+        #self.getProgramWrapper(self.getCurrentComponent()).insertVisibleNotice()
             
             
         ###################################################################
@@ -215,25 +245,6 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         #####################################################################
         ####################################################################
 
-    def getProgramWrapper(self, ):
-        """
-        """
-        #xServiceInfo=self.xCurrentComponent
-
-        if (self.xCurrentComponent.supportsService("com.sun.star.sheet.SpreadsheetDocument")):
-            return Calc(self.xCurrentComponent,self.ctx)
-            
-        elif (self.xCurrentComponent.supportsService("com.sun.star.text.TextDocument")):
-            return  Writer(self.xCurrentComponent,self.ctx)
-            
-            
-        elif (self.xCurrentComponent.supportsService("com.sun.star.presentation.PresentationDocument")):
-            return Draw(self.xCurrentComponent,self.ctx)
-
-        elif (self.xCurrentComponent.supportsService("com.sun.star.drawing.DrawingDocument")):
-            return Draw(self.xCurrentComponent,self.ctx)
-
-        return None
 
     
 g_ImplementationHelper = unohelper.ImplementationHelper()
