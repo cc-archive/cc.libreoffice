@@ -62,8 +62,7 @@ class Chooser():
         #add jurisdiction filter
         if ((jurisdiction is None) or (isinstance(jurisdiction,Unported))):
             #limit results to unported
-            queryString += ("OPTIONAL { ?license cc:jurisdiction "
-                            "?jurisdiction } . ")
+            queryString += ("OPTIONAL { ?license cc:jurisdiction ?jurisdiction } . ")
             qFilter += "&& !bound(?jurisdiction) "
 
         else:
@@ -97,6 +96,8 @@ class Chooser():
 
         #close the query
         queryString += "FILTER(" + qFilter + ")      }"
+
+        print queryString
 
         return queryString
 

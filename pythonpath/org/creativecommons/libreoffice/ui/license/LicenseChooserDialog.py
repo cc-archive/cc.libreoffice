@@ -19,6 +19,7 @@ from org.creativecommons.libreoffice.ui.license.CC0ClickListener import CC0Click
 from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickListener
 
 from org.creativecommons.license.Store import Store
+from org.creativecommons.license.Chooser import Chooser
 from org.creativecommons.license.Jurisdiction import Jurisdiction
 
 from org.creativecommons.libreoffice.program.Writer import Writer
@@ -440,10 +441,62 @@ class LicenseChooserDialog():
         """
         self.dialog.endExecute()
 
+
+    def __getRadioButtonValue(self, rdoName):
+        """
+    
+        Arguments:
+        - `rdoName`:String
+        """
+        try:
+
+            xPSetList=self.xNameCont.getByName(rdoName)
+            if (xPSetList.getPropertyValue("State")==1):
+                return True
+            else:
+                return False
+            
+        except Exception, ex:
+            print 'Exception in LicenseChooserDialog.__getRadioButtonValue'
+            print type(ex)
+            print ex
+            return None
+            #raise ex
+
+    def __getSelectedLicense(self, ):
+        """
+        """
+        try:
+            #retrieve the Document for the issued license
+            licenseChooser=Chooser()
+
+            type=self.dlgLicenseSelector.getPropertyValue("Step")
+
+            if (type == 2):
+                #TODO:From where self.selectedTerritory set??
+                return licenseChooser.selectPDTools(self.selectedTerritory, 2)
+            elif (type == 3):
+                return licenseChooser.selectPDTools(None, 3)
+            else:
+                return licenseChooser.selectLicense(
+                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES)
+                    or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE)
+                    or self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO)
+                    or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
+                    self.selectedJurisdiction)
+
+            
+            
+        except Exception, ex:
+            raise ex
+
+        return None
+
     def updateSelectedLicense(self, ):
         """
         """
         xpsSelectedLicense=self.getNameContainer().getByName(self.LBL_SELECTED_LICENSE)
+        xpsSelectedLicense.setPropertyValue("Label", self.__getSelectedLicense().getName())
         ##TODO:Complete the method
         pass
 
@@ -543,38 +596,19 @@ class LicenseChooserDialog():
             print ex
             raise ex
 
-    def __getRadioButtonValue(self, rdoName):
-        """
     
-        Arguments:
-        - `rdoName`:String
-        """
-        try:
 
-            xPSetList=self.xNameCont.getByName(rdoName)
-            if (xPSetList.getPropertyValue("State")==1):
-                return True
-            else:
-                return False
-            
-        except Exception, ex:
-            print 'Exception in LicenseChooserDialog.__getRadioButtonValue'
-            print type(ex)
-            print ex
-            return None
-            #raise ex
+    # def __getSelectedLicense(self, ):
+    #     """
+    #     """
+    #     try:
+    #         pass
+    #     except Exception, ex:
+    #         print 'Exception in LicenseChooserDialog.__getSelectedLicense'
+    #         print type(ex)
+    #         print ex
 
-    def __getSelectedLicense(self, ):
-        """
-        """
-        try:
-            pass
-        except Exception, ex:
-            print 'Exception in LicenseChooserDialog.__getSelectedLicense'
-            print type(ex)
-            print ex
-
-        return None
+    #     return None
 
     def __setCRadioButtonValue(self, controlName,bValue):
         """
@@ -591,6 +625,33 @@ class LicenseChooserDialog():
             print type(ex)
             print ex
             #raise ex
+
+    
+        
+            
+    def __setSelectedLicense(self, selected):
+        """ update the user interface to match this selection
+    
+    Arguments:
+    - `selected`:
+    """
+        self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_YES,
+                                    not selected.prohibitCommercial())
+
+        self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO,
+                                    selected.prohibitCommercial())
+
+        self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES,
+                                    (selected.allowRemix() and not selected.requireShareAlike()))
+
+        self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                                    selected.requireShareAlike())
+        
+        self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_NO,
+                                    not selected.allowRemix())
+
+        self.selectedJurisdiction=selected.getJurisdiction()
+
         
             
     def showDialog(self):
@@ -624,6 +685,7 @@ class LicenseChooserDialog():
             self.dlgLicenseSelector.PositionX=100
             self.dlgLicenseSelector.PositionY=80
             self.dlgLicenseSelector.Title="Sharing & Reuse Permissions"
+            self.dlgLicenseSelector.Step=1
       
 
             ##--due to the following commment the following code in __createAWTControl is not run
@@ -813,6 +875,7 @@ class LicenseChooserDialog():
             ##TODO: Implement this
             if (self._ccLoAddin.getProgramWrapper().getDocumentLicense()):
                 print "in exists"
+                
             else:
                 print "in does not exist"
 
