@@ -18,6 +18,7 @@ from org.creativecommons.libreoffice.ui.license.CancelClickListener import Cance
 from org.creativecommons.libreoffice.ui.license.CCClickListener import CCClickListener
 from org.creativecommons.libreoffice.ui.license.CC0ClickListener import CC0ClickListener
 from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickListener
+from org.creativecommons.libreoffice.ui.license.TerritorySelectListener import TerritorySelectListener
 
 from org.creativecommons.license.Store import Store
 from org.creativecommons.license.Chooser import Chooser
@@ -830,7 +831,7 @@ class LicenseChooserDialog():
             self.jurisdictionList=Store().jurisdictions()
             #TODO-seems like lines 229-230 are unnecessary
 
-            juriList=Store().jurisdictions()
+            self.juriList=Store().jurisdictions()
 
             count=0
 
@@ -841,7 +842,7 @@ class LicenseChooserDialog():
             #TODO:Done- add line 236-239
             
             
-            for uri in juriList:
+            for uri in self.juriList:
                 
                 title=Jurisdiction(uri).getTitle()
                 
@@ -851,8 +852,8 @@ class LicenseChooserDialog():
             
             ##add a bogus place-holder for Unported in the JurisdictionList to
             ##ensure indices match up when determining the item selectedJurisdiction
-            #TODO: add line 243
-            juriList.insert(0,None)
+            
+            self.juriList.insert(0,None)
             
             ##Pre-select Unported
             #TODO: bit different from the origianl code
@@ -892,7 +893,7 @@ class LicenseChooserDialog():
 
             
             ##Set the initial license
-            ##TODO: Implement this
+
             if (self._ccLoAddin.getProgramWrapper().getDocumentLicense()):
                 self.__setSelectedLicense(self._ccLoAddin.getProgramWrapper().getDocumentLicense())
                 
@@ -941,23 +942,33 @@ class LicenseChooserDialog():
                                 + "\nlanguage and terminology from international treaties. ", 1)
 
             ##TODO: Implement the Territories correctly- Line 314
+            path=os.path.join(os.path.dirname(__file__), './../../../license/rdf/territory')
+            f=open(path)
 
-            trritories=()
-            trritories+=('1',)
-            trritories+=('2',)
+            
+            territoryList=f.read().rstrip().split('\n')
+            
+            self.trritories=()
+            #add the terrotories to the data structure
+            for trr in territoryList:
+                self.trritories+=(trr,)
+            
+            
+            #trritories+=('1',)
+            #trritories+=('2',)
             self.cmbTList=self.dialog.getControl(self.CMB_TERRITORY)
             ##TODO: was (short) 
             self.cmbTList.addItem("",  0)
             ##TODO: was (short) 
-            self.cmbTList.addItems(trritories,  1)
+            self.cmbTList.addItems(self.trritories,  1)
             ##TODO: was (short) 
             self.cmbTList.selectItemPos( 0, True)
             ##TODO: was (short) 
             self.cmbTList.makeVisible( 0)
 
 
-            ##TODO: add the line
-            #cmbTList.addItemListener(new TerritorySelectListener(this));
+            print "came-1"
+            self.cmbTList.addItemListener(TerritorySelectListener(self))
             
             ##execute the dialog
             self.dialog .setVisible(True)
@@ -970,7 +981,8 @@ class LicenseChooserDialog():
             
         except Exception,ex:
             print "Exception in LicenseChooserDialog.showDialog:"
-            #print ex
+            print ex
+            print 
             traceback.print_exec()
             #TODO: match the raising exception with the origianl source
             #raise ex
@@ -1034,5 +1046,19 @@ class LicenseChooserDialog():
             print type(ex)
             print ex
             raise ex
+
+    def setSelectedTerritory(self, selection):
+        """
+    
+        Arguments:
+        - `selection`:Integer
+        """
+        if (selection>0):
+            self.selectedTerritory=self.trritories[selection-1]
+
+        else:
+            self.selectedTerritory=None
+
+        
         
 import CcOOoAddin

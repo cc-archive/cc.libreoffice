@@ -40,7 +40,7 @@ class AcceptWaiveListener(XItemListener,unohelper.Base):
         Arguments:
         - `event`:ItemEvent
         """
-        waive=event.source
+        waive=event.Source
 
         try:
             #enable disable dialog controls accoring to the state

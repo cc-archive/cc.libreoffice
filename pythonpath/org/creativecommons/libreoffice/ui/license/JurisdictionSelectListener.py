@@ -23,8 +23,8 @@ class JurisdictionSelectListener(XItemListener,UpdateLicenseListner):
         Arguments:
         - `event`:ItemEvent
         """
-        #TODO: Complete the method
-        pass
+        print "in itemStateChanged"
+        self.dialog.selectedJurisdiction=self.dialog.juriList.pop(event.Selected)
         
     def disposing(self, event):
         """@override

@@ -31,19 +31,24 @@ class AcceptListener(XItemListener,unohelper.Base):
         Arguments:
         - `event`:ItemEvent
         """
-        accept=event.source
+        
+        
+        accept=event.Source
+        
 
         try:
 
             #enable disable dialog controls accoring to the state
             ##TODO: was (short)0
             if (accept.getState()==0):
+                
                 self.dialog.xNameCont.getByName(
-                    LicenseChooserDialog.BTN_OK).setPropertyValue(
+                    self.dialog.BTN_OK).setPropertyValue(
                         "Enabled", False)
             else:
+                
                 self.dialog.xNameCont.getByName(
-                    LicenseChooserDialog.BTN_OK).setPropertyValue(
+                    self.dialog.BTN_OK).setPropertyValue(
                         "Enabled", True)
             
         except IllegalArgumentException, ex:
