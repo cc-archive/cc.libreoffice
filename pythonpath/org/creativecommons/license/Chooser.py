@@ -97,7 +97,7 @@ class Chooser():
         #close the query
         queryString += "FILTER(" + qFilter + ")      }"
 
-        print queryString
+        #print queryString
 
         return queryString
 

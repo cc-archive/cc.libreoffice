@@ -3,6 +3,7 @@
 #Blog: www.blog.ishans.info
 
 import os
+import traceback
 
 
 from com.sun.star.beans import PropertyValue
@@ -20,6 +21,7 @@ from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickLi
 
 from org.creativecommons.license.Store import Store
 from org.creativecommons.license.Chooser import Chooser
+from org.creativecommons.license.License import License
 from org.creativecommons.license.Jurisdiction import Jurisdiction
 
 from org.creativecommons.libreoffice.program.Writer import Writer
@@ -480,25 +482,27 @@ class LicenseChooserDialog():
             else:
                 return licenseChooser.selectLicense(
                     self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES)
-                    or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE)
-                    or self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO)
                     or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
+                    self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO),
+                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
                     self.selectedJurisdiction)
 
             
             
         except Exception, ex:
-            raise ex
+            traceback.print_exc()
 
         return None
 
     def updateSelectedLicense(self, ):
         """
         """
-        xpsSelectedLicense=self.getNameContainer().getByName(self.LBL_SELECTED_LICENSE)
-        xpsSelectedLicense.setPropertyValue("Label", self.__getSelectedLicense().getName())
-        ##TODO:Complete the method
-        pass
+        try:
+            xpsSelectedLicense=self.xNameCont.getByName(self.LBL_SELECTED_LICENSE)
+            xpsSelectedLicense.setPropertyValue("Label", self.__getSelectedLicense().getName())
+            ##TODO:Complete the method
+        except Exception, ex:
+            traceback.print_exc()
 
     def __getGraphic(self, sImageUrl):
         """
@@ -617,8 +621,10 @@ class LicenseChooserDialog():
     - `controlName`: String
     - `bValue`: Boolean
     """
+        print "in __setCRadioButtonValue"
         try:
-            xpsSelectedLicense=self.xNameCont.getByName(LBL_SELECTED_LICENSE)
+            xpsSelectedLicense=self.xNameCont.getByName(self.LBL_SELECTED_LICENSE)
+            print "ccc"
             #TODO:Implement
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__setCRadioButtonValue'
@@ -635,8 +641,14 @@ class LicenseChooserDialog():
     Arguments:
     - `selected`:
     """
+
+        
+        
+        
+        
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_YES,
                                     not selected.prohibitCommercial())
+        
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO,
                                     selected.prohibitCommercial())
@@ -650,7 +662,10 @@ class LicenseChooserDialog():
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_NO,
                                     not selected.allowRemix())
 
+        
         self.selectedJurisdiction=selected.getJurisdiction()
+
+        self.updateSelectedLicense()
 
         
             
@@ -808,18 +823,19 @@ class LicenseChooserDialog():
             ##add an action listener to the Previous button control
             #xControlCont=self.dialog 
             cmbJList=self.dialog .getControl(self.CMB_JURISDICTION)
-            #TODO: Add the items to the cmbJList properly (Line 227-230)
+            #TODO:Done- Add the items to the cmbJList properly (Line 227-230)
+            self.jurisdictionList=Store().jurisdictions()
+            #TODO-seems like lines 229-230 are unnecessary
 
             juriList=Store().jurisdictions()
 
             count=0
 
             ##add Unported, which isn't actually a jurisdiction'
-            count+=1
             cmbJList.addItem("Unported", count)
-            #TODO: add line 236-239
+            count+=1
             
-
+            #TODO:Done- add line 236-239
             
             
             for uri in juriList:
@@ -833,6 +849,7 @@ class LicenseChooserDialog():
             ##add a bogus place-holder for Unported in the JurisdictionList to
             ##ensure indices match up when determining the item selectedJurisdiction
             #TODO: add line 243
+            juriList.insert(0,None)
             
             ##Pre-select Unported
             #TODO: bit different from the origianl code
@@ -874,10 +891,12 @@ class LicenseChooserDialog():
             ##Set the initial license
             ##TODO: Implement this
             if (self._ccLoAddin.getProgramWrapper().getDocumentLicense()):
-                print "in exists"
+                self.__setSelectedLicense(self._ccLoAddin.getProgramWrapper().getDocumentLicense())
                 
             else:
-                print "in does not exist"
+                
+                self.__setSelectedLicense(License("http://creativecommons.org/licenses/by/3.0/"))
+                
 
             
             
@@ -918,7 +937,7 @@ class LicenseChooserDialog():
                                 "Use the option \"Unported\" if you desire a license using "
                                 + "\nlanguage and terminology from international treaties. ", 1)
 
-            ##TODO: Implement the Territories correctly
+            ##TODO: Implement the Territories correctly- Line 314
 
             trritories=()
             trritories+=('1',)
@@ -948,10 +967,10 @@ class LicenseChooserDialog():
             
         except Exception,ex:
             print "Exception in LicenseChooserDialog.showDialog:"
-            print ex
-
+            #print ex
+            traceback.print_exec()
             #TODO: match the raising exception with the origianl source
-            raise ex
+            #raise ex
 
     def setLicenseType(self, type):
         """Set license type according to the tab selected.

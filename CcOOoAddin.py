@@ -51,8 +51,8 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         print "in test method-CcOOoAddin"
         try:
             chs=Chooser()
-            chs.selectPDTools("United States",2)
-            chs.selectLicense(True,False,False,None)
+            #chs.selectPDTools("United States",2)
+            #chs.selectLicense(True,False,False,None)
             
         except Exception, ex:
             # print "Exception in CcOOoAddin.TestMethod: "

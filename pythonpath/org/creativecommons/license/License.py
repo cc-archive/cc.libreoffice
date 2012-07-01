@@ -10,6 +10,7 @@ from org.creativecommons.license.Unported import Unported
 class License():
     """
     """
+    CC=Namespace("http://creativecommons.org/ns#")
     
     def __init__(self, license_uri,territory=None):
         """
@@ -45,11 +46,26 @@ class License():
     def getJurisdiction(self, ):
         """Get the jurisdiction.
         """
-        CC=Namespace("http://creativecommons.org/ns#")
-        jurisdiction=self.licenseStore.object(self.license_uri,CC['jurisdiction'])
+        
+        jurisdiction=self.licenseStore.object(self.license_uri,self.CC['jurisdiction'])
         if jurisdiction is not None:
             return Jurisdiction(jurisdiction.identifier)
 
         return Unported()
         
-    
+    def requireShareAlike(self, ):
+        """
+        """
+        return self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
+
+    def prohibitCommercial(self, ):
+        """
+        """
+        
+        
+        return self.licenseStore.exists(self.license_uri,self.CC['prohibits'],self.CC['CommercialUse'])
+
+    def allowRemix(self, ):
+        """
+        """
+        return self.licenseStore.exists(self.license_uri,self.CC['permits'],self.CC['DerivativeWorks'])

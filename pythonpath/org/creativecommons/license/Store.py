@@ -129,6 +129,7 @@ class Store():
         - `predicate`:
         - `object`:
         """
+        print "in Store"
         gen=self.g.triples((subject,predicate,resource))
 
         #TODO: find a better way to do this checking
