@@ -25,8 +25,77 @@ class Writer(OOoProgram):
         """
         super(Writer,self).__init__(component,m_xContext)
 
+    
+    def __getMasterField(field_name,mxTextFields,mxDocFactory):
+        """
+        Arguments:
+        - `field_name`:String
+        - `mxTextFields`:XTextFieldsSupplier
+        - `mxDocFactory`:XMultiServiceFactory
+        """
 
+        
+        try:
+            #property set for the user text field
+            xMasterPropSet=None
+            
+            #determine the name for the master field
+            masterFieldName = "com.sun.star.text.FieldMaster.User." + field_name
+            
+            #see if the user field already exists
+            if (mxTextFields.getTextFieldMasters().hasByName(masterFieldName)):
+                xMasterPropSet=mxTextFields.getTextFieldMasters().getByName(masterFieldName)
 
+            else:
+                #Create a fieldmaster for our newly created User Text field, and
+                #access it's XPropertySet interface
+
+                xMasterPropSet=mxDocFactory.createInstance(
+                "com.sun.star.text.FieldMaster.User")
+
+                xMasterPropSet.setPropertyValue("Name", field_name)
+
+                return xMasterPropSet
+            
+        except Exception, e:
+            traceback.print_exc()
+            raise e
+
+        
+        
+    #TODO-Complete the method
+    def __updateMasterField(self, field_name,field_value,mxTextFields,mxDocFactory):
+        """
+        
+        Arguments:
+        - `field_name`:String
+        - `field_value`:String
+        - `mxTextFields`:XTextFieldsSupplier
+        - `mxDocFactory`:XMultiServiceFactory
+        """
+        
+        try:
+            #get or create the master field
+            xMasterPropSet = self.__getMasterField(field_name, mxTextFields, mxDocFactory)
+
+            #Set the value of the FieldMaster
+            xMasterPropSet.setPropertyValue("Content", field_value)
+
+            #update any dependent text fields in the document
+            fields=xMasterPropSet.getPropertyValue("DependentTextFields")
+
+            for field in fields:
+                field.update()
+
+            return xMasterPropSet
+            
+        except Exception, e:
+            traceback.print_exc()
+            raise e
+
+        
+
+    #TODO: Complete the Method
     def __embedGraphic(self, mxDocFactory,xCursor,imgURL):
         """Embeds the license "button" into a Textdocument at the given cursor position
         
