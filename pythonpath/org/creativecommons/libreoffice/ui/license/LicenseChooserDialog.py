@@ -526,8 +526,7 @@ class LicenseChooserDialog():
             aPropertyValues=(aPropertyValue,)
 
             xGraphic=oGraphicProvider.queryGraphic(aPropertyValues)
-            print "about to return"
-            print xGraphic
+                        
             return xGraphic
             
         except Exception, ex:
@@ -575,13 +574,9 @@ class LicenseChooserDialog():
             xGraphic=None
             
 
-            #get the path for the images folder
-            path=os.path.join(os.path.dirname(__file__), '../../../../../../images/information.png')
-            path=os.path.abspath(path)
-            print path
-
+            path="vnd.sun.star.extension://org.creativecommons.openoffice.CcOOoAddin/images/information.png"
             xGraphic=self.__getGraphic(path)
-            print "xGraphic: "+xGraphic
+            #print "xGraphic: "+xGraphic
 
             ##TODO: was (short)0
             oICModel.setPropertyValue("Border",  0)
