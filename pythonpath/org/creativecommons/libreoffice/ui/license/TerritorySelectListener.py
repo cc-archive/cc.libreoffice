@@ -15,9 +15,9 @@ class TerritorySelectListener(XItemListener,unohelper.Base):
         Arguments:
         - `dialog`:LicenseChooserDialog
         """
-        print "came-2"
+        
         self.dialog = dialog
-        print "came-3"
+        
         
     def itemStateChanged(self, event):
         """

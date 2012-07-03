@@ -966,7 +966,7 @@ class LicenseChooserDialog():
             self.cmbTList.makeVisible( 0)
 
 
-            print "came-1"
+            
             self.cmbTList.addItemListener(TerritorySelectListener(self))
             
             ##execute the dialog
