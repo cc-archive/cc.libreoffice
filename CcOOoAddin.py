@@ -16,6 +16,9 @@ import module.module1 as Module
 #import org.creativecommons.libs.rdflib.graph #import Graph
 #import org.creativecommons.libs.rdflib.term #import URIRef
 
+#from com.sun.star.uno import AnyConverter 
+#import com.sun.star.uno.AnyConverter
+
 #from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.program.Writer import Writer
 from org.creativecommons.libreoffice.program.Calc import Calc
