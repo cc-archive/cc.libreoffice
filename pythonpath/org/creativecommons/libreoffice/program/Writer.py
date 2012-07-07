@@ -66,7 +66,7 @@ class Writer(OOoProgram):
 
         
         
-    #TODO-Complete the method
+    
     def __updateMasterField(self, field_name,field_value,mxTextFields,mxDocFactory):
         """
         
@@ -129,7 +129,7 @@ class Writer(OOoProgram):
 
         
 
-    #TODO: Complete the Method
+    
     def __embedGraphic(self, mxDocFactory,xCursor,imgURL):
         """Embeds the license "button" into a Textdocument at the given cursor position
         
@@ -245,7 +245,7 @@ class Writer(OOoProgram):
             #raise e
 
 
-    #TODO: Complete the method
+    
     def insertPicture(self, img):
         """Insert pictures from the internet.
         
@@ -326,3 +326,9 @@ class Writer(OOoProgram):
         """
         #TODO-method to change the visible notice
         pass
+
+    def hasVisibleNotice(self, ):
+        """
+        """
+        #TODO-Should this be implemented?
+        raise NotImplementedError("Writer.hasVisibleNotice")
