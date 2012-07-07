@@ -11,23 +11,25 @@ class PageHelper():
         """
         
         pass
-    def createUniqueName(self, _xElementContainer,_sElementName):
+    
+    @staticmethod
+    def createUniqueName(_xElementContainer,elementName):
         """makes a String unique by appending a numerical suffix 
         
         
         Arguments:
         - `_xElementContainer`:the com.sun.star.container.XNameAccess container
         that the new Element is going to be inserted to
-        - `_sElementName`: the StemName of the Element
+        - `_elementName`: the StemName of the Element
         """
         bElementexists = True
 
         i = 1
-        BaseName = _sElementName
+        BaseName = elementName
         while bElementexists:
-            bElementexists = _xElementContainer.hasByName(_sElementName)
+            bElementexists = _xElementContainer.hasByName(elementName)
             if bElementexists:
                 i=i+1
-                _sElementName = BaseName+str(i)
+                elementName = BaseName+str(i)
 
-            return _sElementName
+        return elementName

@@ -307,9 +307,7 @@ class Writer(OOoProgram):
             docCursor.getText().insertControlCharacter(docCursor,
                                     PARAGRAPH_BREAK, False)
             
-            caption = img.getTitle() + " ( " + img.getImgUrlMainPage()
-                    + " ) / " + byCaption + img.getLicenseNumber()
-                    + " ( " + img.getLicenseURL() + " )"
+            caption = img.getTitle() + " ( " + img.getImgUrlMainPage()+ " ) / " + byCaption + img.getLicenseNumber()+ " ( " + img.getLicenseURL() + " )"
                 
             docCursor.getText().insertString(docCursor, caption, False)    
             
