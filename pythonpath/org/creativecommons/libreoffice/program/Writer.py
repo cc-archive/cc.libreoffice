@@ -273,11 +273,46 @@ class Writer(OOoProgram):
             #that can be used later (internal name consists of various checksums)
 
             #Static class method call
-            sName = PageHelper.createUniqueName(xBitmapContainer, img.getPhotoID())
+            imgId=img.getPhotoID()
+            sName = PageHelper.createUniqueName(xBitmapContainer,imgId )
             xBitmapContainer.insertByName(sName, img.getSelectedImageURL())
 
-            ##TODO:partially Implemented
+            internalURL=xBitmapContainer.getByName(sName)
 
+            xImage.setPropertyValue("AnchorType",AS_CHARACTER)
+            xImage.setPropertyValue("GraphicURL", internalURL)
+
+            #insert the graphic at the cursor position
+            size=xImage.getPropertyValue("ActualSize")
+
+            if (size.Width != 0):
+                xImage.setPropertyValue("Width", size.Width)
+            else:
+                xImage.setPropertyValue("Width", img.getSelectedImageWidth())
+
+            if (size.Height != 0):
+                xImage.setPropertyValue("Height", size.Height)
+            else:
+                xImage.setPropertyValue("Height", img.getSelectedImageHeigth())
+
+            #remove the helper-entry
+            xBitmapContainer.removeByName(sName)
+
+            byCaption = ""
+            if (img.getLicenseCode() =="by"):
+                byCaption = "CC BY "
+            else:
+                byCaption = img.getLicenseCode().upper()+" "
+
+            docCursor.getText().insertControlCharacter(docCursor,
+                                    PARAGRAPH_BREAK, False)
+            
+            caption = img.getTitle() + " ( " + img.getImgUrlMainPage()
+                    + " ) / " + byCaption + img.getLicenseNumber()
+                    + " ( " + img.getLicenseURL() + " )"
+                
+            docCursor.getText().insertString(docCursor, caption, False)    
+            
             
             
         except Exception, ex:
