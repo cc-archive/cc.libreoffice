@@ -93,6 +93,7 @@ class LicenseChooserDialog():
         self.xMultiComponentFactory = self.m_xContext.getServiceManager()
         
 
+        #TODO-how about uno.createUnoStruct ?
     # The CoreReflection object. 
     def __createUnoStruct(self, cTypeName):
         """Create a UNO struct and return it. 
@@ -466,34 +467,6 @@ class LicenseChooserDialog():
             return None
             #raise ex
 
-    def getSelectedLicense(self, ):
-        """
-        """
-        try:
-            #retrieve the Document for the issued license
-            licenseChooser=Chooser()
-
-            type=self.dlgLicenseSelector.getPropertyValue("Step")
-
-            if (type == 2):
-                #TODO:From where self.selectedTerritory set??
-                return licenseChooser.selectPDTools(self.selectedTerritory, 2)
-            elif (type == 3):
-                return licenseChooser.selectPDTools(None, 3)
-            else:
-                return licenseChooser.selectLicense(
-                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES)
-                    or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
-                    self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO),
-                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
-                    self.selectedJurisdiction)
-
-            
-            
-        except Exception, ex:
-            traceback.print_exc()
-
-        return None
 
     def updateSelectedLicense(self, ):
         """
@@ -1059,5 +1032,33 @@ class LicenseChooserDialog():
             self.selectedTerritory=None
 
         
-        
-import CcOOoAddin
+
+    def getSelectedLicense(self, ):
+        """
+        """
+        try:
+            #retrieve the Document for the issued license
+            licenseChooser=Chooser()
+
+            type=self.dlgLicenseSelector.getPropertyValue("Step")
+
+            if (type == 2):
+                #TODO:From where self.selectedTerritory set??
+                return licenseChooser.selectPDTools(self.selectedTerritory, 2)
+            elif (type == 3):
+                return licenseChooser.selectPDTools(None, 3)
+            else:
+                return licenseChooser.selectLicense(
+                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES)
+                    or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
+                    self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO),
+                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
+                    self.selectedJurisdiction)
+
+            
+            
+        except Exception, ex:
+            traceback.print_exc()
+
+        return None
+            #import CcOOoAddin

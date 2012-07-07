@@ -8,6 +8,9 @@ import traceback
 #from com.sun.star.uno import AnyConverter 
 #import com.sun.star.uno.AnyConverter
 
+from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
+from com.sun.star.text.TextContentAnchorType import AS_CHARACTER
+
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.util.PageHelper import PageHelper
 
@@ -26,7 +29,7 @@ class Writer(OOoProgram):
         super(Writer,self).__init__(component,m_xContext)
 
     
-    def __getMasterField(field_name,mxTextFields,mxDocFactory):
+    def __getMasterField(self,field_name,mxTextFields,mxDocFactory):
         """
         Arguments:
         - `field_name`:String
@@ -93,6 +96,37 @@ class Writer(OOoProgram):
             traceback.print_exc()
             raise e
 
+    def __createUserTextField(self, mxDocFactory,mxTextFields,field_name,field_value):
+        """
+    
+        Arguments:
+        - `mxDocFactory`:XMultiServiceFactory
+        - `mxTextFields`:XTextFieldsSupplier
+        - `field_name`:String
+        - `field_value`:String
+        """
+
+        
+        try:
+            xMasterPropSet=self.__updateMasterField(field_name, field_value,
+                                                    mxTextFields, mxDocFactory)
+
+            #Use the text document's factory to create a user text field,
+            #and access it's XDependentTextField interface
+
+            xUserField=mxDocFactory.createInstance(
+                "com.sun.star.text.TextField.User")
+
+            #Attach the field master to the user field
+            xUserField.attachTextFieldMaster(xMasterPropSet)
+
+            return xUserField
+
+                    
+        except Exception, e:
+            traceback.print_exc()
+            raise e
+
         
 
     #TODO: Complete the Method
@@ -116,13 +150,83 @@ class Writer(OOoProgram):
             #helper-stuff to let OOo create an internal name of the graphic
             #that can be used later (internal name consists of various checksums)
 
-            xBitmapContainer.insertByName("imgID", imgURL)
+            #TODO:use this link
+            #http://www.oooforum.org/forum/viewtopic.phtml?t=87225
+            
 
+            print "URL- "+imgURL
+            imgURL="http://i.creativecommons.org/l/by-nd/3.0/88x31.png"
+            xBitmapContainer.insertByName("imgID", imgURL)
+            internalURL=xBitmapContainer.getByName("imgID")
+
+            xImage.setPropertyValue("AnchorType",AS_CHARACTER)
+            xImage.setPropertyValue("GraphicURL", internalURL)
+            xImage.setPropertyValue("Width", 3104)
+            xImage.setPropertyValue("Height", 1093)
+
+            #insert the graphic at the cursor position
+            xCursor.getText().insertTextContent(xCursor, xImage, False)
+
+            #remove the helper-entry
+            xBitmapContainer.removeByName("imgID")
+            
+            
             
 
         except Exception, ex:
             traceback.print_exc()
+
+    def insertVisibleNotice(self, ):
+        """
+    """
+        docLicense=super(Writer,self).getDocumentLicense()
+
+        if docLicense is None:
+            return
+
         
+        try:
+            mxDoc=self.component
+            mxDocText = mxDoc.getText()
+
+            docCursor=mxDoc.getCurrentController().getViewCursor()
+
+            #mxDocFactory=mxDoc
+
+            #mxTextFields=mxDoc
+
+            licenseNameField=self.__createUserTextField(mxDoc,
+                    mxDoc, "License Name", docLicense.getName())
+
+            licenseURLField=self.__createUserTextField(mxDoc,
+                    mxDoc, "License URL", docLicense.license_uri)
+
+            #insert the license graphic if available
+            if (docLicense.getImageUrl() is not None):
+                self.__embedGraphic(mxDoc, docCursor, docLicense.getImageUrl())
+            #insert the licensing statement
+            if (docLicense.getName()=="CC0 1.0 Universal"):
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+                mxDocText.insertString(docCursor, "To the extent possible under law, the person who associated ", False)
+                mxDocText.insertTextContent(docCursor, licenseNameField, False)
+                mxDocText.insertString(docCursor, " with this work has waived all "
+                        + "copyright and related or neighboring rights to this work. "
+                        + "The summary of the Legal Code is available at ", False)
+                mxDocText.insertTextContent(docCursor, licenseURLField, False)
+                mxDocText.insertString(docCursor, ".", False)
+
+                if (docLicense.territory is not None):
+                    territory=self.__createUserTextField(mxDoc,mxDoc,"Territory",docLicense.territory)
+                    mxDocText.insertString(docCursor, "This work is published from ", False)
+                    mxDocText.insertTextContent(docCursor, territory, False)
+
+                    #resume line 270
+                
+            
+        except Exception, e:
+            traceback.print_exc()
+            #raise e
+
 
     #TODO: Complete the method
     def insertPicture(self, img):
@@ -165,4 +269,8 @@ class Writer(OOoProgram):
                 print type(ex)
                 #raise ex
 
-    
+    def updateVisibleNotice(self, ):
+        """
+        """
+        #TODO-method to change the visible notice
+        pass

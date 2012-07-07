@@ -9,11 +9,11 @@ from com.sun.star.beans import PropertyVetoException
 from com.sun.star.beans import UnknownPropertyException
 from com.sun.star.lang import WrappedTargetException
 
-#from com.sun.star.rdf import URI
+#from com.sun.star.rdf.URI import URI
 #import com.sun.star.rdf.URI
 #import com.sun.star.rdf.Literal
 
-#from com.sun.star.beans import PropertyAttribute
+from com.sun.star.beans.PropertyAttribute import MAYBEVOID,REMOVEABLE
 
 from org.creativecommons.libreoffice.program.IVisibleNotice import IVisibleNotice
 from org.creativecommons.libreoffice.program.Constants import Constants
@@ -33,6 +33,7 @@ class OOoProgram(object):
         
         self.component = component
         self.m_xContext = m_xContext
+        self.xMultiComponentFactory=self.m_xContext.getServiceManager()
 
     def getDocumentLicense(self, ):
         """Return the License for the active document, if it exists 
@@ -84,18 +85,23 @@ class OOoProgram(object):
         Arguments:
         - `license`:License
         """
+        
         #xDocumentInfoSupplier=self.component
         docInfo=self.component.getDocumentInfo()
         #docProperties=docInfo
 
+        
+        
         #docPropertyContainer=docInfo
         if (not docInfo.getPropertySetInfo().hasPropertyByName(Constants.LICENSE_URI)):
+            
             #add the necessary properties to this document
             try:
                 docInfo.addProperty(Constants.LICENSE_URI,
-                                    PropertyAttribute.MAYBEVOID, "")
+                                    MAYBEVOID, "")
                 docInfo.addProperty(Constants.LICENSE_NAME,
-                                    PropertyAttribute.MAYBEVOID, "")
+                                    MAYBEVOID, "")
+                
                 
 
             except IllegalArgumentException, ex:
@@ -119,17 +125,23 @@ class OOoProgram(object):
 
         #end of if
         try:
-            docInfo.setPropertyValue(Constants.LICENSE_URI, license.getLicenseUri())
+            
+                        
+            docInfo.setPropertyValue(Constants.LICENSE_URI, license.license_uri)
             docInfo.setPropertyValue(Constants.LICENSE_NAME, license.getName())
 
-            if (license.getTerritory() is not None):
+            
+            if (license.territory is not None):
+            
                 if(not docInfo.getPropertySetInfo().hasPropertyByName(Constants.TERRITORY)):
 
                     docInfo.addProperty(Constants.TERRITORY,
-                                    PropertyAttribute.REMOVEABLE, "")
-                docInfo.setPropertyValue(Constants.TERRITORY, license.getTerritory())
+                                        REMOVEABLE, "")
+                docInfo.setPropertyValue(Constants.TERRITORY, license.territory)
 
             elif(docInfo.getPropertySetInfo().hasPropertyByName(Constants.TERRITORY)):
+
+            
                 try:
                     docInfo.removeProperty(Constants.TERRITORY)
                     
@@ -138,6 +150,7 @@ class OOoProgram(object):
                     print ex
                     print type(ex)
                     #raise ex
+
             
         except PropertyExistException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
@@ -177,7 +190,7 @@ class OOoProgram(object):
 
         #RDF metadata
         #TODO: add territory and title to RDF
-
+        
         try:
             author=None
             title=None
@@ -194,34 +207,41 @@ class OOoProgram(object):
             #xDMA=self.component
             try:
                 #Note: High chance of an error
-                self.component.removeMetadataFile(URI.create(self.m_xContext,self.component.getNamespace()+"meta.rdf"))
+                                  
+                #self.component.removeMetadataFile(URI.create(self.m_xContext,self.component.getNamespace()+"meta.rdf"))
+                
+                self.component.removeMetadataFile(self.__createUri(self.component.Namespace+"meta.rdf"))
             except Exception, ex:
-                print "Exception in OOoProgram.setDocumentLicense: "
+                #TODO: remove the stack trace
+                print "Exception in OOoProgram.setDocumentLicense: (ignored exception)"
                 print ex
                 print type(ex)
                 #raise ex
-                
-            xType = URI.create(self.m_xContext, self.component.getStringValue())
-            xTypeRights = URI.create(self.m_xContext, "http://purl.org/dc/elements/1.1/rights")
-            #TODO:Line 179 - Implement correctly
-            xGraphName = self.component.addMetadataFile("meta.rdf", None)
+                      
+            value=self.component.StringValue
+            xType=self.__createUri(value)
+
+                       
+            xTypeRights = self.__createUri("http://purl.org/dc/elements/1.1/rights")
+            
+            xGraphName = self.component.addMetadataFile("meta.rdf", (xTypeRights,));
+                       
             xGraph = self.component.getRDFRepository().getGraph(xGraphName)
 
-            nodeRights = URI.create(self.m_xContext, "http://purl.org/dc/elements/1.1/rights")
+            nodeRights = self.__createUri("http://purl.org/dc/elements/1.1/rights")
             #TODO: Line 191- Implement correctly
-            valRights = Literal.create(self.m_xContext, "-ASCII C- " + author
+            valRights =self.__createLiteral("-ASCII C- " + author
                     + " licensed to the public under the " + license.getName() + " license")
             xGraph.addStatement(xType, nodeRights, valRights)
 
-            nodeLicense = URI.create(self.m_xContext, "http://purl.org/dc/terms/license")
-            valLicense = Literal.create(self.m_xContext, license.getLicenseUri())
+            nodeLicense = self.__createUri("http://purl.org/dc/terms/license")
+            valLicense = self.__createLiteral( license.license_uri)
             xGraph.addStatement(xType, nodeLicense, valLicense)
 
-            noderightsHolder = URI.create(self.m_xContext, "http://purl.org/dc/terms/rightsHolder")
-            valrightsHolder = Literal.create(self.m_xContext, author)
+            noderightsHolder =self.__createUri("http://purl.org/dc/terms/rightsHolder")
+            valrightsHolder = self.__createLiteral(author)
             xGraph.addStatement(xType, noderightsHolder, valrightsHolder)
-
-            
+                       
                 
         except Exception, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
@@ -230,6 +250,24 @@ class OOoProgram(object):
             #raise ex
 
         
+    def __createUri(self,value ):
+        """
+        """
         
-        
+        metaURI=self.xMultiComponentFactory.\
+            createInstanceWithArgumentsAndContext("com.sun.star.rdf.URI",(value,),self.m_xContext)
+        return metaURI
             
+
+    def __createLiteral(self, value):
+        """
+    
+        Arguments:
+        - `value`:String
+        """
+        literal=self.xMultiComponentFactory.\
+            createInstanceWithArgumentsAndContext("com.sun.star.rdf.Literal",(value,),self.m_xContext)
+
+        return literal
+        
+        

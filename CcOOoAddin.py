@@ -18,6 +18,8 @@ import module.module1 as Module
 
 #from com.sun.star.uno import AnyConverter 
 #import com.sun.star.uno.AnyConverter
+#from com.sun.star.rdf import URI
+
 
 #from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.program.Writer import Writer
@@ -53,9 +55,23 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         """
         print "in test method-CcOOoAddin"
         try:
-            chs=Chooser()
+            #chs=Chooser()
+            # print "k"
+            # self.xMultiComponentFactory=self.ctx.ServiceManager
+            
+            # URI=self.xMultiComponentFactory.createInstanceWithArguments("com.sun.star.rdf.URI",("http://purl.org/dc/elements/1.1/rights"))
+            # print
+            # print dir(URI)
+            # print
+            # print URI.ImplementationName
+            # print URI.LocalName
+            # print URI.Namespace
+            # print URI.StringValue
+            # u=URI.create("http://purl.org/dc/elements/1.1/rights")
+            
             #chs.selectPDTools("United States",2)
             #chs.selectLicense(True,False,False,None)
+            pass
             
         except Exception, ex:
             # print "Exception in CcOOoAddin.TestMethod: "
@@ -64,7 +80,20 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
             traceback.print_exc()
             #
         
+    def insertStatement(self, ):
+        """
+        """
+        wrapper=self.getProgramWrapper()
+        try:
+            if (wrapper.getDocumentLicense() is not None):
+                self.selectLicense()
 
+            wrapper=self.getProgramWrapper()
+            wrapper.insertVisibleNotice()
+
+        except Exception, ex:
+            traceback.print_exc()
+            
     def updateCurrentComponent(self, ):
         """Updates the Desktop current component in case of opening, creating or swapping
         to other document
@@ -127,11 +156,8 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
                 print 'calling selectLicense'
 
                 #Module.testMethod()
-                self.testMethod()
-                lcd=LicenseChooserDialog(self, self.ctx)
-                #print type(lcd)
-                #print dir(lcd)
-                lcd.showDialog()
+                #self.testMethod()
+                self.insertStatement()
                 
 
             elif url.Path == "InsertPictureFlickr":
@@ -158,6 +184,9 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         print "Test"
         pass 
 
+
+
+
     def selectLicense(self):
 
         try:
@@ -167,26 +196,32 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
             #     return;
             # }
 
+            print "Entered"
             self.updateCurrentComponent()
 
             #Create the dialog for license selection
             dialog=LicenseChooserDialog(self,self.ctx)
             dialog.showDialog()
 
+            print "entering"
             if not dialog.cancelled:
                 #retrieve the selected License
                 selected = dialog.getSelectedLicense()
+                print "1"
                 document = self.getProgramWrapper()
-
+                print "2"
                 #store the license information in the document
                 document.setDocumentLicense(selected)
                 ##TODO: Add the line 290
-
+                print "3"
+                wrapper=self.getProgramWrapper()
+                wrapper.updateVisibleNotice()
                 
-
+                
+            print "exiting"
         except Exception, ex:
             print "Exception in CcOOoAddin.selectLicense: "
-            traceback.print_exec() 
+            traceback.print_exc() 
 
     def getProgramWrapper(self, ):
         """
@@ -209,16 +244,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         return None
 
 
-    def insertStatement(self, ):
-        """
-    """
-        if (self.getProgramWrapper().getDocumentLicense() is not None):
-            self.selectLicense()
-
-        #TODO- Implement the following (line 309 )
-        #self.getProgramWrapper(self.getCurrentComponent()).insertVisibleNotice()
-            
-            
+    
         ###################################################################
         ###################################################################
 

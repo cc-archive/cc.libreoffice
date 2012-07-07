@@ -3,6 +3,7 @@
 #Blog: www.blog.ishans.info
 
 import unohelper
+import traceback
 
 from com.sun.star.awt import XActionListener
 
@@ -25,8 +26,14 @@ class OKClickListener(XActionListener,unohelper.Base):
         Arguments:
         - `aEvent`:ActionEvent
         """
-        self.dialog.cancelled=False
-        self.dialog.close()
+        
+        try:
+            self.dialog.cancelled=False
+            self.dialog.close()
+        except Exception, e:
+            traceback.print_exc()
+            raise e
+
 
 
     def disposing(self, eObject):

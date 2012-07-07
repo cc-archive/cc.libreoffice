@@ -29,6 +29,9 @@ class License():
         if territory is not None:
             self.territory=territory
 
+        else:
+            self.territory=None
+
 
 
 
@@ -36,14 +39,13 @@ class License():
     def getName(self, ):
         """Get the license for "en" locale.
         """
-        #TODO: implement the Null pointer Exception handling 
+        #TODO: implement the Null pointer Exception handling
+        #TODO: Can return names like -"NoneNoneUnported" 
 
         DC= Namespace("http://purl.org/dc/elements/1.1/")
         
         
-        return str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+""
-        +str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+""
-        +self.getJurisdiction().getTitle()
+        return str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+""+self.getJurisdiction().getTitle()
 
 
     def getJurisdiction(self, ):
