@@ -152,11 +152,7 @@ class Writer(OOoProgram):
 
             #TODO:use this link
             #http://www.oooforum.org/forum/viewtopic.phtml?t=87225
-            
-
-            #TODO-remove dummy data
-            print "URL- "+imgURL
-            #imgURL="http://i.creativecommons.org/l/by-nd/3.0/88x31.png"
+                        
             xBitmapContainer.insertByName("imgID", imgURL)
             internalURL=xBitmapContainer.getByName("imgID")
 
@@ -221,9 +217,29 @@ class Writer(OOoProgram):
                     mxDocText.insertString(docCursor, "This work is published from ", False)
                     mxDocText.insertTextContent(docCursor, territory, False)
 
-                    #resume line 270
-                
-            
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+
+            elif (docLicense.getName() == "Public Domain"):
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+                mxDocText.insertString(docCursor, "This document is in the ", False)
+                mxDocText.insertTextContent(docCursor, licenseNameField, False)
+                mxDocText.insertString(docCursor, ". The summary of the Legal Code is available at ", False)
+                mxDocText.insertTextContent(docCursor, licenseURLField, False)
+                mxDocText.insertString(docCursor, ".", False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+
+            else:
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+                mxDocText.insertString(docCursor, "This document is licensed under the ", False)
+                mxDocText.insertTextContent(docCursor, licenseNameField, False)
+                mxDocText.insertString(docCursor, " license, available at ", False)
+                mxDocText.insertTextContent(docCursor, licenseURLField, False)
+                mxDocText.insertString(docCursor, ".", False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+
+            mxDoc.refresh()
+
+                        
         except Exception, e:
             traceback.print_exc()
             #raise e
