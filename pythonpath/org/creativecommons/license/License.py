@@ -43,9 +43,16 @@ class License():
         #TODO: Can return names like -"NoneNoneUnported" 
 
         DC= Namespace("http://purl.org/dc/elements/1.1/")
+        #print "In getName()"
+        ##TODO-remove the dummy value
+        #self.license_uri="http://creativecommons.org/licenses/by/3.0/"
+
+        name=str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.getJurisdiction().getTitle())
+
+        #print "name :"+name
         
         
-        return str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+""+self.getJurisdiction().getTitle()
+        return name
 
 
     def getJurisdiction(self, ):
@@ -90,7 +97,9 @@ class License():
         """
 
         version=self.licenseStore.literal(self.license_uri,
-                                             self.DCTerms['hasVersion'],"")
+                                             self.DCTerms['hasVersion'],None)
+
+        print "Version-"+str(version)
         if version is None:
             return None
         

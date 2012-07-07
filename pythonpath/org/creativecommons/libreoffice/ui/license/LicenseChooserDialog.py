@@ -955,7 +955,7 @@ class LicenseChooserDialog():
             print "Exception in LicenseChooserDialog.showDialog:"
             print ex
             print 
-            traceback.print_exec()
+            traceback.print_exc()
             #TODO: match the raising exception with the origianl source
             #raise ex
 

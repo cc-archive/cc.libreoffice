@@ -154,8 +154,9 @@ class Writer(OOoProgram):
             #http://www.oooforum.org/forum/viewtopic.phtml?t=87225
             
 
+            #TODO-remove dummy data
             print "URL- "+imgURL
-            imgURL="http://i.creativecommons.org/l/by-nd/3.0/88x31.png"
+            #imgURL="http://i.creativecommons.org/l/by-nd/3.0/88x31.png"
             xBitmapContainer.insertByName("imgID", imgURL)
             internalURL=xBitmapContainer.getByName("imgID")
 

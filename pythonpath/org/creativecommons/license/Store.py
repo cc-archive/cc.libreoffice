@@ -9,6 +9,7 @@ from rdflib.graph import Graph
 from rdflib import RDF
 from rdflib import Literal
 from rdflib.resource import Resource
+from rdflib.term import URIRef
 
 from org.creativecommons.license.CC import CC
 
@@ -81,7 +82,7 @@ class Store():
         return jurList
 
 
-    def literal(self, subject, predicate, lang):
+    def literal(self, sub, pred, lang):
         """Returns a Literal object
         
         Arguments:
@@ -92,13 +93,34 @@ class Store():
 
         
         #get generator over the objects in case there's more than one
-        gen=self.g.objects(subject,predicate)
+        gen=self.g.objects(URIRef(sub),predicate=pred)
+        #gen=self.g.transitive_objects(sub,pred)
+        #gen=self.g.value(subject=sub,predicate=pred)
+
+        #print "++++++++++++++"
+        #print sub
+        #print pred
         
         for it in gen:
+            # print it
+            #print type(it)
+            #break
             if isinstance(it,Literal):
-                if it.language == lang:
-                    #this is a literal, in the language we care about
+                #if lang is set
+                if lang is not None:
+                    if it.language == lang:
+                        #this is a literal, in the language we care about
+                        return it
+                else:
                     return it
+        # ##Changed
+        # gen=self.g.predicate_objects(subject)
+        # print "subject:"+str(subject)
+        # for it in gen:
+        #     print "it"+str(it)
+        #     break
+        #     if isinstance(it,Literal):
+        #         return it
 
         return None
 

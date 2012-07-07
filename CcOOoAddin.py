@@ -210,6 +210,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
                 print "1"
                 document = self.getProgramWrapper()
                 print "2"
+                print "license :"+selected.license_uri
                 #store the license information in the document
                 document.setDocumentLicense(selected)
                 ##TODO: Add the line 290
