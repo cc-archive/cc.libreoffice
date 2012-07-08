@@ -134,6 +134,7 @@ class Calc(OOoProgram):
             caption = byCaption + img.getLicenseNumber() + " ( " + img.getLicenseURL() + " )"
             
             #resume @ 151
+            raise NotImplementedError("Calc.insertPicture")
 
             
             
@@ -266,10 +267,22 @@ class Calc(OOoProgram):
                 #xDrawPageSupplier=xSpreadsheet
                 xShapes = xSpreadsheet.getDrawPage()
 
-                #TODO-resume from 371
+                #TODO-resume from 381
+                numOfShapes=xShapes.getCount()
+                for i in range(numOfShapes):
+                    xShape=xShapes.getByIndex(i)
+                    #xShapePropSet=xShape
+                    print "TEST"
+                    print xShape.getPropertyValue("Name")
+                    print type(xShape.getPropertyValue("Name"))
+
+        raise NotImplementedError("Calc.UpdateVisibleNotice")
                 
         except Exception, e:
             traceback.print_exc()
             raise e
 
-        
+    def hasVisibleNotice(self, ):
+        """
+    """
+        raise NotImplementedError("Calc.hasVisibleNotice")
