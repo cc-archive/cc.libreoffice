@@ -3,6 +3,7 @@
 #Blog: www.blog.ishans.info
 
 import traceback
+import uno
 
 from com.sun.star.awt import Size
 from com.sun.star.awt import Point
@@ -13,6 +14,8 @@ from com.sun.star.style import LineSpacing
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.util.ShapeHelper import createShape, addPortion
+from org.creativecommons.libreoffice.util.PageHelper import getDrawPageCount, getDrawPageByIndex
+
 
 class Draw(OOoProgram):
     """
@@ -74,6 +77,9 @@ class Draw(OOoProgram):
             
             
         except Exception, e:
+            #as a precaution
+            #if xBitmapContainer is not None:
+            #    xBitmapContainer.removeByName("imgID")
             traceback.print_exc()
             raise e
 
@@ -159,7 +165,37 @@ class Draw(OOoProgram):
         """
         
         try:
-            pass
+            drawPages=[]
+            shapes=[]
+
+            #search for vivible notices and remove them
+            numOfPages=getDrawPageCount(self.component)
+
+            for i in range(numOfPages):
+                xPage=getDrawPageByIndex(self.component,i)
+                #xShapes=xPage
+
+                count=xPage.getCount()
+
+                for j in range(count):
+                    xShape=xPage.getByIndex(j)
+                    #xShapePropSet=xShape
+                    name = xShape.getPropertyValue("Name")
+
+                    if (name.lower() == "ccoo:licenseImage".lower()):
+                        shapes.append(xShape)
+                        drawPages.append(xPage)
+                    elif(name.lower() == "ccoo:licenseText".lower()):
+                        shapes.append(xShape)
+
+                
+                for shape in shapes:
+                    xPage.remove(shape)
+
+            #add new visible notices
+            for page in drawPages:
+                self.insertVisibleNotice(page)
+            
         except Exception, e:
             traceback.print_exc()
             raise e
