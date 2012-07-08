@@ -8,17 +8,28 @@ import traceback
 
 from com.sun.star.beans import PropertyValue
 
-from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
-from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener import JurisdictionSelectListener
-from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener import AcceptWaiveListener
-from org.creativecommons.libreoffice.ui.license.AcceptListener import AcceptListener
-from org.creativecommons.libreoffice.ui.license.FaqClickListener import FaqClickListener
-from org.creativecommons.libreoffice.ui.license.OKClickListener import OKClickListener
-from org.creativecommons.libreoffice.ui.license.CancelClickListener import CancelClickListener
-from org.creativecommons.libreoffice.ui.license.CCClickListener import CCClickListener
-from org.creativecommons.libreoffice.ui.license.CC0ClickListener import CC0ClickListener
-from org.creativecommons.libreoffice.ui.license.PDClickListener import PDClickListener
-from org.creativecommons.libreoffice.ui.license.TerritorySelectListener import TerritorySelectListener
+from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListner \
+  import UpdateLicenseListner
+from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener \
+  import JurisdictionSelectListener
+from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener \
+  import AcceptWaiveListener
+from org.creativecommons.libreoffice.ui.license.AcceptListener \
+  import AcceptListener
+from org.creativecommons.libreoffice.ui.license.FaqClickListener \
+  import FaqClickListener
+from org.creativecommons.libreoffice.ui.license.OKClickListener \
+  import OKClickListener
+from org.creativecommons.libreoffice.ui.license.CancelClickListener \
+  import CancelClickListener
+from org.creativecommons.libreoffice.ui.license.CCClickListener \
+  import CCClickListener
+from org.creativecommons.libreoffice.ui.license.CC0ClickListener \
+  import CC0ClickListener
+from org.creativecommons.libreoffice.ui.license.PDClickListener \
+  import PDClickListener
+from org.creativecommons.libreoffice.ui.license.TerritorySelectListener \
+  import TerritorySelectListener
 
 from org.creativecommons.license.Store import Store
 from org.creativecommons.license.Chooser import Chooser
@@ -106,7 +117,8 @@ class LicenseChooserDialog():
        
        
        
-        oCoreReflection=self.xMultiComponentFactory.createInstance("com.sun.star.reflection.CoreReflection")
+        oCoreReflection=self.xMultiComponentFactory.createInstance(
+            "com.sun.star.reflection.CoreReflection")
         
         oXIdlClass = oCoreReflection.forName( cTypeName ) 
         oReturnValue, oStruct = oXIdlClass.createObject( None ) 
@@ -123,7 +135,8 @@ class LicenseChooserDialog():
         oRect.Height = nHeight 
         return oRect
     
-    def __createAWTControl(self, xpsProperties, ctrlName,ctrlCaption, posSize, step):
+    def __createAWTControl(self, xpsProperties, ctrlName,ctrlCaption,
+                           posSize, step):
         """Add AWT control components to the dialog.
         
         Arguments:
@@ -167,17 +180,24 @@ class LicenseChooserDialog():
         
         try:
             
-            lblWarning = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlFixedTextModel")
+            lblWarning = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
 
             ##TODO: add the Java.util support to the following line
-            xpsLblWarning = self.__createAWTControl(lblWarning, self.LBL_INSTRUCTIONS_CC0,"Are you certain you wish to waive all rights to your work? "
-                                + "Once these rights are waived, you cannot reclaim them."+ "\n\nIn particular, if you are an artist or author who depends "
-                + "upon copyright for your income, "
-                + "Creative Commons does not recommend that you use this tool."
-                + "\n\nIf you don't own the rights to this work, then do not use CC0. "
-                + "\nIf you believe that nobody owns rights to the work, then the "
-                + "Public Domain Certification may be what you're looking for.",
-                self.__makeRectangle(10, 25, 195, 80), 2)
+            xpsLblWarning = self.__createAWTControl(lblWarning, 
+                                                    self.LBL_INSTRUCTIONS_CC0,
+                                                    ("Are you certain "
+            "you wish to waive all "
+            "rights to your work? "
+            "Once these rights are waived, you cannot reclaim them."
+            "\n\nIn particular, if you are an artist or author who depends "
+            "upon copyright for your income, "
+            "Creative Commons does not recommend that you use this tool."
+            "\n\nIf you don't own the rights to this work, then do not use "
+            "CC0. "
+            "\nIf you believe that nobody owns rights to the work, then the "
+            "Public Domain Certification may be what you're looking for."),
+            self.__makeRectangle(10, 25, 195, 80), 2)
 
             xpsLblWarning.setPropertyValue("MultiLine", True)
             fontDes =  xpsLblWarning.getPropertyValue("FontDescriptor")
@@ -189,9 +209,11 @@ class LicenseChooserDialog():
 
             ##TODO:Add java.util support to the following line
             xpsChkWaive = self.__createAWTControl(chkWaive, self.CHK_WAIVE,
-                                "I hereby waive all copyright and related or neighboring rights "
-                                + "together with all associated claims and causes of action with "
-                                + "respect to this work to the extent possible under the law.",
+                                ("I hereby waive all copyright and related"
+                                 " or neighboring rights together with all"
+                                 "associated claims and causes of action with "
+                                 "respect to this work to the extent possible"
+                                 " under the law."),
                                 self.__makeRectangle(10, 110, 190, 30), 2)
             
 
@@ -199,13 +221,15 @@ class LicenseChooserDialog():
 
             
             ##Legal code
-            path=os.path.join(os.path.dirname(__file__), '../../../license/legalcodes/cc0')
+            path=os.path.join(os.path.dirname(__file__), 
+                              '../../../license/legalcodes/cc0')
             f=open(path,'r')
             cc0LegalCode=f.read()
 
             txtDeed = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed = self.__createAWTControl(txtDeed, self.TXT_LEGAL_CODE_CC0, None,
+            xpsTxtDeed = self.__createAWTControl(txtDeed, 
+                                                 self.TXT_LEGAL_CODE_CC0, None,
                 self.__makeRectangle(10, 145, 190, 60), 2)
             xpsTxtDeed.setPropertyValue("MultiLine", True)
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
@@ -217,21 +241,24 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlCheckBoxModel")
             ##TODO:Add java.util support to the following line
             xpsChkYes = self.__createAWTControl(chkYes, self.CHK_YES_CC0,
-                    "I have read and understand the terms and intended legal effect of CC0, "
-                    + "and hereby voluntarily elect to apply it to this work.",
+                    ("I have read and understand the terms and intended"
+                     "legal effect of CC0, "
+                     "and hereby voluntarily elect to apply it to this work."),
                     self.__makeRectangle(10, 210, 190, 20), 2)
             xpsChkYes.setPropertyValue("MultiLine", True)
 
             ##Territory
             lblJurisdictionList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList = self.__createAWTControl(lblJurisdictionList, "lbltrritory",
+            xpsLblJurisdictionList = self.__createAWTControl(
+                lblJurisdictionList, "lbltrritory",
                 "Territory", self.__makeRectangle(10, 230, 45, 15), 2)
 
             #TODO: This list currently contains nothing. Add items to the list
             cmbTerritoryList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControl(cmbTerritoryList, self.CMB_TERRITORY,
+            xPSetList = self.__createAWTControl(cmbTerritoryList, 
+                                                self.CMB_TERRITORY,
                 None, self.__makeRectangle(55, 230, 120, 12), 2)
             xPSetList.setPropertyValue("Dropdown", True)
             xPSetList.setPropertyValue("MultiSelection", False)
@@ -255,11 +282,13 @@ class LicenseChooserDialog():
             #create the current license information
             lblSelectedLicenseLabel = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControl(lblSelectedLicenseLabel, self.LBL_SELECTED_LICENSE_LABEL,
+            self.__createAWTControl(lblSelectedLicenseLabel, 
+                                    self.LBL_SELECTED_LICENSE_LABEL,
                 "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1)
             lblSelectedLicense = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsSelectedLicense = self.__createAWTControl(lblSelectedLicense, self.LBL_SELECTED_LICENSE,
+            xpsSelectedLicense = self.__createAWTControl(lblSelectedLicense, 
+                                                         self.LBL_SELECTED_LICENSE,
                 None, self.__makeRectangle(60, 20, 145, 30), 1)
             xpsSelectedLicense.setPropertyValue("MultiLine", True)
 
@@ -267,7 +296,8 @@ class LicenseChooserDialog():
             lblAllowCommercialUse = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
             #TODO:The next line needs localization support.
-            self.__createAWTControl(lblAllowCommercialUse, self.LBL_ALLOW_COMERCIAL_USE,
+            self.__createAWTControl(lblAllowCommercialUse, 
+                                    self.LBL_ALLOW_COMERCIAL_USE,
                 "commercial", self.__makeRectangle(15, 45, 100, 12), 1)
 
             radioCommercialYes = self.dlgLicenseSelector.createInstance(
@@ -290,7 +320,8 @@ class LicenseChooserDialog():
             #Allow modifications of your work?
             lblAllowModifications = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControl(lblAllowModifications, self.LBL_ALLOW_MODIFICATIONS,
+            self.__createAWTControl(lblAllowModifications, 
+                                    self.LBL_ALLOW_MODIFICATIONS,
                 "derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
             radioModificationsYes = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
@@ -303,8 +334,10 @@ class LicenseChooserDialog():
             radioModificationsShareAlike = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioModificationsShareAlike = self.__createAWTControl(
-                radioModificationsShareAlike, self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
-                "Yes, as long as others share alike", self.__makeRectangle(20, 120, 100, 12), 1)
+                radioModificationsShareAlike, 
+                self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                "Yes, as long as others share alike", self.__makeRectangle(
+                    20, 120, 100, 12), 1)
             #TODO: was new Short((short) 1)
             xpsRadioModificationsShareAlike.setPropertyValue("State", 0)
 
@@ -319,12 +352,15 @@ class LicenseChooserDialog():
             #Create the jurisdiction drop-down list
             lblJurisdictionList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList =self.__createAWTControl(lblJurisdictionList, self.LBL_JURISDICTION_LIST,
-                "license.jurisdiction_question",self.__makeRectangle(15, 150, 75, 15), 1)
+            xpsLblJurisdictionList =self.__createAWTControl(
+                lblJurisdictionList, self.LBL_JURISDICTION_LIST,
+                "license.jurisdiction_question",self.__makeRectangle(
+                    15, 150, 75, 15), 1)
 
             cmbJurisdictionList = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControl(cmbJurisdictionList, self.CMB_JURISDICTION,
+            xPSetList = self.__createAWTControl(cmbJurisdictionList, 
+                                                self.CMB_JURISDICTION,
                 None, self.__makeRectangle(90, 150, 60, 12), 1)
             #TODO: Next two lines are different from the source- new Boolean()
             xPSetList.setPropertyValue("Dropdown", True)
@@ -338,13 +374,17 @@ class LicenseChooserDialog():
 
             lblInstructions = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblInstructions = self.__createAWTControl(lblInstructions, self.LBL_INSTRUCTIONS_CC,
-                "With a Creative Commons license, you keep your copyright but allow "
-                + "people to copy and distribute your work provided they give you credit  "
-                + "  and only on the conditions you specify here. "
-                + "\n\nIf you want to offer your work with no conditions or you"
-                + " want to certify a work as public domain, choose one of the "
-                + "public domain tools.(CC0 & Public Domain)", self.__makeRectangle(10, 175, 195, 80), 1)
+            xpsLblInstructions = self.__createAWTControl(lblInstructions, 
+                                                         self.LBL_INSTRUCTIONS_CC,
+                ("With a Creative Commons license, you keep your copyright but"
+                 " allow "
+                 "people to copy and distribute your work provided they give"
+                 " you credit  "
+                 "  and only on the conditions you specify here. "
+                 "\n\nIf you want to offer your work with no conditions or you"
+                 " want to certify a work as public domain, choose one of the "
+                 "public domain tools.(CC0 & Public Domain)"),
+                 self.__makeRectangle(10, 175, 195, 80), 1)
             
             xpsLblInstructions.setPropertyValue("MultiLine", True)
             fontDes = xpsLblInstructions.getPropertyValue("FontDescriptor")
@@ -366,16 +406,20 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             
             xpsLblWarning = self.__createAWTControl(lblWarning, "pdwarning",
-                "You have selected the Public Domain Certification. "
-                + "The Public Domain Certification should only be used to certify "
-                + "a work that is already in the public domain. "
-                + "\n\nCreative Commons does not recommend you use the "
-                + "Public Domain Certification for dedicating a work still "
-                + "protected by copyright to the public domain. "
-                + "To dedicate a work to the public domain, consider using CC0. "
-                + "\n\nPlease note that if you use the Public Domain Certification to "
-                + "dedicate a work to the public domain, it may not be valid outside "
-                + "of the United States.",
+                ("You have selected the Public Domain Certification. "
+                 "The Public Domain Certification should only be used "
+                 "to certify "
+                 "a work that is already in the public domain. "
+                 "\n\nCreative Commons does not recommend you use the "
+                 "Public Domain Certification for dedicating a work still "
+                 "protected by copyright to the public domain. "
+                 "To dedicate a work to the public domain, consider using "
+                 "CC0. "
+                 "\n\nPlease note that if you use the Public Domain "
+                 "Certification to "
+                 "dedicate a work to the public domain, it may not be valid "
+                 "outside "
+                 "of the United States."),
                 self.__makeRectangle(10, 25, 190, 100), 3)
 
             xpsLblWarning.setPropertyValue("MultiLine", True)
@@ -391,8 +435,10 @@ class LicenseChooserDialog():
             #Legal code
             txtDeed=self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed=self.__createAWTControl(txtDeed, self.TXT_LEGAL_CODE_PD, None,
-                self.__makeRectangle(10, 130, 190, 75), 3)
+            xpsTxtDeed=self.__createAWTControl(txtDeed, 
+                                               self.TXT_LEGAL_CODE_PD, None,
+                                               self.__makeRectangle(
+                                                   10, 130, 190, 75), 3)
 
             xpsTxtDeed.setPropertyValue("MultiLine", True)
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
@@ -404,8 +450,10 @@ class LicenseChooserDialog():
 
             ##TODO: add internationalization support
             xpsChkYes=self.__createAWTControl(chkYes, self.CHK_YES_PD,
-                                "I have read and understand the terms and intended legal effect of "
-                                + "this tool, and hereby voluntarily elect to apply it to this work.",
+                                ("I have read and understand the terms"
+                                 " and intended legal effect of "
+                                 "this tool, and hereby voluntarily"
+                                 " elect to apply it to this work."),
                                 self.__makeRectangle(10, 210, 190, 30), 3)
             xpsChkYes.setPropertyValue("MultiLine", True)
             
@@ -543,7 +591,8 @@ class LicenseChooserDialog():
                     print ex
                     raise ex
 
-            oICModel = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlImageControlModel")
+            oICModel = self.dlgLicenseSelector.createInstance(
+                "com.sun.star.awt.UnoControlImageControlModel")
             xGraphic=None
             
 
@@ -630,7 +679,8 @@ class LicenseChooserDialog():
                                     selected.prohibitCommercial())
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES,
-                                    (selected.allowRemix() and not selected.requireShareAlike()))
+                                    (selected.allowRemix() and 
+                                     not selected.requireShareAlike()))
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
                                     selected.requireShareAlike())
@@ -739,8 +789,9 @@ class LicenseChooserDialog():
 
             pdButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            xPSetPDButton = self.__createAWTControl(pdButton, self.BTN_PUBLICDOMAIN,
-                None,self.__makeRectangle(92, 3, 60, 12), 0)
+            xPSetPDButton = self.__createAWTControl(pdButton, 
+                                                    self.BTN_PUBLICDOMAIN,
+            None,self.__makeRectangle(92, 3, 60, 12), 0)
             xPSetPDButton.setPropertyValue("DefaultButton", True)
             #TODO: The next line needs localization support.
             xPSetPDButton.setPropertyValue("Label","Public Domain")
@@ -755,7 +806,8 @@ class LicenseChooserDialog():
             oGBResults = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlGroupBoxModel")
             xpsBox =self.__createAWTControl(
-                oGBResults, "box", None, self.__makeRectangle(2, 15, 206, 243), 0)
+                oGBResults, "box", None, 
+                self.__makeRectangle(2, 15, 206, 243), 0)
 
             ##Create Tabs
             self.__crateCC0LicenseTab()
@@ -775,10 +827,12 @@ class LicenseChooserDialog():
             ##create the button model - OK and set the properties
             finishButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
-            self.xPSetFinishButton = self.__createAWTControl(finishButton, self.BTN_OK,
+            self.xPSetFinishButton = self.__createAWTControl(finishButton, 
+                                                             self.BTN_OK,
                 None, self.__makeRectangle(115, 260, 40, 14), 0)
             self.xPSetFinishButton.setPropertyValue("DefaultButton", True)
-            self.xPSetFinishButton.setPropertyValue("Label", self.finishButtonLabel)
+            self.xPSetFinishButton.setPropertyValue("Label", 
+                                                    self.finishButtonLabel)
 
             ## create the button model - Cancel and set the properties
             cancelButton = self.dlgLicenseSelector.createInstance(
@@ -839,39 +893,53 @@ class LicenseChooserDialog():
             #self.__addListners("XRadioButton",None,None)
             #self.__addListners("XButton",None,None)
 
-            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_YES,UpdateLicenseListner(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_NO,UpdateLicenseListner(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_YES,UpdateLicenseListner(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,UpdateLicenseListner(self))
-            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_NO,UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_YES,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_COMERCIAL_NO,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_YES,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",self.RDO_ALLOW_MODIFICATIONS_NO,
+                               UpdateLicenseListner(self))
 
             cmbJList.addItemListener(JurisdictionSelectListener(self))
 
-            self.__addListners("XCheckBox", self.CHK_WAIVE,AcceptWaiveListener(self))
-            self.__addListners("XCheckBox", self.CHK_YES_CC0,AcceptListener(self))
-            self.__addListners("XCheckBox", self.CHK_YES_PD,AcceptListener(self))
+            self.__addListners("XCheckBox", 
+                               self.CHK_WAIVE,AcceptWaiveListener(self))
+            self.__addListners("XCheckBox", 
+                               self.CHK_YES_CC0,AcceptListener(self))
+            self.__addListners("XCheckBox", 
+                               self.CHK_YES_PD,AcceptListener(self))
 
             
 
             
             ##add an action listeners to buttons
 
-            self.__addListners("XButton",self.BTN_FAQ,FaqClickListener(self,self.m_xContext))
+            self.__addListners("XButton",
+                               self.BTN_FAQ,FaqClickListener(self,
+                                                             self.m_xContext))
             self.__addListners("XButton",self.BTN_OK,OKClickListener(self))
-            self.__addListners("XButton",self.BTN_CANCEL,CancelClickListener(self))
+            self.__addListners("XButton",
+                               self.BTN_CANCEL,CancelClickListener(self))
             self.__addListners("XButton",self.BTN_CC,CCClickListener(self))
             self.__addListners("XButton",self.BTN_CC0,CC0ClickListener(self))
-            self.__addListners("XButton",self.BTN_PUBLICDOMAIN,PDClickListener(self))
+            self.__addListners("XButton",
+                               self.BTN_PUBLICDOMAIN,PDClickListener(self))
 
             
             ##Set the initial license
 
             if (self._ccLoAddin.getProgramWrapper().getDocumentLicense()):
-                self.__setSelectedLicense(self._ccLoAddin.getProgramWrapper().getDocumentLicense())
+                self.__setSelectedLicense(
+                    self._ccLoAddin.getProgramWrapper().getDocumentLicense())
                 
             else:
                 
-                self.__setSelectedLicense(License("http://creativecommons.org/licenses/by/3.0/"))
+                self.__setSelectedLicense(
+                    License("http://creativecommons.org/licenses/by/3.0/"))
                 
 
             
@@ -884,37 +952,55 @@ class LicenseChooserDialog():
 
             ##TODO: all the following info images needs internationalization support
 
-            self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),self.RDO_ALLOW_COMERCIAL_YES,
-                                "The licensor permits others to copy, distribute,"
-                                + "\ndisplay and perform the work,"
-                                + "\nas well as make derivative works based on it.", 1)
+            self.__setInfoImage(
+                self.__makeRectangle(55, 58, 9, 10),
+                self.RDO_ALLOW_COMERCIAL_YES,
+                                ("The licensor permits others to copy, "
+                                 "distribute,"
+                                 "\ndisplay and perform the work,"
+                                 "\nas well as make derivative works based"
+                                 " on it."), 1)
 
-            self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),self.RDO_ALLOW_COMERCIAL_NO,
-                                "The licensor permits others to copy, "
-                                + "\ndistribute, display, and perform the work "
-                                + "\nfor non-commercial purposes only", 1)
+            self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),
+                                self.RDO_ALLOW_COMERCIAL_NO,
+                                ("The licensor permits others to copy, "
+                                 "\ndistribute, display, and perform the work "
+                                 "\nfor non-commercial purposes only"), 1)
 
-            self.__setInfoImage(self.__makeRectangle(55, 103, 9, 10),self.RDO_ALLOW_MODIFICATIONS_YES,
-                                "The licensor permits others to copy, "
-                                + "\ndistribute, display and perform the work, "
-                                + "\nas well as make derivative works based on it.", 1)
+            self.__setInfoImage(self.__makeRectangle(55, 103, 9, 10),
+                                self.RDO_ALLOW_MODIFICATIONS_YES,
+                                ("The licensor permits others to copy, "
+                                 "\ndistribute, display and perform the work, "
+                                 "\nas well as make derivative works based"
+                                 " on it."), 1)
 
-            self.__setInfoImage(self.__makeRectangle(125, 118, 9, 10),self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
-                                "The licensor permits others to distribute derivative works "
-                                + "\nonly under the same license or one compatible "
-                                + "\nwith the one that governs the licensor's work.", 1)
+            self.__setInfoImage(self.__makeRectangle(125, 118, 9, 10),
+                                self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                                ("The licensor permits others to distribute"
+                                 " derivative works "
+                                 "\nonly under the same license or one "
+                                 "compatible "
+                                 "\nwith the one that governs the "
+                                 "licensor's work."), 1)
 
-            self.__setInfoImage(self.__makeRectangle(55, 133, 9, 10),self.RDO_ALLOW_MODIFICATIONS_NO,
-                                "The licensor permits others to copy, "
-                                + "\ndistribute and transmit only unaltered copies of the "
-                                + "\nwork - not derivative works based on it.", 1)
+            self.__setInfoImage(self.__makeRectangle(55, 133, 9, 10),
+                                self.RDO_ALLOW_MODIFICATIONS_NO,
+                                ("The licensor permits others to copy, "
+                                 "\ndistribute and transmit only unaltered"
+                                 " copies of the "
+                                 "\nwork - not derivative works based"
+                                 " on it."), 1)
 
-            self.__setInfoImage(self.__makeRectangle(155, 148, 9, 10),self.CMB_JURISDICTION,
-                                "Use the option \"Unported\" if you desire a license using "
-                                + "\nlanguage and terminology from international treaties. ", 1)
+            self.__setInfoImage(self.__makeRectangle(155, 148, 9, 10),
+                                self.CMB_JURISDICTION,
+                                ("Use the option \"Unported\" if you "
+                                 "desire a license using "
+                                 "\nlanguage and terminology from "
+                                 "international treaties. "), 1)
 
             ##TODO: Implement the Territories correctly- Line 314
-            path=os.path.join(os.path.dirname(__file__), './../../../license/rdf/territory')
+            path=os.path.join(
+                os.path.dirname(__file__), './../../../license/rdf/territory')
             f=open(path)
 
             
@@ -991,9 +1077,11 @@ class LicenseChooserDialog():
 
              
             self.xNameCont.getByName(self.CHK_YES_CC0).setPropertyValue("Enabled",False)
-            self.xNameCont.getByName(self.TXT_LEGAL_CODE_CC0).setPropertyValue("Enabled",False)
+            self.xNameCont.getByName(self.TXT_LEGAL_CODE_CC0).setPropertyValue(
+                "Enabled",False)
             ##TODO: was (short)0
-            self.xNameCont.getByName(self.CHK_WAIVE).setPropertyValue("State", 0)
+            self.xNameCont.getByName(self.CHK_WAIVE).setPropertyValue(
+                "State", 0)
             self.xNameCont.getByName(self.CHK_YES_CC0).setPropertyValue("State", 0)
             self.xNameCont.getByName(self.CMB_TERRITORY).setPropertyValue("Enabled",False)
 
@@ -1001,7 +1089,8 @@ class LicenseChooserDialog():
             self.cmbTList.selectItemPos( 0, True);
             
 
-            self.xNameCont.getByName(self.CHK_YES_PD).setPropertyValue("State", 0)
+            self.xNameCont.getByName(self.CHK_YES_PD).setPropertyValue(
+                "State", 0)
             
 
             ##Note: It seems like that self.dlgLicenseSelector and 
@@ -1049,10 +1138,13 @@ class LicenseChooserDialog():
                 return licenseChooser.selectPDTools(None, 3)
             else:
                 return licenseChooser.selectLicense(
-                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES)
-                    or self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
+                    self.__getRadioButtonValue(
+                        self.RDO_ALLOW_MODIFICATIONS_YES)
+                    or self.__getRadioButtonValue(
+                        self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
                     self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO),
-                    self.__getRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
+                    self.__getRadioButtonValue(
+                        self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
                     self.selectedJurisdiction)
 
             

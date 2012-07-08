@@ -3,7 +3,8 @@
 #Blog: www.blog.ishans.info
 
 from com.sun.star.awt import XItemListener
-from org.creativecommons.libreoffice.ui.license.UpdateLicenseListner import UpdateLicenseListner
+from org.creativecommons.libreoffice.ui.license.UpdateLicenseListner \
+  import UpdateLicenseListner
 
 class JurisdictionSelectListener(XItemListener,UpdateLicenseListner):
     """Get the user selected jurisdiction.
@@ -24,7 +25,8 @@ class JurisdictionSelectListener(XItemListener,UpdateLicenseListner):
         - `event`:ItemEvent
         """
         
-        self.dialog.selectedJurisdiction=self.dialog.juriList.pop(event.Selected)
+        self.dialog.selectedJurisdiction=self.dialog.juriList.pop(
+            event.Selected)
         
     def disposing(self, event):
         """@override
