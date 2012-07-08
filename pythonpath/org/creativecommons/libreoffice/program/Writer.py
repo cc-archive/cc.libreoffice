@@ -58,7 +58,7 @@ class Writer(OOoProgram):
 
                 xMasterPropSet.setPropertyValue("Name", field_name)
 
-                return xMasterPropSet
+            return xMasterPropSet
             
         except Exception, e:
             traceback.print_exc()
