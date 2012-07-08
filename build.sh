@@ -17,8 +17,8 @@ echo "Installed the new extension"
 
 #Starts LibreOffice
 echo "Starting LibreOffice writer"
-#libreoffice --writer --nofirststartwizard
-libreoffice --draw --nofirststartwizard
+libreoffice --writer --nofirststartwizard
+#libreoffice --draw --nofirststartwizard
 
 #Removes the extension when quitting
 echo "Removing the installed extension"

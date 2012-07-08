@@ -11,7 +11,7 @@ from com.sun.star.style.LineSpacingMode import PROP
 from com.sun.star.style import LineSpacing
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
-from org.creativecommons.libreoffice.util.PageHelper import PageHelper
+from org.creativecommons.libreoffice.util.PageHelper import createUniqueName
 from org.creativecommons.libreoffice.util.ShapeHelper import createShape, addPortion
 
 class Calc(OOoProgram):
@@ -98,7 +98,7 @@ class Calc(OOoProgram):
             #helper-stuff to let OOo create an internal name of the graphic
             #that can be used later (internal name consists of various checksums)
 
-            sName = PageHelper.createUniqueName(xBitmapContainer, img.getPhotoID())
+            sName = createUniqueName(xBitmapContainer, img.getPhotoID())
             xBitmapContainer.insertByName(sName, img.getSelectedImageURL())
 
             internalURL=xBitmapContainer.getByName(sName)

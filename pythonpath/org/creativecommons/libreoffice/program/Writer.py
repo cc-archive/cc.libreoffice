@@ -12,7 +12,7 @@ from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 from com.sun.star.text.TextContentAnchorType import AS_CHARACTER
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
-from org.creativecommons.libreoffice.util.PageHelper import PageHelper
+from org.creativecommons.libreoffice.util.PageHelper import createUniqueName
 
 
 class Writer(OOoProgram):
@@ -274,7 +274,7 @@ class Writer(OOoProgram):
 
             #Static class method call
             imgId=img.getPhotoID()
-            sName = PageHelper.createUniqueName(xBitmapContainer,imgId )
+            sName = createUniqueName(xBitmapContainer,imgId )
             xBitmapContainer.insertByName(sName, img.getSelectedImageURL())
 
             internalURL=xBitmapContainer.getByName(sName)

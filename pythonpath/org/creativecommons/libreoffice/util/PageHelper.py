@@ -4,18 +4,8 @@
 
 import traceback
 
-class PageHelper():
-    """
-    """
-    
-    def __init__(self, ):
-        """
-        """
-        
-        pass
-    
-    @staticmethod
-    def createUniqueName(_xElementContainer,elementName):
+
+def createUniqueName(_xElementContainer,elementName):
         """makes a String unique by appending a numerical suffix 
         
         
