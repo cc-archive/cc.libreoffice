@@ -9,24 +9,11 @@ import unohelper
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
-
+from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
 from org.creativecommons.license.Store import Store
-
-
-#import org.creativecommons.libs.rdflib.graph #import Graph
-#import org.creativecommons.libs.rdflib.term #import URIRef
-
-#from com.sun.star.uno import AnyConverter 
-#import com.sun.star.uno.AnyConverter
-#from com.sun.star.rdf import URI
-
-
-#from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.program.Writer import Writer
 from org.creativecommons.libreoffice.program.Calc import Calc
 from org.creativecommons.libreoffice.program.Draw import Draw
-#import rdflib
-
 from org.creativecommons.license.Chooser import Chooser
 
 
@@ -38,10 +25,10 @@ def createInstance(ctx):
     return org.creativecommons.license.Store.Store()
 
 
-class Example(unohelper.Base, XInitialization, XServiceInfo,
+class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
               XDispatchProvider, XDispatch):
 
-    
+
     def __init__(self, ctx, *args):
         self.ctx = ctx
         self.frame = None
@@ -76,7 +63,7 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         except Exception, ex:
             # print "Exception in CcOOoAddin.TestMethod: "
             # print ex
-            # 
+            #
             traceback.print_exc()
             #
         
@@ -95,8 +82,8 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
             traceback.print_exc()
             
     def updateCurrentComponent(self, ):
-        """Updates the Desktop current component in case of opening, creating or swapping
-        to other document
+        """Updates the Desktop current component in case of opening, creating 
+           or swapping to other document
         """
         ret=None
 
@@ -229,17 +216,21 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
         """
         #xServiceInfo=self.xCurrentComponent
 
-        if (self.xCurrentComponent.supportsService("com.sun.star.sheet.SpreadsheetDocument")):
+        if (self.xCurrentComponent.supportsService(
+                "com.sun.star.sheet.SpreadsheetDocument")):
             return Calc(self.xCurrentComponent,self.ctx)
             
-        elif (self.xCurrentComponent.supportsService("com.sun.star.text.TextDocument")):
+        elif (self.xCurrentComponent.supportsService(
+                "com.sun.star.text.TextDocument")):
             return  Writer(self.xCurrentComponent,self.ctx)
             
             
-        elif (self.xCurrentComponent.supportsService("com.sun.star.presentation.PresentationDocument")):
+        elif (self.xCurrentComponent.supportsService(
+                "com.sun.star.presentation.PresentationDocument")):
             return Draw(self.xCurrentComponent,self.ctx)
 
-        elif (self.xCurrentComponent.supportsService("com.sun.star.drawing.DrawingDocument")):
+        elif (self.xCurrentComponent.supportsService(
+                "com.sun.star.drawing.DrawingDocument")):
             return Draw(self.xCurrentComponent,self.ctx)
 
         return None
@@ -279,12 +270,10 @@ class Example(unohelper.Base, XInitialization, XServiceInfo,
     
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation( 
-    Example, 
+    CcLoAddin, 
     IMPLE_NAME, 
     (SERVICE_NAME,),)
 
 g_ImplementationHelper.addImplementation( \
 	createInstance,"org.creativecommons.license.Store",
         (SERVICE_NAME,),)
-
-from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
