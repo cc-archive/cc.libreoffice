@@ -3,7 +3,8 @@
 #Blog: www.blog.ishans.info
 
 class Constants():
-    """cc tags will be identified putting this prefix in the documents metadata file
+    """cc tags will be identified putting this prefix in the documents 
+    metadata file
     """
 
     CC_METADATA_IDENTIFIER = "http://creativecommons.org/ns#"
