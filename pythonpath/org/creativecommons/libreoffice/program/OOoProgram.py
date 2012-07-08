@@ -15,7 +15,8 @@ from com.sun.star.lang import WrappedTargetException
 
 from com.sun.star.beans.PropertyAttribute import MAYBEVOID,REMOVEABLE
 
-from org.creativecommons.libreoffice.program.IVisibleNotice import IVisibleNotice
+from org.creativecommons.libreoffice.program.IVisibleNotice \
+  import IVisibleNotice
 from org.creativecommons.libreoffice.program.Constants import Constants
 from org.creativecommons.license.License import License
 
@@ -43,7 +44,10 @@ class OOoProgram(object):
         docInfo=self.component.getDocumentInfo()
         #docProperties=docInfo
 
-        if ((docInfo.getPropertySetInfo().hasPropertyByName(Constants.LICENSE_URI)) and (docInfo.getPropertySetInfo().hasPropertyByName(Constants.TERRITORY))):
+        if ((docInfo.getPropertySetInfo().hasPropertyByName(
+                Constants.LICENSE_URI)) and 
+            (docInfo.getPropertySetInfo().hasPropertyByName(
+                Constants.TERRITORY))):
             try:
                 return License(docInfo.getPropertyValue(Constants.LICENSE_URI),
                         docInfo.getPropertyValue(Constants.TERRITORY))
@@ -60,7 +64,8 @@ class OOoProgram(object):
                 print type(ex)
                 #raise ex
 
-        elif (docInfo.getPropertySetInfo().hasPropertyByName(Constants.LICENSE_URI)):
+        elif (docInfo.getPropertySetInfo().hasPropertyByName(
+                Constants.LICENSE_URI)):
             try:
                 return License(docInfo.getPropertyValue(Constants.LICENSE_URI))
             
@@ -93,7 +98,8 @@ class OOoProgram(object):
         
         
         #docPropertyContainer=docInfo
-        if (not docInfo.getPropertySetInfo().hasPropertyByName(Constants.LICENSE_URI)):
+        if (not docInfo.getPropertySetInfo().hasPropertyByName(
+                Constants.LICENSE_URI)):
             
             #add the necessary properties to this document
             try:
@@ -127,19 +133,23 @@ class OOoProgram(object):
         try:
             
                         
-            docInfo.setPropertyValue(Constants.LICENSE_URI, license.license_uri)
+            docInfo.setPropertyValue(Constants.LICENSE_URI, 
+                                     license.license_uri)
             docInfo.setPropertyValue(Constants.LICENSE_NAME, license.getName())
 
             
             if (license.territory is not None):
             
-                if(not docInfo.getPropertySetInfo().hasPropertyByName(Constants.TERRITORY)):
+                if(not docInfo.getPropertySetInfo().hasPropertyByName(
+                    Constants.TERRITORY)):
 
                     docInfo.addProperty(Constants.TERRITORY,
                                         REMOVEABLE, "")
-                docInfo.setPropertyValue(Constants.TERRITORY, license.territory)
+                docInfo.setPropertyValue(Constants.TERRITORY, 
+                                         license.territory)
 
-            elif(docInfo.getPropertySetInfo().hasPropertyByName(Constants.TERRITORY)):
+            elif(docInfo.getPropertySetInfo().hasPropertyByName(
+                Constants.TERRITORY)):
 
             
                 try:
@@ -210,10 +220,12 @@ class OOoProgram(object):
                                   
                 #self.component.removeMetadataFile(URI.create(self.m_xContext,self.component.getNamespace()+"meta.rdf"))
                 
-                self.component.removeMetadataFile(self.__createUri(self.component.Namespace+"meta.rdf"))
+                self.component.removeMetadataFile(
+                    self.__createUri(self.component.Namespace+"meta.rdf"))
             except Exception, ex:
                 #TODO: remove the stack trace
-                print "Exception in OOoProgram.setDocumentLicense: (ignored exception)"
+                print "Exception in OOoProgram.setDocumentLicense:"+ \
+                  "-ignored exception"
                 print ex
                 print type(ex)
                 #raise ex
@@ -222,23 +234,28 @@ class OOoProgram(object):
             xType=self.__createUri(value)
 
                        
-            xTypeRights = self.__createUri("http://purl.org/dc/elements/1.1/rights")
+            xTypeRights = self.__createUri(
+                "http://purl.org/dc/elements/1.1/rights")
             
-            xGraphName = self.component.addMetadataFile("meta.rdf", (xTypeRights,));
+            xGraphName = self.component.addMetadataFile(
+                "meta.rdf", (xTypeRights,));
                        
             xGraph = self.component.getRDFRepository().getGraph(xGraphName)
 
-            nodeRights = self.__createUri("http://purl.org/dc/elements/1.1/rights")
+            nodeRights = self.__createUri(
+                "http://purl.org/dc/elements/1.1/rights")
             #TODO: Line 191- Implement correctly
             valRights =self.__createLiteral("-ASCII C- " + author
-                    + " licensed to the public under the " + license.getName() + " license")
+                    + " licensed to the public under the " + \
+                    license.getName() + " license")
             xGraph.addStatement(xType, nodeRights, valRights)
 
             nodeLicense = self.__createUri("http://purl.org/dc/terms/license")
             valLicense = self.__createLiteral( license.license_uri)
             xGraph.addStatement(xType, nodeLicense, valLicense)
 
-            noderightsHolder =self.__createUri("http://purl.org/dc/terms/rightsHolder")
+            noderightsHolder =self.__createUri(
+                "http://purl.org/dc/terms/rightsHolder")
             valrightsHolder = self.__createLiteral(author)
             xGraph.addStatement(xType, noderightsHolder, valrightsHolder)
                        
@@ -255,7 +272,8 @@ class OOoProgram(object):
         """
         
         metaURI=self.xMultiComponentFactory.\
-            createInstanceWithArgumentsAndContext("com.sun.star.rdf.URI",(value,),self.m_xContext)
+            createInstanceWithArgumentsAndContext(
+                "com.sun.star.rdf.URI",(value,),self.m_xContext)
         return metaURI
             
 
@@ -266,7 +284,8 @@ class OOoProgram(object):
         - `value`:String
         """
         literal=self.xMultiComponentFactory.\
-            createInstanceWithArgumentsAndContext("com.sun.star.rdf.Literal",(value,),self.m_xContext)
+            createInstanceWithArgumentsAndContext(
+                "com.sun.star.rdf.Literal",(value,),self.m_xContext)
 
         return literal
         
