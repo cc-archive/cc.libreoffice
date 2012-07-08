@@ -11,6 +11,7 @@ from com.sun.star.style import LineSpacing
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.util.PageHelper import PageHelper
+from org.creativecommons.libreoffice.util.ShapeHelper import ShapeHelper
 
 class Calc(OOoProgram):
     """
@@ -131,6 +132,56 @@ class Calc(OOoProgram):
             #resume @ 151
 
             
+            
+        except Exception, e:
+            traceback.print_exc()
+            raise e
+
+
+    def __embedGraphic(self, imgURL,xSpreadsheet):
+        """Insert the license image.
+    
+    Arguments:
+    - `imgURL`:String-URL to the license image
+    - `xSpreadsheet`:xSpreadsheet-Spread sheet to insert the image
+    """
+        
+        try:
+            xSheetDoc=self.component
+            #xSpreadsheetFactory=xSheetDoc
+            #xDrawPageSupplier=xSpreadsheet
+            xPage=xSpreadsheet.getDrawPage()
+
+            xBitmapContainer=xSheetDoc.createInstance(
+                "com.sun.star.drawing.BitmapTable")
+
+            xGraphicShape=xSheetDoc.createInstance(
+                    "com.sun.star.drawing.GraphicObjectShape")
+            xGraphicShape.setSize(Size(3104, 1093))
+
+            acrSc=self.__getActiveCellsRange(self.component).StartColumn
+            acrSr=self.__getActiveCellsRange(self.component).StartRow
+
+            #add to current cell
+            xGraphicShape.setPosition(self.__getAbsoluteCellPosition(xSpreadsheet,acrSc,acrSr))
+
+            xProps=xGraphicShape
+
+            #helper-stuff to let OOo create an internal name of the graphic
+            #that can be used later (internal name consists of various checksums)
+
+            internalURL=xBitmapContainer.getByName("imgID")
+
+            xProps.setPropertyValue("AnchorType",AS_CHARACTER)
+            xProps.setPropertyValue("GraphicURL", internalURL)
+            xProps.setPropertyValue("Width", 4000) # original: 88 px
+            xProps.setPropertyValue("Height", 1550) # original: 31 px
+            xProps.setPropertyValue("Name", "ccoo:licenseImage")
+
+            #inser the graphic at the cursor position
+            xPage.add(xGraphicShape)
+            #remove the helper-entry
+            xBitmapContainer.removeByName("imgID")
             
         except Exception, e:
             traceback.print_exc()
