@@ -12,7 +12,8 @@ from com.sun.star.style import LineSpacing
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.util.PageHelper import createUniqueName
-from org.creativecommons.libreoffice.util.ShapeHelper import createShape, addPortion
+from org.creativecommons.libreoffice.util.ShapeHelper \
+  import createShape, addPortion
 
 class Calc(OOoProgram):
     """
@@ -91,7 +92,8 @@ class Calc(OOoProgram):
 
             acrSc=self.__getActiveCellsRange(self.component).StartColumn
             acrSr=self.__getActiveCellsRange(self.component).StartRow
-            xGraphicShape.setPosition(self.__getAbsoluteCellPosition(xSpreadsheet,acrSc,acrSr))
+            xGraphicShape.setPosition(self.__getAbsoluteCellPosition(
+                xSpreadsheet,acrSc,acrSr))
 
             xProps=xGraphicShape
 
@@ -118,7 +120,8 @@ class Calc(OOoProgram):
             else:
                 actualSize=xGraphicPropsGOSX.getPropertyValue("SizePixel")
                 #convert pixels to 100th of mm
-                xGraphicShape.setSize(Size(actualSize.Width * 26.4,actualSize.Height * 26.4))
+                xGraphicShape.setSize(
+                    Size(actualSize.Width * 26.4,actualSize.Height * 26.4))
                 
             #remove the helper-entry
             xBitmapContainer.removeByName(sName)
@@ -133,7 +136,8 @@ class Calc(OOoProgram):
                 byCaption = img.getLicenseCode().upper()+" "
 
             #first shape
-            caption = byCaption + img.getLicenseNumber() + " ( " + img.getLicenseURL() + " )"
+            caption = (byCaption + img.getLicenseNumber() + " ( " 
+                + img.getLicenseURL() + " )")
             
             #resume @ 151
             raise NotImplementedError("Calc.insertPicture")
@@ -170,7 +174,8 @@ class Calc(OOoProgram):
             acrSr=self.__getActiveCellsRange(self.component).StartRow
 
             #add to current cell
-            xGraphicShape.setPosition(self.__getAbsoluteCellPosition(xSpreadsheet,acrSc,acrSr))
+            xGraphicShape.setPosition(self.__getAbsoluteCellPosition(
+                xSpreadsheet,acrSc,acrSr))
 
             xProps=xGraphicShape
 
@@ -226,7 +231,8 @@ class Calc(OOoProgram):
 
             absCellPos=self.__getAbsoluteCellPosition(xSpreadsheet,acrSc,acrSr)
 
-            xRectangle=createShape(self.component,absCellPos,Size( 15000, 1500 ),
+            xRectangle=createShape(
+                self.component,absCellPos,Size( 15000, 1500 ),
                                    "com.sun.star.drawing.RectangleShape" )
             xPage.add( xRectangle )
 
@@ -234,9 +240,11 @@ class Calc(OOoProgram):
 
             xRectangle.setPropertyValue("TextAutoGrowHeight", True)
             xShapePropSet.setPropertyValue("TextAutoGrowWidth", True)
-            noneLineStyle=uno.getConstantByName("com.sun.star.drawing.LineStyle.NONE")
+            noneLineStyle=uno.getConstantByName(
+                "com.sun.star.drawing.LineStyle.NONE")
             xShapePropSet.setPropertyValue("LineStyle", noneLineStyle)
-            noneFillStyle=uno.getConstantByName("com.sun.star.drawing.FillStyle.NONE")
+            noneFillStyle=uno.getConstantByName(
+                "com.sun.star.drawing.FillStyle.NONE")
             xShapePropSet.setPropertyValue("FillStyle", noneFillStyle)
             xShapePropSet.setPropertyValue("Name", "ccoo:licenseText")
 
