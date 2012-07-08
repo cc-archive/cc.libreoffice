@@ -4,9 +4,6 @@
 
 import traceback
 
-#from com.sun.star.uno import AnyConverter
-#from com.sun.star.uno import AnyConverter 
-#import com.sun.star.uno.AnyConverter
 
 from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 from com.sun.star.text.TextContentAnchorType import AS_CHARACTER
@@ -43,15 +40,17 @@ class Writer(OOoProgram):
             xMasterPropSet=None
             
             #determine the name for the master field
-            masterFieldName = "com.sun.star.text.FieldMaster.User." + field_name
+            masterFieldName = "com.sun.star.text.FieldMaster.User." + \
+              field_name
             
             #see if the user field already exists
             if (mxTextFields.getTextFieldMasters().hasByName(masterFieldName)):
-                xMasterPropSet=mxTextFields.getTextFieldMasters().getByName(masterFieldName)
+                xMasterPropSet=mxTextFields.getTextFieldMasters().getByName(
+                    masterFieldName)
 
             else:
-                #Create a fieldmaster for our newly created User Text field, and
-                #access it's XPropertySet interface
+                #Create a fieldmaster for our newly created User Text field, 
+                #and access it's XPropertySet interface
 
                 xMasterPropSet=mxDocFactory.createInstance(
                 "com.sun.star.text.FieldMaster.User")
@@ -67,7 +66,8 @@ class Writer(OOoProgram):
         
         
     
-    def __updateMasterField(self, field_name,field_value,mxTextFields,mxDocFactory):
+    def __updateMasterField(self, 
+                            field_name,field_value,mxTextFields,mxDocFactory):
         """
         
         Arguments:
@@ -79,7 +79,8 @@ class Writer(OOoProgram):
         
         try:
             #get or create the master field
-            xMasterPropSet = self.__getMasterField(field_name, mxTextFields, mxDocFactory)
+            xMasterPropSet = self.__getMasterField(field_name, 
+                                                   mxTextFields, mxDocFactory)
 
             #Set the value of the FieldMaster
             xMasterPropSet.setPropertyValue("Content", field_value)
@@ -96,7 +97,8 @@ class Writer(OOoProgram):
             traceback.print_exc()
             raise e
 
-    def __createUserTextField(self, mxDocFactory,mxTextFields,field_name,field_value):
+    def __createUserTextField(self, mxDocFactory,
+                              mxTextFields,field_name,field_value):
         """
     
         Arguments:
@@ -131,7 +133,8 @@ class Writer(OOoProgram):
 
     
     def __embedGraphic(self, mxDocFactory,xCursor,imgURL):
-        """Embeds the license "button" into a Textdocument at the given cursor position
+        """Embeds the license "button" into a Textdocument at 
+        the given cursor position
         
         Arguments:
         - `mxDocFactory`:XMultiServiceFactory-the factory to create services from
@@ -214,39 +217,58 @@ class Writer(OOoProgram):
                 self.__embedGraphic(mxDoc, docCursor, docLicense.getImageUrl())
             #insert the licensing statement
             if (docLicense.getName()=="CC0 1.0 Universal"):
-                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
-                mxDocText.insertString(docCursor, "To the extent possible under law, the person who associated ", False)
+                mxDocText.insertControlCharacter(docCursor, 
+                                                 PARAGRAPH_BREAK, False)
+                mxDocText.insertString(
+                    docCursor, 
+                    "To the extent possible under law, the person who"
+                    + "associated ", 
+                    False)
                 mxDocText.insertTextContent(docCursor, licenseNameField, False)
-                mxDocText.insertString(docCursor, " with this work has waived all "
-                        + "copyright and related or neighboring rights to this work. "
-                        + "The summary of the Legal Code is available at ", False)
+                mxDocText.insertString(docCursor, 
+                                       " with this work has waived all "
+                        + "copyright and related or neighboring rights to this"
+                        + " work. The summary of the Legal Code is" 
+                        + "available at ", False)
                 mxDocText.insertTextContent(docCursor, licenseURLField, False)
                 mxDocText.insertString(docCursor, ".", False)
 
                 if (docLicense.territory is not None):
-                    territory=self.__createUserTextField(mxDoc,mxDoc,"Territory",docLicense.territory)
-                    mxDocText.insertString(docCursor, "This work is published from ", False)
+                    territory=self.__createUserTextField(mxDoc,mxDoc,
+                                                         "Territory",
+                                                         docLicense.territory)
+                    mxDocText.insertString(docCursor, "This work is published"
+                                           + "from ", False)
                     mxDocText.insertTextContent(docCursor, territory, False)
 
-                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
+                                                 False)
 
             elif (docLicense.getName() == "Public Domain"):
-                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
-                mxDocText.insertString(docCursor, "This document is in the ", False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
+                                                 False)
+                mxDocText.insertString(docCursor, "This document is in the ", 
+                                       False)
                 mxDocText.insertTextContent(docCursor, licenseNameField, False)
-                mxDocText.insertString(docCursor, ". The summary of the Legal Code is available at ", False)
+                mxDocText.insertString(docCursor, ". The summary of the Legal" 
+                                       + "Code is available at ", False)
                 mxDocText.insertTextContent(docCursor, licenseURLField, False)
                 mxDocText.insertString(docCursor, ".", False)
-                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
+                                                 False)
 
             else:
-                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
-                mxDocText.insertString(docCursor, "This document is licensed under the ", False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
+                                                 False)
+                mxDocText.insertString(docCursor, "This document is licensed"
+                                       + "under the ", False)
                 mxDocText.insertTextContent(docCursor, licenseNameField, False)
-                mxDocText.insertString(docCursor, " license, available at ", False)
+                mxDocText.insertString(docCursor, " license, available at ", 
+                                       False)
                 mxDocText.insertTextContent(docCursor, licenseURLField, False)
                 mxDocText.insertString(docCursor, ".", False)
-                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, False)
+                mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
+                                                 False)
 
             mxDoc.refresh()
 
@@ -318,7 +340,9 @@ class Writer(OOoProgram):
             docCursor.getText().insertControlCharacter(docCursor,
                                     PARAGRAPH_BREAK, False)
             
-            caption = img.getTitle() + " ( " + img.getImgUrlMainPage()+ " ) / " + byCaption + img.getLicenseNumber()+ " ( " + img.getLicenseURL() + " )"
+            caption = img.getTitle() + " ( " + \
+              img.getImgUrlMainPage()+ " ) / " + byCaption + \
+              img.getLicenseNumber()+ " ( " + img.getLicenseURL() + " )"
                 
             docCursor.getText().insertString(docCursor, caption, False)    
             

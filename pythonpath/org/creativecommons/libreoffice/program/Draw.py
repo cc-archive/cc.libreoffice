@@ -13,8 +13,10 @@ from com.sun.star.style import LineSpacing
 
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
-from org.creativecommons.libreoffice.util.ShapeHelper import createShape, addPortion
-from org.creativecommons.libreoffice.util.PageHelper import getDrawPageCount, getDrawPageByIndex
+from org.creativecommons.libreoffice.util.ShapeHelper \
+  import createShape, addPortion
+from org.creativecommons.libreoffice.util.PageHelper \
+  import getDrawPageCount, getDrawPageByIndex
 
 
 class Draw(OOoProgram):
@@ -49,9 +51,12 @@ class Draw(OOoProgram):
                 "com.sun.star.drawing.GraphicObjectShape")
 
             
-            xGraphicShape.setSize(Size(310 * self.pageWidth / 2000, 109 * self.pageWidth / 2000))
-            x=self.pageWidth - 310 * self.pageWidth / 2000- self.pageBorderRight - 200
-            y=self.pageHeight - 2 * self.pageWidth / 50 - 109 * self.pageWidth / 1800 - self.pageBorderBottom - 200
+            xGraphicShape.setSize(
+                Size(310 * self.pageWidth / 2000, 109 * self.pageWidth / 2000))
+            x=self.pageWidth - \
+                310 * self.pageWidth / 2000- self.pageBorderRight - 200
+            y=self.pageHeight - 2 * self.pageWidth / 50 - \
+                109 * self.pageWidth / 1800 - self.pageBorderBottom - 200
 
             xGraphicShape.setPosition(Point(x,y))
 
@@ -65,8 +70,8 @@ class Draw(OOoProgram):
 
             xProps.setPropertyValue("AnchorType",AS_CHARACTER)
             xProps.setPropertyValue("GraphicURL", internalURL)
-            xProps.setPropertyValue("Width", 4000) #original: 88 px
-            xProps.setPropertyValue("Height", 1550) #original: 31 px
+            xProps.setPropertyValue("Width", 4000)  #original: 88 px
+            xProps.setPropertyValue("Height", 1550)  #original: 31 px
             xProps.setPropertyValue("Name", "ccoo:licenseImage")
 
             #inser the graphic at the cursor position
@@ -85,8 +90,8 @@ class Draw(OOoProgram):
 
 
     def insertVisibleNotice(self, xPage=None):
-        """Create and insert an auto-text containing the license for the given draw page.
-        (if the draw page is given)
+        """Create and insert an auto-text containing the license 
+        for the given draw page.(if the draw page is given)
         
         Arguments:
         - `xPage`:XDrawPage
@@ -114,8 +119,10 @@ class Draw(OOoProgram):
             aLineSpacing.Mode=PROP
 
             #first shape
-            x=self.pageWidth - len(docLicense.getName()) * self.pageWidth / 65 - self.pageBorderRight - 200
-            y=self.pageHeight - 2 * self.pageWidth / 50 - self.pageBorderBottom - 200
+            x=self.pageWidth - \
+                len(docLicense.getName()) * self.pageWidth / 65 - self.pageBorderRight - 200
+            y=self.pageHeight - \
+                2 * self.pageWidth / 50 - self.pageBorderBottom - 200
             width= len(docLicense.getName()) * self.pageWidth / 65
             height= 2 * self.pageWidth / 50
 
@@ -129,9 +136,11 @@ class Draw(OOoProgram):
 
             xShapePropSet.setPropertyValue("TextAutoGrowHeight", True)
             xShapePropSet.setPropertyValue("TextAutoGrowWidth", True)
-            noneLineStyle=uno.getConstantByName("com.sun.star.drawing.LineStyle.NONE")
+            noneLineStyle=uno.getConstantByName(
+                "com.sun.star.drawing.LineStyle.NONE")
             xShapePropSet.setPropertyValue("LineStyle",noneLineStyle)
-            noneFillStyle=uno.getConstantByName("com.sun.star.drawing.FillStyle.NONE")
+            noneFillStyle=uno.getConstantByName(
+                "com.sun.star.drawing.FillStyle.NONE")
             xShapePropSet.setPropertyValue("FillStyle", noneFillStyle)
             xShapePropSet.setPropertyValue("Name", "ccoo:licenseText")
 
