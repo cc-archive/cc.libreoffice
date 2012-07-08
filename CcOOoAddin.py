@@ -11,7 +11,7 @@ from com.sun.star.lang import XInitialization, XServiceInfo
 
 
 from org.creativecommons.license.Store import Store
-import module.module1 as Module
+
 
 #import org.creativecommons.libs.rdflib.graph #import Graph
 #import org.creativecommons.libs.rdflib.term #import URIRef
