@@ -52,5 +52,5 @@ def addPortion(xShape,sText,bNewParagraph):
         return xTextCursor
     except Exception, e:
 	traceback.print_exc()
-	raise e
+	#raise e
 

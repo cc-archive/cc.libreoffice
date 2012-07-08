@@ -2,6 +2,7 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 import traceback
+import uno
 
 from com.sun.star.awt import Size
 from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
@@ -40,6 +41,9 @@ class Calc(OOoProgram):
             xCell = spreadsheet.getCellByPosition(x, y)
             #xPropSet=xCell
             p=xCell.getPropertyValue("Position")
+            
+            # print "X- "+p.X
+            #print "Y- "+p.Y
             return p
         except Exception, e:
             traceback.print_exc()
@@ -74,7 +78,7 @@ class Calc(OOoProgram):
             #xSpreadsheetFactory=xSheetDoc
             #xDrawPageSupplier=xSpreadsheet
 
-            xPage = xDrawPageSupplier.getDrawPage()
+            xPage = xSpreadsheet.getDrawPage()
 
             xBitmapContainer=xSheetDoc.createInstance(
                 "com.sun.star.drawing.BitmapTable")
@@ -169,6 +173,7 @@ class Calc(OOoProgram):
 
             #helper-stuff to let OOo create an internal name of the graphic
             #that can be used later (internal name consists of various checksums)
+            xBitmapContainer.insertByName("imgID", imgURL)
 
             internalURL=xBitmapContainer.getByName("imgID")
 
@@ -187,7 +192,7 @@ class Calc(OOoProgram):
             traceback.print_exc()
             raise e
 
-    #TODO-complete the method
+    
     def insertVisibleNotice(self, xSpreadsheet=None):
         """Create and insert an auto-text containing the license(
         if spreadsheet is given,to it)
@@ -216,7 +221,7 @@ class Calc(OOoProgram):
             acrSc=self.__getActiveCellsRange(self.component).StartColumn
             acrSr=self.__getActiveCellsRange(self.component).StartRow+3
 
-            absCellPos=(xSpreadsheet,acrSc,acrSr)
+            absCellPos=self.__getAbsoluteCellPosition(xSpreadsheet,acrSc,acrSr)
 
             xRectangle=createShape(self.component,absCellPos,Size( 15000, 1500 ),
                                    "com.sun.star.drawing.RectangleShape" )
@@ -224,7 +229,7 @@ class Calc(OOoProgram):
 
             xShapePropSet=xRectangle
 
-            xShapePropSet.setPropertyValue("TextAutoGrowHeight", True)
+            xRectangle.setPropertyValue("TextAutoGrowHeight", True)
             xShapePropSet.setPropertyValue("TextAutoGrowWidth", True)
             noneLineStyle=uno.getConstantByName("com.sun.star.drawing.LineStyle.NONE")
             xShapePropSet.setPropertyValue("LineStyle", noneLineStyle)
@@ -233,13 +238,36 @@ class Calc(OOoProgram):
             xShapePropSet.setPropertyValue("Name", "ccoo:licenseText")
 
             #first paragraph
-            xTextPropSet=addPortion( xRectangle, license.getName(), False )
+            xTextPropSet=addPortion( xRectangle, docLicense.getName(), False )
             #TODO-has this been done correctly??
             xTextPropSet.setPropertyValue( "CharColor",int(0x000000))
 
             #insert the graphic
-            self.__embedGraphic(license.getImageUrl(),xSpreadsheet)
+            self.__embedGraphic(docLicense.getImageUrl(),xSpreadsheet)
             
+        except Exception, e:
+            traceback.print_exc()
+            #raise e
+
+    #TODO-complete the method
+    def updateVisibleNotice(self, ):
+        """Update visible notices to current license.
+        """
+        
+        try:
+            xSheetDoc=self.component
+
+            sheetNames = xSheetDoc.getSheets().getElementNames()
+
+            #search for vivible notices and remove them
+            for sheet in sheetNames:
+                xSpreadsheet=xSheetDoc.getSheets().getByName(sheet)
+
+                #xDrawPageSupplier=xSpreadsheet
+                xShapes = xSpreadsheet.getDrawPage()
+
+                #TODO-resume from 371
+                
         except Exception, e:
             traceback.print_exc()
             raise e
