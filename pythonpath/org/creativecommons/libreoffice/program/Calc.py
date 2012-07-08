@@ -11,7 +11,7 @@ from com.sun.star.style import LineSpacing
 
 from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
 from org.creativecommons.libreoffice.util.PageHelper import PageHelper
-from org.creativecommons.libreoffice.util.ShapeHelper import ShapeHelper
+from org.creativecommons.libreoffice.util.ShapeHelper import createShape, addPortion
 
 class Calc(OOoProgram):
     """
@@ -187,3 +187,61 @@ class Calc(OOoProgram):
             traceback.print_exc()
             raise e
 
+    #TODO-complete the method
+    def insertVisibleNotice(self, xSpreadsheet=None):
+        """Create and insert an auto-text containing the license(
+        if spreadsheet is given,to it)
+    
+        Arguments:
+        - `xSpreadsheet`:xSpreadsheet- Spread sheet to insert the text
+        """
+        
+        try:
+            if xSpreadsheet is None:
+                xDocModel=self.component
+                xController = xDocModel.getCurrentController()
+                xSpreadsheet=xController.getActiveSheet()
+            
+            docLicense=super(Calc,self).getDocumentLicense()
+
+            #xDrawPageSupplier=xSpreadsheet
+            xPage=xSpreadsheet.getDrawPage()
+
+            #xShapes=xPage
+
+            aLineSpacing=LineSpacing()
+            aLineSpacing.Mode=PROP
+
+            #first shape
+            acrSc=self.__getActiveCellsRange(self.component).StartColumn
+            acrSr=self.__getActiveCellsRange(self.component).StartRow+3
+
+            absCellPos=(xSpreadsheet,acrSc,acrSr)
+
+            xRectangle=createShape(self.component,absCellPos,Size( 15000, 1500 ),
+                                   "com.sun.star.drawing.RectangleShape" )
+            xPage.add( xRectangle )
+
+            xShapePropSet=xRectangle
+
+            xShapePropSet.setPropertyValue("TextAutoGrowHeight", True)
+            xShapePropSet.setPropertyValue("TextAutoGrowWidth", True)
+            noneLineStyle=uno.getConstantByName("com.sun.star.drawing.LineStyle.NONE")
+            xShapePropSet.setPropertyValue("LineStyle", noneLineStyle)
+            noneFillStyle=uno.getConstantByName("com.sun.star.drawing.FillStyle.NONE")
+            xShapePropSet.setPropertyValue("FillStyle", noneFillStyle)
+            xShapePropSet.setPropertyValue("Name", "ccoo:licenseText")
+
+            #first paragraph
+            xTextPropSet=addPortion( xRectangle, license.getName(), False )
+            #TODO-has this been done correctly??
+            xTextPropSet.setPropertyValue( "CharColor",int(0x000000))
+
+            #insert the graphic
+            self.__embedGraphic(license.getImageUrl(),xSpreadsheet)
+            
+        except Exception, e:
+            traceback.print_exc()
+            raise e
+
+        
