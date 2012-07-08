@@ -50,6 +50,8 @@ class Calc(OOoProgram):
             raise e
 
 
+    ##TODO-The following method throws an exception if a cell
+    ##is not selected whenthis method is called. Fix it
     def __getActiveCellsRange(self, xComponent):
         """
         
@@ -254,13 +256,15 @@ class Calc(OOoProgram):
     def updateVisibleNotice(self, ):
         """Update visible notices to current license.
         """
+        shapes=[]
+        drawPages=[]
         
         try:
             xSheetDoc=self.component
 
             sheetNames = xSheetDoc.getSheets().getElementNames()
 
-            #search for vivible notices and remove them
+            #search for visible notices and remove them
             for sheet in sheetNames:
                 xSpreadsheet=xSheetDoc.getSheets().getByName(sheet)
 
@@ -272,12 +276,22 @@ class Calc(OOoProgram):
                 for i in range(numOfShapes):
                     xShape=xShapes.getByIndex(i)
                     #xShapePropSet=xShape
-                    print "TEST"
-                    print xShape.getPropertyValue("Name")
-                    print type(xShape.getPropertyValue("Name"))
+                    
+                    name= xShape.getPropertyValue("Name")
 
-        raise NotImplementedError("Calc.UpdateVisibleNotice")
-                
+                    if (name.lower() == "ccoo:licenseImage".lower()):
+                        shapes.append(xShape)
+                        drawPages.append(xSpreadsheet)
+                    elif(name.lower() == "ccoo:licenseText".lower()):
+                        shapes.append(xShape)
+
+                for shape in shapes:
+                    xShapes.remove(shape)
+
+            #add new visible notices
+            for page in drawPages:
+                self.insertVisibleNotice(page)
+            
         except Exception, e:
             traceback.print_exc()
             raise e
