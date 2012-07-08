@@ -152,8 +152,19 @@ class Writer(OOoProgram):
 
             #TODO:use this link
             #http://www.oooforum.org/forum/viewtopic.phtml?t=87225
-                        
-            xBitmapContainer.insertByName("imgID", imgURL)
+
+            
+            try:
+                xBitmapContainer.insertByName("imgID", imgURL)
+            except Exception, e:
+                print "Image imgID already exists"
+                traceback.print_exc()                
+                xBitmapContainer.removeByName("imgID")
+                xBitmapContainer.insertByName("imgID", imgURL)
+                #raise e
+
+                
+            
             internalURL=xBitmapContainer.getByName("imgID")
 
             xImage.setPropertyValue("AnchorType",AS_CHARACTER)
