@@ -11,7 +11,7 @@ from com.sun.star.container import NoSuchElementException
 from com.sun.star.lang import WrappedTargetException
 from com.sun.star.lang import IllegalArgumentException
 
-# from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
+
 
 class AcceptWaiveListener(XItemListener,unohelper.Base):
     """Enable CC0 deed and territory etc. after accepting to waive.
@@ -50,7 +50,9 @@ class AcceptWaiveListener(XItemListener,unohelper.Base):
                         "Enabled", False)
 
                 ##TODO: was (short)0
-                self.dialog.xNameCont.getByName(LicenseChooserDialog.CHK_YES_CC0).setPropertyValue("State", 0)
+                self.dialog.xNameCont.getByName(
+                    LicenseChooserDialog.CHK_YES_CC0).setPropertyValue(
+                        "State", 0)
 
                 self.dialog.xNameCont.getByName(
                     self.dialog.TXT_LEGAL_CODE_CC0).setPropertyValue(
