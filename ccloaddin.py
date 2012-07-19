@@ -9,7 +9,7 @@ import unohelper
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
-from org.creativecommons.libreoffice.ui.license.LicenseChooserDialog import LicenseChooserDialog
+from org.creativecommons.libreoffice.ui.license.licensechooserdialog import LicenseChooserDialog
 from org.creativecommons.license.Store import Store
 from org.creativecommons.libreoffice.program.Writer import Writer
 from org.creativecommons.libreoffice.program.Calc import Calc
