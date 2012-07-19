@@ -10,7 +10,7 @@ from com.sun.star.beans import PropertyValue
 
 from  org.creativecommons.libreoffice.ui.license.updatelicenselistner \
   import UpdateLicenseListner
-from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener \
+from org.creativecommons.libreoffice.ui.license.jurisdictionselectlistener \
   import JurisdictionSelectListener
 from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener \
   import AcceptWaiveListener
