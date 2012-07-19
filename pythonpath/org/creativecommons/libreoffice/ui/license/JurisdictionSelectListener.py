@@ -3,7 +3,7 @@
 #Blog: www.blog.ishans.info
 
 #from com.sun.star.awt import XItemListener
-from org.creativecommons.libreoffice.ui.license.UpdateLicenseListner \
+from org.creativecommons.libreoffice.ui.license.updatelicenselistner \
   import UpdateLicenseListner
 
 class JurisdictionSelectListener(UpdateLicenseListner):

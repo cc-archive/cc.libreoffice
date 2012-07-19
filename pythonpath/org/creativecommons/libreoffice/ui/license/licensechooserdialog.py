@@ -8,7 +8,7 @@ import traceback
 
 from com.sun.star.beans import PropertyValue
 
-from  org.creativecommons.libreoffice.ui.license.UpdateLicenseListner \
+from  org.creativecommons.libreoffice.ui.license.updatelicenselistner \
   import UpdateLicenseListner
 from org.creativecommons.libreoffice.ui.license.JurisdictionSelectListener \
   import JurisdictionSelectListener
