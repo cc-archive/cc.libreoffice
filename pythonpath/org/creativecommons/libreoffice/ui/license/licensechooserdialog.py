@@ -20,11 +20,11 @@ from org.creativecommons.libreoffice.ui.license.faqclicklistener \
   import FaqClickListener
 from org.creativecommons.libreoffice.ui.license.okclicklistener \
   import OKClickListener
-from org.creativecommons.libreoffice.ui.license.CancelClickListener \
+from org.creativecommons.libreoffice.ui.license.cancelclicklistener \
   import CancelClickListener
-from org.creativecommons.libreoffice.ui.license.CCClickListener \
+from org.creativecommons.libreoffice.ui.license.ccclicklistener \
   import CCClickListener
-from org.creativecommons.libreoffice.ui.license.CC0ClickListener \
+from org.creativecommons.libreoffice.ui.license.cc0clicklistener \
   import CC0ClickListener
 from org.creativecommons.libreoffice.ui.license.PDClickListener \
   import PDClickListener
