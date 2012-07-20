@@ -26,9 +26,9 @@ from org.creativecommons.libreoffice.ui.license.ccclicklistener \
   import CCClickListener
 from org.creativecommons.libreoffice.ui.license.cc0clicklistener \
   import CC0ClickListener
-from org.creativecommons.libreoffice.ui.license.PDClickListener \
+from org.creativecommons.libreoffice.ui.license.pdclicklistener \
   import PDClickListener
-from org.creativecommons.libreoffice.ui.license.TerritorySelectListener \
+from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
   import TerritorySelectListener
 
 from org.creativecommons.license.Store import Store
