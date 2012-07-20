@@ -16,9 +16,9 @@ from org.creativecommons.libreoffice.ui.license.acceptwaivelistener \
   import AcceptWaiveListener
 from org.creativecommons.libreoffice.ui.license.acceptlistener \
   import AcceptListener
-from org.creativecommons.libreoffice.ui.license.FaqClickListener \
+from org.creativecommons.libreoffice.ui.license.faqclicklistener \
   import FaqClickListener
-from org.creativecommons.libreoffice.ui.license.OKClickListener \
+from org.creativecommons.libreoffice.ui.license.okclicklistener \
   import OKClickListener
 from org.creativecommons.libreoffice.ui.license.CancelClickListener \
   import CancelClickListener
