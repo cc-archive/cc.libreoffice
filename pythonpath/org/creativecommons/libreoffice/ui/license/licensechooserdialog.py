@@ -12,9 +12,9 @@ from  org.creativecommons.libreoffice.ui.license.updatelicenselistner \
   import UpdateLicenseListner
 from org.creativecommons.libreoffice.ui.license.jurisdictionselectlistener \
   import JurisdictionSelectListener
-from org.creativecommons.libreoffice.ui.license.AcceptWaiveListener \
+from org.creativecommons.libreoffice.ui.license.acceptwaivelistener \
   import AcceptWaiveListener
-from org.creativecommons.libreoffice.ui.license.AcceptListener \
+from org.creativecommons.libreoffice.ui.license.acceptlistener \
   import AcceptListener
 from org.creativecommons.libreoffice.ui.license.FaqClickListener \
   import FaqClickListener
