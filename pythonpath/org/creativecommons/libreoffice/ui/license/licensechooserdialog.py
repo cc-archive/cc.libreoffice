@@ -33,7 +33,7 @@ from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
 
 from org.creativecommons.license.store import Store
 from org.creativecommons.license.Chooser import Chooser
-from org.creativecommons.license.License import License
+from org.creativecommons.license.license import License
 from org.creativecommons.license.Jurisdiction import Jurisdiction
 
 #from org.creativecommons.libreoffice.program.Writer import Writer

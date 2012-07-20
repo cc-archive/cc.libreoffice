@@ -9,7 +9,7 @@ from rdflib.namespace import Namespace
 
 from org.creativecommons.license.store import Store
 from org.creativecommons.license.unported import Unported
-from org.creativecommons.license.License import License
+from org.creativecommons.license.license import License
 
 #register the plugins
 
