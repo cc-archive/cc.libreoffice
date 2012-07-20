@@ -2,7 +2,7 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 
-from org.creativecommons.license.Store import Store
+from org.creativecommons.license.store import Store
 from rdflib import Namespace
 
 class Jurisdiction():

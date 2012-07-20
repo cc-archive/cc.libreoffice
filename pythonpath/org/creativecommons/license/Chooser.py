@@ -7,7 +7,7 @@ import rdflib
 from rdflib import plugin
 from rdflib.namespace import Namespace
 
-from org.creativecommons.license.Store import Store
+from org.creativecommons.license.store import Store
 from org.creativecommons.license.Unported import Unported
 from org.creativecommons.license.License import License
 

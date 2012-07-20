@@ -31,7 +31,7 @@ from org.creativecommons.libreoffice.ui.license.pdclicklistener \
 from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
   import TerritorySelectListener
 
-from org.creativecommons.license.Store import Store
+from org.creativecommons.license.store import Store
 from org.creativecommons.license.Chooser import Chooser
 from org.creativecommons.license.License import License
 from org.creativecommons.license.Jurisdiction import Jurisdiction

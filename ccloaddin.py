@@ -10,7 +10,7 @@ from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
 from org.creativecommons.libreoffice.ui.license.licensechooserdialog import LicenseChooserDialog
-from org.creativecommons.license.Store import Store
+from org.creativecommons.license.store import Store
 from org.creativecommons.libreoffice.program.writer import Writer
 from org.creativecommons.libreoffice.program.calc import Calc
 from org.creativecommons.libreoffice.program.draw import Draw
@@ -21,8 +21,8 @@ SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
 
 def createInstance(ctx):
-    import org.creativecommons.license.Store
-    return org.creativecommons.license.Store.Store()
+    import org.creativecommons.license.store
+    return org.creativecommons.license.store.Store()
 
 
 class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
@@ -275,5 +275,5 @@ g_ImplementationHelper.addImplementation(
     (SERVICE_NAME,),)
 
 g_ImplementationHelper.addImplementation( \
-	createInstance,"org.creativecommons.license.Store",
+	createInstance,"org.creativecommons.license.store",
         (SERVICE_NAME,),)
