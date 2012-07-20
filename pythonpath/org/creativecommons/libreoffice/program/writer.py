@@ -9,7 +9,7 @@ from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 from com.sun.star.text.TextContentAnchorType import AS_CHARACTER
 
 from org.creativecommons.libreoffice.program.loprogram import LoProgram
-from org.creativecommons.libreoffice.util.PageHelper import createUniqueName
+from org.creativecommons.libreoffice.util.pagehelper import createUniqueName
 
 
 class Writer(LoProgram):

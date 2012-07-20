@@ -15,7 +15,7 @@ from com.sun.star.lang import WrappedTargetException
 
 from com.sun.star.beans.PropertyAttribute import MAYBEVOID,REMOVEABLE
 
-from org.creativecommons.libreoffice.program.Constants import Constants
+from org.creativecommons.libreoffice.program.constants import Constants
 from org.creativecommons.license.License import License
 
 class LoProgram(object):

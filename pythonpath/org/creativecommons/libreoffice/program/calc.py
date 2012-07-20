@@ -11,8 +11,8 @@ from com.sun.star.style.LineSpacingMode import PROP
 from com.sun.star.style import LineSpacing
 
 from org.creativecommons.libreoffice.program.loprogram import LoProgram
-from org.creativecommons.libreoffice.util.PageHelper import createUniqueName
-from org.creativecommons.libreoffice.util.ShapeHelper \
+from org.creativecommons.libreoffice.util.pagehelper import createUniqueName
+from org.creativecommons.libreoffice.util.shapehelper \
   import createShape, addPortion
 
 class Calc(LoProgram):
