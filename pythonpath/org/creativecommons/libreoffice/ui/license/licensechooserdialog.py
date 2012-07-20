@@ -36,8 +36,8 @@ from org.creativecommons.license.Chooser import Chooser
 from org.creativecommons.license.License import License
 from org.creativecommons.license.Jurisdiction import Jurisdiction
 
-from org.creativecommons.libreoffice.program.Writer import Writer
-from org.creativecommons.libreoffice.program.Calc import Calc
+#from org.creativecommons.libreoffice.program.Writer import Writer
+#from org.creativecommons.libreoffice.program.Calc import Calc
 
 
 
