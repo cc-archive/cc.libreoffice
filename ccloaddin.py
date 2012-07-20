@@ -14,7 +14,7 @@ from org.creativecommons.license.store import Store
 from org.creativecommons.libreoffice.program.writer import Writer
 from org.creativecommons.libreoffice.program.calc import Calc
 from org.creativecommons.libreoffice.program.draw import Draw
-from org.creativecommons.license.Chooser import Chooser
+from org.creativecommons.license.chooser import Chooser
 
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
