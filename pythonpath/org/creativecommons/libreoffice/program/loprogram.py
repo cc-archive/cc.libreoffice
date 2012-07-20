@@ -18,7 +18,7 @@ from com.sun.star.beans.PropertyAttribute import MAYBEVOID,REMOVEABLE
 from org.creativecommons.libreoffice.program.Constants import Constants
 from org.creativecommons.license.License import License
 
-class OOoProgram(object):
+class LoProgram(object):
     """
     """
     

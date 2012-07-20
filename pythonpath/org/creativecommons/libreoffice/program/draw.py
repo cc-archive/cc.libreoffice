@@ -12,14 +12,14 @@ from com.sun.star.style.LineSpacingMode import PROP
 from com.sun.star.style import LineSpacing
 
 
-from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
+from org.creativecommons.libreoffice.program.loprogram import LoProgram
 from org.creativecommons.libreoffice.util.ShapeHelper \
   import createShape, addPortion
 from org.creativecommons.libreoffice.util.PageHelper \
   import getDrawPageCount, getDrawPageByIndex
 
 
-class Draw(OOoProgram):
+class Draw(LoProgram):
     """
     """
     

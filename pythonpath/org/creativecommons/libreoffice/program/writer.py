@@ -8,11 +8,11 @@ import traceback
 from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 from com.sun.star.text.TextContentAnchorType import AS_CHARACTER
 
-from org.creativecommons.libreoffice.program.OOoProgram import OOoProgram
+from org.creativecommons.libreoffice.program.loprogram import LoProgram
 from org.creativecommons.libreoffice.util.PageHelper import createUniqueName
 
 
-class Writer(OOoProgram):
+class Writer(LoProgram):
     """
     """
     
