@@ -11,7 +11,7 @@ from rdflib import Literal
 from rdflib.resource import Resource
 from rdflib.term import URIRef
 
-from org.creativecommons.license.CC import CC
+from org.creativecommons.license.cc import CC
 
 
 
