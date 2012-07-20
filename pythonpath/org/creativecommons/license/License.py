@@ -6,7 +6,7 @@ from rdflib import Namespace
 import traceback
 
 from org.creativecommons.license.store import Store
-from org.creativecommons.license.Unported import Unported
+from org.creativecommons.license.unported import Unported
 from org.creativecommons.license.Jurisdiction import Jurisdiction
 
 class License():
