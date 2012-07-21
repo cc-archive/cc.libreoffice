@@ -120,10 +120,10 @@ class Draw(LoProgram):
 
             #first shape
             x=self.pageWidth - \
-                len(docLicense.getName()) * self.pageWidth / 65 - self.pageBorderRight - 200
+                len(docLicense.name) * self.pageWidth / 65 - self.pageBorderRight - 200
             y=self.pageHeight - \
                 2 * self.pageWidth / 50 - self.pageBorderBottom - 200
-            width= len(docLicense.getName()) * self.pageWidth / 65
+            width= len(docLicense.name) * self.pageWidth / 65
             height= 2 * self.pageWidth / 50
 
             xRectangle=createShape(self.component,
@@ -145,7 +145,7 @@ class Draw(LoProgram):
             xShapePropSet.setPropertyValue("Name", "ccoo:licenseText")
 
             #first paragraph
-            xTextPropSet=addPortion(xRectangle, docLicense.getName(), False)
+            xTextPropSet=addPortion(xRectangle, docLicense.name, False)
             xTextPropSet.setPropertyValue("CharColor", int(0x000000))
 
             #insert the graphic

@@ -8,6 +8,7 @@ from com.sun.star.beans import PropertyExistException
 from com.sun.star.beans import PropertyVetoException
 from com.sun.star.beans import UnknownPropertyException
 from com.sun.star.lang import WrappedTargetException
+from com.sun.star.lang import IllegalArgumentException
 
 #from com.sun.star.rdf.URI import URI
 #import com.sun.star.rdf.URI
@@ -133,7 +134,7 @@ class LoProgram(object):
                         
             docInfo.setPropertyValue(Constants.LICENSE_URI, 
                                      license.license_uri)
-            docInfo.setPropertyValue(Constants.LICENSE_NAME, license.getName())
+            docInfo.setPropertyValue(Constants.LICENSE_NAME, license.name)
 
             
             if (license.territory is not None):
@@ -245,7 +246,7 @@ class LoProgram(object):
             #TODO: Line 191- Implement correctly
             valRights =self.__createLiteral("-ASCII C- " + author
                     + " licensed to the public under the " + \
-                    license.getName() + " license")
+                    license.name + " license")
             xGraph.addStatement(xType, nodeRights, valRights)
 
             nodeLicense = self.__createUri("http://purl.org/dc/terms/license")

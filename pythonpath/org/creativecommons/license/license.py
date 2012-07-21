@@ -14,6 +14,7 @@ class License():
     """
     CC=Namespace("http://creativecommons.org/ns#")
     DCTerms=Namespace("http://purl.org/dc/terms/")
+    DC= Namespace("http://purl.org/dc/elements/1.1/")
     
     def __init__(self, license_uri,territory=None):
         """
@@ -32,27 +33,32 @@ class License():
         else:
             self.territory=None
 
-
-
-
-    ##TODO:Implemented
-    def getName(self, ):
-        """Get the license for "en" locale.
-        """
+        ####name####
         #TODO: implement the Null pointer Exception handling
         #TODO: Can return names like -"NoneNoneUnported" 
+        self.name=str(self.licenseStore.literal(self.license_uri,self.DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.getJurisdiction().getTitle())
 
-        DC= Namespace("http://purl.org/dc/elements/1.1/")
-        #print "In getName()"
-        ##TODO-remove the dummy value
-        #self.license_uri="http://creativecommons.org/licenses/by/3.0/"
+        ####Jurisdiction####
 
-        name=str(self.licenseStore.literal(self.license_uri,DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.getJurisdiction().getTitle())
 
-        #print "name :"+name
+    # ##TODO:Implemented
+    # def getName(self, ):
+    #     """Get the license for "en" locale.
+    #     """
+        
+    #     #TODO: implement the Null pointer Exception handling
+    #     #TODO: Can return names like -"NoneNoneUnported" 
+        
+    #     #print "In getName()"
+    #     ##TODO-remove the dummy value
+    #     #self.license_uri="http://creativecommons.org/licenses/by/3.0/"
+
+    #     name=str(self.licenseStore.literal(self.license_uri,self.DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.getJurisdiction().getTitle())
+
+    #     #print "name :"+name
         
         
-        return name
+    #     return name
 
 
     def getJurisdiction(self, ):

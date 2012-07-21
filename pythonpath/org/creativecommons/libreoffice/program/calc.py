@@ -249,7 +249,7 @@ class Calc(LoProgram):
             xShapePropSet.setPropertyValue("Name", "ccoo:licenseText")
 
             #first paragraph
-            xTextPropSet=addPortion( xRectangle, docLicense.getName(), False )
+            xTextPropSet=addPortion( xRectangle, docLicense.name, False )
             #TODO-has this been done correctly??
             xTextPropSet.setPropertyValue( "CharColor",int(0x000000))
 

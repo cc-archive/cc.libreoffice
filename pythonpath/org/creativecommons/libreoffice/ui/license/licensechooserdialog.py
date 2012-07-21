@@ -521,7 +521,7 @@ class LicenseChooserDialog():
         """
         try:
             xpsSelectedLicense=self.xNameCont.getByName(self.LBL_SELECTED_LICENSE)
-            xpsSelectedLicense.setPropertyValue("Label", self.getSelectedLicense().getName())
+            xpsSelectedLicense.setPropertyValue("Label", self.getSelectedLicense().name)
             ##TODO:Complete the method
         except Exception, ex:
             traceback.print_exc()

@@ -207,7 +207,7 @@ class Writer(LoProgram):
             #mxTextFields=mxDoc
 
             licenseNameField=self.__createUserTextField(mxDoc,
-                    mxDoc, "License Name", docLicense.getName())
+                    mxDoc, "License Name", docLicense.name)
 
             licenseURLField=self.__createUserTextField(mxDoc,
                     mxDoc, "License URL", docLicense.license_uri)
@@ -216,7 +216,7 @@ class Writer(LoProgram):
             if (docLicense.getImageUrl() is not None):
                 self.__embedGraphic(mxDoc, docCursor, docLicense.getImageUrl())
             #insert the licensing statement
-            if (docLicense.getName()=="CC0 1.0 Universal"):
+            if (docLicense.name=="CC0 1.0 Universal"):
                 mxDocText.insertControlCharacter(docCursor, 
                                                  PARAGRAPH_BREAK, False)
                 mxDocText.insertString(
@@ -244,7 +244,7 @@ class Writer(LoProgram):
                 mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
                                                  False)
 
-            elif (docLicense.getName() == "Public Domain"):
+            elif (docLicense.name == "Public Domain"):
                 mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK, 
                                                  False)
                 mxDocText.insertString(docCursor, "This document is in the ", 
