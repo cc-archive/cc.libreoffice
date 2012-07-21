@@ -172,9 +172,9 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     
 
     def selectLicense(self):
-    """Shows the license chooser dialog for the user to select a 
-       license
-     """
+        """Shows the license chooser dialog for the user to select a 
+           license
+        """
 
         try:
             ##TODO: following part was not Implemented

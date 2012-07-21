@@ -35,7 +35,7 @@ class Store():
     NS =Namespace("http://creativecommons.org/ns#")
 
     def __new__(cls, *args, **kwargs):
-        """
+        """Create a singleton instance of the class
         """
         # if not cls._instance:
         #     cls._instance = super(Store, cls).__new__(
@@ -147,7 +147,7 @@ class Store():
         return None
 
     def exists(self, subject,predicate,resource):
-        """
+        """Check whteher a given condition exists
     
         Arguments:
         - `subject`:
