@@ -266,7 +266,8 @@ class LoProgram(object):
 
         
     def __createUri(self,value ):
-        """
+        """A helper method for rdf handling in LibreOffice.
+        Creates a new uri
         """
         
         metaURI=self.xMultiComponentFactory.\
@@ -276,7 +277,8 @@ class LoProgram(object):
             
 
     def __createLiteral(self, value):
-        """
+        """"A helper method for rdf handling in LibreOffice.
+        Creates a new Literal
     
         Arguments:
         - `value`:String

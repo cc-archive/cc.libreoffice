@@ -34,7 +34,7 @@ class Draw(LoProgram):
         
         
     def __embedGraphic(self, imgURL,xPage):
-        """
+        """Insert the license image to the document.
         
         Arguments:
         - `imgURL`:String- URL to the license image

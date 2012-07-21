@@ -27,7 +27,7 @@ class Writer(LoProgram):
 
     
     def __getMasterField(self,field_name,mxTextFields,mxDocFactory):
-        """
+        """returns the property set for the user text field
         Arguments:
         - `field_name`:String
         - `mxTextFields`:XTextFieldsSupplier
@@ -69,6 +69,7 @@ class Writer(LoProgram):
     def __updateMasterField(self, 
                             field_name,field_value,mxTextFields,mxDocFactory):
         """
+        Update the  property set for the user text field
         
         Arguments:
         - `field_name`:String
@@ -100,7 +101,8 @@ class Writer(LoProgram):
     def __createUserTextField(self, mxDocFactory,
                               mxTextFields,field_name,field_value):
         """
-    
+        Creates a user text field
+
         Arguments:
         - `mxDocFactory`:XMultiServiceFactory
         - `mxTextFields`:XTextFieldsSupplier
@@ -188,7 +190,7 @@ class Writer(LoProgram):
             traceback.print_exc()
 
     def insertVisibleNotice(self, ):
-        """
+        """Create and insert an auto-text containing the license
     """
         docLicense=super(Writer,self).getDocumentLicense()
 
@@ -355,7 +357,7 @@ class Writer(LoProgram):
                 #raise ex
 
     def updateVisibleNotice(self, ):
-        """
+        """Update visible notices to current license.
         """
         #TODO-method to change the visible notice
         pass

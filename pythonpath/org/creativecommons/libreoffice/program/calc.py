@@ -30,7 +30,8 @@ class Calc(LoProgram):
         
         
     def __getAbsoluteCellPosition(self, spreadsheet,x,y):
-        """
+        """Returns a Point which provides the absolute location
+        of a cell using the Cartesian coordinate system
         
         Arguments:
         - `spreadsheet`:XSpreadsheet
@@ -52,9 +53,10 @@ class Calc(LoProgram):
 
 
     ##TODO-The following method throws an exception if a cell
-    ##is not selected whenthis method is called. Fix it
+    ##is not selected when this method is called. Fix it
     def __getActiveCellsRange(self, xComponent):
-        """
+        """Returns a cell range address for the
+        selected cell range within a spreadsheet document 
         
         Arguments:
         - `xComponent`:xComponent
@@ -150,7 +152,7 @@ class Calc(LoProgram):
 
 
     def __embedGraphic(self, imgURL,xSpreadsheet):
-        """Insert the license image.
+        """Insert the license image to the document.
     
     Arguments:
     - `imgURL`:String-URL to the license image
