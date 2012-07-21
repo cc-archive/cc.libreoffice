@@ -37,6 +37,7 @@ class Chooser():
                            prohibitCommercialUse,
                            requireShareAlike,jurisdiction):
         """
+        Creates the sparql query String for the selectLicense method.
         Arguments:
         - `allowRemixing`:Boolean
         - `prohibitCommercialUse`:Boolean
@@ -134,7 +135,7 @@ class Chooser():
         
         
     def __makePDToolQuery(self, ):
-        """
+        """Create the sparql query String for the selectPDTools() method
         """
         #Create the basic query
         queryString = ("SELECT ?license "
