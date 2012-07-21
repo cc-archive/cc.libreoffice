@@ -10,8 +10,9 @@ from rdflib import RDF
 from rdflib import Literal
 from rdflib.resource import Resource
 from rdflib.term import URIRef
+from rdflib import Namespace
 
-from org.creativecommons.license.cc import CC
+#from org.creativecommons.license.cc import CC
 
 
 
@@ -30,6 +31,8 @@ class Store():
     g.parse(path)
 
     _instance=None
+
+    NS =Namespace("http://creativecommons.org/ns#")
 
     def __new__(cls, *args, **kwargs):
         """
@@ -69,7 +72,7 @@ class Store():
         """Get the jurisdictions
         """
                 
-        jur= self.g.subjects(RDF.type, CC.Jurisdiction)
+        jur= self.g.subjects(RDF.type, self.NS.Jurisdiction)
 
         #the empty list
         jurList=[]
