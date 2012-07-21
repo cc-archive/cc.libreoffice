@@ -175,6 +175,8 @@ class LicenseChooserDialog():
             raise ex
 
     def __crateCC0LicenseTab(self):
+        """Creates the CC0 license tab
+        """
         
        
         
@@ -272,7 +274,7 @@ class LicenseChooserDialog():
 
     #TODO: Method is not fully implemented.
     def __createCCLicenseTab(self, ):
-        """
+        """Creates the CC license tab
         """
 
         
@@ -398,8 +400,8 @@ class LicenseChooserDialog():
             raise ex
 
     def __cratePDLicenseTab(self, ):
+        """Creates the PD license tab
         """
-    """
         try:
             
             lblWarning=self.dlgLicenseSelector.createInstance(
@@ -496,7 +498,8 @@ class LicenseChooserDialog():
 
     def __getRadioButtonValue(self, rdoName):
         """
-    
+        Returns the value of the given radio button
+        
         Arguments:
         - `rdoName`:String
         """
@@ -517,17 +520,19 @@ class LicenseChooserDialog():
 
 
     def updateSelectedLicense(self, ):
-        """
+        """Updates the current selected license 
+        label value.
         """
         try:
             xpsSelectedLicense=self.xNameCont.getByName(self.LBL_SELECTED_LICENSE)
             xpsSelectedLicense.setPropertyValue("Label", self.getSelectedLicense().name)
-            ##TODO:Complete the method
+            
         except Exception, ex:
             traceback.print_exc()
 
     def __getGraphic(self, sImageUrl):
-        """
+        """Returns the xGraphic object from the
+            given image location
     
         Arguments:
         - `sImageUrl`:String
@@ -637,7 +642,7 @@ class LicenseChooserDialog():
     #     return None
 
     def __setCRadioButtonValue(self, controlName,bValue):
-        """
+        """ Set the value of the given radio button
     
     Arguments:
     - `controlName`: String
@@ -1109,7 +1114,7 @@ class LicenseChooserDialog():
             raise ex
 
     def setSelectedTerritory(self, selection):
-        """
+        """Sets the selected territory
     
         Arguments:
         - `selection`:Integer
@@ -1123,7 +1128,7 @@ class LicenseChooserDialog():
         
 
     def getSelectedLicense(self, ):
-        """
+        """Returns the selected license
         """
         try:
             #retrieve the Document for the issued license
