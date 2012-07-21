@@ -21,6 +21,8 @@ SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
 
 def createInstance(ctx):
+    """Used to load the 3rd party libraries to the extension
+    """
     import org.creativecommons.license.store
     return org.creativecommons.license.store.Store()
 
@@ -68,7 +70,8 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             #
         
     def insertStatement(self, ):
-        """
+        """Inserts the relevant license statement to the document
+           on menu item click
         """
         wrapper=self.getProgramWrapper()
         try:
@@ -98,7 +101,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             
         except Exception, ex:
             print "Exception in CcOOoAddin.updateCurrentComponent: "
-            traceback.print_exec()
+            traceback.print_exc()
             
             
 
@@ -167,14 +170,11 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     def removeStatusListener(self, control, url): 
         pass 
     
-    def do(self): 
-        print "Test"
-        pass 
-
-
-
 
     def selectLicense(self):
+    """Shows the license chooser dialog for the user to select a 
+       license
+     """
 
         try:
             ##TODO: following part was not Implemented
@@ -212,7 +212,8 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             traceback.print_exc() 
 
     def getProgramWrapper(self, ):
-        """
+        """Returns a class corresponding to the currently 
+        selected document
         """
         #xServiceInfo=self.xCurrentComponent
 
