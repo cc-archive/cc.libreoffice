@@ -6,19 +6,17 @@ import unohelper
 
 from com.sun.star.awt import XActionListener
 
-class CCClickListener(XActionListener,unohelper.Base):
+
+class CCClickListener(XActionListener, unohelper.Base):
     """Show Creative Commons tab.
     """
-    
     def __init__(self, dialog):
         """
         """
-        self.dialog=dialog
-
+        self.dialog = dialog
 
     def actionPerformed(self, aEvent):
         """
-        
         Arguments:
         - `aEvent`:ActionEvent
         """
@@ -27,10 +25,7 @@ class CCClickListener(XActionListener,unohelper.Base):
     #@Override
     def disposing(self, eObject):
         """
-        
         Arguments:
         - `eObject`:EventObject
         """
         pass
-    
-        
