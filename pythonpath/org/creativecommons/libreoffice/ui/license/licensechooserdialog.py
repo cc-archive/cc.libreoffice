@@ -672,21 +672,21 @@ class LicenseChooserDialog():
         
         
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_YES,
-                                    not selected.prohibitCommercial())
+                                    not selected.prohibitCommercial)
         
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO,
-                                    selected.prohibitCommercial())
+                                    selected.prohibitCommercial)
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES,
-                                    (selected.allowRemix() and 
+                                    (selected.allowRemix and 
                                      not selected.requireShareAlike))
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
                                     selected.requireShareAlike)
         
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_NO,
-                                    not selected.allowRemix())
+                                    not selected.allowRemix)
 
         
         self.selectedJurisdiction=selected.jurisdiction

@@ -149,7 +149,7 @@ class Draw(LoProgram):
             xTextPropSet.setPropertyValue("CharColor", int(0x000000))
 
             #insert the graphic
-            self.__embedGraphic(docLicense.getImageUrl(),xPage)
+            self.__embedGraphic(docLicense.imageUrl,xPage)
             
         except Exception, e:
             traceback.print_exc()

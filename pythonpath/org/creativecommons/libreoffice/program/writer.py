@@ -213,8 +213,8 @@ class Writer(LoProgram):
                     mxDoc, "License URL", docLicense.license_uri)
 
             #insert the license graphic if available
-            if (docLicense.getImageUrl() is not None):
-                self.__embedGraphic(mxDoc, docCursor, docLicense.getImageUrl())
+            if (docLicense.imageUrl is not None):
+                self.__embedGraphic(mxDoc, docCursor, docLicense.imageUrl)
             #insert the licensing statement
             if (docLicense.name=="CC0 1.0 Universal"):
                 mxDocText.insertControlCharacter(docCursor, 

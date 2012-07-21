@@ -51,6 +51,35 @@ class License():
         ####requireShareAlike####
         self.requireShareAlike=self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
 
+        ####prohibitCommercial####
+        self.prohibitCommercial=self.licenseStore.exists(self.license_uri,self.CC['prohibits'],self.CC['CommercialUse'])
+
+        ####allowRemix####
+        self.allowRemix=self.licenseStore.exists(self.license_uri,self.CC['permits'],self.CC['DerivativeWorks'])
+
+        ####code####
+        #Return the license code for this License.  For example, the code for the
+        #Attribution 3.0 license (http://creativecommons.org/licenses/by/3.0/) is
+        #"by".  Note this is based on a Creative Commons-specific standard.
+        try:
+            self.code= self.license_uri.split('/')[4]
+        except Exception, ex:
+            traceback.print_exc()
+
+        ####version####
+        self.version=str(self.licenseStore.literal(self.license_uri,
+                                             self.DCTerms['hasVersion'],None))
+
+        ####Image URL####
+        if self.version is not None:
+            self.imageUrl=("http://i.creativecommons.org/l/" + self.code + "/"
+                    + self.version + "/88x31.png")
+        else:
+            self.imageUrl=("http://i.creativecommons.org/l/" + self.getCode() + "/88x31.png")
+
+
+
+
 
     # ##TODO:Implemented
     # def getName(self, ):
@@ -87,51 +116,51 @@ class License():
     #     """
     #     return self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
 
-    def prohibitCommercial(self, ):
-        """
-        """
+    # def prohibitCommercial(self, ):
+    #     """
+    #     """
         
         
-        return self.licenseStore.exists(self.license_uri,self.CC['prohibits'],self.CC['CommercialUse'])
+    #     return self.licenseStore.exists(self.license_uri,self.CC['prohibits'],self.CC['CommercialUse'])
 
-    def allowRemix(self, ):
-        """
-        """
-        return self.licenseStore.exists(self.license_uri,self.CC['permits'],self.CC['DerivativeWorks'])
+    # def allowRemix(self, ):
+    #     """
+    #     """
+    #     return self.licenseStore.exists(self.license_uri,self.CC['permits'],self.CC['DerivativeWorks'])
 
-    def getCode(self, ):
-        """Return the license code for this License.  For example, the code for the
-        Attribution 3.0 license (http://creativecommons.org/licenses/by/3.0/) is
-        "by".  Note this is based on a Creative Commons-specific standard.
-        """
-        try:
-            return self.license_uri.split('/')[4]
-        except Exception, ex:
-            traceback.print_exc()
+    # def getCode(self, ):
+    #     """Return the license code for this License.  For example, the code for the
+    #     Attribution 3.0 license (http://creativecommons.org/licenses/by/3.0/) is
+    #     "by".  Note this is based on a Creative Commons-specific standard.
+    #     """
+    #     try:
+    #         return self.license_uri.split('/')[4]
+    #     except Exception, ex:
+    #         traceback.print_exc()
 
-    def getVersion(self, ):
-        """License version
-        """
+    # def getVersion(self, ):
+    #     """License version
+    #     """
 
-        version=self.licenseStore.literal(self.license_uri,
-                                             self.DCTerms['hasVersion'],None)
+    #     version=self.licenseStore.literal(self.license_uri,
+    #                                          self.DCTerms['hasVersion'],None)
 
-        print "Version-"+str(version)
-        if version is None:
-            return None
+    #     print "Version-"+str(version)
+    #     if version is None:
+    #         return None
         
-        return str(version)
+    #     return str(version)
 
-    def getImageUrl(self, ):
-        """
-        """
-        version=self.getVersion()
+    # def getImageUrl(self, ):
+    #     """
+    #     """
+    #     version=self.getVersion()
 
-        if version is not None:
-            return ("http://i.creativecommons.org/l/" + self.getCode() + "/"
-                    + version + "/88x31.png")
+    #     if version is not None:
+    #         return ("http://i.creativecommons.org/l/" + self.getCode() + "/"
+    #                 + version + "/88x31.png")
 
-        else:
-            return ("http://i.creativecommons.org/l/" + self.getCode() + "/88x31.png")
+    #     else:
+    #         return ("http://i.creativecommons.org/l/" + self.getCode() + "/88x31.png")
 
     
