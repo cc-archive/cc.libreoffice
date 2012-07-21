@@ -99,6 +99,7 @@ class LoProgram(object):
         #docPropertyContainer=docInfo
         if (not docInfo.getPropertySetInfo().hasPropertyByName(
                 Constants.LICENSE_URI)):
+            print "in if-1"
             
             #add the necessary properties to this document
             try:
@@ -106,6 +107,7 @@ class LoProgram(object):
                                     MAYBEVOID, "")
                 docInfo.addProperty(Constants.LICENSE_NAME,
                                     MAYBEVOID, "")
+                print "in try-1"
                 
                 
 
@@ -136,7 +138,7 @@ class LoProgram(object):
                                      license.license_uri)
             docInfo.setPropertyValue(Constants.LICENSE_NAME, license.name)
 
-            
+            print
             if (license.territory is not None):
             
                 if(not docInfo.getPropertySetInfo().hasPropertyByName(
@@ -215,10 +217,7 @@ class LoProgram(object):
 
             #xDMA=self.component
             try:
-                #Note: High chance of an error
-                                  
-                #self.component.removeMetadataFile(URI.create(self.m_xContext,self.component.getNamespace()+"meta.rdf"))
-                
+                                
                 self.component.removeMetadataFile(
                     self.__createUri(self.component.Namespace+"meta.rdf"))
             except Exception, ex:
@@ -237,7 +236,7 @@ class LoProgram(object):
                 "http://purl.org/dc/elements/1.1/rights")
             
             xGraphName = self.component.addMetadataFile(
-                "meta.rdf", (xTypeRights,));
+                "meta.rdf", (xTypeRights,))
                        
             xGraph = self.component.getRDFRepository().getGraph(xGraphName)
 

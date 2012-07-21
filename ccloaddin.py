@@ -72,7 +72,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
         """
         wrapper=self.getProgramWrapper()
         try:
-            if (wrapper.getDocumentLicense() is not None):
+            if (wrapper.getDocumentLicense() is None):
                 self.selectLicense()
 
             wrapper=self.getProgramWrapper()
