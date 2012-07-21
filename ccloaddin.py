@@ -9,7 +9,8 @@ import unohelper
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 
-from org.creativecommons.libreoffice.ui.license.licensechooserdialog import LicenseChooserDialog
+from org.creativecommons.libreoffice.ui.license.licensechooserdialog \
+   import LicenseChooserDialog
 from org.creativecommons.license.store import Store
 from org.creativecommons.libreoffice.program.writer import Writer
 from org.creativecommons.libreoffice.program.calc import Calc
@@ -19,6 +20,7 @@ from org.creativecommons.license.chooser import Chooser
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
+
 
 def createInstance(ctx):
     """Used to load the 3rd party libraries to the extension
@@ -30,13 +32,11 @@ def createInstance(ctx):
 class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
               XDispatchProvider, XDispatch):
 
-
     def __init__(self, ctx, *args):
         self.ctx = ctx
         self.frame = None
         self.initialize(args)
-        self.mxRemoteServiceManager=self.ctx.getServiceManager()
-
+        self.mxRemoteServiceManager = self.ctx.getServiceManager()
 
     ##A meyhod for testing purposes
     def testMethod(self,):
@@ -47,8 +47,8 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             #chs=Chooser()
             # print "k"
             # self.xMultiComponentFactory=self.ctx.ServiceManager
-            
-            # URI=self.xMultiComponentFactory.createInstanceWithArguments("com.sun.star.rdf.URI",("http://purl.org/dc/elements/1.1/rights"))
+            # URI=self.xMultiComponentFactory.createInstanceWithArguments(
+            #"com.sun.star.rdf.URI",("http://purl.org/dc/elements/1.1/rights"))
             # print
             # print dir(URI)
             # print
@@ -57,38 +57,36 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             # print URI.Namespace
             # print URI.StringValue
             # u=URI.create("http://purl.org/dc/elements/1.1/rights")
-            
             #chs.selectPDTools("United States",2)
             #chs.selectLicense(True,False,False,None)
             pass
-            
         except Exception, ex:
             # print "Exception in CcOOoAddin.TestMethod: "
             # print ex
             #
             traceback.print_exc()
             #
-        
+
     def insertStatement(self, ):
         """Inserts the relevant license statement to the document
            on menu item click
         """
-        wrapper=self.getProgramWrapper()
+        wrapper = self.getProgramWrapper()
         try:
             if (wrapper.getDocumentLicense() is None):
                 self.selectLicense()
 
-            wrapper=self.getProgramWrapper()
+            wrapper = self.getProgramWrapper()
             wrapper.insertVisibleNotice()
 
         except Exception, ex:
             traceback.print_exc()
-            
+
     def updateCurrentComponent(self, ):
-        """Updates the Desktop current component in case of opening, creating 
+        """Updates the Desktop current component in case of opening, creating
            or swapping to other document
         """
-        ret=None
+        ret = None
 
         try:
 
@@ -96,19 +94,16 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             desktop = self.mxRemoteServiceManager.createInstanceWithContext(
                     "com.sun.star.frame.Desktop", self.ctx)
             ret = desktop.getCurrentComponent()
-            self.xMultiComponentFactory=self.ctx.getServiceManager()
-            
-            
+            self.xMultiComponentFactory = self.ctx.getServiceManager()
+
         except Exception, ex:
             print "Exception in CcOOoAddin.updateCurrentComponent: "
             traceback.print_exc()
-            
-            
 
-        self.xCurrentComponent=ret
+        self.xCurrentComponent = ret
 
     def supportsService(self, name):
-        return (name == SERVICE_NAME) 
+        return (name == SERVICE_NAME)
 
     def getImplementationName(self):
         return IMPLE_NAME
@@ -117,21 +112,20 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
         return (SERVICE_NAME,)
 
     # XInitialization
-    def initialize(self, args): 
-        if args: 
-            self.frame = args[0] 
-        
-    # XDispatchProvider 
+    def initialize(self, args):
+        if args:
+            self.frame = args[0]
+    # XDispatchProvider
+
     def queryDispatch(self, url, name, flags):
-         
-        if url.Protocol == "org.creativecommons.openoffice.ccooo:": 
-            return self 
-        return None 
-    
-    def queryDispatches(self, req): 
-        pass 
-    
-    # XDispatch 
+        if url.Protocol == "org.creativecommons.openoffice.ccooo:":
+            return self
+        return None
+
+    def queryDispatches(self, req):
+        pass
+
+    # XDispatch
     def dispatch(self, url, args):
 
         if url.Protocol == "org.creativecommons.openoffice.ccooo:":
@@ -148,7 +142,6 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
                 #Module.testMethod()
                 #self.testMethod()
                 self.insertStatement()
-                
 
             elif url.Path == "InsertPictureFlickr":
                 print "InsertPictureFlickr"
@@ -163,16 +156,15 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
 
             elif url.Path == "InsertPicasa":
                 print "InsertPicasa"
-    
-    def addStatusListener(self, control, url): 
-        pass 
-    
-    def removeStatusListener(self, control, url): 
-        pass 
-    
+
+    def addStatusListener(self, control, url):
+        pass
+
+    def removeStatusListener(self, control, url):
+        pass
 
     def selectLicense(self):
-        """Shows the license chooser dialog for the user to select a 
+        """Shows the license chooser dialog for the user to select a
            license
         """
 
@@ -187,7 +179,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             self.updateCurrentComponent()
 
             #Create the dialog for license selection
-            dialog=LicenseChooserDialog(self,self.ctx)
+            dialog = LicenseChooserDialog(self, self.ctx)
             dialog.showDialog()
 
             print "entering"
@@ -197,52 +189,49 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
                 print "1"
                 document = self.getProgramWrapper()
                 print "2"
-                print "license :"+selected.license_uri
+                print "license :" + selected.license_uri
                 #store the license information in the document
                 document.setDocumentLicense(selected)
                 ##TODO: Add the line 290
                 print "3"
-                wrapper=self.getProgramWrapper()
+                wrapper = self.getProgramWrapper()
                 wrapper.updateVisibleNotice()
-                
-                
-            print "exiting"
+
+                print "exiting"
         except Exception, ex:
             print "Exception in CcOOoAddin.selectLicense: "
-            traceback.print_exc() 
+            traceback.print_exc()
 
     def getProgramWrapper(self, ):
-        """Returns a class corresponding to the currently 
+        """Returns a class corresponding to the currently
         selected document
         """
         #xServiceInfo=self.xCurrentComponent
 
         if (self.xCurrentComponent.supportsService(
                 "com.sun.star.sheet.SpreadsheetDocument")):
-            return Calc(self.xCurrentComponent,self.ctx)
-            
+            return Calc(self.xCurrentComponent, self.ctx)
+
         elif (self.xCurrentComponent.supportsService(
                 "com.sun.star.text.TextDocument")):
-            return  Writer(self.xCurrentComponent,self.ctx)
-            
-            
+            return  Writer(self.xCurrentComponent, self.ctx)
+
         elif (self.xCurrentComponent.supportsService(
                 "com.sun.star.presentation.PresentationDocument")):
-            return Draw(self.xCurrentComponent,self.ctx)
+            return Draw(self.xCurrentComponent, self.ctx)
 
         elif (self.xCurrentComponent.supportsService(
                 "com.sun.star.drawing.DrawingDocument")):
-            return Draw(self.xCurrentComponent,self.ctx)
+            return Draw(self.xCurrentComponent, self.ctx)
 
         return None
 
 
-    
         ###################################################################
         ###################################################################
 
         # # #This code fragment creates a sample window
-        # # oDialogModel = self.ctx.ServiceManager.createInstanceWithContext( 
+        # # oDialogModel = self.ctx.ServiceManager.createInstanceWithContext(
         # #     "com.sun.star.awt.UnoControlDialogModel", self.ctx )
 
         # # # Initialize the dialog model's properties.
@@ -253,7 +242,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
         # # oDialogModel.Title = "Title"
 
 
-        # # oDialogControl = self.ctx.ServiceManager.createInstanceWithContext( 
+        # # oDialogControl = self.ctx.ServiceManager.createInstanceWithContext(
         # #     "com.sun.star.awt.UnoControlDialog", self.ctx )
         # # oDialogControl.setModel( oDialogModel )
         # # print "setModel Ok"
@@ -268,13 +257,12 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
         ####################################################################
 
 
-    
 g_ImplementationHelper = unohelper.ImplementationHelper()
-g_ImplementationHelper.addImplementation( 
-    CcLoAddin, 
-    IMPLE_NAME, 
+g_ImplementationHelper.addImplementation(
+    CcLoAddin,
+    IMPLE_NAME,
     (SERVICE_NAME,),)
 
 g_ImplementationHelper.addImplementation( \
-	createInstance,"org.creativecommons.license.store",
+        createInstance, "org.creativecommons.license.store",
         (SERVICE_NAME,),)
