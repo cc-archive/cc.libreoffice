@@ -11,46 +11,37 @@ from com.sun.star.container import NoSuchElementException
 from com.sun.star.lang import WrappedTargetException
 from com.sun.star.lang import IllegalArgumentException
 
-class AcceptListener(XItemListener,unohelper.Base):
+
+class AcceptListener(XItemListener, unohelper.Base):
     """Enable OK button after accepting the deed.
     """
-    
     def __init__(self, dialog):
         """
-        
         Arguments:
         - `dialog`:LicenseChooserDialog
         """
         self.dialog = dialog
 
-
     #@override
     def itemStateChanged(self, event):
         """
-        
         Arguments:
         - `event`:ItemEvent
         """
-        
-        
-        accept=event.Source
-        
+        accept = event.Source
 
         try:
 
             #enable disable dialog controls accoring to the state
             ##TODO: was (short)0
-            if (accept.getState()==0):
-                
+            if (accept.getState() == 0):
                 self.dialog.xNameCont.getByName(
                     self.dialog.BTN_OK).setPropertyValue(
                         "Enabled", False)
             else:
-                
                 self.dialog.xNameCont.getByName(
                     self.dialog.BTN_OK).setPropertyValue(
                         "Enabled", True)
-            
         except IllegalArgumentException, ex:
             print "Exception in AcceptListener.itemStateChanged: "
             print ex
@@ -80,7 +71,6 @@ class AcceptListener(XItemListener,unohelper.Base):
 
     def disposing(self, eObject):
         """
-        
         Arguments:
         - `eObject`:EventObject
         """
