@@ -33,12 +33,23 @@ class License():
         else:
             self.territory=None
 
+        
+
+        ####Jurisdiction####
+        juri=self.licenseStore.object(self.license_uri,self.CC['jurisdiction'])
+        if juri is not None:
+            self.jurisdiction=Jurisdiction(jurisdiction.identifier)
+
+        else:
+           self.jurisdiction=Unported()     
+
         ####name####
         #TODO: implement the Null pointer Exception handling
         #TODO: Can return names like -"NoneNoneUnported" 
-        self.name=str(self.licenseStore.literal(self.license_uri,self.DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.getJurisdiction().getTitle())
+        self.name=str(self.licenseStore.literal(self.license_uri,self.DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.jurisdiction.getTitle())
 
-        ####Jurisdiction####
+        ####requireShareAlike####
+        self.requireShareAlike=self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
 
 
     # ##TODO:Implemented
@@ -61,20 +72,20 @@ class License():
     #     return name
 
 
-    def getJurisdiction(self, ):
-        """Get the jurisdiction.
-        """
+    # def getJurisdiction(self, ):
+    #     """Get the jurisdiction.
+    #     """
         
-        jurisdiction=self.licenseStore.object(self.license_uri,self.CC['jurisdiction'])
-        if jurisdiction is not None:
-            return Jurisdiction(jurisdiction.identifier)
+    #     jurisdiction=self.licenseStore.object(self.license_uri,self.CC['jurisdiction'])
+    #     if jurisdiction is not None:
+    #         return Jurisdiction(jurisdiction.identifier)
 
-        return Unported()
+    #     return Unported()
         
-    def requireShareAlike(self, ):
-        """
-        """
-        return self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
+    # def requireShareAlike(self, ):
+    #     """
+    #     """
+    #     return self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
 
     def prohibitCommercial(self, ):
         """

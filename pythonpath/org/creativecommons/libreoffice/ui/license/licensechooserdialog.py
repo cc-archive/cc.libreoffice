@@ -680,16 +680,16 @@ class LicenseChooserDialog():
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_YES,
                                     (selected.allowRemix() and 
-                                     not selected.requireShareAlike()))
+                                     not selected.requireShareAlike))
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
-                                    selected.requireShareAlike())
+                                    selected.requireShareAlike)
         
         self.__setCRadioButtonValue(self.RDO_ALLOW_MODIFICATIONS_NO,
                                     not selected.allowRemix())
 
         
-        self.selectedJurisdiction=selected.getJurisdiction()
+        self.selectedJurisdiction=selected.jurisdiction
 
         self.updateSelectedLicense()
 
