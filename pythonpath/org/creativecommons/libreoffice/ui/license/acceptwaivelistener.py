@@ -12,14 +12,11 @@ from com.sun.star.lang import WrappedTargetException
 from com.sun.star.lang import IllegalArgumentException
 
 
-
-class AcceptWaiveListener(XItemListener,unohelper.Base):
+class AcceptWaiveListener(XItemListener, unohelper.Base):
     """Enable CC0 deed and territory etc. after accepting to waive.
     """
-    
     def __init__(self, dialog):
         """
-        
         Arguments:
         - `dialog`:LicenseChooserDialog
         """
@@ -27,7 +24,6 @@ class AcceptWaiveListener(XItemListener,unohelper.Base):
 
     def disposing(self, arg0):
         """
-        
         Arguments:
         - `arg0`: EventObject
         """
@@ -36,15 +32,14 @@ class AcceptWaiveListener(XItemListener,unohelper.Base):
     #@override
     def itemStateChanged(self, event):
         """
-        
         Arguments:
         - `event`:ItemEvent
         """
-        waive=event.Source
+        waive = event.Source
 
         try:
             #enable disable dialog controls accoring to the state
-            if (waive.getState()==0):
+            if (waive.getState() == 0):
                 self.dialog.xNameCont.getByName(
                     self.dialog.CHK_YES_CC0).setPropertyValue(
                         "Enabled", False)
@@ -67,28 +62,25 @@ class AcceptWaiveListener(XItemListener,unohelper.Base):
                         "Enabled", False)
 
             else:
-                 self.dialog.xNameCont.getByName(
+                self.dialog.xNameCont.getByName(
                      self.dialog.CHK_YES_CC0).setPropertyValue(
                          "Enabled", True)
 
-                 self.dialog.xNameCont.getByName(
+                self.dialog.xNameCont.getByName(
                      self.dialog.TXT_LEGAL_CODE_CC0).setPropertyValue(
                          "Enabled", True)
 
-                 self.dialog.xNameCont.getByName(
+                self.dialog.xNameCont.getByName(
                      self.dialog.CMB_TERRITORY).setPropertyValue(
                          "Enabled", True)
-
-                 
 
         except IllegalArgumentException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
             print ex
             print type(ex)
             raise ex
-            
 
-        except WrappedTargetException,ex:
+        except WrappedTargetException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
             print ex
             print type(ex)
@@ -111,6 +103,3 @@ class AcceptWaiveListener(XItemListener,unohelper.Base):
             print ex
             print type(ex)
             raise ex
-    
-
-        
