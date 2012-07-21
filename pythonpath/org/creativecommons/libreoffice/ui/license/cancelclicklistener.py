@@ -6,13 +6,12 @@ import unohelper
 
 from com.sun.star.awt import XActionListener
 
-class CancelClickListener(XActionListener,unohelper.Base):
+
+class CancelClickListener(XActionListener, unohelper.Base):
     """
     """
-    
     def __init__(self, dialog):
         """
-        
         Arguments:
         - `dialog`: LicenseChooserDialog
         """
@@ -20,7 +19,6 @@ class CancelClickListener(XActionListener,unohelper.Base):
 
     def actionPerformed(self, aEvent):
         """
-        
         Arguments:
         - `aEvent`: ActionEvent
         """
@@ -28,7 +26,6 @@ class CancelClickListener(XActionListener,unohelper.Base):
 
     def disposing(self, eObject):
         """
-        
         Arguments:
         - `eObject`: EventObject
         """
