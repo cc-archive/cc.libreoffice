@@ -15,24 +15,23 @@ from rdflib import Namespace
 #from org.creativecommons.license.cc import CC
 
 
-
 class Store():
     """
     """
     g = rdflib.Graph()
 
-    path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+    path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
     g.parse(path)
 
-    path=os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+    path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
     g.parse(path)
 
-    path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+    path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
     g.parse(path)
 
-    _instance=None
+    _instance = None
 
-    NS =Namespace("http://creativecommons.org/ns#")
+    NS = Namespace("http://creativecommons.org/ns#")
 
     def __new__(cls, *args, **kwargs):
         """Create a singleton instance of the class
@@ -47,14 +46,13 @@ class Store():
 
         cls._inst = object.__new__(cls, *args, **kwargs)
         return cls._instance
-    
+
     def __init__(self, ):
         """
         """
         pass
-        
-        
-        #model=graph=g
+
+    #model=graph=g
         #self.g = rdflib.Graph()
 
         # path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
@@ -66,17 +64,14 @@ class Store():
         # path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
         # self.g.parse(path)
 
-
-
     def jurisdictions(self, ):
         """Get the jurisdictions
         """
-                
-        jur= self.g.subjects(RDF.type, self.NS.Jurisdiction)
+        jur = self.g.subjects(RDF.type, self.NS.Jurisdiction)
 
         #the empty list
-        jurList=[]
-        
+        jurList = []
+
         for uri in jur:
             jurList.append(uri)
 
@@ -84,31 +79,28 @@ class Store():
 
         return jurList
 
-
     def literal(self, sub, pred, lang):
         """Returns a Literal object
-        
+
         Arguments:
         - `subject`:String
         - `predicate`:String
         - `lang`:String
         """
-
-        
         #get generator over the objects in case there's more than one
-        gen=self.g.objects(URIRef(sub),predicate=pred)
+        gen = self.g.objects(URIRef(sub), predicate=pred)
         #gen=self.g.transitive_objects(sub,pred)
         #gen=self.g.value(subject=sub,predicate=pred)
 
         #print "++++++++++++++"
         #print sub
         #print pred
-        
+
         for it in gen:
             # print it
             #print type(it)
             #break
-            if isinstance(it,Literal):
+            if isinstance(it, Literal):
                 #if lang is set
                 if lang is not None:
                     if it.language == lang:
@@ -127,49 +119,43 @@ class Store():
 
         return None
 
-
     def object(self, subject, predicate):
         """Get the object of the RDF triple
-        
+
         Arguments:
         - `subject`: String
         - `predicate`: String
         """
         #get generator over the objects in case there's more than one
-        gen=self.g.objects(subject,predicate)
-        
+        gen = self.g.objects(subject, predicate)
+
         for it in gen:
-            
-            if isinstance(it,Resource):
+
+            if isinstance(it, Resource):
                 #this is a Resource
                 return it
-            
         return None
 
-    def exists(self, subject,predicate,resource):
+    def exists(self, subject, predicate, resource):
         """Check whteher a given condition exists
-    
+
         Arguments:
         - `subject`:
         - `predicate`:
         - `object`:
         """
-        
-        gen=self.g.triples((subject,predicate,resource))
+
+        gen = self.g.triples((subject, predicate, resource))
 
         #TODO: find a better way to do this checking
 
-        exists=False
+        exists = False
 
         #check for elements in the generator
         for dd in gen:
             #if an element exists, a triple exists
-            exists=True
+            exists = True
             #checking for one triple is enough
             break
 
         return exists
-       
-        
-        
-        
