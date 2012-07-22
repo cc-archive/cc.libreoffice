@@ -5,23 +5,19 @@
 import unohelper
 from com.sun.star.awt import XItemListener
 
-class UpdateLicenseListner(XItemListener,unohelper.Base):
+
+class UpdateLicenseListner(XItemListener, unohelper.Base):
     """Updates the selected license Label
     """
-    
     def __init__(self, dialog):
         """
-        
         Arguments:
         - `dialog`:LicenseChooserDialog
         """
         self.dialog = dialog
-        
-
 
     def disposing(self, event):
         """
-        
         Arguments:
         - `event`:EventObject
         """
@@ -34,15 +30,13 @@ class UpdateLicenseListner(XItemListener,unohelper.Base):
 
     def setDialog(self, dialog):
         """
-        
         Arguments:
         - `dialog`:LicenseChooserDialog
         """
-        self.dialog=dialog
+        self.dialog = dialog
 
     def itemStateChanged(self, event):
         """
-        
         Arguments:
         - `event`:ItemEvent
         """
