@@ -5,15 +5,13 @@
 from org.creativecommons.license.store import Store
 from rdflib import Namespace
 
+
 class Jurisdiction():
     """
     """
 
-    
-    
     def __init__(self, uri):
         """
-        
         Arguments:
         - `uri`:
         """
@@ -22,7 +20,6 @@ class Jurisdiction():
     # @staticmethod
     # def byId(id):
     #     """
-        
     #     Arguments:
     #     - `id`:String
     #     """
@@ -37,23 +34,20 @@ class Jurisdiction():
     #     """
     #     """
     #     return self.getTitle("en")
-        
     def getTitle(self, lang=None):
         """
-        
         Arguments:
         - `lang`:String
         """
 
         if lang is None:
-            lang="en"
-            
-        DC= Namespace("http://purl.org/dc/elements/1.1/")
-        
-        dcTitle=DC['title']
+            lang = "en"
 
-        title=Store().literal(self.uri,dcTitle,lang)
+        DC = Namespace("http://purl.org/dc/elements/1.1/")
 
+        dcTitle = DC['title']
+
+        title = Store().literal(self.uri, dcTitle, lang)
 
         if title:
             return str(title)
@@ -62,10 +56,7 @@ class Jurisdiction():
 
     def compareTo(self, other):
         """
-        
         Arguments:
         - `other`:Jurisdiction
         """
-        
-        return cmp(self.getTitle(),other.getTitle())
-
+        return cmp(self.getTitle(), other.getTitle())
