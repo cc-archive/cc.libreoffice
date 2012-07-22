@@ -14,60 +14,23 @@ from rdflib import Namespace
 
 #from org.creativecommons.license.cc import CC
 
+g = rdflib.Graph()
 
-class Store():
-    """
-    """
-    g = rdflib.Graph()
+path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+g.parse(path)
 
-    path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
-    g.parse(path)
+path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+g.parse(path)
 
-    path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
-    g.parse(path)
+path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+g.parse(path)
 
-    path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
-    g.parse(path)
+NS = Namespace("http://creativecommons.org/ns#")
 
-    _instance = None
-
-    NS = Namespace("http://creativecommons.org/ns#")
-
-    def __new__(cls, *args, **kwargs):
-        """Create a singleton instance of the class
-        """
-        # if not cls._instance:
-        #     cls._instance = super(Store, cls).__new__(
-        #                         cls, *args, **kwargs)
-        # return cls._instance
-
-        if cls._instance is not None:
-            return cls._instance
-
-        cls._inst = object.__new__(cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self, ):
-        """
-        """
-        pass
-
-    #model=graph=g
-        #self.g = rdflib.Graph()
-
-        # path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
-        # self.g.parse(path)
-
-        # path=os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
-        # self.g.parse(path)
-
-        # path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
-        # self.g.parse(path)
-
-    def jurisdictions(self, ):
+def jurisdictions():
         """Get the jurisdictions
         """
-        jur = self.g.subjects(RDF.type, self.NS.Jurisdiction)
+        jur = g.subjects(RDF.type, NS.Jurisdiction)
 
         #the empty list
         jurList = []
@@ -79,7 +42,7 @@ class Store():
 
         return jurList
 
-    def literal(self, sub, pred, lang):
+def literal(sub, pred, lang):
         """Returns a Literal object
 
         Arguments:
@@ -88,7 +51,7 @@ class Store():
         - `lang`:String
         """
         #get generator over the objects in case there's more than one
-        gen = self.g.objects(URIRef(sub), predicate=pred)
+        gen = g.objects(URIRef(sub), predicate=pred)
         #gen=self.g.transitive_objects(sub,pred)
         #gen=self.g.value(subject=sub,predicate=pred)
 
@@ -119,7 +82,7 @@ class Store():
 
         return None
 
-    def object(self, subject, predicate):
+def object(subject, predicate):
         """Get the object of the RDF triple
 
         Arguments:
@@ -127,7 +90,7 @@ class Store():
         - `predicate`: String
         """
         #get generator over the objects in case there's more than one
-        gen = self.g.objects(subject, predicate)
+        gen = g.objects(subject, predicate)
 
         for it in gen:
 
@@ -136,7 +99,7 @@ class Store():
                 return it
         return None
 
-    def exists(self, subject, predicate, resource):
+def exists(subject, predicate, resource):
         """Check whteher a given condition exists
 
         Arguments:
@@ -145,7 +108,7 @@ class Store():
         - `object`:
         """
 
-        gen = self.g.triples((subject, predicate, resource))
+        gen = g.triples((subject, predicate, resource))
 
         #TODO: find a better way to do this checking
 
@@ -159,3 +122,149 @@ class Store():
             break
 
         return exists
+
+
+# class Store():
+#     """
+#     """
+#     g = rdflib.Graph()
+
+#     path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+#     g.parse(path)
+
+#     path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+#     g.parse(path)
+
+#     path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+#     g.parse(path)
+
+#     _instance = None
+
+#     NS = Namespace("http://creativecommons.org/ns#")
+
+#     def __new__(cls, *args, **kwargs):
+#         """Create a singleton instance of the class
+#         """
+#         # if not cls._instance:
+#         #     cls._instance = super(Store, cls).__new__(
+#         #                         cls, *args, **kwargs)
+#         # return cls._instance
+
+#         if cls._instance is not None:
+#             return cls._instance
+
+#         cls._inst = object.__new__(cls, *args, **kwargs)
+#         return cls._instance
+
+#     def __init__(self, ):
+#         """
+#         """
+#         pass
+
+#     #model=graph=g
+#         #self.g = rdflib.Graph()
+
+#         # path=os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+#         # self.g.parse(path)
+
+#         # path=os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+#         # self.g.parse(path)
+
+#         # path=os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+#         # self.g.parse(path)
+
+#     def jurisdictions(self, ):
+#         """Get the jurisdictions
+#         """
+#         jur = self.g.subjects(RDF.type, self.NS.Jurisdiction)
+
+#         #the empty list
+#         jurList = []
+
+#         for uri in jur:
+#             jurList.append(uri)
+
+#         jurList.sort()
+
+#         return jurList
+
+#     def literal(self, sub, pred, lang):
+#         """Returns a Literal object
+
+#         Arguments:
+#         - `subject`:String
+#         - `predicate`:String
+#         - `lang`:String
+#         """
+#         #get generator over the objects in case there's more than one
+#         gen = self.g.objects(URIRef(sub), predicate=pred)
+#         #gen=self.g.transitive_objects(sub,pred)
+#         #gen=self.g.value(subject=sub,predicate=pred)
+
+#         #print "++++++++++++++"
+#         #print sub
+#         #print pred
+
+#         for it in gen:
+#             # print it
+#             #print type(it)
+#             #break
+#             if isinstance(it, Literal):
+#                 #if lang is set
+#                 if lang is not None:
+#                     if it.language == lang:
+#                         #this is a literal, in the language we care about
+#                         return it
+#                 else:
+#                     return it
+#         # ##Changed
+#         # gen=self.g.predicate_objects(subject)
+#         # print "subject:"+str(subject)
+#         # for it in gen:
+#         #     print "it"+str(it)
+#         #     break
+#         #     if isinstance(it,Literal):
+#         #         return it
+
+#         return None
+
+#     def object(self, subject, predicate):
+#         """Get the object of the RDF triple
+
+#         Arguments:
+#         - `subject`: String
+#         - `predicate`: String
+#         """
+#         #get generator over the objects in case there's more than one
+#         gen = self.g.objects(subject, predicate)
+
+#         for it in gen:
+
+#             if isinstance(it, Resource):
+#                 #this is a Resource
+#                 return it
+#         return None
+
+#     def exists(self, subject, predicate, resource):
+#         """Check whteher a given condition exists
+
+#         Arguments:
+#         - `subject`:
+#         - `predicate`:
+#         - `object`:
+#         """
+
+#         gen = self.g.triples((subject, predicate, resource))
+
+#         #TODO: find a better way to do this checking
+
+#         exists = False
+
+#         #check for elements in the generator
+#         for dd in gen:
+#             #if an element exists, a triple exists
+#             exists = True
+#             #checking for one triple is enough
+#             break
+
+#         return exists

@@ -11,11 +11,12 @@ from com.sun.star.lang import XInitialization, XServiceInfo
 
 from org.creativecommons.libreoffice.ui.license.licensechooserdialog \
    import LicenseChooserDialog
-from org.creativecommons.license.store import Store
+
+#from org.creativecommons.license.store import Store
 from org.creativecommons.libreoffice.program.writer import Writer
 from org.creativecommons.libreoffice.program.calc import Calc
 from org.creativecommons.libreoffice.program.draw import Draw
-from org.creativecommons.license.chooser import Chooser
+#from org.creativecommons.license.chooser import Chooser
 
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
