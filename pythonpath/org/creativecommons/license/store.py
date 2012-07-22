@@ -27,6 +27,7 @@ g.parse(path)
 
 NS = Namespace("http://creativecommons.org/ns#")
 
+
 def jurisdictions():
         """Get the jurisdictions
         """
@@ -41,6 +42,7 @@ def jurisdictions():
         jurList.sort()
 
         return jurList
+
 
 def literal(sub, pred, lang):
         """Returns a Literal object
@@ -82,6 +84,7 @@ def literal(sub, pred, lang):
 
         return None
 
+
 def object(subject, predicate):
         """Get the object of the RDF triple
 
@@ -98,6 +101,7 @@ def object(subject, predicate):
                 #this is a Resource
                 return it
         return None
+
 
 def exists(subject, predicate, resource):
         """Check whteher a given condition exists
