@@ -9,73 +9,90 @@ from org.creativecommons.license.store import Store
 from org.creativecommons.license.unported import Unported
 from org.creativecommons.license.jurisdiction import Jurisdiction
 
+
 class License():
     """
     """
-    CC=Namespace("http://creativecommons.org/ns#")
-    DCTerms=Namespace("http://purl.org/dc/terms/")
-    DC= Namespace("http://purl.org/dc/elements/1.1/")
-    
-    def __init__(self, license_uri,territory=None):
+    CC = Namespace("http://creativecommons.org/ns#")
+    DCTerms = Namespace("http://purl.org/dc/terms/")
+    DC = Namespace("http://purl.org/dc/elements/1.1/")
+
+    def __init__(self, license_uri, territory=None):
         """
-        
         Arguments:
         - `license_uri`:String
         - `territory`:String
         """
         self.license_uri = license_uri
-        self.licenseStore=Store()
+        self.licenseStore = Store()
 
         #Creates a new instance of License with a territory (for PD).
         if territory is not None:
-            self.territory=territory
+            self.territory = territory
 
         else:
-            self.territory=None
-
-        
+            self.territory = None
 
         ####Jurisdiction####
-        juri=self.licenseStore.object(self.license_uri,self.CC['jurisdiction'])
+        juri = self.licenseStore.\
+          object(self.license_uri, self.CC['jurisdiction'])
         if juri is not None:
-            self.jurisdiction=Jurisdiction(jurisdiction.identifier)
+            self.jurisdiction = Jurisdiction(jurisdiction.identifier)
 
         else:
-           self.jurisdiction=Unported()     
+            self.jurisdiction = Unported()
 
         ####name####
         #TODO: implement the Null pointer Exception handling
-        #TODO: Can return names like -"NoneNoneUnported" 
-        self.name=str(self.licenseStore.literal(self.license_uri,self.DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.jurisdiction.getTitle())
+        #TODO: Can return names like -"NoneNoneUnported"
+        self.name = str(self.\
+                        licenseStore.literal(
+                            self.license_uri, self.DC['title'], "en")) +\
+                            "" + str(self.licenseStore.literal(
+                                self.license_uri,
+                                self.DCTerms['hasVersion'], "")) +\
+                                str(self.jurisdiction.getTitle())
 
         ####requireShareAlike####
-        self.requireShareAlike=self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
+        self.requireShareAlike = self.\
+          licenseStore.exists(
+              self.license_uri, self.CC['requires'], self.CC['ShareAlike'])
 
         ####prohibitCommercial####
-        self.prohibitCommercial=self.licenseStore.exists(self.license_uri,self.CC['prohibits'],self.CC['CommercialUse'])
+        self.prohibitCommercial = self.\
+          licenseStore.exists(
+              self.license_uri, self.CC['prohibits'], self.CC['CommercialUse'])
 
         ####allowRemix####
-        self.allowRemix=self.licenseStore.exists(self.license_uri,self.CC['permits'],self.CC['DerivativeWorks'])
+        self.allowRemix = self.\
+          licenseStore.exists(
+              self.license_uri, self.CC['permits'], self.CC['DerivativeWorks'])
 
         ####code####
-        #Return the license code for this License.  For example, the code for the
-        #Attribution 3.0 license (http://creativecommons.org/licenses/by/3.0/) is
-        #"by".  Note this is based on a Creative Commons-specific standard.
+        #Return the license code for this License.
+        #For example, the code for the
+        #Attribution 3.0 license
+        #(http://creativecommons.org/licenses/by/3.0/) is
+        #"by".  Note this is based on a
+        #Creative Commons-specific standard.
         try:
-            self.code= self.license_uri.split('/')[4]
+            self.code = self.license_uri.split('/')[4]
         except Exception, ex:
             traceback.print_exc()
 
         ####version####
-        self.version=str(self.licenseStore.literal(self.license_uri,
-                                             self.DCTerms['hasVersion'],None))
+        self.version = str(self.licenseStore.literal(self.license_uri,
+                                             self.DCTerms['hasVersion'], None))
 
         ####Image URL####
         if self.version is not None:
-            self.imageUrl=("http://i.creativecommons.org/l/" + self.code + "/"
+            self.imageUrl =\
+               ("http://i.creativecommons.org/l/" + self.code + "/"
                     + self.version + "/88x31.png")
         else:
-            self.imageUrl=("http://i.creativecommons.org/l/" + self.getCode() + "/88x31.png")
+            self.imageUrl =\
+               ("http://i.creativecommons.org/l/" +\
+                self.getCode() + "/88x31.png")
 
 
 
@@ -85,10 +102,10 @@ class License():
     # def getName(self, ):
     #     """Get the license for "en" locale.
     #     """
-        
+
     #     #TODO: implement the Null pointer Exception handling
-    #     #TODO: Can return names like -"NoneNoneUnported" 
-        
+    #     #TODO: Can return names like -"NoneNoneUnported"
+
     #     #print "In getName()"
     #     ##TODO-remove the dummy value
     #     #self.license_uri="http://creativecommons.org/licenses/by/3.0/"
