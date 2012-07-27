@@ -18,16 +18,16 @@ from rdflib import Namespace
 class Store():
     """
     """
-    g = rdflib.Graph()
+    RDF_GRAPH = rdflib.Graph()
 
     path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
-    g.parse(path)
+    RDF_GRAPH.parse(path)
 
     path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
-    g.parse(path)
+    RDF_GRAPH.parse(path)
 
     path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
-    g.parse(path)
+    RDF_GRAPH.parse(path)
 
     _instance = None
 
@@ -67,7 +67,7 @@ class Store():
     def jurisdictions(self, ):
         """Get the jurisdictions
         """
-        jur = self.g.subjects(RDF.type, self.NS.Jurisdiction)
+        jur = self.RDF_GRAPH.subjects(RDF.type, self.NS.Jurisdiction)
 
         #the empty list
         jurList = []
@@ -88,7 +88,7 @@ class Store():
         - `lang`:String
         """
         #get generator over the objects in case there's more than one
-        gen = self.g.objects(URIRef(sub), predicate=pred)
+        gen = self.RDF_GRAPH.objects(URIRef(sub), predicate=pred)
         #gen=self.g.transitive_objects(sub,pred)
         #gen=self.g.value(subject=sub,predicate=pred)
 
@@ -127,7 +127,7 @@ class Store():
         - `predicate`: String
         """
         #get generator over the objects in case there's more than one
-        gen = self.g.objects(subject, predicate)
+        gen = self.RDF_GRAPH.objects(subject, predicate)
 
         for it in gen:
 
@@ -145,7 +145,7 @@ class Store():
         - `object`:
         """
 
-        gen = self.g.triples((subject, predicate, resource))
+        gen = self.RDF_GRAPH.triples((subject, predicate, resource))
 
         #TODO: find a better way to do this checking
 

@@ -117,7 +117,7 @@ class Chooser():
 
         #Execute the query and obtain results
         results = self.licenseStore.\
-          g.query(queryString,
+          RDF_GRAPH.query(queryString,
                   initNs=dict(
                       cc=Namespace("http://creativecommons.org/ns#"),
                       dc=Namespace("http://purl.org/dc/elements/1.1/"),
@@ -183,7 +183,7 @@ class Chooser():
         queryString = self.__makePDToolQuery()
 
         #Execute the query and obtain results
-        results = self.licenseStore.g.\
+        results = self.licenseStore.RDF_GRAPH.\
           query(queryString,
                 initNs=dict(
                     cc=Namespace("http://creativecommons.org/ns#"),
