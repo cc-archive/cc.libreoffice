@@ -2,7 +2,8 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 
-from org.creativecommons.license.store import Store
+#from org.creativecommons.license.store import Store
+from org.creativecommons.license.store import literal
 from rdflib import Namespace
 
 
@@ -47,7 +48,7 @@ class Jurisdiction():
 
         dcTitle = DC['title']
 
-        title = Store().literal(self.uri, dcTitle, lang)
+        title = literal(self.uri, dcTitle, lang)
 
         if title:
             return str(title)

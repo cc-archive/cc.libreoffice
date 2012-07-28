@@ -5,7 +5,8 @@
 from rdflib import Namespace
 import traceback
 
-from org.creativecommons.license.store import Store
+#from org.creativecommons.license.store import Store
+from org.creativecommons.license.store import g, object, literal, exists
 from org.creativecommons.license.unported import Unported
 from org.creativecommons.license.jurisdiction import Jurisdiction
 
@@ -24,7 +25,7 @@ class License():
         - `territory`:String
         """
         self.license_uri = license_uri
-        self.licenseStore = Store()
+        #self.licenseStore = store
 
         #Creates a new instance of License with a territory (for PD).
         if territory is not None:
@@ -34,8 +35,7 @@ class License():
             self.territory = None
 
         ####Jurisdiction####
-        juri = self.licenseStore.\
-          object(self.license_uri, self.CC['jurisdiction'])
+        juri = object(self.license_uri, self.CC['jurisdiction'])
         if juri is not None:
             self.jurisdiction = Jurisdiction(jurisdiction.identifier)
 
@@ -45,27 +45,23 @@ class License():
         ####name####
         #TODO: implement the Null pointer Exception handling
         #TODO: Can return names like -"NoneNoneUnported"
-        self.name = str(self.\
-                        licenseStore.literal(
+        self.name = str(literal(
                             self.license_uri, self.DC['title'], "en")) +\
-                            "" + str(self.licenseStore.literal(
+                            "" + str(literal(
                                 self.license_uri,
                                 self.DCTerms['hasVersion'], "")) +\
                                 str(self.jurisdiction.getTitle())
 
         ####requireShareAlike####
-        self.requireShareAlike = self.\
-          licenseStore.exists(
+        self.requireShareAlike = exists(
               self.license_uri, self.CC['requires'], self.CC['ShareAlike'])
 
         ####prohibitCommercial####
-        self.prohibitCommercial = self.\
-          licenseStore.exists(
+        self.prohibitCommercial = exists(
               self.license_uri, self.CC['prohibits'], self.CC['CommercialUse'])
 
         ####allowRemix####
-        self.allowRemix = self.\
-          licenseStore.exists(
+        self.allowRemix = exists(
               self.license_uri, self.CC['permits'], self.CC['DerivativeWorks'])
 
         ####code####
@@ -81,7 +77,7 @@ class License():
             traceback.print_exc()
 
         ####version####
-        self.version = str(self.licenseStore.literal(self.license_uri,
+        self.version = str(literal(self.license_uri,
                                              self.DCTerms['hasVersion'], None))
 
         ####Image URL####

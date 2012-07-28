@@ -31,7 +31,8 @@ from org.creativecommons.libreoffice.ui.license.pdclicklistener \
 from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
   import TerritorySelectListener
 
-from org.creativecommons.license.store import Store
+  #from org.creativecommons.license.store import Store
+from org.creativecommons.license.store import jurisdictions
 from org.creativecommons.license.chooser import Chooser
 from org.creativecommons.license.license import License
 from org.creativecommons.license.jurisdiction import Jurisdiction
@@ -807,10 +808,10 @@ class LicenseChooserDialog():
             #xControlCont=self.dialog
             cmbJList = self.dialog .getControl(self.CMB_JURISDICTION)
             #TODO:Done- Add the items to the cmbJList properly (Line 227-230)
-            self.jurisdictionList = Store().jurisdictions()
+            self.jurisdictionList = jurisdictions()
             #TODO-seems like lines 229-230 are unnecessary
 
-            self.juriList = Store().jurisdictions()
+            self.juriList = jurisdictions()
 
             count = 0
 
