@@ -18,6 +18,8 @@ from org.creativecommons.libreoffice.program.calc import Calc
 from org.creativecommons.libreoffice.program.draw import Draw
 #from org.creativecommons.license.chooser import Chooser
 
+from com.sun.star.task import XJob
+
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
@@ -26,12 +28,12 @@ IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
 def createInstance(ctx):
     """Used to load the 3rd party libraries to the extension
     """
-    import org.creativecommons.license.store
-    return org.creativecommons.license.store.Store()
-
+    #import org.creativecommons.license.store
+    #return org.creativecommons.license.store.Store()
+    pass
 
 class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
-              XDispatchProvider, XDispatch):
+              XDispatchProvider, XDispatch,XJob):
 
     def __init__(self, ctx, *args):
         self.ctx = ctx
@@ -256,7 +258,14 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
 
         #####################################################################
         ####################################################################
-
+        
+    def execute(self, args):
+        """
+    
+    Arguments:
+    - `args`:
+    """
+        print "called!"
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
@@ -264,6 +273,6 @@ g_ImplementationHelper.addImplementation(
     IMPLE_NAME,
     (SERVICE_NAME,),)
 
-g_ImplementationHelper.addImplementation( \
-        createInstance, "org.creativecommons.license.store",
-        (SERVICE_NAME,),)
+# g_ImplementationHelper.addImplementation( \
+#         createInstance, "org.creativecommons.license.store",
+#         (SERVICE_NAME,),)
