@@ -8,7 +8,7 @@ from rdflib import plugin
 from rdflib.namespace import Namespace
 
 #from org.creativecommons.license.store import Store
-from org.creativecommons.license.store import RDF_GRAPH
+from org.creativecommons.license.store import query
 from org.creativecommons.license.unported import Unported
 from org.creativecommons.license.license import License
 
@@ -117,12 +117,14 @@ class Chooser():
                                             requireShareAlike, jurisdiction)
 
         #Execute the query and obtain results
-        results = RDF_GRAPH.query(queryString,
-                        initNs=dict(
-                            cc=Namespace("http://creativecommons.org/ns#"),
-                            dc=Namespace("http://purl.org/dc/elements/1.1/"),
-                            dcq=Namespace("http://purl.org/dc/terms/"),
-                            rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
+        # results = RDF_GRAPH.query(queryString,
+        #                 initNs=dict(
+        #                     cc=Namespace("http://creativecommons.org/ns#"),
+        #                     dc=Namespace("http://purl.org/dc/elements/1.1/"),
+        #                     dcq=Namespace("http://purl.org/dc/terms/"),
+        #                     rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
+
+        results = query(queryString)
         for uri in results:
             uriStr = str(uri[0])
             if "sampling" in uriStr:
@@ -183,12 +185,14 @@ class Chooser():
         queryString = self.__makePDToolQuery()
 
         #Execute the query and obtain results
-        results = RDF_GRAPH.query(queryString,
-                          initNs=dict(
-                              cc=Namespace("http://creativecommons.org/ns#"),
-                              dc=Namespace("http://purl.org/dc/elements/1.1/"),
-                              dcq=Namespace("http://purl.org/dc/terms/"),
-                              rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
+        # results = RDF_GRAPH.query(queryString,
+        #                   initNs=dict(
+        #                       cc=Namespace("http://creativecommons.org/ns#"),
+        #                       dc=Namespace("http://purl.org/dc/elements/1.1/"),
+        #                       dcq=Namespace("http://purl.org/dc/terms/"),
+        #                       rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
+        results = query(queryString)
+
         for uri in results.result:
             uriStr = str(uri[0])
 

@@ -32,8 +32,9 @@ def createInstance(ctx):
     #return org.creativecommons.license.store.Store()
     pass
 
+
 class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
-              XDispatchProvider, XDispatch,XJob):
+              XDispatchProvider, XDispatch, XJob):
 
     def __init__(self, ctx, *args):
         self.ctx = ctx
@@ -229,7 +230,6 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
 
         return None
 
-
         ###################################################################
         ###################################################################
 
@@ -258,14 +258,16 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
 
         #####################################################################
         ####################################################################
-        
     def execute(self, args):
         """
-    
     Arguments:
     - `args`:
     """
-        print "called!"
+        #print "import"
+        #from org.creativecommons.license.store import parseGraph
+        #print "parseG"
+        #parseGraph()
+        print "parsge graph-skipped"
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(

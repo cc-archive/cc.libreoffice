@@ -14,118 +14,197 @@ from rdflib import Namespace
 
 #from org.creativecommons.license.cc import CC
 
-RDF_GRAPH = rdflib.Graph()
+import threading
 
-path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
-RDF_GRAPH.parse(path)
+RDF_GRAPH = None
 
-path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
-RDF_GRAPH.parse(path)
 
-path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
-RDF_GRAPH.parse(path)
+class RdfLoaderThread(threading.Thread):
+    """Parses the rdf Graph in a Thread
+    """
+    def run(self, ):
+        """
+        """
+        print "Thread!"
+        #print RDF_GRAPH
+        global RDF_GRAPH
+        RDF_GRAPH = rdflib.Graph()
+
+        path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+        RDF_GRAPH.parse(path)
+
+        path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+        RDF_GRAPH.parse(path)
+
+        path = os.path.\
+          join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+        RDF_GRAPH.parse(path)
+        print "Thread end!"
+
+RdfLoaderThread().start()
+print "RDF_GRAPH-" + str(RDF_GRAPH)
+
+try:
+        RDF_GRAPH
+except NameError:
+        print "not defined"
+        RdfLoaderThread().start()
+        #RDF_GRAPH=None
+        print "calling parse graphx-exception"
+
+        #RDF_GRAPH = None
 
 NS = Namespace("http://creativecommons.org/ns#")
 
 
+def parseGraph():
+    """Parsess the rdf graphs
+    """
+    print "begin parsing"
+
+    RDF_GRAPH = rdflib.Graph()
+
+    path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+    RDF_GRAPH.parse(path)
+
+    path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+    RDF_GRAPH.parse(path)
+
+    path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+    RDF_GRAPH.parse(path)
+    print "end parsing"
+    #return RDF_GRAPH
+
+
 def jurisdictions():
-        """Get the jurisdictions
-        """
-        jur = RDF_GRAPH.subjects(RDF.type, NS.Jurisdiction)
+    """Get the jurisdictions
+    """
+    if RDF_GRAPH is None:
+        print "rdf is none"
+        #RDF_GRAPH=parseGraph()
+        parseGraph()
 
-        #the empty list
-        jurList = []
+    jur = RDF_GRAPH.subjects(RDF.type, NS.Jurisdiction)
 
-        for uri in jur:
-            jurList.append(uri)
+    #the empty list
+    jurList = []
 
-        jurList.sort()
+    for uri in jur:
+        jurList.append(uri)
 
-        return jurList
+    jurList.sort()
+
+    return jurList
 
 
 def literal(sub, pred, lang):
-        """Returns a Literal object
+    """Returns a Literal object
 
-        Arguments:
-        - `subject`:String
-        - `predicate`:String
-        - `lang`:String
-        """
-        #get generator over the objects in case there's more than one
-        gen = RDF_GRAPH.objects(URIRef(sub), predicate=pred)
-        #gen=self.g.transitive_objects(sub,pred)
-        #gen=self.g.value(subject=sub,predicate=pred)
+    Arguments:
+    - `subject`:String
+    - `predicate`:String
+    - `lang`:String
+    """
 
-        #print "++++++++++++++"
-        #print sub
-        #print pred
+    if RDF_GRAPH is None:
+        parseGraph()
 
-        for it in gen:
-            # print it
-            #print type(it)
-            #break
-            if isinstance(it, Literal):
-                #if lang is set
-                if lang is not None:
-                    if it.language == lang:
-                        #this is a literal, in the language we care about
-                        return it
-                else:
+    #get generator over the objects in case there's more than one
+    gen = RDF_GRAPH.objects(URIRef(sub), predicate=pred)
+    #gen=self.g.transitive_objects(sub,pred)
+    #gen=self.g.value(subject=sub,predicate=pred)
+
+    #print "++++++++++++++"
+    #print sub
+    #print pred
+
+    for it in gen:
+        # print it
+        #print type(it)
+        #break
+        if isinstance(it, Literal):
+            #if lang is set
+            if lang is not None:
+                if it.language == lang:
+                    #this is a literal, in the language we care about
                     return it
-        # ##Changed
-        # gen=self.g.predicate_objects(subject)
-        # print "subject:"+str(subject)
-        # for it in gen:
-        #     print "it"+str(it)
-        #     break
-        #     if isinstance(it,Literal):
-        #         return it
+            else:
+                return it
+    # ##Changed
+    # gen=self.g.predicate_objects(subject)
+    # print "subject:"+str(subject)
+    # for it in gen:
+    #     print "it"+str(it)
+    #     break
+    #     if isinstance(it,Literal):
+    #         return it
 
-        return None
+    return None
 
 
 def object(subject, predicate):
-        """Get the object of the RDF triple
+    """Get the object of the RDF triple
 
-        Arguments:
-        - `subject`: String
-        - `predicate`: String
-        """
-        #get generator over the objects in case there's more than one
-        gen = RDF_GRAPH.objects(subject, predicate)
+    Arguments:
+    - `subject`: String
+    - `predicate`: String
+    """
 
-        for it in gen:
+    if RDF_GRAPH is None:
+        parseGraph()
 
-            if isinstance(it, Resource):
-                #this is a Resource
-                return it
-        return None
+    #get generator over the objects in case there's more than one
+    gen = RDF_GRAPH.objects(subject, predicate)
+
+    for it in gen:
+
+        if isinstance(it, Resource):
+            #this is a Resource
+            return it
+
+    return None
 
 
 def exists(subject, predicate, resource):
-        """Check whteher a given condition exists
+    """Check whteher a given condition exists
 
-        Arguments:
-        - `subject`:
-        - `predicate`:
-        - `object`:
-        """
+    Arguments:
+    - `subject`:
+    - `predicate`:
+    - `object`:
+    """
+    if RDF_GRAPH is None:
+        parseGraph()
 
-        gen = RDF_GRAPH.triples((subject, predicate, resource))
+    gen = RDF_GRAPH.triples((subject, predicate, resource))
 
-        #TODO: find a better way to do this checking
+    #TODO: find a better way to do this checking
 
-        exists = False
+    exists = False
 
-        #check for elements in the generator
-        for dd in gen:
-            #if an element exists, a triple exists
-            exists = True
-            #checking for one triple is enough
-            break
+    #check for elements in the generator
+    for dd in gen:
+        #if an element exists, a triple exists
+        exists = True
+        #checking for one triple is enough
+        break
 
-        return exists
+    return exists
+
+
+def query(queryString):
+    """queries the graph using the given sparql
+    string and returns the results.
+
+    Arguments:
+    - `queryString`: A sparql query string
+    """
+    return RDF_GRAPH.query(queryString,
+        initNs=dict(
+                cc=Namespace("http://creativecommons.org/ns#"),
+                dc=Namespace("http://purl.org/dc/elements/1.1/"),
+                dcq=Namespace("http://purl.org/dc/terms/"),
+                rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
 
 
 # class Store():
