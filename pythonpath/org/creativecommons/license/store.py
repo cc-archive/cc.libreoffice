@@ -25,7 +25,7 @@ class RdfLoaderThread(threading.Thread):
     def run(self, ):
         """
         """
-        print "Thread!"
+        print "Thread started to parse!"
         #print RDF_GRAPH
         global RDF_GRAPH
         RDF_GRAPH = rdflib.Graph()
@@ -41,18 +41,18 @@ class RdfLoaderThread(threading.Thread):
         RDF_GRAPH.parse(path)
         print "Thread end!"
 
-RdfLoaderThread().start()
-print "RDF_GRAPH-" + str(RDF_GRAPH)
+        #RdfLoaderThread().start()
+        #print "RDF_GRAPH-" + str(RDF_GRAPH)
 
-try:
-        RDF_GRAPH
-except NameError:
-        print "not defined"
-        RdfLoaderThread().start()
-        #RDF_GRAPH=None
-        print "calling parse graphx-exception"
+# try:
+#         RDF_GRAPH
+# except NameError:
+#         print "not defined"
+#         RdfLoaderThread().start()
+#         #RDF_GRAPH=None
+#         print "calling parse graphx-exception"
 
-        #RDF_GRAPH = None
+#         #RDF_GRAPH = None
 
 NS = Namespace("http://creativecommons.org/ns#")
 

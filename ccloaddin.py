@@ -264,10 +264,10 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     - `args`:
     """
         #print "import"
-        #from org.creativecommons.license.store import parseGraph
+        from org.creativecommons.license.store import RdfLoaderThread
         #print "parseG"
-        #parseGraph()
-        print "parsge graph-skipped"
+        RdfLoaderThread().start()
+        #print "parsge graph-skipped"
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
