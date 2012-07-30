@@ -702,71 +702,84 @@ class LicenseChooserDialog():
             #get the name container for the dialog for inserting other elements
             self.xNameCont = self.dlgLicenseSelector
 
-            ###Tabs
-            ##CC
-            ccButton = self.dlgLicenseSelector.createInstance(
-                "com.sun.star.awt.UnoControlButtonModel")
+            # # ###Tabs
+            # # ##CC
+            # # ccButton = self.dlgLicenseSelector.createInstance(
+            # #     "com.sun.star.awt.UnoControlButtonModel")
 
-            xPSetCCButton = self.__createAWTControl(ccButton, self.BTN_CC,
-                None, self.__makeRectangle(4, 3, 70, 12), 0)
+            # # xPSetCCButton = self.__createAWTControl(ccButton, self.BTN_CC,
+            # #     None, self.__makeRectangle(4, 3, 70, 12), 0)
 
-            xPSetCCButton.setPropertyValue("DefaultButton", True)
+            # # xPSetCCButton.setPropertyValue("DefaultButton", True)
 
-            #TODO: The next line needs localization support. See original code
-            #for more details.
+            # # #TODO: The next line needs localization support. See original code
+            # # #for more details.
 
-            xPSetCCButton.setPropertyValue("Label", "Creative_Commons")
-            xPSetCCButton.setPropertyValue("Toggle", True)
+            # # xPSetCCButton.setPropertyValue("Label", "Creative_Commons")
+            # # xPSetCCButton.setPropertyValue("Toggle", True)
 
-            fontDes = xPSetCCButton.getPropertyValue("FontDescriptor")
-            fontDes.Weight = 150
-            xPSetCCButton.setPropertyValue("FontDescriptor", fontDes)
-            #TODO: Original code had (short)1
-            xPSetCCButton.setPropertyValue("State", 1)
+            # # fontDes = xPSetCCButton.getPropertyValue("FontDescriptor")
+            # # fontDes.Weight = 150
+            # # xPSetCCButton.setPropertyValue("FontDescriptor", fontDes)
+            # # #TODO: Original code had (short)1
+            # # xPSetCCButton.setPropertyValue("State", 1)
 
-            ##CC0
+            # # ##CC0
 
-            cc0Button = self.dlgLicenseSelector.createInstance(
-                "com.sun.star.awt.UnoControlButtonModel")
-            xPSetCC0Button = self.__createAWTControl(cc0Button, self.BTN_CC0,
-                None, self.__makeRectangle(73, 3, 20, 12), 0)
-            xPSetCC0Button.setPropertyValue("DefaultButton", True)
-            xPSetCC0Button.setPropertyValue("Label", "CC0")
-            xPSetCC0Button.setPropertyValue("Toggle", True)
-            fontDes = xPSetCC0Button.getPropertyValue("FontDescriptor")
-            fontDes.Weight = 75
-            xPSetCC0Button.setPropertyValue("FontDescriptor", fontDes)
-            #TODO: Original code had (short)0
-            xPSetCC0Button.setPropertyValue("State", 0)
+            # # cc0Button = self.dlgLicenseSelector.createInstance(
+            # #     "com.sun.star.awt.UnoControlButtonModel")
+            # # xPSetCC0Button = self.__createAWTControl(cc0Button, self.BTN_CC0,
+            # #     None, self.__makeRectangle(73, 3, 20, 12), 0)
+            # # xPSetCC0Button.setPropertyValue("DefaultButton", True)
+            # # xPSetCC0Button.setPropertyValue("Label", "CC0")
+            # # xPSetCC0Button.setPropertyValue("Toggle", True)
+            # # fontDes = xPSetCC0Button.getPropertyValue("FontDescriptor")
+            # # fontDes.Weight = 75
+            # # xPSetCC0Button.setPropertyValue("FontDescriptor", fontDes)
+            # # #TODO: Original code had (short)0
+            # # xPSetCC0Button.setPropertyValue("State", 0)
 
-            ##PD
+            # # ##PD
 
-            pdButton = self.dlgLicenseSelector.createInstance(
-                "com.sun.star.awt.UnoControlButtonModel")
-            xPSetPDButton = self.__createAWTControl(pdButton,
-                                                    self.BTN_PUBLICDOMAIN,
-            None, self.__makeRectangle(92, 3, 60, 12), 0)
-            xPSetPDButton.setPropertyValue("DefaultButton", True)
-            #TODO: The next line needs localization support.
-            xPSetPDButton.setPropertyValue("Label", "Public Domain")
-            xPSetPDButton.setPropertyValue("Toggle", True)
-            fontDes = xPSetPDButton.getPropertyValue("FontDescriptor")
-            fontDes.Weight = 75
-            xPSetPDButton.setPropertyValue("FontDescriptor", fontDes)
-            #TODO: Original code had (short)0
-            xPSetPDButton.setPropertyValue("State", 0)
+            # # pdButton = self.dlgLicenseSelector.createInstance(
+            # #     "com.sun.star.awt.UnoControlButtonModel")
+            # # xPSetPDButton = self.__createAWTControl(pdButton,
+            # #                                         self.BTN_PUBLICDOMAIN,
+            # # None, self.__makeRectangle(92, 3, 60, 12), 0)
+            # # xPSetPDButton.setPropertyValue("DefaultButton", True)
+            # # #TODO: The next line needs localization support.
+            # # xPSetPDButton.setPropertyValue("Label", "Public Domain")
+            # # xPSetPDButton.setPropertyValue("Toggle", True)
+            # # fontDes = xPSetPDButton.getPropertyValue("FontDescriptor")
+            # # fontDes.Weight = 75
+            # # xPSetPDButton.setPropertyValue("FontDescriptor", fontDes)
+            # # #TODO: Original code had (short)0
+            # # xPSetPDButton.setPropertyValue("State", 0)
 
-            ##Creates the outer frame like box of the window
-            oGBResults = self.dlgLicenseSelector.createInstance(
-                "com.sun.star.awt.UnoControlGroupBoxModel")
-            xpsBox = self.__createAWTControl(
-                oGBResults, "box", None,
-                self.__makeRectangle(2, 15, 206, 243), 0)
+            # # ##Creates the outer frame like box of the window
+            # # oGBResults = self.dlgLicenseSelector.createInstance(
+            # #     "com.sun.star.awt.UnoControlGroupBoxModel")
+            # # xpsBox = self.__createAWTControl(
+            # #     oGBResults, "box", None,
+            # #     self.__makeRectangle(2, 15, 206, 243), 0)
 
-            ##Create Tabs
-            self.__crateCC0LicenseTab()
-            self.__createCCLicenseTab()
-            self.__cratePDLicenseTab()
+            # # ##Create Tabs
+            # # self.__crateCC0LicenseTab()
+            # # self.__createCCLicenseTab()
+            # # self.__cratePDLicenseTab()
+
+
+            ######
+            #Tab code
+            ######
+            self.tab_model = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoMultiPageModel")
+
+            tab_model.PositionX = 0
+            tab_model.PositionY = 0
+            tab_model.Width = 150
+            tab_model.Height = 150
+
+            
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -804,78 +817,78 @@ class LicenseChooserDialog():
 
             self.dialog .setModel(self.dlgLicenseSelector)
 
-            ##add an action listener to the Previous button control
-            #xControlCont=self.dialog
-            cmbJList = self.dialog .getControl(self.CMB_JURISDICTION)
-            #TODO:Done- Add the items to the cmbJList properly (Line 227-230)
-            self.jurisdictionList = jurisdictions()
-            #TODO-seems like lines 229-230 are unnecessary
+            # # ##add an action listener to the Previous button control
+            # # #xControlCont=self.dialog
+            # # cmbJList = self.dialog .getControl(self.CMB_JURISDICTION)
+            # # #TODO:Done- Add the items to the cmbJList properly (Line 227-230)
+            # # self.jurisdictionList = jurisdictions()
+            # # #TODO-seems like lines 229-230 are unnecessary
 
-            self.juriList = jurisdictions()
+            # # self.juriList = jurisdictions()
 
-            count = 0
+            # # count = 0
 
-            ##add Unported, which isn't actually a jurisdiction'
-            cmbJList.addItem("Unported", count)
-            count += 1
+            # # ##add Unported, which isn't actually a jurisdiction'
+            # # cmbJList.addItem("Unported", count)
+            # # count += 1
 
-            #TODO:Done- add line 236-239
-            for uri in self.juriList:
+            # # #TODO:Done- add line 236-239
+            # # for uri in self.juriList:
 
-                title = Jurisdiction(uri).getTitle()
-                cmbJList.addItem(title, count)
-                count += 1
+            # #     title = Jurisdiction(uri).getTitle()
+            # #     cmbJList.addItem(title, count)
+            # #     count += 1
 
-            ##add a bogus place-holder for Unported in the JurisdictionList to
-            ##ensure indices match up when determining the item
-            ##selectedJurisdiction
+            # # ##add a bogus place-holder for Unported in the JurisdictionList to
+            # # ##ensure indices match up when determining the item
+            # # ##selectedJurisdiction
 
-            self.juriList.insert(0, None)
+            # # self.juriList.insert(0, None)
 
-            ##Pre-select Unported
-            #TODO: bit different from the origianl code
-            cmbJList.selectItemPos(0, True)
-            cmbJList.makeVisible(0)
+            # # ##Pre-select Unported
+            # # #TODO: bit different from the origianl code
+            # # cmbJList.selectItemPos(0, True)
+            # # cmbJList.makeVisible(0)
 
-            ##listen for license selection changes
-            #self.__addListners("XCheckBox", None,None)
-            #self.__addListners("XRadioButton",None,None)
-            #self.__addListners("XButton",None,None)
+            # ##listen for license selection changes
+            # #self.__addListners("XCheckBox", None,None)
+            # #self.__addListners("XRadioButton",None,None)
+            # #self.__addListners("XButton",None,None)
 
-            self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_YES,
-                               UpdateLicenseListner(self))
-            self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_NO,
-                               UpdateLicenseListner(self))
-            self.__addListners("XRadioButton",
-                               self.RDO_ALLOW_MODIFICATIONS_YES,
-                               UpdateLicenseListner(self))
-            self.__addListners("XRadioButton",
-                               self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
-                               UpdateLicenseListner(self))
-            self.__addListners("XRadioButton", self.RDO_ALLOW_MODIFICATIONS_NO,
-                               UpdateLicenseListner(self))
+            # # self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_YES,
+            # #                    UpdateLicenseListner(self))
+            # # self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_NO,
+            # #                    UpdateLicenseListner(self))
+            # # self.__addListners("XRadioButton",
+            # #                    self.RDO_ALLOW_MODIFICATIONS_YES,
+            # #                    UpdateLicenseListner(self))
+            # # self.__addListners("XRadioButton",
+            # #                    self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+            # #                    UpdateLicenseListner(self))
+            # # self.__addListners("XRadioButton", self.RDO_ALLOW_MODIFICATIONS_NO,
+            # #                    UpdateLicenseListner(self))
 
-            cmbJList.addItemListener(JurisdictionSelectListener(self))
+            # # cmbJList.addItemListener(JurisdictionSelectListener(self))
 
-            self.__addListners("XCheckBox",
-                               self.CHK_WAIVE, AcceptWaiveListener(self))
-            self.__addListners("XCheckBox",
-                               self.CHK_YES_CC0, AcceptListener(self))
-            self.__addListners("XCheckBox",
-                               self.CHK_YES_PD, AcceptListener(self))
+            # # self.__addListners("XCheckBox",
+            # #                    self.CHK_WAIVE, AcceptWaiveListener(self))
+            # # self.__addListners("XCheckBox",
+            # #                    self.CHK_YES_CC0, AcceptListener(self))
+            # # self.__addListners("XCheckBox",
+            # #                    self.CHK_YES_PD, AcceptListener(self))
 
-            ##add an action listeners to buttons
+            # # ##add an action listeners to buttons
 
-            self.__addListners("XButton",
-                               self.BTN_FAQ, FaqClickListener(self,
-                                                             self.m_xContext))
-            self.__addListners("XButton", self.BTN_OK, OKClickListener(self))
-            self.__addListners("XButton",
-                               self.BTN_CANCEL, CancelClickListener(self))
-            self.__addListners("XButton", self.BTN_CC, CCClickListener(self))
-            self.__addListners("XButton", self.BTN_CC0, CC0ClickListener(self))
-            self.__addListners("XButton",
-                               self.BTN_PUBLICDOMAIN, PDClickListener(self))
+            # # self.__addListners("XButton",
+            # #                    self.BTN_FAQ, FaqClickListener(self,
+            # #                                                  self.m_xContext))
+            # # self.__addListners("XButton", self.BTN_OK, OKClickListener(self))
+            # # self.__addListners("XButton",
+            # #                    self.BTN_CANCEL, CancelClickListener(self))
+            # # self.__addListners("XButton", self.BTN_CC, CCClickListener(self))
+            # # self.__addListners("XButton", self.BTN_CC0, CC0ClickListener(self))
+            # # self.__addListners("XButton",
+            # #                    self.BTN_PUBLICDOMAIN, PDClickListener(self))
 
             ##Set the initial license
 
@@ -952,17 +965,17 @@ class LicenseChooserDialog():
                 self.trritories += (trr,)
             #trritories+=('1',)
             #trritories+=('2',)
-            self.cmbTList = self.dialog.getControl(self.CMB_TERRITORY)
+            # # self.cmbTList = self.dialog.getControl(self.CMB_TERRITORY)
+            # # ##TODO: was (short)
+            # # self.cmbTList.addItem("",  0)
             ##TODO: was (short)
-            self.cmbTList.addItem("",  0)
-            ##TODO: was (short)
-            self.cmbTList.addItems(self.trritories,  1)
-            ##TODO: was (short)
-            self.cmbTList.selectItemPos(0, True)
-            ##TODO: was (short)
-            self.cmbTList.makeVisible(0)
+            # self.cmbTList.addItems(self.trritories,  1)
+            # ##TODO: was (short)
+            # self.cmbTList.selectItemPos(0, True)
+            # ##TODO: was (short)
+            # self.cmbTList.makeVisible(0)
 
-            self.cmbTList.addItemListener(TerritorySelectListener(self))
+            # self.cmbTList.addItemListener(TerritorySelectListener(self))
             ##execute the dialog
             self.dialog .setVisible(True)
             self.dialog .execute()
