@@ -58,7 +58,7 @@ NS = Namespace("http://creativecommons.org/ns#")
 
 
 def parseGraph():
-    """Parsess the rdf graphs
+    """Parsess the rdf graphs.
     """
     print "begin parsing"
 
