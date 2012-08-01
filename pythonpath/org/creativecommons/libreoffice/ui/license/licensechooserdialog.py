@@ -147,14 +147,15 @@ class LicenseChooserDialog():
             xpsProperties.setPropertyValue("Width",  posSize.Width)
             xpsProperties.setPropertyValue("Height",  posSize.Height)
             xpsProperties.setPropertyValue("Name", ctrlName)
-            xpsProperties.setPropertyValue("Step", step)
+            #xpsProperties.setPropertyValue("Step", step)
 
             if ctrlCaption is not None:
                 xpsProperties.setPropertyValue("Label", ctrlCaption)
 
             if (not self.dlgLicenseSelector.hasByName(ctrlName)):
                 self.dlgLicenseSelector.insertByName(ctrlName, xpsProperties)
-
+                print "Added "+ctrlName
+                
             return xpsProperties
 
         except Exception, ex:
@@ -729,15 +730,12 @@ class LicenseChooserDialog():
             ###
             #rect=self.__makeRectangle(100, 80, 210, 275)
 
-            # self.dlgLicenseSelector.Width = 210
-            # self.dlgLicenseSelector.Height = 275
-            # self.dlgLicenseSelector.PositionX = 100
-            # self.dlgLicenseSelector.PositionY = 80
+            self.dlgLicenseSelector.Width = 210
+            self.dlgLicenseSelector.Height = 295
+            self.dlgLicenseSelector.PositionX = 100
+            self.dlgLicenseSelector.PositionY = 80
 
-            self.dlgLicenseSelector.Width = 200
-            self.dlgLicenseSelector.Height = 200
-            self.dlgLicenseSelector.PositionX = 200
-            self.dlgLicenseSelector.PositionY = 200
+            
             self.dlgLicenseSelector.Title = "Sharing & Reuse Permissions"
             self.dlgLicenseSelector.Step = 1
 
@@ -845,8 +843,8 @@ class LicenseChooserDialog():
 
             tab_model.PositionX = 0
             tab_model.PositionY = 0
-            tab_model.Width = 150
-            tab_model.Height = 150
+            tab_model.Width = 206 #206
+            tab_model.Height = 24 #243
 
 
             self.dlgLicenseSelector.insertByName("tab", tab_model)
@@ -856,14 +854,16 @@ class LicenseChooserDialog():
             page_model2 = self.__AddTabPage(tab, "page2", "Page 2")
 
             
-            btn_model = page_model1.createInstance("com.sun.star.awt.UnoControlButtonModel")
-            btn_model.PositionX = 10
-            btn_model.PositionY = 10
+            #btn_model = page_model1.createInstance("com.sun.star.awt.UnoControlButtonModel")
+
+            btn_model = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlButtonModel")
+            btn_model.PositionX = 100
+            btn_model.PositionY = 100
             btn_model.Width = 30
             btn_model.Height = 15
             btn_model.Label = "btn 1"
 
-            page_model1.insertByName("btn", btn_model)
+            self.dlgLicenseSelector.insertByName("btn", btn_model)
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -872,7 +872,7 @@ class LicenseChooserDialog():
                 None, self.__makeRectangle(70, 260, 40, 14), 0)
             xPSetFaqButton.setPropertyValue("DefaultButton", True)
             xPSetFaqButton.setPropertyValue("Label", self.faqButtonLabel)
-
+            #self.dlgLicenseSelector.insertByName("ss",faqButton)
             ##create the button model - OK and set the properties
             finishButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
