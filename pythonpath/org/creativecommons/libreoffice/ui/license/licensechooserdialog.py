@@ -4,6 +4,7 @@
 
 import os
 import traceback
+import uno
 
 
 from com.sun.star.beans import PropertyValue
@@ -656,6 +657,52 @@ class LicenseChooserDialog():
 
         self.updateSelectedLicense()
 
+    def __Array(self, *args ):
+        """This is just sugar coating so that code from OOoBasic which
+        contains the Array() function can work perfectly in python."""
+        print 'came'
+        tArray = ()
+        for arg in args:
+            tArray += (arg,)
+        print 'left'
+        print len(tArray)
+        return tArray
+    
+    def __AddTabPage(self, tab, name, title):
+        """
+        
+        Arguments:
+        - `tab`:
+        - `name`:
+        - `title`:
+        """
+        
+        #oCoreReflection=self.ctx.getServiceManager().createInstance("com.sun.star.reflection.CoreReflection")
+        #oXIdlClass = oCoreReflection.forName("com.sun.star.beans.NamedValue" ) 
+        #aStruct=[1,2]
+        #print 'ff'
+        #oXIdlClass.createObject(aStruct)
+        #print 'kk'
+        #args=aStruct
+        args=uno.createUnoStruct("com.sun.star.beans.NamedValue")
+        
+        print 'O.o'
+        args.Name = "Title"
+        args.Value = title
+        tab_model = tab.getModel()
+
+        page_model = tab_model.createInstance("com.sun.star.awt.UnoPageModel")
+        tab_model.insertByName(name, page_model)
+        n=len(tab_model.getElementNames())
+        print "n is "+str(n)
+        print type(args)
+        print dir(tab)
+        tab.setTabProps(n, self.__Array(args))
+        return page_model
+        
+
+        
+
     def showDialog(self):
         """Shows the LicenseChooserDialog
 
@@ -683,6 +730,16 @@ class LicenseChooserDialog():
             self.dlgLicenseSelector.PositionY = 80
             self.dlgLicenseSelector.Title = "Sharing & Reuse Permissions"
             self.dlgLicenseSelector.Step = 1
+
+
+             ##create the dialog control and set the model
+            self.dialog = self.xMultiComponentFactory.\
+              createInstanceWithContext(
+                "com.sun.star.awt.UnoControlDialog", self.m_xContext)
+            # xControl = dialog
+            #xControlModel =  dlgLicenseSelector
+
+            self.dialog.setModel(self.dlgLicenseSelector)
 
             ##--due to the following commment the following code in
             ##__createAWTControl is not run
@@ -774,12 +831,27 @@ class LicenseChooserDialog():
             ######
             self.tab_model = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoMultiPageModel")
 
-            tab_model.PositionX = 0
-            tab_model.PositionY = 0
-            tab_model.Width = 150
-            tab_model.Height = 150
+            self.tab_model.PositionX = 0
+            self.tab_model.PositionY = 0
+            self.tab_model.Width = 150
+            self.tab_model.Height = 150
+
+
+            self.dlgLicenseSelector.insertByName("tab", self.tab_model)
+            tab = self.dialog.getControl("tab")
+
+            page_model1 = self.__AddTabPage(tab, "page1", "page1")
+            page_model2 = self.__AddTabPage(tab, "page2", "Page 2")
 
             
+            btn_model = page_model1.createInstance("com.sun.star.awt.UnoControlButtonModel")
+            btn_model.PositionX = 10
+            btn_model.PositionY = 10
+            btn_model.Width = 30
+            btn_model.Height = 15
+            btn_model.Label = "btn 1"
+
+            page_model1.insertByName("btn", btn_model)
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -808,14 +880,7 @@ class LicenseChooserDialog():
             xPSetCancelButton.setPropertyValue("Name", self.BTN_CANCEL)
             xPSetCancelButton.setPropertyValue("Label", self.cancelButtonLabel)
 
-            ##create the dialog control and set the model
-            self.dialog = self.xMultiComponentFactory.\
-              createInstanceWithContext(
-                "com.sun.star.awt.UnoControlDialog", self.m_xContext)
-            # xControl = dialog
-            #xControlModel =  dlgLicenseSelector
-
-            self.dialog .setModel(self.dlgLicenseSelector)
+           
 
             # # ##add an action listener to the Previous button control
             # # #xControlCont=self.dialog
