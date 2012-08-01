@@ -954,15 +954,15 @@ class LicenseChooserDialog():
             # # self.__addListners("XCheckBox",
             # #                    self.CHK_YES_PD, AcceptListener(self))
 
-            # # ##add an action listeners to buttons
+            ##add an action listeners to buttons
 
-            # # self.__addListners("XButton",
-            # #                    self.BTN_FAQ, FaqClickListener(self,
-            # #                                                  self.m_xContext))
-            # # self.__addListners("XButton", self.BTN_OK, OKClickListener(self))
-            # # self.__addListners("XButton",
-            # #                    self.BTN_CANCEL, CancelClickListener(self))
-            # # self.__addListners("XButton", self.BTN_CC, CCClickListener(self))
+            self.__addListners("XButton",
+                               self.BTN_FAQ, FaqClickListener(self,
+                                                             self.m_xContext))
+            self.__addListners("XButton", self.BTN_OK, OKClickListener(self))
+            self.__addListners("XButton",
+                               self.BTN_CANCEL, CancelClickListener(self))
+            # self.__addListners("XButton", self.BTN_CC, CCClickListener(self))
             # # self.__addListners("XButton", self.BTN_CC0, CC0ClickListener(self))
             # # self.__addListners("XButton",
             # #                    self.BTN_PUBLICDOMAIN, PDClickListener(self))
