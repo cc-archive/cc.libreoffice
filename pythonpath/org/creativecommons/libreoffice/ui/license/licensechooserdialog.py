@@ -164,6 +164,44 @@ class LicenseChooserDialog():
             print type(ex)
             raise ex
 
+    def __createAWTControlInCCTab(self, xpsProperties, ctrlName, ctrlCaption,
+                           posSize, step):
+        """Add AWT control components to the CC tab.
+
+        Arguments:
+        - `self`:
+        - `xpsProperties`:XPropertySet
+        - `ctrlName`:String
+        - `ctrlCaption`:String
+        - `ctrlName`:String
+        - `posSize`:Rectangle - https://gist.github.com/990143
+        - `step`:integer
+        """
+
+        #throw the exceptions
+        try:
+            xpsProperties.setPropertyValue("PositionX",  posSize.X)
+            xpsProperties.setPropertyValue("PositionY",  posSize.Y)
+            xpsProperties.setPropertyValue("Width",  posSize.Width)
+            xpsProperties.setPropertyValue("Height",  posSize.Height)
+            xpsProperties.setPropertyValue("Name", ctrlName)
+            #xpsProperties.setPropertyValue("Step", step)
+
+            if ctrlCaption is not None:
+                xpsProperties.setPropertyValue("Label", ctrlCaption)
+
+            if (not self.ccTab.hasByName(ctrlName)):
+                self.ccTab.insertByName(ctrlName, xpsProperties)
+                print "Added "+ctrlName
+                
+            return xpsProperties
+
+        except Exception, ex:
+            print "Exception in LicenseChooserDialog.__createAWTControlInCCTab: "
+            print ex
+            print type(ex)
+            raise ex
+
     def __crateCC0LicenseTab(self):
         """Creates the CC0 license tab
         """
@@ -260,61 +298,61 @@ class LicenseChooserDialog():
         """
         try:
             #create the current license information
-            lblSelectedLicenseLabel = self.dlgLicenseSelector.createInstance(
+            lblSelectedLicenseLabel = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControl(lblSelectedLicenseLabel,
+            self.__createAWTControlInCCTab(lblSelectedLicenseLabel,
                                     self.LBL_SELECTED_LICENSE_LABEL,
                 "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1)
-            lblSelectedLicense = self.dlgLicenseSelector.createInstance(
+            lblSelectedLicense = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsSelectedLicense = self.__createAWTControl(
+            xpsSelectedLicense = self.__createAWTControlInCCTab(
                 lblSelectedLicense, self.LBL_SELECTED_LICENSE,
                 None, self.__makeRectangle(60, 20, 145, 30), 1)
             xpsSelectedLicense.setPropertyValue("MultiLine", True)
 
             #Allow commercial uses of your work?
-            lblAllowCommercialUse = self.dlgLicenseSelector.createInstance(
+            lblAllowCommercialUse = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
             #TODO:The next line needs localization support.
-            self.__createAWTControl(lblAllowCommercialUse,
+            self.__createAWTControlInCCTab(lblAllowCommercialUse,
                                     self.LBL_ALLOW_COMERCIAL_USE,
                 "commercial", self.__makeRectangle(15, 45, 100, 12), 1)
 
-            radioCommercialYes = self.dlgLicenseSelector.createInstance(
+            radioCommercialYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             #TODO:The next line needs localization support.
-            xpsRadioCommercialYes = self.__createAWTControl(
+            xpsRadioCommercialYes = self.__createAWTControlInCCTab(
                 radioCommercialYes, self.RDO_ALLOW_COMERCIAL_YES,
                 "Yes", self.__makeRectangle(20, 60, 30, 12), 1)
             #TODO: Original line was  new Short((short) 1))
             xpsRadioCommercialYes.setPropertyValue("State", 1)
 
-            radioCommercialNo = self.dlgLicenseSelector.createInstance(
+            radioCommercialNo = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioCommercialNo = self.__createAWTControl(
+            xpsRadioCommercialNo = self.__createAWTControlInCCTab(
                 radioCommercialNo, self.RDO_ALLOW_COMERCIAL_NO,
                 "No", self.__makeRectangle(20, 75, 30, 12), 1)
             #TODO: Original line was  new Short((short) 0))
             xpsRadioCommercialNo.setPropertyValue("State", 0)
 
             #Allow modifications of your work?
-            lblAllowModifications = self.dlgLicenseSelector.createInstance(
+            lblAllowModifications = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControl(lblAllowModifications,
+            self.__createAWTControlInCCTab(lblAllowModifications,
                                     self.LBL_ALLOW_MODIFICATIONS,
                 "derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
-            radioModificationsYes = self.dlgLicenseSelector.createInstance(
+            radioModificationsYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioModificationYes = self.__createAWTControl(
+            xpsRadioModificationYes = self.__createAWTControlInCCTab(
                 radioModificationsYes, self.RDO_ALLOW_MODIFICATIONS_YES,
                 "Yes", self.__makeRectangle(20, 105, 30, 12), 1)
             #TODO: was new Short((short) 1)
             xpsRadioModificationYes.setPropertyValue("State", 1)
 
-            radioModificationsShareAlike = self.dlgLicenseSelector.\
+            radioModificationsShareAlike = self.ccTab.\
               createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioModificationsShareAlike = self.__createAWTControl(
+            xpsRadioModificationsShareAlike = self.__createAWTControlInCCTab(
                 radioModificationsShareAlike,
                 self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
                 "Yes, as long as others share alike", self.__makeRectangle(
@@ -322,40 +360,40 @@ class LicenseChooserDialog():
             #TODO: was new Short((short) 1)
             xpsRadioModificationsShareAlike.setPropertyValue("State", 0)
 
-            radioModificationsNo = self.dlgLicenseSelector.createInstance(
+            radioModificationsNo = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioModificationsNo = self.__createAWTControl(
+            xpsRadioModificationsNo = self.__createAWTControlInCCTab(
                 radioModificationsNo, self.RDO_ALLOW_MODIFICATIONS_NO,
                 "No", self.__makeRectangle(20, 135, 30, 12), 1)
             #TODO: was new Short((short) 1)
             xpsRadioModificationsNo.setPropertyValue("State", 0)
 
             #Create the jurisdiction drop-down list
-            lblJurisdictionList = self.dlgLicenseSelector.createInstance(
+            lblJurisdictionList = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList = self.__createAWTControl(
+            xpsLblJurisdictionList = self.__createAWTControlInCCTab(
                 lblJurisdictionList, self.LBL_JURISDICTION_LIST,
                 "license.jurisdiction_question", self.__makeRectangle(
                     15, 150, 75, 15), 1)
 
-            cmbJurisdictionList = self.dlgLicenseSelector.createInstance(
+            cmbJurisdictionList = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControl(cmbJurisdictionList,
+            xPSetList = self.__createAWTControlInCCTab(cmbJurisdictionList,
                                                 self.CMB_JURISDICTION,
                 None, self.__makeRectangle(90, 150, 60, 12), 1)
             #TODO: Next two lines are different from the source- new Boolean()
             xPSetList.setPropertyValue("Dropdown", True)
             xPSetList.setPropertyValue("MultiSelection", False)
 
-            hrLine = self.dlgLicenseSelector.createInstance(
+            hrLine = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedLineModel")
-            xpshrLine = self.__createAWTControl(hrLine, "hrLine",
+            xpshrLine = self.__createAWTControlInCCTab(hrLine, "hrLine",
                 None, self.__makeRectangle(5, 165, 200, 5), 1)
             xpshrLine.setPropertyValue("Orientation", 0)
 
-            lblInstructions = self.dlgLicenseSelector.createInstance(
+            lblInstructions = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblInstructions = self.__createAWTControl(
+            xpsLblInstructions = self.__createAWTControlInCCTab(
                 lblInstructions, self.LBL_INSTRUCTIONS_CC,
                 ("With a Creative Commons license, you keep your copyright but"
                  " allow "
@@ -694,6 +732,8 @@ class LicenseChooserDialog():
 
         page_model = tab_model.createInstance("com.sun.star.awt.UnoPageModel")
         tab_model.insertByName(name, page_model)
+        print "xx"
+        print tab.getControl(name)
         n=len(tab_model.getElementNames())
         print "n is "+str(n)
         print type(args)
@@ -830,40 +870,41 @@ class LicenseChooserDialog():
             # #     oGBResults, "box", None,
             # #     self.__makeRectangle(2, 15, 206, 243), 0)
 
-            # # ##Create Tabs
-            # # self.__crateCC0LicenseTab()
-            # # self.__createCCLicenseTab()
-            # # self.__cratePDLicenseTab()
+           
 
 
             ######
             #Tab code
             ######
-            tab_model = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoMultiPageModel")
+            self.tab_model = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoMultiPageModel")
 
-            tab_model.PositionX = 0
-            tab_model.PositionY = 0
-            tab_model.Width = 206 #206
-            tab_model.Height = 24 #243
+            self.tab_model.PositionX = 0
+            self.tab_model.PositionY = 0
+            self.tab_model.Width = 206 #206
+            self.tab_model.Height = 243 #243
 
 
-            self.dlgLicenseSelector.insertByName("tab", tab_model)
-            tab = self.dialog.getControl("tab")
-
-            page_model1 = self.__AddTabPage(tab, "page1", "page1")
-            page_model2 = self.__AddTabPage(tab, "page2", "Page 2")
+            self.dlgLicenseSelector.insertByName("tab", self.tab_model)
+            self.tab=self.dialog.getControl("tab")
+            self.ccTab = self.__AddTabPage(self.tab, "page1", "Creative Commons")
+            page_model2 = self.__AddTabPage(self.tab, "page2", "CC0")
+            page_model3 = self.__AddTabPage(self.tab, "page3", "Public Domain")
 
             
-            #btn_model = page_model1.createInstance("com.sun.star.awt.UnoControlButtonModel")
+            btn_model = self.ccTab.createInstance("com.sun.star.awt.UnoControlButtonModel")
 
-            btn_model = self.dlgLicenseSelector.createInstance("com.sun.star.awt.UnoControlButtonModel")
+            
             btn_model.PositionX = 100
             btn_model.PositionY = 100
             btn_model.Width = 30
             btn_model.Height = 15
             btn_model.Label = "btn 1"
 
-            self.dlgLicenseSelector.insertByName("btn", btn_model)
+            self.ccTab.insertByName("btn", btn_model)
+            # # ##Create Tabs
+            ##self.__crateCC0LicenseTab()
+            self.__createCCLicenseTab()
+            # # self.__cratePDLicenseTab()
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -933,7 +974,7 @@ class LicenseChooserDialog():
             # #self.__addListners("XButton",None,None)
 
             # # self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_YES,
-            # #                    UpdateLicenseListner(self))
+            # #                  UpdateLicenseListner(self))
             # # self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_NO,
             # #                    UpdateLicenseListner(self))
             # # self.__addListners("XRadioButton",
