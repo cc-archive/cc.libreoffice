@@ -755,15 +755,15 @@ class LicenseChooserDialog():
             #set to modify the global copies of variables
             #global BTN_CC
 
-            dp = self.xMultiComponentFactory.createInstanceWithContext("com.sun.star.awt.DialogProvider", self.m_xContext) 
-            self.dialog = dp.createDialog("vnd.sun.star.extension://org.creativecommons.openoffice.CcOOoAddin/dialogs/Dialog1.xdl")
+            #dp = self.xMultiComponentFactory.createInstanceWithContext("com.sun.star.awt.DialogProvider", self.m_xContext) 
+            #self.dialog = dp.createDialog("vnd.sun.star.extension://org.creativecommons.openoffice.CcOOoAddin/dialogs/Dialog1.xdl")
 
-            self.dlgLicenseSelector= self.dialog.getModel()
+            #self.dlgLicenseSelector= self.dialog.getModel()
             
-            # create the dialog model and set the properties
-            # self.dlgLicenseSelector = self.xMultiComponentFactory.\
-            #   createInstanceWithContext(
-            #     "com.sun.star.awt.UnoControlDialogModel", self.m_xContext)
+            #create the dialog model and set the properties
+            self.dlgLicenseSelector = self.xMultiComponentFactory.\
+              createInstanceWithContext(
+                "com.sun.star.awt.UnoControlDialogModel", self.m_xContext)
 
             ###
             #The following part was changed from the origianl code
@@ -780,14 +780,14 @@ class LicenseChooserDialog():
             self.dlgLicenseSelector.Step = 1
 
 
-             ##create the dialog control and set the model
-            # self.dialog = self.xMultiComponentFactory.\
-            #   createInstanceWithContext(
-            #     "com.sun.star.awt.UnoControlDialog", self.m_xContext)
-            # # xControl = dialog
-            # #xControlModel =  dlgLicenseSelector
+            #create the dialog control and set the model
+            self.dialog = self.xMultiComponentFactory.\
+              createInstanceWithContext(
+                "com.sun.star.awt.UnoControlDialog", self.m_xContext)
+            # xControl = dialog
+            #xControlModel =  dlgLicenseSelector
 
-            # self.dialog.setModel(self.dlgLicenseSelector)
+            self.dialog.setModel(self.dlgLicenseSelector)
 
             
 
@@ -885,6 +885,11 @@ class LicenseChooserDialog():
 
 
             self.dlgLicenseSelector.insertByName("tab", self.tab_model)
+            toolkit = self.m_xContext.getServiceManager().createInstanceWithContext( 
+            "com.sun.star.awt.Toolkit", self.m_xContext)
+            self.dialog.createPeer(toolkit, None)
+            
+            
             self.tab=self.dialog.getControl("tab")
             self.ccTab = self.__AddTabPage(self.tab, "page1", "Creative Commons")
             page_model2 = self.__AddTabPage(self.tab, "page2", "CC0")
