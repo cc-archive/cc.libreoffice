@@ -82,6 +82,10 @@ class LicenseChooserDialog():
     CHK_YES_PD = "chkYesPD"
     CMB_TERRITORY = "cmbTerritory"
 
+    CC_TAB_NAME = "ccPage"
+    CC0_TAB_NAME = "cc0Page"
+    PD_TAB_NAME = "pdPage"
+
     cancelled = True
 
     def __init__(self, ccLoAddin, ctx):
@@ -154,7 +158,83 @@ class LicenseChooserDialog():
 
             if (not self.dlgLicenseSelector.hasByName(ctrlName)):
                 self.dlgLicenseSelector.insertByName(ctrlName, xpsProperties)
-                print "Added "+ctrlName
+
+            return xpsProperties
+        
+        except Exception, ex:
+            print "Exception in LicenseChooserDialog.__createAWTControl: "
+            print ex
+            print type(ex)
+            raise ex
+        
+
+    def __createAWTControlInCC0Tab(self, xpsProperties, ctrlName, ctrlCaption,
+                                   posSize, step):
+        """Add AWT control components to the dialog.
+
+        Arguments:
+        - `self`:
+        - `xpsProperties`:XPropertySet
+        - `ctrlName`:String
+        - `ctrlCaption`:String
+        - `ctrlName`:String
+        - `posSize`:Rectangle - https://gist.github.com/990143
+        - `step`:integer
+        """
+
+        #throw the exceptions
+        try:
+            xpsProperties.setPropertyValue("PositionX",  posSize.X)
+            xpsProperties.setPropertyValue("PositionY",  posSize.Y)
+            xpsProperties.setPropertyValue("Width",  posSize.Width)
+            xpsProperties.setPropertyValue("Height",  posSize.Height)
+            xpsProperties.setPropertyValue("Name", ctrlName)
+            #xpsProperties.setPropertyValue("Step", step)
+
+            if ctrlCaption is not None:
+                xpsProperties.setPropertyValue("Label", ctrlCaption)
+
+            if (not self.cc0Tab.hasByName(ctrlName)):
+                self.cc0Tab.insertByName(ctrlName, xpsProperties)
+                #print "Added "+ctrlName
+                
+            return xpsProperties
+
+        except Exception, ex:
+            print "Exception in LicenseChooserDialog.__createAWTControl: "
+            print ex
+            print type(ex)
+            raise ex
+
+    def __createAWTControlInPDTab(self, xpsProperties, ctrlName, ctrlCaption,
+                                   posSize, step):
+        """Add AWT control components to the dialog.
+
+        Arguments:
+        - `self`:
+        - `xpsProperties`:XPropertySet
+        - `ctrlName`:String
+        - `ctrlCaption`:String
+        - `ctrlName`:String
+        - `posSize`:Rectangle - https://gist.github.com/990143
+        - `step`:integer
+        """
+
+        #throw the exceptions
+        try:
+            xpsProperties.setPropertyValue("PositionX",  posSize.X)
+            xpsProperties.setPropertyValue("PositionY",  posSize.Y)
+            xpsProperties.setPropertyValue("Width",  posSize.Width)
+            xpsProperties.setPropertyValue("Height",  posSize.Height)
+            xpsProperties.setPropertyValue("Name", ctrlName)
+            #xpsProperties.setPropertyValue("Step", step)
+
+            if ctrlCaption is not None:
+                xpsProperties.setPropertyValue("Label", ctrlCaption)
+
+            if (not self.pdTab.hasByName(ctrlName)):
+                self.pdTab.insertByName(ctrlName, xpsProperties)
+                #print "Added "+ctrlName
                 
             return xpsProperties
 
@@ -192,7 +272,7 @@ class LicenseChooserDialog():
 
             if (not self.ccTab.hasByName(ctrlName)):
                 self.ccTab.insertByName(ctrlName, xpsProperties)
-                print "Added "+ctrlName
+                #print "Added "+ctrlName
                 
             return xpsProperties
 
@@ -206,11 +286,11 @@ class LicenseChooserDialog():
         """Creates the CC0 license tab
         """
         try:
-            lblWarning = self.dlgLicenseSelector.createInstance(
+            lblWarning = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             ##TODO: add the Java.util support to the following line
-            xpsLblWarning = self.__createAWTControl(lblWarning,
+            xpsLblWarning = self.__createAWTControlInCC0Tab(lblWarning,
                                                     self.LBL_INSTRUCTIONS_CC0,
                                                     ("Are you certain "
             "you wish to waive all "
@@ -230,11 +310,11 @@ class LicenseChooserDialog():
             fontDes.Weight = 150
             xpsLblWarning.setPropertyValue("FontDescriptor", fontDes)
 
-            chkWaive = self.dlgLicenseSelector.createInstance(
+            chkWaive = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
 
             ##TODO:Add java.util support to the following line
-            xpsChkWaive = self.__createAWTControl(chkWaive, self.CHK_WAIVE,
+            xpsChkWaive = self.__createAWTControlInCC0Tab(chkWaive, self.CHK_WAIVE,
                                 ("I hereby waive all copyright and related"
                                  " or neighboring rights together with all"
                                  "associated claims and causes of action with "
@@ -250,9 +330,9 @@ class LicenseChooserDialog():
             f = open(path, 'r')
             cc0LegalCode = f.read()
 
-            txtDeed = self.dlgLicenseSelector.createInstance(
+            txtDeed = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed = self.__createAWTControl(txtDeed,
+            xpsTxtDeed = self.__createAWTControlInCC0Tab(txtDeed,
                                                  self.TXT_LEGAL_CODE_CC0, None,
                 self.__makeRectangle(10, 145, 190, 60), 2)
             xpsTxtDeed.setPropertyValue("MultiLine", True)
@@ -260,10 +340,10 @@ class LicenseChooserDialog():
             xpsTxtDeed.setPropertyValue("VScroll", True)
             xpsTxtDeed.setPropertyValue("Text", cc0LegalCode)
 
-            chkYes = self.dlgLicenseSelector.createInstance(
+            chkYes = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
             ##TODO:Add java.util support to the following line
-            xpsChkYes = self.__createAWTControl(chkYes, self.CHK_YES_CC0,
+            xpsChkYes = self.__createAWTControlInCC0Tab(chkYes, self.CHK_YES_CC0,
                     ("I have read and understand the terms and intended"
                      "legal effect of CC0, "
                      "and hereby voluntarily elect to apply it to this work."),
@@ -271,16 +351,16 @@ class LicenseChooserDialog():
             xpsChkYes.setPropertyValue("MultiLine", True)
 
             ##Territory
-            lblJurisdictionList = self.dlgLicenseSelector.createInstance(
+            lblJurisdictionList = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList = self.__createAWTControl(
+            xpsLblJurisdictionList = self.__createAWTControlInCC0Tab(
                 lblJurisdictionList, "lbltrritory",
                 "Territory", self.__makeRectangle(10, 230, 45, 15), 2)
 
             #TODO: This list currently contains nothing. Add items to the list
-            cmbTerritoryList = self.dlgLicenseSelector.createInstance(
+            cmbTerritoryList = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControl(cmbTerritoryList,
+            xPSetList = self.__createAWTControlInCC0Tab(cmbTerritoryList,
                                                 self.CMB_TERRITORY,
                 None, self.__makeRectangle(55, 230, 120, 12), 2)
             xPSetList.setPropertyValue("Dropdown", True)
@@ -420,10 +500,10 @@ class LicenseChooserDialog():
         """Creates the PD license tab
         """
         try:
-            lblWarning = self.dlgLicenseSelector.createInstance(
+            lblWarning = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
-            xpsLblWarning = self.__createAWTControl(lblWarning, "pdwarning",
+            xpsLblWarning = self.__createAWTControlInPDTab(lblWarning, "pdwarning",
                 ("You have selected the Public Domain Certification. "
                  "The Public Domain Certification should only be used "
                  "to certify "
@@ -452,9 +532,9 @@ class LicenseChooserDialog():
             pdLegalCode = f.read()
 
             #Legal code
-            txtDeed = self.dlgLicenseSelector.createInstance(
+            txtDeed = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed = self.__createAWTControl(txtDeed,
+            xpsTxtDeed = self.__createAWTControlInPDTab(txtDeed,
                                                self.TXT_LEGAL_CODE_PD, None,
                                                self.__makeRectangle(
                                                    10, 130, 190, 75), 3)
@@ -464,11 +544,11 @@ class LicenseChooserDialog():
             xpsTxtDeed.setPropertyValue("VScroll", True)
             xpsTxtDeed.setPropertyValue("Text", pdLegalCode)
 
-            chkYes = self.dlgLicenseSelector.createInstance(
+            chkYes = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
 
             ##TODO: add internationalization support
-            xpsChkYes = self.__createAWTControl(chkYes, self.CHK_YES_PD,
+            xpsChkYes = self.__createAWTControlInPDTab(chkYes, self.CHK_YES_PD,
                                 ("I have read and understand the terms"
                                  " and intended legal effect of "
                                  "this tool, and hereby voluntarily"
@@ -482,13 +562,14 @@ class LicenseChooserDialog():
             print ex
             raise ex
 
-    def __addListners(self, classType, controlName, listner):
+    def __addListners(self, classType, controlName, listner,page=None):
         """Creates event listners
 
         Arguments:
         - `classType`: The type of the class
         - `controlName`: String
         - `listner`: XEventListener
+        - `page`: The tab page that the controlName is in.If page is None, it'll be assumed that the controlName is in the dialog(not in a tab) 
         """
         if (classType == 'XButton'):
             #print "XButton"
@@ -496,12 +577,15 @@ class LicenseChooserDialog():
             objectButton.addActionListener(listner)
 
         elif (classType == 'XRadioButton'):
-            #print 'XRadioButton'
-            self.dialog.getControl(controlName).addItemListener(listner)
+            #get the CC tab page by default since xRadioButtons are
+            #only available in that tab.
+            ccTabPage = self.tab.getControl(self.CC_TAB_NAME)
+            ccTabPage.getControl(controlName).addItemListener(listner)
 
         elif (classType == 'XCheckBox'):
-            #print 'XCheckBox'
-            self.dialog.getControl(controlName).addItemListener(listner)
+            #get the tab page
+            tabPage = self.tab.getControl(page)
+            tabPage.getControl(controlName).addItemListener(listner)
 
     def close(self, ):
         """End the excution of the dialog
@@ -891,25 +975,31 @@ class LicenseChooserDialog():
             
             
             self.tab=self.dialog.getControl("tab")
-            self.ccTab = self.__AddTabPage(self.tab, "page1", "Creative Commons")
-            page_model2 = self.__AddTabPage(self.tab, "page2", "CC0")
-            page_model3 = self.__AddTabPage(self.tab, "page3", "Public Domain")
+            self.ccTab = self.__AddTabPage(self.tab, self.CC_TAB_NAME, "Creative Commons")
+            self.cc0Tab = self.__AddTabPage(self.tab, self.CC0_TAB_NAME, "CC0")
+            self.pdTab = self.__AddTabPage(self.tab, self.PD_TAB_NAME, "Public Domain")
 
             
-            btn_model = self.ccTab.createInstance("com.sun.star.awt.UnoControlButtonModel")
+            # btn_model = self.ccTab.createInstance("com.sun.star.awt.UnoControlButtonModel")
 
             
-            btn_model.PositionX = 100
-            btn_model.PositionY = 100
-            btn_model.Width = 30
-            btn_model.Height = 15
-            btn_model.Label = "btn 1"
+            # btn_model.PositionX = 100
+            # btn_model.PositionY = 100
+            # btn_model.Width = 30
+            # btn_model.Height = 15
+            # btn_model.Label = "btn 1"
 
-            self.ccTab.insertByName("btn", btn_model)
+            # self.ccTab.insertByName("btn", btn_model)
+            # print "xxxxxxxxxxxxxxxxxxxxxxxxxx"
+            # page1=self.tab.getControl(self.CC_TAB_NAME)
+            # btn1 = page1.getControl("btn")
+            # print btn1
+            # print "yyyyyyyyyyyyyyyyyyyyyyyyy"
+
             # # ##Create Tabs
-            ##self.__crateCC0LicenseTab()
+            self.__crateCC0LicenseTab()
             self.__createCCLicenseTab()
-            # # self.__cratePDLicenseTab()
+            self.__cratePDLicenseTab()
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -940,65 +1030,65 @@ class LicenseChooserDialog():
 
            
 
-            # # ##add an action listener to the Previous button control
-            # # #xControlCont=self.dialog
-            # # cmbJList = self.dialog .getControl(self.CMB_JURISDICTION)
-            # # #TODO:Done- Add the items to the cmbJList properly (Line 227-230)
-            # # self.jurisdictionList = jurisdictions()
-            # # #TODO-seems like lines 229-230 are unnecessary
+            ##add an action listener to the Previous button control
+            #xControlCont=self.dialog
+            cmbJList = self.tab.getControl(self.CC_TAB_NAME).getControl(self.CMB_JURISDICTION)
+            #TODO:Done- Add the items to the cmbJList properly (Line 227-230)
+            self.jurisdictionList = jurisdictions()
+            #TODO-seems like lines 229-230 are unnecessary
 
-            # # self.juriList = jurisdictions()
+            self.juriList = jurisdictions()
 
-            # # count = 0
+            count = 0
 
-            # # ##add Unported, which isn't actually a jurisdiction'
-            # # cmbJList.addItem("Unported", count)
-            # # count += 1
+            ##add Unported, which isn't actually a jurisdiction'
+            cmbJList.addItem("Unported", count)
+            count += 1
 
-            # # #TODO:Done- add line 236-239
-            # # for uri in self.juriList:
+            #TODO:Done- add line 236-239
+            for uri in self.juriList:
 
-            # #     title = Jurisdiction(uri).getTitle()
-            # #     cmbJList.addItem(title, count)
-            # #     count += 1
+                title = Jurisdiction(uri).getTitle()
+                cmbJList.addItem(title, count)
+                count += 1
 
-            # # ##add a bogus place-holder for Unported in the JurisdictionList to
-            # # ##ensure indices match up when determining the item
-            # # ##selectedJurisdiction
+            ##add a bogus place-holder for Unported in the JurisdictionList to
+            ##ensure indices match up when determining the item
+            ##selectedJurisdiction
 
-            # # self.juriList.insert(0, None)
+            self.juriList.insert(0, None)
 
-            # # ##Pre-select Unported
-            # # #TODO: bit different from the origianl code
-            # # cmbJList.selectItemPos(0, True)
-            # # cmbJList.makeVisible(0)
+            ##Pre-select Unported
+            #TODO: bit different from the origianl code
+            cmbJList.selectItemPos(0, True)
+            cmbJList.makeVisible(0)
 
             # ##listen for license selection changes
             # #self.__addListners("XCheckBox", None,None)
             # #self.__addListners("XRadioButton",None,None)
             # #self.__addListners("XButton",None,None)
 
-            # # self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_YES,
-            # #                  UpdateLicenseListner(self))
-            # # self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_NO,
-            # #                    UpdateLicenseListner(self))
-            # # self.__addListners("XRadioButton",
-            # #                    self.RDO_ALLOW_MODIFICATIONS_YES,
-            # #                    UpdateLicenseListner(self))
-            # # self.__addListners("XRadioButton",
-            # #                    self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
-            # #                    UpdateLicenseListner(self))
-            # # self.__addListners("XRadioButton", self.RDO_ALLOW_MODIFICATIONS_NO,
-            # #                    UpdateLicenseListner(self))
+            self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_YES,
+                             UpdateLicenseListner(self))
+            self.__addListners("XRadioButton", self.RDO_ALLOW_COMERCIAL_NO,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",
+                               self.RDO_ALLOW_MODIFICATIONS_YES,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton",
+                               self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
+                               UpdateLicenseListner(self))
+            self.__addListners("XRadioButton", self.RDO_ALLOW_MODIFICATIONS_NO,
+                               UpdateLicenseListner(self))
 
-            # # cmbJList.addItemListener(JurisdictionSelectListener(self))
+            cmbJList.addItemListener(JurisdictionSelectListener(self))
 
-            # # self.__addListners("XCheckBox",
-            # #                    self.CHK_WAIVE, AcceptWaiveListener(self))
-            # # self.__addListners("XCheckBox",
-            # #                    self.CHK_YES_CC0, AcceptListener(self))
-            # # self.__addListners("XCheckBox",
-            # #                    self.CHK_YES_PD, AcceptListener(self))
+            self.__addListners("XCheckBox",
+                               self.CHK_WAIVE, AcceptWaiveListener(self),self.CC0_TAB_NAME)
+            self.__addListners("XCheckBox",
+                               self.CHK_YES_CC0, AcceptListener(self),self.CC0_TAB_NAME)
+            self.__addListners("XCheckBox",
+                               self.CHK_YES_PD, AcceptListener(self),self.PD_TAB_NAME)
 
             ##add an action listeners to buttons
 
