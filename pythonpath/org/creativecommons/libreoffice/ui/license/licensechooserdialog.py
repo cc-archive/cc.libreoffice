@@ -601,7 +601,7 @@ class LicenseChooserDialog():
         """
         try:
 
-            xPSetList = self.xNameCont.getByName(rdoName)
+            xPSetList = self.ccTab.getByName(rdoName)
             if (xPSetList.getPropertyValue("State") == 1):
                 return True
             else:
@@ -619,7 +619,8 @@ class LicenseChooserDialog():
         label value.
         """
         try:
-            xpsSelectedLicense = self.xNameCont.getByName(
+            ccTabPage = self.tab.getControl(self.CC_TAB_NAME)
+            xpsSelectedLicense = self.ccTab.getByName(
                 self.LBL_SELECTED_LICENSE)
             xpsSelectedLicense.setPropertyValue("Label",
                                                 self.getSelectedLicense().name)
@@ -744,7 +745,7 @@ class LicenseChooserDialog():
         - `bValue`: Boolean
         """
         try:
-            xPSetList = self.xNameCont.getByName(controlName)
+            xPSetList = self.ccTab.getByName(controlName)
             if bValue:
                 xPSetList.setPropertyValue("State", 1)
             else:
