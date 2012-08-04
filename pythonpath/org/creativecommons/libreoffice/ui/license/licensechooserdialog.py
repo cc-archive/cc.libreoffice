@@ -584,9 +584,9 @@ class LicenseChooserDialog():
 
         elif (classType == 'XCheckBox'):
             #get the tab page
-            print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
             tabPage = self.tab.getControl(page)
-            print "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+
             tabPage.getControl(controlName).addItemListener(listner)
 
     def close(self, ):
