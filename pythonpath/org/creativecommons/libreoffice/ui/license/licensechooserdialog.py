@@ -674,6 +674,9 @@ class LicenseChooserDialog():
             ##print 'ss'
             #print dir(self.xN)
 
+            ##xNameCont=dialog
+            
+            ccTabPage = self.tab.getControl(self.CC_TAB_NAME)
             ##TODO: original was "ImageControl" + item
             if (self.xNameCont.hasByName("ImageControl" + item)):
                 try:
@@ -693,7 +696,7 @@ class LicenseChooserDialog():
                     print ex
                     raise ex
 
-            oICModel = self.dlgLicenseSelector.createInstance(
+            oICModel = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlImageControlModel")
             xGraphic = None
 
@@ -711,7 +714,7 @@ class LicenseChooserDialog():
             oICModel.setPropertyValue("Width", rect.Width)
             oICModel.setPropertyValue("Step", step)
 
-            self.xNameCont.insertByName("ImageControl" + item, oICModel)
+            self.ccTab.insertByName("ImageControl" + item, oICModel)
             oICModel.setPropertyValue("HelpText", title)
             oICModel.setPropertyValue("Graphic", xGraphic)
 
