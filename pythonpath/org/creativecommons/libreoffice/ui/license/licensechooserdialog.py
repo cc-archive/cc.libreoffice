@@ -968,7 +968,7 @@ class LicenseChooserDialog():
             self.tab_model.PositionX = 0
             self.tab_model.PositionY = 0
             self.tab_model.Width = 206 #206
-            self.tab_model.Height = 243 #243
+            self.tab_model.Height = 270 #243
 
 
             self.dlgLicenseSelector.insertByName("tab", self.tab_model)
@@ -1181,17 +1181,18 @@ class LicenseChooserDialog():
                 self.trritories += (trr,)
             #trritories+=('1',)
             #trritories+=('2',)
-            # # self.cmbTList = self.dialog.getControl(self.CMB_TERRITORY)
-            # # ##TODO: was (short)
-            # # self.cmbTList.addItem("",  0)
+            cc0TabPage = self.tab.getControl(self.CC0_TAB_NAME)
+            self.cmbTList = cc0TabPage.getControl(self.CMB_TERRITORY)
             ##TODO: was (short)
-            # self.cmbTList.addItems(self.trritories,  1)
-            # ##TODO: was (short)
-            # self.cmbTList.selectItemPos(0, True)
-            # ##TODO: was (short)
-            # self.cmbTList.makeVisible(0)
+            self.cmbTList.addItem("",  0)
+            ##TODO: was (short)
+            self.cmbTList.addItems(self.trritories,  1)
+            ##TODO: was (short)
+            self.cmbTList.selectItemPos(0, True)
+            ##TODO: was (short)
+            self.cmbTList.makeVisible(0)
 
-            # self.cmbTList.addItemListener(TerritorySelectListener(self))
+            self.cmbTList.addItemListener(TerritorySelectListener(self))
             ##execute the dialog
             self.dialog .setVisible(True)
             self.dialog .execute()
