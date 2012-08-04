@@ -51,54 +51,58 @@ class Chooser():
         queryString = ("SELECT ?license "
         "WHERE {"
         "      ?license cc:requires cc:Attribution . "
-        "      ?license cc:permits  cc:Distribution . "
-        "OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } . "
+        "      ?license cc:permits  cc:Distribution . ")
+
+        optionalQuery=("OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } . "
         "OPTIONAL {?license dcq:isReplacedBy ?replacedBy } . ")
+
+        extraQuery=""
 
         qFilter = "!bound(?deprecatedDate) && !bound(?replacedBy) "
 
         #add jurisdiction filter
         if ((jurisdiction is None) or (isinstance(jurisdiction, Unported))):
             #limit results to unported
-            queryString +=\
+            optionalQuery +=\
             ("OPTIONAL { ?license cc:jurisdiction ?jurisdiction } . ")
             qFilter += "&& !bound(?jurisdiction) "
 
         else:
             #add a qualifier for the specific jurisdiction
-            queryString += "?license cc:jurisdiction <" + \
+            extraQuery += "?license cc:jurisdiction <" + \
               str(jurisdiction) + "> . "
         #add optional qualifiers
         if allowRemixing:
-            queryString += "?license cc:permits cc:DerivativeWorks . "
+            extraQuery += "?license cc:permits cc:DerivativeWorks . "
 
         else:
             #only -nd licenses
-            queryString +=\
+            optionalQuery +=\
             "OPTIONAL { ?license ?prohibitsRemixing cc:DerivativeWorks } . "
             qFilter += "&& !bound(?prohibitsRemixing) "
 
         if prohibitCommercialUse:
-            queryString += "?license cc:prohibits cc:CommercialUse . "
+            extraQuery += "?license cc:prohibits cc:CommercialUse . "
         else:
             #filter out -nc licenses
-            queryString +=\
+            optionalQuery +=\
               "OPTIONAL { ?license ?allowCommercialUse cc:CommercialUse } . "
             qFilter += "&& !bound(?allowCommercialUse) "
 
         if requireShareAlike:
-            queryString += "?license cc:requires cc:ShareAlike . "
+            extraQuery += "?license cc:requires cc:ShareAlike . "
 
         else:
             #filter out -sa licenses
-            queryString +=\
+            optionalQuery +=\
                "OPTIONAL { ?license ?noShareAlike cc:ShareAlike } . "
             qFilter += "&& !bound(?noShareAlike) "
 
         #close the query
+        queryString += extraQuery + optionalQuery
         queryString += "FILTER(" + qFilter + ")      }"
 
-        #print queryString
+        print queryString
 
         return queryString
 
