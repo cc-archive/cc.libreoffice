@@ -2,6 +2,22 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 
+import sys
+
+##Load our rdflib files if the user already has a
+#local copy of rdflib installed
+bundle_path = None
+for part in sys.path:
+    if part.count("uno_packages") and part.count("cache") and part.\
+      count("pythonpath"):
+        bundle_path = part
+        break
+if bundle_path:
+    addTo = 1
+    sys.path.append(sys.path[addTo])
+    sys.path.insert(addTo, bundle_path)
+
+
 import traceback
 
 import unohelper
@@ -230,34 +246,6 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
 
         return None
 
-        ###################################################################
-        ###################################################################
-
-        # # #This code fragment creates a sample window
-        # # oDialogModel = self.ctx.ServiceManager.createInstanceWithContext(
-        # #     "com.sun.star.awt.UnoControlDialogModel", self.ctx )
-
-        # # # Initialize the dialog model's properties.
-        # # oDialogModel.PositionX = 200
-        # # oDialogModel.PositionY = 200
-        # # oDialogModel.Width = 200
-        # # oDialogModel.Height = 200
-        # # oDialogModel.Title = "Title"
-
-
-        # # oDialogControl = self.ctx.ServiceManager.createInstanceWithContext(
-        # #     "com.sun.star.awt.UnoControlDialog", self.ctx )
-        # # oDialogControl.setModel( oDialogModel )
-        # # print "setModel Ok"
-
-        # # #segfault on next line
-        # # oDialogControl.setVisible( True )
-        # # print "visible"
-        # # oDialogControl.execute()
-        # # print "execute"
-
-        #####################################################################
-        ####################################################################
     def execute(self, args):
         """
     Arguments:
