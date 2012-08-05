@@ -330,15 +330,17 @@ class LicenseChooserDialog():
             f = open(path, 'r')
             cc0LegalCode = f.read()
 
-            txtDeed = self.cc0Tab.createInstance(
+            xpsTxtDeed = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed = self.__createAWTControlInCC0Tab(txtDeed,
-                                                 self.TXT_LEGAL_CODE_CC0, None,
-                self.__makeRectangle(10, 145, 190, 60), 2)
+            
             xpsTxtDeed.setPropertyValue("MultiLine", True)
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
             xpsTxtDeed.setPropertyValue("VScroll", True)
             xpsTxtDeed.setPropertyValue("Text", cc0LegalCode)
+            self.__createAWTControlInCC0Tab(xpsTxtDeed,
+                                                 self.TXT_LEGAL_CODE_CC0, None,
+                self.__makeRectangle(10, 145, 190, 60), 2)
+            
 
             chkYes = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
@@ -360,11 +362,13 @@ class LicenseChooserDialog():
             #TODO: This list currently contains nothing. Add items to the list
             cmbTerritoryList = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControlInCC0Tab(cmbTerritoryList,
+            
+            cmbTerritoryList.setPropertyValue("Dropdown", True)
+            cmbTerritoryList.setPropertyValue("MultiSelection", False)
+            
+            self.__createAWTControlInCC0Tab(cmbTerritoryList,
                                                 self.CMB_TERRITORY,
                 None, self.__makeRectangle(55, 230, 120, 12), 2)
-            xPSetList.setPropertyValue("Dropdown", True)
-            xPSetList.setPropertyValue("MultiSelection", False)
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__crateCC0LicenseTab'
@@ -458,12 +462,12 @@ class LicenseChooserDialog():
 
             cmbJurisdictionList = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControlInCCTab(cmbJurisdictionList,
+            
+            cmbJurisdictionList.setPropertyValue("Dropdown", True)
+            cmbJurisdictionList.setPropertyValue("MultiSelection", False)
+            self.__createAWTControlInCCTab(cmbJurisdictionList,
                                                 self.CMB_JURISDICTION,
                 None, self.__makeRectangle(90, 150, 60, 12), 1)
-            #TODO: Next two lines are different from the source- new Boolean()
-            xPSetList.setPropertyValue("Dropdown", True)
-            xPSetList.setPropertyValue("MultiSelection", False)
 
             hrLine = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedLineModel")
@@ -532,17 +536,18 @@ class LicenseChooserDialog():
             pdLegalCode = f.read()
 
             #Legal code
-            txtDeed = self.pdTab.createInstance(
+            xpsTxtDeed = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed = self.__createAWTControlInPDTab(txtDeed,
-                                               self.TXT_LEGAL_CODE_PD, None,
-                                               self.__makeRectangle(
-                                                   10, 130, 190, 75), 3)
-
             xpsTxtDeed.setPropertyValue("MultiLine", True)
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
             xpsTxtDeed.setPropertyValue("VScroll", True)
             xpsTxtDeed.setPropertyValue("Text", pdLegalCode)
+            xpsTxtDeed = self.__createAWTControlInPDTab(xpsTxtDeed,
+                                               self.TXT_LEGAL_CODE_PD, None,
+                                               self.__makeRectangle(
+                                                   10, 130, 190, 75), 3)
+
+            
 
             chkYes = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
