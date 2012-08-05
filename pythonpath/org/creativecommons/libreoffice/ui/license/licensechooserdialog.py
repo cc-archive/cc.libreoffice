@@ -794,12 +794,12 @@ class LicenseChooserDialog():
     def __Array(self, *args ):
         """This is just sugar coating so that code from OOoBasic which
         contains the Array() function can work perfectly in python."""
-        print 'came'
+        
         tArray = ()
         for arg in args:
             tArray += (arg,)
-        print 'left'
-        print len(tArray)
+        
+        
         return tArray
     
     def __AddTabPage(self, tab, name, title):
@@ -820,19 +820,19 @@ class LicenseChooserDialog():
         #args=aStruct
         args=uno.createUnoStruct("com.sun.star.beans.NamedValue")
         
-        print 'O.o'
+        
         args.Name = "Title"
         args.Value = title
         tab_model = tab.getModel()
 
         page_model = tab_model.createInstance("com.sun.star.awt.UnoPageModel")
         tab_model.insertByName(name, page_model)
-        print "xx"
-        print tab.getControl(name)
+        
+        
         n=len(tab_model.getElementNames())
-        print "n is "+str(n)
-        print type(args)
-        print dir(tab)
+        
+        
+        
         tab.setTabProps(n, self.__Array(args))
         return page_model
         

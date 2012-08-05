@@ -102,7 +102,7 @@ class Chooser():
         queryString += extraQuery + optionalQuery
         queryString += "FILTER(" + qFilter + ")      }"
 
-        print queryString
+        #print queryString
 
         return queryString
 
