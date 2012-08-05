@@ -362,11 +362,13 @@ class LicenseChooserDialog():
             #TODO: This list currently contains nothing. Add items to the list
             cmbTerritoryList = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControlInCC0Tab(cmbTerritoryList,
+            
+            cmbTerritoryList.setPropertyValue("Dropdown", True)
+            cmbTerritoryList.setPropertyValue("MultiSelection", False)
+            
+            self.__createAWTControlInCC0Tab(cmbTerritoryList,
                                                 self.CMB_TERRITORY,
                 None, self.__makeRectangle(55, 230, 120, 12), 2)
-            xPSetList.setPropertyValue("Dropdown", True)
-            xPSetList.setPropertyValue("MultiSelection", False)
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__crateCC0LicenseTab'
@@ -460,12 +462,12 @@ class LicenseChooserDialog():
 
             cmbJurisdictionList = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
-            xPSetList = self.__createAWTControlInCCTab(cmbJurisdictionList,
+            
+            cmbJurisdictionList.setPropertyValue("Dropdown", True)
+            cmbJurisdictionList.setPropertyValue("MultiSelection", False)
+            self.__createAWTControlInCCTab(cmbJurisdictionList,
                                                 self.CMB_JURISDICTION,
                 None, self.__makeRectangle(90, 150, 60, 12), 1)
-            #TODO: Next two lines are different from the source- new Boolean()
-            xPSetList.setPropertyValue("Dropdown", True)
-            xPSetList.setPropertyValue("MultiSelection", False)
 
             hrLine = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedLineModel")
