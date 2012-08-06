@@ -1056,7 +1056,7 @@ class LicenseChooserDialog():
             ##add Unported, which isn't actually a jurisdiction'
             cmbJList.addItem("Unported", count)
             count += 1
-
+                        
             #TODO:Done- add line 236-239
             for uri in self.juriList:
 
@@ -1064,6 +1064,7 @@ class LicenseChooserDialog():
                 cmbJList.addItem(title, count)
                 count += 1
 
+            
             ##add a bogus place-holder for Unported in the JurisdictionList to
             ##ensure indices match up when determining the item
             ##selectedJurisdiction

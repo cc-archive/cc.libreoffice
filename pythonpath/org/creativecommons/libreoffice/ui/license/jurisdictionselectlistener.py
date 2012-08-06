@@ -23,8 +23,7 @@ class JurisdictionSelectListener(UpdateLicenseListner):
         - `event`:ItemEvent
         """
         print "O.o"
-        self.dialog.selectedJurisdiction = self.dialog.juriList.pop(
-            event.Selected)
+        self.dialog.selectedJurisdiction = self.dialog.juriList[event.Selected]
         self.dialog.updateSelectedLicense()
 
     def disposing(self, event):
