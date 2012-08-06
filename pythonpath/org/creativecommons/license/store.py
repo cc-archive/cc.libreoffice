@@ -156,14 +156,15 @@ def object(subject, predicate):
     #get generator over the objects in case there's more than one
     print subject
     print predicate
-    gen = RDF_GRAPH.objects(subject, predicate)
+    gen = RDF_GRAPH.objects(URIRef(subject), predicate)
         
     for it in gen:
 
         print it
-        if isinstance(it, Resource):
-            #this is a Resource
-            return it
+        # if isinstance(it, Resource):
+        #     #this is a Resource
+        #     return it
+        return it
 
     return None
 

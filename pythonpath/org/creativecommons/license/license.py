@@ -35,9 +35,9 @@ class License():
             self.territory = None
 
         ####Jurisdiction####
-        juri = object(self.license_uri, self.CC['jurisdiction'])
-        if juri is not None:
-            self.jurisdiction = Jurisdiction(jurisdiction.identifier)
+        jurisdiction = object(self.license_uri, self.CC['jurisdiction'])
+        if jurisdiction is not None:
+            self.jurisdiction = Jurisdiction(str(jurisdiction))
 
         else:
             self.jurisdiction = Unported()

@@ -10,7 +10,7 @@ from org.creativecommons.libreoffice.ui.license.updatelicenselistner \
 class JurisdictionSelectListener(UpdateLicenseListner):
     """Get the user selected jurisdiction.
     """
-    def __init__(self, tab, dialog):
+    def __init__(self, dialog):
         """
         Arguments:
         - `tab`:The tab in which the jurisdiction list will be shown
@@ -22,7 +22,7 @@ class JurisdictionSelectListener(UpdateLicenseListner):
         Arguments:
         - `event`:ItemEvent
         """
-        print "O.o"
+        
         self.dialog.selectedJurisdiction = self.dialog.juriList[event.Selected]
         self.dialog.updateSelectedLicense()
 

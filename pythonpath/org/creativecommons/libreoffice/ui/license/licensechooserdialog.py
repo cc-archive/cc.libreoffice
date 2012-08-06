@@ -1094,7 +1094,7 @@ class LicenseChooserDialog():
             self.__addListners("XRadioButton", self.RDO_ALLOW_MODIFICATIONS_NO,
                                UpdateLicenseListner(self))
 
-            cmbJList.addItemListener(JurisdictionSelectListener(self.ccTab,self))
+            cmbJList.addItemListener(JurisdictionSelectListener(self))
 
             self.__addListners("XCheckBox",
                                self.CHK_WAIVE, AcceptWaiveListener(self),self.CC0_TAB_NAME)
