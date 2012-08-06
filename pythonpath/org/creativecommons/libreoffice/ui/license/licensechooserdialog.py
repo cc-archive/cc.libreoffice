@@ -629,6 +629,7 @@ class LicenseChooserDialog():
             ccTabPage = self.tab.getControl(self.CC_TAB_NAME)
             xpsSelectedLicense = self.ccTab.getByName(
                 self.LBL_SELECTED_LICENSE)
+            
             xpsSelectedLicense.setPropertyValue("Label",
                                                 self.getSelectedLicense().name)
 
@@ -1092,7 +1093,7 @@ class LicenseChooserDialog():
             self.__addListners("XRadioButton", self.RDO_ALLOW_MODIFICATIONS_NO,
                                UpdateLicenseListner(self))
 
-            cmbJList.addItemListener(JurisdictionSelectListener(self))
+            cmbJList.addItemListener(JurisdictionSelectListener(self.ccTab,self))
 
             self.__addListners("XCheckBox",
                                self.CHK_WAIVE, AcceptWaiveListener(self),self.CC0_TAB_NAME)
@@ -1290,10 +1291,12 @@ class LicenseChooserDialog():
         """Returns the selected license
         """
         try:
+            print "in"
             #retrieve the Document for the issued license
             licenseChooser = Chooser()
 
             type = self.dlgLicenseSelector.getPropertyValue("Step")
+            print "type :"+str(type)
 
             if (type == 2):
                 #TODO:From where self.selectedTerritory set??

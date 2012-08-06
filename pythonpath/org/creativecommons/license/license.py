@@ -45,6 +45,10 @@ class License():
         ####name####
         #TODO: implement the Null pointer Exception handling
         #TODO: Can return names like -"NoneNoneUnported"
+        print "1 :: "+str(literal(self.license_uri, self.DC['title'], "en"))
+        print "2 :: "+str(literal(self.license_uri,self.DCTerms['hasVersion'], ""))
+        print "3 :: "+str(self.jurisdiction.getTitle())
+        print
         self.name = str(literal(
                             self.license_uri, self.DC['title'], "en")) +\
                             "" + str(literal(
