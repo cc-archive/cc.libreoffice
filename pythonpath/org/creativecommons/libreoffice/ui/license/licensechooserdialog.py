@@ -31,6 +31,9 @@ from org.creativecommons.libreoffice.ui.license.pdclicklistener \
   import PDClickListener
 from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
   import TerritorySelectListener
+from org.creativecommons.libreoffice.ui.license.cc0tabfocuslistener \
+  import CC0TabFocusListener
+  
 
   #from org.creativecommons.license.store import Store
 from org.creativecommons.license.store import jurisdictions
@@ -594,6 +597,12 @@ class LicenseChooserDialog():
 
             tabPage.getControl(controlName).addItemListener(listner)
 
+        elif (classType == 'XTabPage'):
+
+            tabPage = self.tab.getControl(page)
+            print dir(tabPage)
+            tabPage.addFocusListener(listner)
+
     def close(self, ):
         """End the excution of the dialog
         """
@@ -1111,7 +1120,9 @@ class LicenseChooserDialog():
             self.__addListners("XButton", self.BTN_OK, OKClickListener(self))
             self.__addListners("XButton",
                                self.BTN_CANCEL, CancelClickListener(self))
-            # self.__addListners("XButton", self.BTN_CC, CCClickListener(self))
+
+            #add listners to tabs
+            self.__addListners("XTabPage", None, CC0TabFocusListener(self),self.CC0_TAB_NAME)
             # # self.__addListners("XButton", self.BTN_CC0, CC0ClickListener(self))
             # # self.__addListners("XButton",
             # #                    self.BTN_PUBLICDOMAIN, PDClickListener(self))
