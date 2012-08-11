@@ -5,7 +5,6 @@
 import unohelper
 
 from com.sun.star.awt import XActionListener
-#from com.sun.star.system import SystemShellExecuteFlags
 
 
 class FaqClickListener(XActionListener, unohelper.Base):
