@@ -210,14 +210,14 @@ class Writer(LoProgram):
                 mxDocText.insertString(
                     docCursor,
                     "To the extent possible under law, the person who"
-                    + "associated ",
+                    + " associated ",
                     False)
                 mxDocText.insertTextContent(docCursor, licenseNameField, False)
                 mxDocText.insertString(docCursor,
                                        " with this work has waived all "
                         + "copyright and related or neighboring rights to this"
                         + " work. The summary of the Legal Code is"
-                        + "available at ", False)
+                        + " available at ", False)
                 mxDocText.insertTextContent(docCursor, licenseURLField, False)
                 mxDocText.insertString(docCursor, ".", False)
 
@@ -225,8 +225,8 @@ class Writer(LoProgram):
                     territory = self.__createUserTextField(mxDoc, mxDoc,
                                                          "Territory",
                                                          docLicense.territory)
-                    mxDocText.insertString(docCursor, "This work is published"
-                                           + "from ", False)
+                    mxDocText.insertString(docCursor, " This work is published"
+                                           + " from ", False)
                     mxDocText.insertTextContent(docCursor, territory, False)
 
                 mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK,
@@ -239,7 +239,7 @@ class Writer(LoProgram):
                                        False)
                 mxDocText.insertTextContent(docCursor, licenseNameField, False)
                 mxDocText.insertString(docCursor, ". The summary of the Legal"
-                                       + "Code is available at ", False)
+                                       + " Code is available at ", False)
                 mxDocText.insertTextContent(docCursor, licenseURLField, False)
                 mxDocText.insertString(docCursor, ".", False)
                 mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK,
@@ -249,7 +249,7 @@ class Writer(LoProgram):
                 mxDocText.insertControlCharacter(docCursor, PARAGRAPH_BREAK,
                                                  False)
                 mxDocText.insertString(docCursor, "This document is licensed"
-                                       + "under the ", False)
+                                       + " under the ", False)
                 mxDocText.insertTextContent(docCursor, licenseNameField, False)
                 mxDocText.insertString(docCursor, " license, available at ",
                                        False)
