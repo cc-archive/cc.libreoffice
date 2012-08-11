@@ -31,8 +31,8 @@ from org.creativecommons.libreoffice.ui.license.pdclicklistener \
   import PDClickListener
 from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
   import TerritorySelectListener
-from org.creativecommons.libreoffice.ui.license.cc0tabfocuslistener \
-  import CC0TabFocusListener
+from org.creativecommons.libreoffice.ui.license.tablistener \
+  import TabListener
   
 
   #from org.creativecommons.license.store import Store
@@ -599,9 +599,9 @@ class LicenseChooserDialog():
 
         elif (classType == 'XTabPage'):
 
-            tabPage = self.tab.getControl(page)
-            print dir(tabPage)
-            tabPage.addFocusListener(listner)
+            #tabPage = self.tab.getControl(page)
+            #print dir(tabPage)
+            self.tab.addTabListener(listner)
 
     def close(self, ):
         """End the excution of the dialog
@@ -1122,7 +1122,7 @@ class LicenseChooserDialog():
                                self.BTN_CANCEL, CancelClickListener(self))
 
             #add listners to tabs
-            self.__addListners("XTabPage", None, CC0TabFocusListener(self),self.CC0_TAB_NAME)
+            self.__addListners("XTabPage", None, TabListener(self),self.CC0_TAB_NAME)
             # # self.__addListners("XButton", self.BTN_CC0, CC0ClickListener(self))
             # # self.__addListners("XButton",
             # #                    self.BTN_PUBLICDOMAIN, PDClickListener(self))
@@ -1239,50 +1239,52 @@ class LicenseChooserDialog():
         btnArray = [self.BTN_CC, self.BTN_CC0, self.BTN_PUBLICDOMAIN]
 
         try:
-            for index, entry in enumerate(btnArray):
-                xPSetLicenseButton = self.xNameCont.getByName(entry)
-                fontDes = xPSetLicenseButton.getPropertyValue("FontDescriptor")
+            # for index, entry in enumerate(btnArray):
+            #     xPSetLicenseButton = self.xNameCont.getByName(entry)
+            #     fontDes = xPSetLicenseButton.getPropertyValue("FontDescriptor")
 
-                if (index + 1 == type):
-                    fontDes.Weight = 150
-                    ##TODO: was (short)1
-                    xPSetLicenseButton.setPropertyValue("State", 1)
-                else:
-                    fontDes.Weight = 50
-                    ##TODO: was (short)0
-                    xPSetLicenseButton.setPropertyValue("State", 0)
+            #     if (index + 1 == type):
+            #         fontDes.Weight = 150
+            #         ##TODO: was (short)1
+            #         xPSetLicenseButton.setPropertyValue("State", 1)
+            #     else:
+            #         fontDes.Weight = 50
+            #         ##TODO: was (short)0
+            #         xPSetLicenseButton.setPropertyValue("State", 0)
 
-                xPSetLicenseButton.setPropertyValue("FontDescriptor", fontDes)
+            #     xPSetLicenseButton.setPropertyValue("FontDescriptor", fontDes)
 
             if (type != 1):
                 self.xPSetFinishButton.setPropertyValue("Enabled", False)
             else:
                 self.xPSetFinishButton.setPropertyValue("Enabled", True)
 
-            self.xNameCont.getByName(self.CHK_YES_CC0).\
+            self.cc0Tab.getByName(self.CHK_YES_CC0).\
               setPropertyValue("Enabled", False)
-            self.xNameCont.getByName(self.TXT_LEGAL_CODE_CC0).setPropertyValue(
+            self.cc0Tab.getByName(self.TXT_LEGAL_CODE_CC0).setPropertyValue(
                 "Enabled", False)
             ##TODO: was (short)0
-            self.xNameCont.getByName(self.CHK_WAIVE).setPropertyValue(
+            self.cc0Tab.getByName(self.CHK_WAIVE).setPropertyValue(
                 "State", 0)
-            self.xNameCont.getByName(self.CHK_YES_CC0).\
+            self.cc0Tab.getByName(self.CHK_YES_CC0).\
               setPropertyValue("State", 0)
-            self.xNameCont.getByName(self.CMB_TERRITORY).\
+            self.cc0Tab.getByName(self.CMB_TERRITORY).\
               setPropertyValue("Enabled", False)
 
             ##TODO: was (short)
             self.cmbTList.selectItemPos(0, True)
 
-            self.xNameCont.getByName(self.CHK_YES_PD).setPropertyValue(
+            self.pdTab.getByName(self.CHK_YES_PD).setPropertyValue(
                 "State", 0)
 
             ##Note: It seems like that self.dlgLicenseSelector and
             ##xPSetDialog are equal
             self.dlgLicenseSelector.setPropertyValue("Step", type)
+            print "In setLicenseType : "+str(type)
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.setLicenseType'
+            traceback.print_exc()
             print type(ex)
             print ex
             raise ex
