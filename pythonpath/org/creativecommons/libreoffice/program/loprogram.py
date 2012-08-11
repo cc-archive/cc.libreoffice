@@ -16,13 +16,19 @@ from com.sun.star.lang import IllegalArgumentException
 
 from com.sun.star.beans.PropertyAttribute import MAYBEVOID, REMOVEABLE
 
-from org.creativecommons.libreoffice.program.constants import Constants
 from org.creativecommons.license.license import License
 
 
 class LoProgram(object):
     """
     """
+
+    CC_METADATA_IDENTIFIER = "http://creativecommons.org/ns#"
+    LICENSE_URI = "license"
+    LICENSE_NAME = "License Name"
+    LANGUAGE_FILE_NAME = "language.properties"
+    TERRITORY = "territory"
+
     def __init__(self, component, m_xContext):
         """
         Arguments:
@@ -42,12 +48,12 @@ class LoProgram(object):
         #docProperties=docInfo
 
         if ((docInfo.getPropertySetInfo().hasPropertyByName(
-                Constants.LICENSE_URI)) and
+                self.LICENSE_URI)) and
             (docInfo.getPropertySetInfo().hasPropertyByName(
-                Constants.TERRITORY))):
+                self.TERRITORY))):
             try:
-                return License(docInfo.getPropertyValue(Constants.LICENSE_URI),
-                        docInfo.getPropertyValue(Constants.TERRITORY))
+                return License(docInfo.getPropertyValue(self.LICENSE_URI),
+                        docInfo.getPropertyValue(self.TERRITORY))
 
             except WrappedTargetException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
@@ -61,9 +67,9 @@ class LoProgram(object):
                 #raise ex
 
         elif (docInfo.getPropertySetInfo().hasPropertyByName(
-                Constants.LICENSE_URI)):
+                self.LICENSE_URI)):
             try:
-                return License(docInfo.getPropertyValue(Constants.LICENSE_URI))
+                return License(docInfo.getPropertyValue(self.LICENSE_URI))
             except WrappedTargetException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
                 print ex
@@ -87,19 +93,16 @@ class LoProgram(object):
         #xDocumentInfoSupplier=self.component
         docInfo = self.component.getDocumentInfo()
         #docProperties=docInfo
-
         #docPropertyContainer=docInfo
         if (not docInfo.getPropertySetInfo().hasPropertyByName(
-                Constants.LICENSE_URI)):
-            print "in if-1"
+                self.LICENSE_URI)):
 
             #add the necessary properties to this document
             try:
-                docInfo.addProperty(Constants.LICENSE_URI,
+                docInfo.addProperty(self.LICENSE_URI,
                                     MAYBEVOID, "")
-                docInfo.addProperty(Constants.LICENSE_NAME,
+                docInfo.addProperty(self.LICENSE_NAME,
                                     MAYBEVOID, "")
-                print "in try-1"
 
             except IllegalArgumentException, ex:
                 print "Exception in OOoProgram.setDocumentLicense: "
@@ -120,25 +123,25 @@ class LoProgram(object):
 
         #end of if
         try:
-            docInfo.setPropertyValue(Constants.LICENSE_URI,
+            docInfo.setPropertyValue(self.LICENSE_URI,
                                      license.license_uri)
-            docInfo.setPropertyValue(Constants.LICENSE_NAME, license.name)
+            docInfo.setPropertyValue(self.LICENSE_NAME, license.name)
 
             print
             if (license.territory is not None):
                 if(not docInfo.getPropertySetInfo().hasPropertyByName(
-                    Constants.TERRITORY)):
+                    self.TERRITORY)):
 
-                    docInfo.addProperty(Constants.TERRITORY,
+                    docInfo.addProperty(self.TERRITORY,
                                         REMOVEABLE, "")
-                docInfo.setPropertyValue(Constants.TERRITORY,
+                docInfo.setPropertyValue(self.TERRITORY,
                                          license.territory)
 
             elif(docInfo.getPropertySetInfo().hasPropertyByName(
-                Constants.TERRITORY)):
+                self.TERRITORY)):
 
                 try:
-                    docInfo.removeProperty(Constants.TERRITORY)
+                    docInfo.removeProperty(self.TERRITORY)
                 except NotRemoveableException, ex:
                     print "Exception in OOoProgram.setDocumentLicense: "
                     print ex
