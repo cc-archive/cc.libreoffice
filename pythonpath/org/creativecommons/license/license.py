@@ -43,33 +43,20 @@ class License():
             self.jurisdiction = Unported()
 
         ####name####
-        #TODO: implement the Null pointer Exception handling
-        #TODO: Can return names like -"NoneNoneUnported"
-        print "1 :: "+str(literal(self.license_uri, self.DC['title'], "en"))
-        print "2 :: "+str(literal(self.license_uri,self.DCTerms['hasVersion'], None))
-        print "3 :: "+str(self.jurisdiction.getTitle())
-        print
-        self.name = str(literal(
-                            self.license_uri, self.DC['title'], "en")) +\
-                            " " + str(literal(
-                                self.license_uri,
-                                self.DCTerms['hasVersion'], None)) + " " +\
-                                str(self.jurisdiction.getTitle())
 
-        title= literal(self.license_uri, self.DC['title'], "en")
+        title = literal(self.license_uri, self.DC['title'], "en")
         version = literal(self.license_uri, self.DCTerms['hasVersion'], None)
         juri = str(self.jurisdiction.getTitle())
 
         if not title:
             #CC0 license
-            self.name = "CC0" + " " +  str(version) + " " + "Universal"
+            self.name = "CC0" + " " + str(version) + " " + "Universal"
         elif not version:
             #PD license
             self.name = str(title)
         else:
             #CC license
             self.name = str(title) + " " + str(version) + " " + juri
-        
 
         ####requireShareAlike####
         self.requireShareAlike = exists(
@@ -108,91 +95,3 @@ class License():
             self.imageUrl =\
                ("http://i.creativecommons.org/l/" +\
                 self.getCode() + "/88x31.png")
-
-
-
-
-
-    # ##TODO:Implemented
-    # def getName(self, ):
-    #     """Get the license for "en" locale.
-    #     """
-
-    #     #TODO: implement the Null pointer Exception handling
-    #     #TODO: Can return names like -"NoneNoneUnported"
-
-    #     #print "In getName()"
-    #     ##TODO-remove the dummy value
-    #     #self.license_uri="http://creativecommons.org/licenses/by/3.0/"
-
-    #     name=str(self.licenseStore.literal(self.license_uri,self.DC['title'],"en"))+""+str(self.licenseStore.literal(self.license_uri,self.DCTerms['hasVersion'],""))+str(self.getJurisdiction().getTitle())
-
-    #     #print "name :"+name
-        
-        
-    #     return name
-
-
-    # def getJurisdiction(self, ):
-    #     """Get the jurisdiction.
-    #     """
-        
-    #     jurisdiction=self.licenseStore.object(self.license_uri,self.CC['jurisdiction'])
-    #     if jurisdiction is not None:
-    #         return Jurisdiction(jurisdiction.identifier)
-
-    #     return Unported()
-        
-    # def requireShareAlike(self, ):
-    #     """
-    #     """
-    #     return self.licenseStore.exists(self.license_uri,self.CC['requires'],self.CC['ShareAlike'])
-
-    # def prohibitCommercial(self, ):
-    #     """
-    #     """
-        
-        
-    #     return self.licenseStore.exists(self.license_uri,self.CC['prohibits'],self.CC['CommercialUse'])
-
-    # def allowRemix(self, ):
-    #     """
-    #     """
-    #     return self.licenseStore.exists(self.license_uri,self.CC['permits'],self.CC['DerivativeWorks'])
-
-    # def getCode(self, ):
-    #     """Return the license code for this License.  For example, the code for the
-    #     Attribution 3.0 license (http://creativecommons.org/licenses/by/3.0/) is
-    #     "by".  Note this is based on a Creative Commons-specific standard.
-    #     """
-    #     try:
-    #         return self.license_uri.split('/')[4]
-    #     except Exception, ex:
-    #         traceback.print_exc()
-
-    # def getVersion(self, ):
-    #     """License version
-    #     """
-
-    #     version=self.licenseStore.literal(self.license_uri,
-    #                                          self.DCTerms['hasVersion'],None)
-
-    #     print "Version-"+str(version)
-    #     if version is None:
-    #         return None
-        
-    #     return str(version)
-
-    # def getImageUrl(self, ):
-    #     """
-    #     """
-    #     version=self.getVersion()
-
-    #     if version is not None:
-    #         return ("http://i.creativecommons.org/l/" + self.getCode() + "/"
-    #                 + version + "/88x31.png")
-
-    #     else:
-    #         return ("http://i.creativecommons.org/l/" + self.getCode() + "/88x31.png")
-
-    
