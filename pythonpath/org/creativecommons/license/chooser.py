@@ -2,12 +2,11 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 
-#import isodate
+
 import rdflib
 from rdflib import plugin
 from rdflib.namespace import Namespace
 
-#from org.creativecommons.license.store import Store
 from org.creativecommons.license.store import query
 from org.creativecommons.license.unported import Unported
 from org.creativecommons.license.license import License
@@ -29,7 +28,7 @@ class Chooser():
     def __init__(self, ):
         """
         """
-        #self.licenseStore = store
+        pass
 
     def __makeLicenseQuery(self, allowRemixing,
                            prohibitCommercialUse,
@@ -43,20 +42,16 @@ class Chooser():
         - `jurisdiction`: Jurisdiction
         """
         #Create the basic query
-
-        # "PREFIX cc: <http://creativecommons.org/ns#> "
-        # "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
-        # "PREFIX dcq: <http://purl.org/dc/terms/> "
-        # "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
         queryString = ("SELECT ?license "
         "WHERE {"
         "      ?license cc:requires cc:Attribution . "
         "      ?license cc:permits  cc:Distribution . ")
 
-        optionalQuery=("OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } . "
+        optionalQuery =\
+           ("OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } . "
         "OPTIONAL {?license dcq:isReplacedBy ?replacedBy } . ")
 
-        extraQuery=""
+        extraQuery = ""
 
         qFilter = "!bound(?deprecatedDate) && !bound(?replacedBy) "
 
@@ -102,8 +97,6 @@ class Chooser():
         queryString += extraQuery + optionalQuery
         queryString += "FILTER(" + qFilter + ")      }"
 
-        #print queryString
-
         return queryString
 
     def selectLicense(self, allowRemixing, prohibitCommercialUse,
@@ -119,14 +112,6 @@ class Chooser():
         queryString = self.__makeLicenseQuery(
             allowRemixing, prohibitCommercialUse,
                                             requireShareAlike, jurisdiction)
-
-        #Execute the query and obtain results
-        # results = RDF_GRAPH.query(queryString,
-        #                 initNs=dict(
-        #                     cc=Namespace("http://creativecommons.org/ns#"),
-        #                     dc=Namespace("http://purl.org/dc/elements/1.1/"),
-        #                     dcq=Namespace("http://purl.org/dc/terms/"),
-        #                     rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
 
         results = query(queryString)
         for uri in results:
@@ -149,28 +134,6 @@ class Chooser():
         "OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } . "
         "OPTIONAL {?license dcq:isReplacedBy ?replacedBy } . ")
 
-        # queryString =("PREFIX cc: <http://creativecommons.org/ns#> "
-        #               "PREFIX dc: <http://purl.org/dc/elements/1.1/> "
-        #     "PREFIX dcq: <http://purl.org/dc/terms/> "
-        #     "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> "
-        #     "SELECT ?license "
-        #      "WHERE {"
-        #     "      ?license cc:permits  cc:Distribution . "
-        #     "      ?license cc:permits  cc:DerivativeWorks . "
-        #     "      ?license cc:permits  cc:Reproduction . "
-        #     "OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } . "
-        #     "OPTIONAL {?license dcq:isReplacedBy ?replacedBy } . ")
-
-       #  PDTOOL_QUERY = """SELECT ?license
-    # WHERE {
-    # ?license cc:permits cc:Distribution .
-    # ?license cc:permits  cc:DerivativeWorks .
-    # ?license cc:permits  cc:Reproduction .
-    # OPTIONAL {?license cc:deprecatedOn ?deprecatedDate } .
-    # OPTIONAL {?license dcq:isReplacedBy ?replacedBy } .
-    # FILTER(!bound(?deprecatedDate) && !bound(?replacedBy))
-    # }"""
-
         qFilter = "!bound(?deprecatedDate) && !bound(?replacedBy) "
 
         #close the query
@@ -189,12 +152,6 @@ class Chooser():
         queryString = self.__makePDToolQuery()
 
         #Execute the query and obtain results
-        # results = RDF_GRAPH.query(queryString,
-        #                   initNs=dict(
-        #                       cc=Namespace("http://creativecommons.org/ns#"),
-        #                       dc=Namespace("http://purl.org/dc/elements/1.1/"),
-        #                       dcq=Namespace("http://purl.org/dc/terms/"),
-        #                       rdf=Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")))
         results = query(queryString)
 
         for uri in results.result:
