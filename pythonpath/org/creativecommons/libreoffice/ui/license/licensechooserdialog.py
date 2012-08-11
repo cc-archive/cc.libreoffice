@@ -28,22 +28,15 @@ from org.creativecommons.libreoffice.ui.license.territoryselectlistener \
 from org.creativecommons.libreoffice.ui.license.tablistener \
   import TabListener
 
-  #from org.creativecommons.license.store import Store
 from org.creativecommons.license.store import jurisdictions
 from org.creativecommons.license.chooser import Chooser
 from org.creativecommons.license.license import License
 from org.creativecommons.license.jurisdiction import Jurisdiction
 
-#from org.creativecommons.libreoffice.program.Writer import Writer
-#from org.creativecommons.libreoffice.program.Calc import Calc
-
 
 class LicenseChooserDialog():
     """Creates a new instance of LicenseChooserDialog
     """
-
-    #TODO: add the global Constants support
-
     #Constants
 
     BTN_CC = "btnCC"
@@ -396,7 +389,7 @@ class LicenseChooserDialog():
             #TODO:The next line needs localization support.
             self.__createAWTControlInCCTab(lblAllowCommercialUse,
                                     self.LBL_ALLOW_COMERCIAL_USE,
-                "commercial", self.__makeRectangle(15, 45, 100, 12), 1)
+                "Commercial", self.__makeRectangle(15, 45, 100, 12), 1)
 
             radioCommercialYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
@@ -420,7 +413,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             self.__createAWTControlInCCTab(lblAllowModifications,
                                     self.LBL_ALLOW_MODIFICATIONS,
-                "derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
+                "Derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
             radioModificationsYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioModificationYes = self.__createAWTControlInCCTab(
@@ -453,7 +446,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             xpsLblJurisdictionList = self.__createAWTControlInCCTab(
                 lblJurisdictionList, self.LBL_JURISDICTION_LIST,
-                "license.jurisdiction_question", self.__makeRectangle(
+                "Jurisdiction", self.__makeRectangle(
                     15, 150, 75, 15), 1)
 
             cmbJurisdictionList = self.ccTab.createInstance(
@@ -569,7 +562,8 @@ class LicenseChooserDialog():
         - `classType`: The type of the class
         - `controlName`: String
         - `listner`: XEventListener
-        - `page`: The tab page that the controlName is in.If page is None, it'll be assumed that the controlName is in the dialog(not in a tab)
+        - `page`: The tab page that the controlName is in.If page is None,
+        it'll be assumed that the controlName is in the dialog(not in a tab)
         """
         if (classType == 'XButton'):
             #print "XButton"
