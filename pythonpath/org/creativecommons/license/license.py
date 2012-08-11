@@ -56,6 +56,21 @@ class License():
                                 self.DCTerms['hasVersion'], None)) + " " +\
                                 str(self.jurisdiction.getTitle())
 
+        title= literal(self.license_uri, self.DC['title'], "en")
+        version = literal(self.license_uri, self.DCTerms['hasVersion'], None)
+        juri = str(self.jurisdiction.getTitle())
+
+        if not title:
+            #CC0 license
+            self.name = "CC0" + " " +  str(version) + " " + "Universal"
+        elif not version:
+            #PD license
+            self.name = str(title)
+        else:
+            #CC license
+            self.name = str(title) + " " + str(version) + " " + juri
+        
+
         ####requireShareAlike####
         self.requireShareAlike = exists(
               self.license_uri, self.CC['requires'], self.CC['ShareAlike'])
