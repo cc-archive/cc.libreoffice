@@ -18,23 +18,9 @@ class Jurisdiction():
         """
         self.uri = uri
 
-    # @staticmethod
-    # def byId(id):
-    #     """
-    #     Arguments:
-    #     - `id`:String
-    #     """
-    #     #TODO:This was a class wide variable
-    #     JURIS_BASE = "http://creativecommons.org/international/"
-    #     return Jurisdiction(JURIS_BASE + id + "/")
-
     def __repr__(self):
         return self.uri
 
-    # def getTitle(self, ):
-    #     """
-    #     """
-    #     return self.getTitle("en")
     def getTitle(self, lang=None):
         """
         Arguments:
