@@ -195,29 +195,23 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             #     return;
             # }
 
-            print "Entered"
             self.updateCurrentComponent()
 
             #Create the dialog for license selection
             dialog = LicenseChooserDialog(self, self.ctx)
             dialog.showDialog()
 
-            print "entering"
             if not dialog.cancelled:
                 #retrieve the selected License
                 selected = dialog.getSelectedLicense()
-                print "1"
                 document = self.getProgramWrapper()
-                print "2"
-                print "license :" + selected.license_uri
+
                 #store the license information in the document
                 document.setDocumentLicense(selected)
                 ##TODO: Add the line 290
-                print "3"
                 wrapper = self.getProgramWrapper()
                 wrapper.updateVisibleNotice()
 
-                print "exiting"
         except Exception, ex:
             print "Exception in CcOOoAddin.selectLicense: "
             traceback.print_exc()
