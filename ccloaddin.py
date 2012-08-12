@@ -13,9 +13,7 @@ for part in sys.path:
         bundle_path = part
         break
 if bundle_path:
-    addTo = 1
-    sys.path.append(sys.path[addTo])
-    sys.path.insert(addTo, bundle_path)
+    sys.path.insert(1, bundle_path)
 
 
 import traceback
@@ -24,18 +22,13 @@ import unohelper
 
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
+from com.sun.star.task import XJob
 
 from org.creativecommons.libreoffice.ui.license.licensechooserdialog \
    import LicenseChooserDialog
-
-#from org.creativecommons.license.store import Store
 from org.creativecommons.libreoffice.program.writer import Writer
 from org.creativecommons.libreoffice.program.calc import Calc
 from org.creativecommons.libreoffice.program.draw import Draw
-#from org.creativecommons.license.chooser import Chooser
-
-from com.sun.star.task import XJob
-
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
 IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
