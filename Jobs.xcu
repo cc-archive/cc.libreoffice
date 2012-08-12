@@ -6,9 +6,9 @@
     oor:package="org.openoffice.Office"
     oor:name="Jobs">
     <node oor:name="Jobs">
-        <node oor:name="org.creativecommons.openoffice" oor:op="replace">
+        <node oor:name="org.creativecommons.libreoffice" oor:op="replace">
             <prop oor:name="Service" oor:type="xs:string">
-                <value>org.creativecommons.openoffice.CcOOoAddin</value>
+                <value>org.creativecommons.libreoffice.CcLoAddin</value>
             </prop>
             <node oor:name="Arguments">
             </node>
@@ -17,12 +17,12 @@
     <node oor:name="Events">
     <node oor:name="OnStartApp" oor:op="fuse">
     <node oor:name="JobList">
-        <node oor:name="org.creativecommons.openoffice" oor:op="replace"/>
+        <node oor:name="org.creativecommons.libreoffice" oor:op="replace"/>
         </node>
     </node>
     <node oor:name="onMyOwnJob" oor:op="fuse">
         <node oor:name="JobList">
-            <node oor:name="org.creativecommons.openoffice" oor:op="replace"/>
+            <node oor:name="org.creativecommons.libreoffice" oor:op="replace"/>
             </node>
 
         </node>

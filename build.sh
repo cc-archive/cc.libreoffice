@@ -8,7 +8,7 @@ mv test.zip out.oxt
 echo "Created new extension"
 
 #Removes the extension if it is already installed
-/usr/lib/libreoffice/program/unopkg remove org.creativecommons.openoffice.CcOOoAddin
+/usr/lib/libreoffice/program/unopkg remove org.creativecommons.libreoffice.CcLoAddin
 echo "Uninstalled the old extension"
 
 #Adds the new extension
@@ -23,4 +23,4 @@ libreoffice --writer --nofirststartwizard
 
 #Removes the extension when quitting
 echo "Removing the installed extension"
-/usr/lib/libreoffice/program/unopkg remove org.creativecommons.openoffice.CcOOoAddin
+/usr/lib/libreoffice/program/unopkg remove org.creativecommons.libreoffice.CcLoAddin

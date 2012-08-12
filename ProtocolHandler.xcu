@@ -4,7 +4,7 @@
   <node oor:name="HandlerSet">
     <node oor:name="org.creativecommons.libreoffice.CcLoAddin" oor:op="replace">
       <prop oor:name="Protocols" oor:type="oor:string-list">
-        <value>org.creativecommons.openoffice.ccooo:*</value>
+        <value>org.creativecommons.libreoffice.cclo:*</value>
       </prop>
     </node>
   </node>

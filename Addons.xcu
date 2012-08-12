@@ -6,7 +6,7 @@
                     oor:package="org.openoffice.Office">
     <node oor:name="AddonUI">
         <node oor:name="OfficeMenuBarMerging">
-            <node oor:name="org.creativecommons.openoffice.ccooo" oor:op="replace">
+            <node oor:name="org.creativecommons.libreoffice.cclo" oor:op="replace">
                 <node oor:name="S1" oor:op="replace">
                     <prop oor:name="MergePoint">
                         <!--<value>.uno:InsertMenu\.uno:InsertDoc</value>-->
@@ -39,7 +39,7 @@
                             <node oor:name="Submenu">
                                 <node oor:name="m1" oor:op="replace">
                                     <prop oor:name="URL" oor:type="xs:string">
-                                        <value>org.creativecommons.openoffice.ccooo:InsertStatement</value>
+                                        <value>org.creativecommons.libreoffice.cclo:InsertStatement</value>
                                     </prop>
                                     <prop oor:name="ImageIdentifier" oor:type="xs:string">
                                         <value/>
@@ -57,7 +57,7 @@
                                 </node>
                                 <node oor:name="m2" oor:op="replace">
                                     <prop oor:name="URL" oor:type="xs:string">
-                                        <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
+                                        <value>org.creativecommons.libreoffice.cclo:SelectLicense</value>
                                     </prop>
                                     <prop oor:name="ImageIdentifier" oor:type="xs:string">
                                         <value/>
@@ -232,9 +232,9 @@
             <!--         </prop> -->
             <!--     </node> -->
             <!-- </node> -->
-            <node oor:name="org.creativecommons.openoffice.ccooo.SelectLicense.images" oor:op="replace">
+            <node oor:name="org.creativecommons.libreoffice.cclo.SelectLicense.images" oor:op="replace">
                 <prop oor:name="URL" oor:type="xs:string">
-                    <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
+                    <value>org.creativecommons.libreoffice.cclo:SelectLicense</value>
                 </prop>
                 <node oor:name="UserDefinedImages">
                     <prop oor:name="ImageSmallURL">
@@ -251,9 +251,9 @@
                     </prop>
                 </node>
             </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertStatement.images" oor:op="replace">
+            <node oor:name="org.creativecommons.libreoffice.cclo.InsertStatement.images" oor:op="replace">
                 <prop oor:name="URL" oor:type="xs:string">
-                    <value>org.creativecommons.openoffice.ccooo:InsertStatement</value>
+                    <value>org.creativecommons.libreoffice.cclo:InsertStatement</value>
                 </prop>
                 <node oor:name="UserDefinedImages">
                     <prop oor:name="ImageSmallURL">

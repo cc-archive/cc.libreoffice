@@ -31,7 +31,7 @@ from org.creativecommons.libreoffice.program.calc import Calc
 from org.creativecommons.libreoffice.program.draw import Draw
 
 SERVICE_NAME = "com.sun.star.frame.ProtocolHandler"
-IMPLE_NAME = "org.creativecommons.openoffice.CcOOoAddin"
+IMPLE_NAME = "org.creativecommons.libreoffice.CcLoAddin"
 
 
 def createInstance(ctx):
@@ -131,7 +131,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     # XDispatchProvider
 
     def queryDispatch(self, url, name, flags):
-        if url.Protocol == "org.creativecommons.openoffice.ccooo:":
+        if url.Protocol == "org.creativecommons.libreoffice.cclo:":
             return self
         return None
 
@@ -141,7 +141,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     # XDispatch
     def dispatch(self, url, args):
 
-        if url.Protocol == "org.creativecommons.openoffice.ccooo:":
+        if url.Protocol == "org.creativecommons.libreoffice.cclo:":
 
             self.updateCurrentComponent()
 
