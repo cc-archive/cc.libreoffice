@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description xmlns="http://openoffice.org/extensions/description/2006" xmlns:xlink="http://www.w3.org/1999/xlink">
     <version value="0.7.0"/>
-    <identifier value="org.creativecommons.openoffice.CcOOoAddin"/>
+    <identifier value="org.creativecommons.libreoffice.CcLoAddin"/>
     <registration>
         <!--        <simple-license accept-by="user" default-license-id="en">
             <license-text lang="en" license-id="en" xlink:href="licenses/LICENSE"/>

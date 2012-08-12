@@ -714,7 +714,7 @@ class LicenseChooserDialog():
             xGraphic = None
 
             path = "vnd.sun.star.extension://org.creativecommons." + \
-              "openoffice.CcOOoAddin/images/information.png"
+              "libreoffice.CcLoAddin/images/information.png"
             xGraphic = self.__getGraphic(path)
             #print "xGraphic: "+xGraphic
 
