@@ -90,6 +90,9 @@ class LicenseChooserDialog():
         # get the service manager from the component context
         self.xMultiComponentFactory = self.m_xContext.getServiceManager()
 
+        #initialize selectedTerritory, useful when a territory is not selected
+        self.selectedTerritory = None
+
         #TODO-how about uno.createUnoStruct ?
     # The CoreReflection object.
     def __createUnoStruct(self, cTypeName):
