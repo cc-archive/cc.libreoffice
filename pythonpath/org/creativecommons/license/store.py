@@ -30,14 +30,16 @@ class RdfLoaderThread(threading.Thread):
         global RDF_GRAPH
         RDF_GRAPH = rdflib.Graph()
 
-        path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+        #os independent relative path
+        rPath = "."+os.path.sep+"rdf"+os.path.sep
+        path = os.path.join(os.path.dirname(__file__), rPath+"schema.rdf")
         RDF_GRAPH.parse(path)
 
-        path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+        path = os.path.join(os.path.dirname(__file__), rPath+"index.rdf")
         RDF_GRAPH.parse(path)
 
         path = os.path.\
-          join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+          join(os.path.dirname(__file__), rPath+"jurisdictions.rdf")
         RDF_GRAPH.parse(path)
         print "Thread end!"
 
