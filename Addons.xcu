@@ -213,25 +213,25 @@
             <!-- </node> -->
         </node>
         <node oor:name="Images">
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr.images" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>org.creativecommons.openoffice.ccooo:InsertPictureFlickr</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>%origin%/images/insert_image_16.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageSmallHCURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageBigHCURL">
-                        <value/>
-                    </prop>
-                </node>
-            </node>
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr.images" oor:op="replace"> -->
+            <!--     <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--         <value>org.creativecommons.openoffice.ccooo:InsertPictureFlickr</value> -->
+            <!--     </prop> -->
+            <!--     <node oor:name="UserDefinedImages"> -->
+            <!--         <prop oor:name="ImageSmallURL"> -->
+            <!--             <value>%origin%/images/insert_image_16.png</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageSmallHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--     </node> -->
+            <!-- </node> -->
             <node oor:name="org.creativecommons.openoffice.ccooo.SelectLicense.images" oor:op="replace">
                 <prop oor:name="URL" oor:type="xs:string">
                     <value>org.creativecommons.openoffice.ccooo:SelectLicense</value>
@@ -270,63 +270,63 @@
                     </prop>
                 </node>
             </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertOpenClipArt.images" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>org.creativecommons.openoffice.ccooo:InsertOpenClipArt</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>%origin%/images/insert_image_16.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageSmallHCURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageBigHCURL">
-                        <value/>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertWikimediaCommons.images" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>org.creativecommons.openoffice.ccooo:InsertWikimediaCommons</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>%origin%/images/insert_image_16.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageSmallHCURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageBigHCURL">
-                        <value/>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPicasa.images" oor:op="replace">
-                <prop oor:name="URL" oor:type="xs:string">
-                    <value>org.creativecommons.openoffice.ccooo:InsertPicasa</value>
-                </prop>
-                <node oor:name="UserDefinedImages">
-                    <prop oor:name="ImageSmallURL">
-                        <value>%origin%/images/insert_image_16.png</value>
-                    </prop>
-                    <prop oor:name="ImageBigURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageSmallHCURL">
-                        <value/>
-                    </prop>
-                    <prop oor:name="ImageBigHCURL">
-                        <value/>
-                    </prop>
-                </node>
-            </node>
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertOpenClipArt.images" oor:op="replace"> -->
+            <!--     <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--         <value>org.creativecommons.openoffice.ccooo:InsertOpenClipArt</value> -->
+            <!--     </prop> -->
+            <!--     <node oor:name="UserDefinedImages"> -->
+            <!--         <prop oor:name="ImageSmallURL"> -->
+            <!--             <value>%origin%/images/insert_image_16.png</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageSmallHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--     </node> -->
+            <!-- </node> -->
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertWikimediaCommons.images" oor:op="replace"> -->
+            <!--     <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--         <value>org.creativecommons.openoffice.ccooo:InsertWikimediaCommons</value> -->
+            <!--     </prop> -->
+            <!--     <node oor:name="UserDefinedImages"> -->
+            <!--         <prop oor:name="ImageSmallURL"> -->
+            <!--             <value>%origin%/images/insert_image_16.png</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageSmallHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--     </node> -->
+            <!-- </node> -->
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertPicasa.images" oor:op="replace"> -->
+            <!--     <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--         <value>org.creativecommons.openoffice.ccooo:InsertPicasa</value> -->
+            <!--     </prop> -->
+            <!--     <node oor:name="UserDefinedImages"> -->
+            <!--         <prop oor:name="ImageSmallURL"> -->
+            <!--             <value>%origin%/images/insert_image_16.png</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageSmallHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="ImageBigHCURL"> -->
+            <!--             <value/> -->
+            <!--         </prop> -->
+            <!--     </node> -->
+            <!-- </node> -->
         </node>
 
         <!-- Below un commented for OOo 3 Changes, Couldn't get in Insert menu
