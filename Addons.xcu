@@ -79,138 +79,138 @@
                     </node>
                 </node>
             </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr" oor:op="replace">
-                <node oor:name="S1" oor:op="replace">
-                    <prop oor:name="MergePoint">
-                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
-                    </prop>
-                    <prop oor:name="MergeCommand">
-                        <value>AddBefore</value>
-                    </prop>
-                    <prop oor:name="MergeFallback">
-                        <value>AddPath</value>
-                    </prop>
-                    <node oor:name="MenuItems">
-                        <node oor:name="m1" oor:op="replace">
-                            <prop oor:name="URL" oor:type="xs:string">
-                                <value>org.creativecommons.openoffice.ccooo:InsertPictureFlickr</value>
-                            </prop>
-                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
-                                <value/>
-                            </prop>
-                            <prop oor:name="Target" oor:type="xs:string">
-                                <value>_self</value>
-                            </prop>
-                            <prop oor:name="Context" oor:type="xs:string">
-                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
-                            </prop>
-                            <prop oor:name="Title" oor:type="xs:string">
-                                <value/>
-                                <value xml:lang="en">From Flickr ... </value>
-                            </prop>
-                        </node>
-                    </node>
-                </node>
-            </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertOpenClipArt" oor:op="replace">
-                <node oor:name="S1" oor:op="replace">
-                    <prop oor:name="MergePoint">
-                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
-                    </prop>
-                    <prop oor:name="MergeCommand">
-                        <value>AddBefore</value>
-                    </prop>
-                    <prop oor:name="MergeFallback">
-                        <value>AddPath</value>
-                    </prop>
-                    <node oor:name="MenuItems">
-                        <node oor:name="m1" oor:op="replace">
-                            <prop oor:name="URL" oor:type="xs:string">
-                                <value>org.creativecommons.openoffice.ccooo:InsertOpenClipArt</value>
-                            </prop>
-                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
-                                <value/>
-                            </prop>
-                            <prop oor:name="Target" oor:type="xs:string">
-                                <value>_self</value>
-                            </prop>
-                            <prop oor:name="Context" oor:type="xs:string">
-                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
-                            </prop>
-                            <prop oor:name="Title" oor:type="xs:string">
-                                <value/>
-                                <value xml:lang="en">From Open Clip Art ... </value>
-                            </prop>
-                        </node>
-                    </node>
-                </node>
-            </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertWikimediaCommons" oor:op="replace">
-                <node oor:name="S1" oor:op="replace">
-                    <prop oor:name="MergePoint">
-                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
-                    </prop>
-                    <prop oor:name="MergeCommand">
-                        <value>AddBefore</value>
-                    </prop>
-                    <prop oor:name="MergeFallback">
-                        <value>AddPath</value>
-                    </prop>
-                    <node oor:name="MenuItems">
-                        <node oor:name="m1" oor:op="replace">
-                            <prop oor:name="URL" oor:type="xs:string">
-                                <value>org.creativecommons.openoffice.ccooo:InsertWikimediaCommons</value>
-                            </prop>
-                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
-                                <value/>
-                            </prop>
-                            <prop oor:name="Target" oor:type="xs:string">
-                                <value>_self</value>
-                            </prop>
-                            <prop oor:name="Context" oor:type="xs:string">
-                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
-                            </prop>
-                            <prop oor:name="Title" oor:type="xs:string">
-                                <value/>
-                                <value xml:lang="en">From Wikimedia Commons ... </value>
-                            </prop>
-                        </node>
-                    </node>
-                </node>
-            </node>
-            <node oor:name="org.creativecommons.openoffice.ccooo.InsertPicasa" oor:op="replace">
-                <node oor:name="S1" oor:op="replace">
-                    <prop oor:name="MergePoint">
-                        <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value>
-                    </prop>
-                    <prop oor:name="MergeCommand">
-                        <value>AddBefore</value>
-                    </prop>
-                    <prop oor:name="MergeFallback">
-                        <value>AddPath</value>
-                    </prop>
-                    <node oor:name="MenuItems">
-                        <node oor:name="m1" oor:op="replace">
-                            <prop oor:name="URL" oor:type="xs:string">
-                                <value>org.creativecommons.openoffice.ccooo:InsertPicasa</value>
-                            </prop>
-                            <prop oor:name="ImageIdentifier" oor:type="xs:string">
-                                <value/>
-                            </prop>
-                            <prop oor:name="Target" oor:type="xs:string">
-                                <value>_self</value>
-                            </prop>
-                            <prop oor:name="Context" oor:type="xs:string">
-                                <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value>
-                            </prop>
-                            <prop oor:name="Title" oor:type="xs:string">
-                                <value/>
-                                <value xml:lang="en">From Picasa ... </value>
-                            </prop>
-                        </node>
-                    </node>
-                </node>
-            </node>
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr" oor:op="replace"> -->
+            <!--     <node oor:name="S1" oor:op="replace"> -->
+            <!--         <prop oor:name="MergePoint"> -->
+            <!--             <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeCommand"> -->
+            <!--             <value>AddBefore</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeFallback"> -->
+            <!--             <value>AddPath</value> -->
+            <!--         </prop> -->
+            <!--         <node oor:name="MenuItems"> -->
+            <!--             <node oor:name="m1" oor:op="replace"> -->
+            <!--                 <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--                     <value>org.creativecommons.openoffice.ccooo:InsertPictureFlickr</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="ImageIdentifier" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Target" oor:type="xs:string"> -->
+            <!--                     <value>_self</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Context" oor:type="xs:string"> -->
+            <!--                     <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Title" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                     <value xml:lang="en">From Flickr ... </value> -->
+            <!--                 </prop> -->
+            <!--             </node> -->
+            <!--         </node> -->
+            <!--     </node> -->
+            <!-- </node> -->
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertOpenClipArt" oor:op="replace"> -->
+            <!--     <node oor:name="S1" oor:op="replace"> -->
+            <!--         <prop oor:name="MergePoint"> -->
+            <!--             <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeCommand"> -->
+            <!--             <value>AddBefore</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeFallback"> -->
+            <!--             <value>AddPath</value> -->
+            <!--         </prop> -->
+            <!--         <node oor:name="MenuItems"> -->
+            <!--             <node oor:name="m1" oor:op="replace"> -->
+            <!--                 <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--                     <value>org.creativecommons.openoffice.ccooo:InsertOpenClipArt</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="ImageIdentifier" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Target" oor:type="xs:string"> -->
+            <!--                     <value>_self</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Context" oor:type="xs:string"> -->
+            <!--                     <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Title" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                     <value xml:lang="en">From Open Clip Art ... </value> -->
+            <!--                 </prop> -->
+            <!--             </node> -->
+            <!--         </node> -->
+            <!--     </node> -->
+            <!-- </node> -->
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertWikimediaCommons" oor:op="replace"> -->
+            <!--     <node oor:name="S1" oor:op="replace"> -->
+            <!--         <prop oor:name="MergePoint"> -->
+            <!--             <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeCommand"> -->
+            <!--             <value>AddBefore</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeFallback"> -->
+            <!--             <value>AddPath</value> -->
+            <!--         </prop> -->
+            <!--         <node oor:name="MenuItems"> -->
+            <!--             <node oor:name="m1" oor:op="replace"> -->
+            <!--                 <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--                     <value>org.creativecommons.openoffice.ccooo:InsertWikimediaCommons</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="ImageIdentifier" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Target" oor:type="xs:string"> -->
+            <!--                     <value>_self</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Context" oor:type="xs:string"> -->
+            <!--                     <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Title" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                     <value xml:lang="en">From Wikimedia Commons ... </value> -->
+            <!--                 </prop> -->
+            <!--             </node> -->
+            <!--         </node> -->
+            <!--     </node> -->
+            <!-- </node> -->
+            <!-- <node oor:name="org.creativecommons.openoffice.ccooo.InsertPicasa" oor:op="replace"> -->
+            <!--     <node oor:name="S1" oor:op="replace"> -->
+            <!--         <prop oor:name="MergePoint"> -->
+            <!--             <value>.uno:InsertMenu\.uno:GraphicMenu\.uno:InsertGraphic</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeCommand"> -->
+            <!--             <value>AddBefore</value> -->
+            <!--         </prop> -->
+            <!--         <prop oor:name="MergeFallback"> -->
+            <!--             <value>AddPath</value> -->
+            <!--         </prop> -->
+            <!--         <node oor:name="MenuItems"> -->
+            <!--             <node oor:name="m1" oor:op="replace"> -->
+            <!--                 <prop oor:name="URL" oor:type="xs:string"> -->
+            <!--                     <value>org.creativecommons.openoffice.ccooo:InsertPicasa</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="ImageIdentifier" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Target" oor:type="xs:string"> -->
+            <!--                     <value>_self</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Context" oor:type="xs:string"> -->
+            <!--                     <value>com.sun.star.drawing.DrawingDocument,com.sun.star.presentation.PresentationDocument,com.sun.star.sheet.SpreadsheetDocument,com.sun.star.text.TextDocument</value> -->
+            <!--                 </prop> -->
+            <!--                 <prop oor:name="Title" oor:type="xs:string"> -->
+            <!--                     <value/> -->
+            <!--                     <value xml:lang="en">From Picasa ... </value> -->
+            <!--                 </prop> -->
+            <!--             </node> -->
+            <!--         </node> -->
+            <!--     </node> -->
+            <!-- </node> -->
         </node>
         <node oor:name="Images">
             <node oor:name="org.creativecommons.openoffice.ccooo.InsertPictureFlickr.images" oor:op="replace">
