@@ -843,7 +843,7 @@ class LicenseChooserDialog():
             #rect=self.__makeRectangle(100, 80, 210, 275)
 
             self.dlgLicenseSelector.Width = 210
-            self.dlgLicenseSelector.Height = 295
+            self.dlgLicenseSelector.Height = 274
             self.dlgLicenseSelector.PositionX = 100
             self.dlgLicenseSelector.PositionY = 80
 
@@ -886,8 +886,8 @@ class LicenseChooserDialog():
 
             self.tab_model.PositionX = 0
             self.tab_model.PositionY = 0
-            self.tab_model.Width = 206  # 206
-            self.tab_model.Height = 270  # 243
+            self.tab_model.Width = 210  # 206
+            self.tab_model.Height = 260  # 243
 
             self.dlgLicenseSelector.insertByName("tab", self.tab_model)
             toolkit = self.m_xContext.\
