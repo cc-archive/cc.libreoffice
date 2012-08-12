@@ -314,9 +314,11 @@ class LicenseChooserDialog():
             xpsChkWaive.setPropertyValue("MultiLine", True)
 
             ##Legal code
-            
+
             #relative path to file
-            rPath = ".."+os.path.sep+".."+os.path.sep+".."+os.path.sep+"license"+os.path.sep+"legalcodes"+os.path.sep+"cc0"
+            rPath = \
+              ".." + os.path.sep + ".." + os.path.sep + ".." + os.path.sep +\
+               "license" + os.path.sep + "legalcodes" + os.path.sep + "cc0"
             path = os.path.join(os.path.dirname(__file__),
                               rPath)
             f = open(path, 'r')
@@ -524,7 +526,9 @@ class LicenseChooserDialog():
             xpsLblWarning.setPropertyValue("FontDescriptor", fontDes)
 
             #relative path to file
-            rPath = ".."+os.path.sep+".."+os.path.sep+".."+os.path.sep+"license"+os.path.sep+"legalcodes"+os.path.sep+"pd"
+            rPath =\
+               ".." + os.path.sep + ".." + os.path.sep + ".." + os.path.sep +\
+                "license" + os.path.sep + "legalcodes" + os.path.sep + "pd"
             path = os.path.join(
                 os.path.dirname(__file__), rPath)
             f = open(path, 'r')
@@ -1072,7 +1076,9 @@ class LicenseChooserDialog():
 
             ##TODO: Implement the Territories correctly- Line 314
             #relative path to file
-            rPath = ".."+os.path.sep+".."+os.path.sep+".."+os.path.sep+"license"+os.path.sep+"rdf"+os.path.sep+"territory"
+            rPath =\
+               ".." + os.path.sep + ".." + os.path.sep + ".." + os.path.sep +\
+                "license" + os.path.sep + "rdf" + os.path.sep + "territory"
             path = os.path.join(
                 os.path.dirname(__file__), rPath)
             f = open(path)
