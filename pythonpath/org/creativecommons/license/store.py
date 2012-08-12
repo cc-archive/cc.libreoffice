@@ -31,15 +31,17 @@ class RdfLoaderThread(threading.Thread):
         RDF_GRAPH = rdflib.Graph()
 
         #os independent relative path
-        rPath = "."+os.path.sep+"rdf"+os.path.sep
-        path = os.path.join(os.path.dirname(__file__), rPath+"schema.rdf")
+        rPath = "." + os.path.sep + "rdf" + os.path.sep
+
+        #read the rdf files
+        path = os.path.join(os.path.dirname(__file__), rPath + "schema.rdf")
         RDF_GRAPH.parse(path)
 
-        path = os.path.join(os.path.dirname(__file__), rPath+"index.rdf")
+        path = os.path.join(os.path.dirname(__file__), rPath + "index.rdf")
         RDF_GRAPH.parse(path)
 
         path = os.path.\
-          join(os.path.dirname(__file__), rPath+"jurisdictions.rdf")
+          join(os.path.dirname(__file__), rPath + "jurisdictions.rdf")
         RDF_GRAPH.parse(path)
         print "Thread end!"
 
@@ -53,14 +55,20 @@ def parseGraph():
 
     RDF_GRAPH = rdflib.Graph()
 
-    path = os.path.join(os.path.dirname(__file__), './rdf/schema.rdf')
+    #os independent relative path
+    rPath = "." + os.path.sep + "rdf" + os.path.sep
+
+    #read the rdf files
+    path = os.path.join(os.path.dirname(__file__), rPath + "schema.rdf")
     RDF_GRAPH.parse(path)
 
-    path = os.path.join(os.path.dirname(__file__), './rdf/index.rdf')
+    path = os.path.join(os.path.dirname(__file__), rPath + "index.rdf")
     RDF_GRAPH.parse(path)
 
-    path = os.path.join(os.path.dirname(__file__), './rdf/jurisdictions.rdf')
+    path = os.path.\
+      join(os.path.dirname(__file__), rPath + "jurisdictions.rdf")
     RDF_GRAPH.parse(path)
+
     print "end parsing"
     #return RDF_GRAPH
 
