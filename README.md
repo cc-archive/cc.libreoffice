@@ -13,5 +13,5 @@ Then go to Insert --> Creative Commons. By using the first option you can insert
 
 If you want to build it and run it (under Linux)
 -----------------------------------------------
-Checkout the code and run the **build.sh** .
+Checkout the code and run **build.sh** .
 
