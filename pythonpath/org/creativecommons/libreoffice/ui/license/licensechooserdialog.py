@@ -1031,17 +1031,15 @@ class LicenseChooserDialog():
             self.__setInfoImage(
                 self.__makeRectangle(55, 58, 9, 10),
                 self.RDO_ALLOW_COMERCIAL_YES,
-                                ("The licensor permits others to copy, "
-                                 "distribute,"
-                                 "\ndisplay and perform the work,"
-                                 "\nas well as make derivative works based"
-                                 " on it."), 1)
+                                ("The licensor permits others to copy,"
+                                 "distribute, display, and perform the work,"
+                                 "including for commercial purposes."), 1)
 
-            self.__setInfoImage(self.__makeRectangle(55, 58, 9, 10),
+            self.__setInfoImage(self.__makeRectangle(55, 73, 9, 10),
                                 self.RDO_ALLOW_COMERCIAL_NO,
-                                ("The licensor permits others to copy, "
-                                 "\ndistribute, display, and perform the work "
-                                 "\nfor non-commercial purposes only"), 1)
+                                ("The licensor permits others to copy,"
+                                 "distribute, display, and perform the work"
+                                 " for non-commercial purposes only"), 1)
 
             self.__setInfoImage(self.__makeRectangle(55, 103, 9, 10),
                                 self.RDO_ALLOW_MODIFICATIONS_YES,
