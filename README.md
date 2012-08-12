@@ -7,7 +7,11 @@ For more information visit [the official addin page](http://wiki.creativecommons
 
 Testing the extension
 ---------------------
-
-Checkout the code and run the **build.sh** .
+Download the **out.oxt** file. Install it via the LibreOffice Extension Manager (Tools --> Extension Manager). 
 
 Then go to Insert --> Creative Commons. By using the first option you can insert the license information to the document. The second option is for changing those data.
+
+If you want to build it and run it (under Linux)
+-----------------------------------------------
+Checkout the code and run the **build.sh** .
+
