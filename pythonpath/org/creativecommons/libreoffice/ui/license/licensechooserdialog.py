@@ -314,8 +314,11 @@ class LicenseChooserDialog():
             xpsChkWaive.setPropertyValue("MultiLine", True)
 
             ##Legal code
+            
+            #relative path to file
+            rPath = ".."+os.path.sep+".."+os.path.sep+".."+os.path.sep+"license"+os.path.sep+"legalcodes"+os.path.sep+"cc0"
             path = os.path.join(os.path.dirname(__file__),
-                              '../../../license/legalcodes/cc0')
+                              rPath)
             f = open(path, 'r')
             cc0LegalCode = f.read()
 
@@ -520,8 +523,10 @@ class LicenseChooserDialog():
             fontDes.Weight = 150
             xpsLblWarning.setPropertyValue("FontDescriptor", fontDes)
 
+            #relative path to file
+            rPath = ".."+os.path.sep+".."+os.path.sep+".."+os.path.sep+"license"+os.path.sep+"legalcodes"+os.path.sep+"pd"
             path = os.path.join(
-                os.path.dirname(__file__), '../../../license/legalcodes/pd')
+                os.path.dirname(__file__), rPath)
             f = open(path, 'r')
             pdLegalCode = f.read()
 
@@ -1066,8 +1071,10 @@ class LicenseChooserDialog():
                                  "international treaties. "), 1)
 
             ##TODO: Implement the Territories correctly- Line 314
+            #relative path to file
+            rPath = ".."+os.path.sep+".."+os.path.sep+".."+os.path.sep+"license"+os.path.sep+"rdf"+os.path.sep+"territory"
             path = os.path.join(
-                os.path.dirname(__file__), './../../../license/rdf/territory')
+                os.path.dirname(__file__), rPath)
             f = open(path)
 
             territoryList = f.read().rstrip().split('\n')
