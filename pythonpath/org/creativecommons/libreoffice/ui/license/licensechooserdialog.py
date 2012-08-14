@@ -782,6 +782,7 @@ class LicenseChooserDialog():
         Arguments:
         - `selected`:
         """
+        print "license - "+selected.name
 
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_YES,
                                     not selected.prohibitCommercial)
@@ -832,18 +833,6 @@ class LicenseChooserDialog():
         tab.setTabProps(n, self.__Array(args))
         return page_model
 
-    def __checkForExistingLicense(self, ):
-        """Checks whehter this document already has license meta-data
-        embedded and sets the radio button values of the CC tab 
-        accordingly(if the license is CC)
-        """
-        ##Get the license info from the document
-        docInfo = self.xCurrentComponent.getDocumentInfo()
-
-        if docInfo.getPropertySetInfo().hasPropertyByName("license"):
-            print "license info exists!"
-        else:
-            print "No license info"
 
     def showDialog(self):
         """Shows the LicenseChooserDialog
@@ -927,8 +916,7 @@ class LicenseChooserDialog():
             self.__createCCLicenseTab()
             self.__cratePDLicenseTab()
 
-            #set the values of CC radio buttons
-            self.__checkForExistingLicense()
+            
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -1035,13 +1023,17 @@ class LicenseChooserDialog():
                                self.CC0_TAB_NAME)
 
             ##Set the initial license
-
-            if (self._ccLoAddin.getProgramWrapper().getDocumentLicense()):
+            docProperties = self.xCurrentComponent.getDocumentInfo()
+            if (docProperties.getPropertySetInfo().hasPropertyByName("license")):
+                print str(docProperties.getPropertyValue("license"))
                 self.__setSelectedLicense(
-                    self._ccLoAddin.getProgramWrapper().getDocumentLicense())
+                    License(str(docProperties.getPropertyValue("license"))))
             else:
                 self.__setSelectedLicense(
                     License("http://creativecommons.org/licenses/by/3.0/"))
+
+           
+            
             ##create a peer
             toolkit = self.xMultiComponentFactory.createInstanceWithContext(
                 "com.sun.star.awt.Toolkit", self.m_xContext)

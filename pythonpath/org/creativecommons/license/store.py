@@ -153,7 +153,7 @@ def exists(subject, predicate, resource):
     if RDF_GRAPH is None:
         parseGraph()
 
-    gen = RDF_GRAPH.triples((subject, predicate, resource))
+    gen = RDF_GRAPH.triples((URIRef(subject), predicate, resource))
 
     #TODO: find a better way to do this checking
 
