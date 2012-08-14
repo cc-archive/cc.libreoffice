@@ -90,6 +90,10 @@ class LicenseChooserDialog():
         # get the service manager from the component context
         self.xMultiComponentFactory = self.m_xContext.getServiceManager()
 
+        #get the current component
+        self.xCurrentComponent=self.xMultiComponentFactory.createInstanceWithContext(
+                    "com.sun.star.frame.Desktop", ctx).getCurrentComponent()
+
         #initialize selectedTerritory, useful when a territory is not selected
         self.selectedTerritory = None
 
@@ -373,7 +377,7 @@ class LicenseChooserDialog():
             print ex
             raise ex
 
-    #TODO: Method is not fully implemented.
+    
     def __createCCLicenseTab(self, ):
         """Creates the CC license tab
         """
@@ -828,6 +832,19 @@ class LicenseChooserDialog():
         tab.setTabProps(n, self.__Array(args))
         return page_model
 
+    def __checkForExistingLicense(self, ):
+        """Checks whehter this document already has license meta-data
+        embedded and sets the radio button values of the CC tab 
+        accordingly(if the license is CC)
+        """
+        ##Get the license info from the document
+        docInfo = self.xCurrentComponent.getDocumentInfo()
+
+        if docInfo.getPropertySetInfo().hasPropertyByName("license"):
+            print "license info exists!"
+        else:
+            print "No license info"
+
     def showDialog(self):
         """Shows the LicenseChooserDialog
 
@@ -909,6 +926,9 @@ class LicenseChooserDialog():
             self.__crateCC0LicenseTab()
             self.__createCCLicenseTab()
             self.__cratePDLicenseTab()
+
+            #set the values of CC radio buttons
+            self.__checkForExistingLicense()
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
