@@ -91,7 +91,8 @@ class LicenseChooserDialog():
         self.xMultiComponentFactory = self.m_xContext.getServiceManager()
 
         #get the current component
-        self.xCurrentComponent=self.xMultiComponentFactory.createInstanceWithContext(
+        self.xCurrentComponent = \
+          self.xMultiComponentFactory.createInstanceWithContext(
                     "com.sun.star.frame.Desktop", ctx).getCurrentComponent()
 
         #initialize selectedTerritory, useful when a territory is not selected
@@ -159,8 +160,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print "Exception in LicenseChooserDialog.__createAWTControl: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
     def __createAWTControlInCC0Tab(self, xpsProperties, ctrlName, ctrlCaption,
@@ -197,8 +197,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print "Exception in LicenseChooserDialog.__createAWTControl: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
     def __createAWTControlInPDTab(self, xpsProperties, ctrlName, ctrlCaption,
@@ -235,8 +234,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print "Exception in LicenseChooserDialog.__createAWTControl: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
     def __createAWTControlInCCTab(self, xpsProperties, ctrlName, ctrlCaption,
@@ -272,9 +270,7 @@ class LicenseChooserDialog():
             return xpsProperties
 
         except Exception, ex:
-            print "Exception in LicenseChooserDialog.__createAWTControlInCCTab: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
     def __crateCC0LicenseTab(self):
@@ -373,11 +369,9 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__crateCC0LicenseTab'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             raise ex
 
-    
     def __createCCLicenseTab(self, ):
         """Creates the CC license tab
         """
@@ -497,8 +491,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__createCCLicenseTab'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             raise ex
 
     def __cratePDLicenseTab(self, ):
@@ -567,8 +560,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__cratePDLicenseTab'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             raise ex
 
     def __addListners(self, classType, controlName, listner, page=None):
@@ -627,8 +619,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__getRadioButtonValue'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             return None
             #raise ex
 
@@ -675,8 +666,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__getGraphic'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             raise ex
 
     def __setInfoImage(self, rect, item, title, step):
@@ -740,8 +730,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__setInfoImage'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             #raise ex
 
     # def __getSelectedLicense(self, ):
@@ -772,8 +761,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__setCRadioButtonValue'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             #raise ex
 
     def __setSelectedLicense(self, selected):
@@ -782,7 +770,7 @@ class LicenseChooserDialog():
         Arguments:
         - `selected`:
         """
-        
+
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_YES,
                                     not selected.prohibitCommercial)
 
@@ -831,7 +819,6 @@ class LicenseChooserDialog():
         n = len(tab_model.getElementNames())
         tab.setTabProps(n, self.__Array(args))
         return page_model
-
 
     def showDialog(self):
         """Shows the LicenseChooserDialog
@@ -914,8 +901,6 @@ class LicenseChooserDialog():
             self.__crateCC0LicenseTab()
             self.__createCCLicenseTab()
             self.__cratePDLicenseTab()
-
-            
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
@@ -1023,15 +1008,14 @@ class LicenseChooserDialog():
 
             ##Set the initial license
             docProperties = self.xCurrentComponent.getDocumentInfo()
-            if (docProperties.getPropertySetInfo().hasPropertyByName("license")):
+            if (docProperties.getPropertySetInfo().\
+                hasPropertyByName("license")):
                 self.__setSelectedLicense(
                     License(str(docProperties.getPropertyValue("license"))))
             else:
                 self.__setSelectedLicense(
                     License("http://creativecommons.org/licenses/by/3.0/"))
 
-           
-            
             ##create a peer
             toolkit = self.xMultiComponentFactory.createInstanceWithContext(
                 "com.sun.star.awt.Toolkit", self.m_xContext)
@@ -1122,11 +1106,7 @@ class LicenseChooserDialog():
 
         except Exception, ex:
             print "Exception in LicenseChooserDialog.showDialog:"
-            print ex
-            print
             traceback.print_exc()
-            #TODO: match the raising exception with the origianl source
-            #raise ex
 
     def setLicenseType(self, type):
         """Set license type according to the tab selected.
@@ -1168,8 +1148,6 @@ class LicenseChooserDialog():
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.setLicenseType'
             traceback.print_exc()
-            print type(ex)
-            print ex
             raise ex
 
     def setSelectedTerritory(self, selection):
@@ -1213,4 +1191,3 @@ class LicenseChooserDialog():
             traceback.print_exc()
 
         return None
-            #import CcOOoAddin
