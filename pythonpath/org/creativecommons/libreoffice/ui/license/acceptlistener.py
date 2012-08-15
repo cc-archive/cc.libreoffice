@@ -44,29 +44,24 @@ class AcceptListener(XItemListener, unohelper.Base):
                         "Enabled", True)
         except IllegalArgumentException, ex:
             print "Exception in AcceptListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
         except WrappedTargetException, ex:
             print "Exception in AcceptListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
         except PropertyVetoException, ex:
             print "Exception in AcceptListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
         except UnknownPropertyException, ex:
             print "Exception in AcceptListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
         except NoSuchElementException, ex:
             print "Exception in AcceptListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
     def disposing(self, eObject):
