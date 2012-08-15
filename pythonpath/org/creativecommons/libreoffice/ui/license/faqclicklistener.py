@@ -46,6 +46,5 @@ class FaqClickListener(XActionListener, unohelper.Base):
 
         except Exception, ex:
             print 'Exception in FaqClickListener.actionPerformed'
-            print type(ex)
-            print ex
+            traceback.print_exc()
             raise ex

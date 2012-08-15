@@ -76,30 +76,25 @@ class AcceptWaiveListener(XItemListener, unohelper.Base):
 
         except IllegalArgumentException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
         except WrappedTargetException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
         except PropertyVetoException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
         except UnknownPropertyException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
 
         except NoSuchElementException, ex:
             print "Exception in AcceptWaiveListener.itemStateChanged: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             raise ex
