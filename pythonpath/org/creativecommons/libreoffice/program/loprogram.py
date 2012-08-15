@@ -72,14 +72,12 @@ class LoProgram(object):
                 return License(docInfo.getPropertyValue(self.LICENSE_URI))
             except WrappedTargetException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
-                print ex
-                print type(ex)
+                traceback.print_exc()
                 #raise ex
 
             except UnknownPropertyException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
-                print ex
-                print type(ex)
+                traceback.print_exc()
                 #raise ex
 
         return None
@@ -106,19 +104,16 @@ class LoProgram(object):
 
             except IllegalArgumentException, ex:
                 print "Exception in OOoProgram.setDocumentLicense: "
-                print ex
-                print type(ex)
+                traceback.print_exc()
                 #raise ex
 
             except PropertyExistException, ex:
                 print "Exception in OOoProgram.setDocumentLicense: "
-                print ex
-                print type(ex)
+                traceback.print_exc()
                 #raise ex
             except IllegalTypeException, ex:
                 print "Exception in OOoProgram.setDocumentLicense: "
-                print ex
-                print type(ex)
+                traceback.print_exc()
                 #raise ex
 
         #end of if
@@ -143,44 +138,37 @@ class LoProgram(object):
                 try:
                     docInfo.removeProperty(self.TERRITORY)
                 except NotRemoveableException, ex:
-                    print "Exception in OOoProgram.setDocumentLicense: "
-                    print ex
+                    traceback.print_exc()
                     print type(ex)
                     #raise ex
 
         except PropertyExistException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
         except IllegalTypeException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
 
         except IllegalArgumentException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
 
         except UnknownPropertyException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
 
         except PropertyVetoException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
 
         except WrappedTargetException, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
 
         #RDF metadata
@@ -204,10 +192,7 @@ class LoProgram(object):
                     self.__createUri(self.component.Namespace + "meta.rdf"))
             except Exception, ex:
                 #TODO: remove the stack trace
-                print "Exception in OOoProgram.setDocumentLicense:" + \
-                  "-ignored exception"
-                print ex
-                print type(ex)
+                print "No graph data seems to exist"
                 #raise ex
 
             value = self.component.StringValue
@@ -240,8 +225,7 @@ class LoProgram(object):
 
         except Exception, ex:
             print "Exception in OOoProgram.setDocumentLicense: "
-            print ex
-            print type(ex)
+            traceback.print_exc()
             #raise ex
 
     def __createUri(self, value):
