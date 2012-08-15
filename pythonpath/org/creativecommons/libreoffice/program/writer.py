@@ -329,8 +329,7 @@ class Writer(LoProgram):
 
         except Exception, ex:
                 print "Exception in Writer.insertPicture: "
-                print ex
-                print type(ex)
+                traceback.print_exc()
                 #raise ex
 
     def updateVisibleNotice(self, ):
