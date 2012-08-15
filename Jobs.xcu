@@ -20,7 +20,7 @@
         <node oor:name="org.creativecommons.libreoffice" oor:op="replace"/>
         </node>
     </node>
-    <node oor:name="onMyOwnJob" oor:op="fuse">
+    <node oor:name="OnLoad" oor:op="fuse">
         <node oor:name="JobList">
             <node oor:name="org.creativecommons.libreoffice" oor:op="replace"/>
             </node>

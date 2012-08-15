@@ -23,6 +23,7 @@ import unohelper
 from com.sun.star.frame import XDispatch, XDispatchProvider
 from com.sun.star.lang import XInitialization, XServiceInfo
 from com.sun.star.task import XJob
+from com.sun.star.awt import WindowDescriptor
 
 from org.creativecommons.libreoffice.ui.license.licensechooserdialog \
    import LicenseChooserDialog
@@ -238,9 +239,72 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     Arguments:
     - `args`:
     """
-        from org.creativecommons.license.store import RdfLoaderThread
-        RdfLoaderThread().start()
+        try:
+            from org.creativecommons.license.store import RdfLoaderThread
+                
+            for item in args:
+                if item.Name == "Environment":
+                    lEnvironment = item.Value
+                    break
 
+            #Display license information when opening CC licensed documents
+            for item in lEnvironment:
+                if item.Name == "EnvType":
+                    sEnvType = item.Value
+                if item.Name == "EventName":
+                    sEventName = item.Value
+                if item.Name == "Frame":
+                    m_xFrame = item.Value
+
+            #Only parse the rdf graph at the start-up of LibreOffice
+            if sEventName == "OnStartApp":
+                RdfLoaderThread().start()
+
+            #Check for license info only if loading a new document
+            if sEventName == "OnLoad":
+                self.updateCurrentComponent()
+                docProperties = self.xCurrentComponent.getDocumentInfo()
+
+                #if this document has license information
+                if docProperties.getPropertySetInfo().hasPropertyByName("license"):
+                    message = ("This work is licensed under a "
+                               ""+docProperties.getPropertyValue("License Name")+ 
+                    ""+" License available at \n"
+                    ""+ docProperties.getPropertyValue("license"))
+
+                   
+                   
+                    parentwin = self.xCurrentComponent.CurrentController.Frame.ContainerWindow
+                   
+                    tk = parentwin.getToolkit()
+                   
+                    #describe window properties.
+                    aDescriptor = WindowDescriptor()
+                   
+                    from com.sun.star.awt.VclWindowPeerAttribute import OK
+                   
+                    aDescriptor.WindowAttributes = OK
+                    aDescriptor.WindowServiceName = "messbox"
+                    aDescriptor.ParentIndex = -1
+                    aDescriptor.Parent = parentwin
+                   
+                    msgbox = tk.createWindow(aDescriptor)
+                   
+                   
+                    msgbox.setMessageText(message)
+                   
+                    msgbox.execute()
+                   
+                   
+    
+
+        except:
+            traceback.print_exc()
+            
+         
+                
+                
+        
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
     CcLoAddin,
