@@ -782,8 +782,7 @@ class LicenseChooserDialog():
         Arguments:
         - `selected`:
         """
-        print "license - "+selected.name
-
+        
         self.__setCRadioButtonValue(self.RDO_ALLOW_COMERCIAL_YES,
                                     not selected.prohibitCommercial)
 
@@ -852,7 +851,7 @@ class LicenseChooserDialog():
             #rect=self.__makeRectangle(100, 80, 210, 275)
 
             self.dlgLicenseSelector.Width = 210
-            self.dlgLicenseSelector.Height = 274
+            self.dlgLicenseSelector.Height = 275
             self.dlgLicenseSelector.PositionX = 100
             self.dlgLicenseSelector.PositionY = 80
 
@@ -1025,7 +1024,6 @@ class LicenseChooserDialog():
             ##Set the initial license
             docProperties = self.xCurrentComponent.getDocumentInfo()
             if (docProperties.getPropertySetInfo().hasPropertyByName("license")):
-                print str(docProperties.getPropertyValue("license"))
                 self.__setSelectedLicense(
                     License(str(docProperties.getPropertyValue("license"))))
             else:
