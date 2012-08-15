@@ -147,29 +147,26 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
             self.updateCurrentComponent()
 
             if url.Path == "SelectLicense":
-                print "SelectLicense"
                 self.selectLicense()
 
             elif url.Path == "InsertStatement":
-                print 'calling selectLicense'
-
-                #Module.testMethod()
-                #self.testMethod()
                 self.insertStatement()
 
-            elif url.Path == "InsertPictureFlickr":
-                print "InsertPictureFlickr"
-                ##Test code
-                self.testMethod()
+            ##These were left out for future reference
 
-            elif url.Path == "InsertOpenClipArt":
-                print "InsertOpenClipArt"
+            # elif url.Path == "InsertPictureFlickr":
+            #     print "InsertPictureFlickr"
+            #     ##Test code
+            #     self.testMethod()
 
-            elif url.Path == "InsertWikimediaCommons":
-                print "InsertWikimediaCommons"
+            # elif url.Path == "InsertOpenClipArt":
+            #     print "InsertOpenClipArt"
 
-            elif url.Path == "InsertPicasa":
-                print "InsertPicasa"
+            # elif url.Path == "InsertWikimediaCommons":
+            #     print "InsertWikimediaCommons"
+
+            # elif url.Path == "InsertPicasa":
+            #     print "InsertPicasa"
 
     def addStatusListener(self, control, url):
         pass
