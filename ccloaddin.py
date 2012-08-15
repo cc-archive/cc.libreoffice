@@ -241,7 +241,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
     """
         try:
             from org.creativecommons.license.store import RdfLoaderThread
-                
+
             for item in args:
                 if item.Name == "Environment":
                     lEnvironment = item.Value
@@ -266,45 +266,34 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
                 docProperties = self.xCurrentComponent.getDocumentInfo()
 
                 #if this document has license information
-                if docProperties.getPropertySetInfo().hasPropertyByName("license"):
+                if docProperties.getPropertySetInfo().\
+                  hasPropertyByName("license"):
                     message = ("This work is licensed under a "
-                               ""+docProperties.getPropertyValue("License Name")+ 
-                    ""+" License available at \n"
-                    ""+ docProperties.getPropertyValue("license"))
+                               "" + docProperties.\
+                               getPropertyValue("License Name") +
+                    "" + " License available at \n"
+                    "" + docProperties.getPropertyValue("license"))
 
-                   
-                   
-                    parentwin = self.xCurrentComponent.CurrentController.Frame.ContainerWindow
-                   
+                    parentwin = self.xCurrentComponent.\
+                      CurrentController.Frame.ContainerWindow
                     tk = parentwin.getToolkit()
-                   
+
                     #describe window properties.
                     aDescriptor = WindowDescriptor()
-                   
                     from com.sun.star.awt.VclWindowPeerAttribute import OK
-                   
                     aDescriptor.WindowAttributes = OK
                     aDescriptor.WindowServiceName = "messbox"
                     aDescriptor.ParentIndex = -1
                     aDescriptor.Parent = parentwin
-                   
                     msgbox = tk.createWindow(aDescriptor)
-                   
-                   
+
                     msgbox.setMessageText(message)
-                   
                     msgbox.execute()
-                   
-                   
-    
 
         except:
             traceback.print_exc()
-            
-         
-                
-                
-        
+
+
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
     CcLoAddin,
