@@ -2,6 +2,8 @@
 #E-mail: ishan@ishans.info
 #Blog: www.blog.ishans.info
 
+import traceback
+
 from com.sun.star.beans import IllegalTypeException
 from com.sun.star.beans import NotRemoveableException
 from com.sun.star.beans import PropertyExistException

@@ -40,5 +40,4 @@ class UpdateLicenseListner(XItemListener, unohelper.Base):
         Arguments:
         - `event`:ItemEvent
         """
-        print "Called"
         self.getDialog().updateSelectedLicense()

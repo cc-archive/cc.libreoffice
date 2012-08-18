@@ -3,6 +3,7 @@
 #Blog: www.blog.ishans.info
 
 import unohelper
+import traceback
 
 from com.sun.star.awt import XItemListener
 from com.sun.star.beans import PropertyVetoException
