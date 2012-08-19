@@ -795,6 +795,8 @@ class LicenseChooserDialog():
             self.cc0Tab = self.__AddTabPage(self.tab, self.CC0_TAB_NAME, "CC0")
             self.pdTab = self.\
               __AddTabPage(self.tab, self.PD_TAB_NAME, "Public Domain")
+            self.metadataTab = self.\
+              __AddTabPage(self.tab, self.METADATA_TAB_NAME, "Metadata")
 
             # # ##Create Tabs
             self.__crateCC0LicenseTab()
