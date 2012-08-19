@@ -165,37 +165,37 @@ class LicenseChooserDialog():
             traceback.print_exc()
             raise ex
 
-    def __createAWTControlInCC0Tab(self, xpsProperties, ctrlName, ctrlCaption,
-                                   posSize, step):
-        """Add AWT control components to the dialog.
+    # def __createAWTControlInCC0Tab(self, xpsProperties, ctrlName, ctrlCaption,
+    #                                posSize, step):
+    #     """Add AWT control components to the dialog.
 
-        Arguments:
-        - `self`:
-        - `xpsProperties`:XPropertySet
-        - `ctrlName`:String
-        - `ctrlCaption`:String
-        - `ctrlName`:String
-        - `posSize`:Rectangle - https://gist.github.com/990143
-        - `step`:integer
-        """
+    #     Arguments:
+    #     - `self`:
+    #     - `xpsProperties`:XPropertySet
+    #     - `ctrlName`:String
+    #     - `ctrlCaption`:String
+    #     - `ctrlName`:String
+    #     - `posSize`:Rectangle - https://gist.github.com/990143
+    #     - `step`:integer
+    #     """
 
-        #throw the exceptions
-        try:
-            xpsProperties.setPropertyValue("PositionX",  posSize.X)
-            xpsProperties.setPropertyValue("PositionY",  posSize.Y)
-            xpsProperties.setPropertyValue("Width",  posSize.Width)
-            xpsProperties.setPropertyValue("Height",  posSize.Height)
-            xpsProperties.setPropertyValue("Name", ctrlName)
-            #xpsProperties.setPropertyValue("Step", step)
+    #     #throw the exceptions
+    #     try:
+    #         xpsProperties.setPropertyValue("PositionX",  posSize.X)
+    #         xpsProperties.setPropertyValue("PositionY",  posSize.Y)
+    #         xpsProperties.setPropertyValue("Width",  posSize.Width)
+    #         xpsProperties.setPropertyValue("Height",  posSize.Height)
+    #         xpsProperties.setPropertyValue("Name", ctrlName)
+    #         #xpsProperties.setPropertyValue("Step", step)
 
-            if ctrlCaption is not None:
-                xpsProperties.setPropertyValue("Label", ctrlCaption)
+    #         if ctrlCaption is not None:
+    #             xpsProperties.setPropertyValue("Label", ctrlCaption)
 
-            if (not self.cc0Tab.hasByName(ctrlName)):
-                self.cc0Tab.insertByName(ctrlName, xpsProperties)
-                #print "Added "+ctrlName
+    #         if (not self.cc0Tab.hasByName(ctrlName)):
+    #             self.cc0Tab.insertByName(ctrlName, xpsProperties)
+    #             #print "Added "+ctrlName
 
-            return xpsProperties
+    #         return xpsProperties
 
         except Exception, ex:
             print "Exception in LicenseChooserDialog.__createAWTControl: "
@@ -283,7 +283,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             ##TODO: add the Java.util support to the following line
-            xpsLblWarning = self.__createAWTControlInCC0Tab(lblWarning,
+            xpsLblWarning = self.__createAWTControl(lblWarning,
                                                     self.LBL_INSTRUCTIONS_CC0,
                                                     ("Are you certain "
             "you wish to waive all "
@@ -296,7 +296,7 @@ class LicenseChooserDialog():
             "CC0. "
             "\nIf you believe that nobody owns rights to the work, then the "
             "Public Domain Certification may be what you're looking for."),
-            self.__makeRectangle(10, 25, 195, 80), 2)
+            self.__makeRectangle(10, 25, 195, 80), 2, self.cc0Tab)
 
             xpsLblWarning.setPropertyValue("MultiLine", True)
             fontDes = xpsLblWarning.getPropertyValue("FontDescriptor")
@@ -308,13 +308,13 @@ class LicenseChooserDialog():
 
             ##TODO:Add java.util support to the following line
             xpsChkWaive = self.\
-              __createAWTControlInCC0Tab(chkWaive, self.CHK_WAIVE,
+              __createAWTControl(chkWaive, self.CHK_WAIVE,
                                 ("I hereby waive all copyright and related"
                                  " or neighboring rights together with all"
                                  "associated claims and causes of action with "
                                  "respect to this work to the extent possible"
                                  " under the law."),
-                                self.__makeRectangle(10, 110, 190, 30), 2)
+                                self.__makeRectangle(10, 110, 190, 30), 2,self.cc0Tab)
 
             xpsChkWaive.setPropertyValue("MultiLine", True)
 
@@ -336,27 +336,27 @@ class LicenseChooserDialog():
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
             xpsTxtDeed.setPropertyValue("VScroll", True)
             xpsTxtDeed.setPropertyValue("Text", cc0LegalCode)
-            self.__createAWTControlInCC0Tab(xpsTxtDeed,
+            self.__createAWTControl(xpsTxtDeed,
                                                  self.TXT_LEGAL_CODE_CC0, None,
-                self.__makeRectangle(10, 145, 190, 60), 2)
+                self.__makeRectangle(10, 145, 190, 60), 2, self.cc0Tab)
 
             chkYes = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
             ##TODO:Add java.util support to the following line
             xpsChkYes = self.\
-              __createAWTControlInCC0Tab(chkYes, self.CHK_YES_CC0,
+              __createAWTControl(chkYes, self.CHK_YES_CC0,
                     ("I have read and understand the terms and intended"
                      "legal effect of CC0, "
                      "and hereby voluntarily elect to apply it to this work."),
-                    self.__makeRectangle(10, 210, 190, 20), 2)
+                    self.__makeRectangle(10, 210, 190, 20), 2, self.cc0Tab)
             xpsChkYes.setPropertyValue("MultiLine", True)
 
             ##Territory
             lblJurisdictionList = self.cc0Tab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList = self.__createAWTControlInCC0Tab(
+            xpsLblJurisdictionList = self.__createAWTControl(
                 lblJurisdictionList, "lbltrritory",
-                "Territory", self.__makeRectangle(10, 230, 45, 15), 2)
+                "Territory", self.__makeRectangle(10, 230, 45, 15), 2, self.cc0Tab)
 
             #TODO: This list currently contains nothing. Add items to the list
             cmbTerritoryList = self.cc0Tab.createInstance(
@@ -365,9 +365,9 @@ class LicenseChooserDialog():
             cmbTerritoryList.setPropertyValue("Dropdown", True)
             cmbTerritoryList.setPropertyValue("MultiSelection", False)
 
-            self.__createAWTControlInCC0Tab(cmbTerritoryList,
+            self.__createAWTControl(cmbTerritoryList,
                                                 self.CMB_TERRITORY,
-                None, self.__makeRectangle(55, 230, 120, 12), 2)
+                None, self.__makeRectangle(55, 230, 120, 12), 2, self.cc0Tab)
 
         except Exception, ex:
             print 'Exception in LicenseChooserDialog.__crateCC0LicenseTab'
