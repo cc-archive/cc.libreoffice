@@ -197,47 +197,47 @@ class LicenseChooserDialog():
 
     #         return xpsProperties
 
-        except Exception, ex:
-            print "Exception in LicenseChooserDialog.__createAWTControl: "
-            traceback.print_exc()
-            raise ex
+        # except Exception, ex:
+        #     print "Exception in LicenseChooserDialog.__createAWTControl: "
+        #     traceback.print_exc()
+        #     raise ex
 
-    def __createAWTControlInPDTab(self, xpsProperties, ctrlName, ctrlCaption,
-                                   posSize, step):
-        """Add AWT control components to the dialog.
+    # def __createAWTControlInPDTab(self, xpsProperties, ctrlName, ctrlCaption,
+    #                                posSize, step):
+    #     """Add AWT control components to the dialog.
 
-        Arguments:
-        - `self`:
-        - `xpsProperties`:XPropertySet
-        - `ctrlName`:String
-        - `ctrlCaption`:String
-        - `ctrlName`:String
-        - `posSize`:Rectangle - https://gist.github.com/990143
-        - `step`:integer
-        """
+    #     Arguments:
+    #     - `self`:
+    #     - `xpsProperties`:XPropertySet
+    #     - `ctrlName`:String
+    #     - `ctrlCaption`:String
+    #     - `ctrlName`:String
+    #     - `posSize`:Rectangle - https://gist.github.com/990143
+    #     - `step`:integer
+    #     """
 
-        #throw the exceptions
-        try:
-            xpsProperties.setPropertyValue("PositionX",  posSize.X)
-            xpsProperties.setPropertyValue("PositionY",  posSize.Y)
-            xpsProperties.setPropertyValue("Width",  posSize.Width)
-            xpsProperties.setPropertyValue("Height",  posSize.Height)
-            xpsProperties.setPropertyValue("Name", ctrlName)
-            #xpsProperties.setPropertyValue("Step", step)
+    #     #throw the exceptions
+    #     try:
+    #         xpsProperties.setPropertyValue("PositionX",  posSize.X)
+    #         xpsProperties.setPropertyValue("PositionY",  posSize.Y)
+    #         xpsProperties.setPropertyValue("Width",  posSize.Width)
+    #         xpsProperties.setPropertyValue("Height",  posSize.Height)
+    #         xpsProperties.setPropertyValue("Name", ctrlName)
+    #         #xpsProperties.setPropertyValue("Step", step)
 
-            if ctrlCaption is not None:
-                xpsProperties.setPropertyValue("Label", ctrlCaption)
+    #         if ctrlCaption is not None:
+    #             xpsProperties.setPropertyValue("Label", ctrlCaption)
 
-            if (not self.pdTab.hasByName(ctrlName)):
-                self.pdTab.insertByName(ctrlName, xpsProperties)
-                #print "Added "+ctrlName
+    #         if (not self.pdTab.hasByName(ctrlName)):
+    #             self.pdTab.insertByName(ctrlName, xpsProperties)
+    #             #print "Added "+ctrlName
 
-            return xpsProperties
+    #         return xpsProperties
 
-        except Exception, ex:
-            print "Exception in LicenseChooserDialog.__createAWTControl: "
-            traceback.print_exc()
-            raise ex
+    #     except Exception, ex:
+    #         print "Exception in LicenseChooserDialog.__createAWTControl: "
+    #         traceback.print_exc()
+    #         raise ex
 
     def __createAWTControlInCCTab(self, xpsProperties, ctrlName, ctrlCaption,
                            posSize, step):
@@ -504,7 +504,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             xpsLblWarning = self.\
-              __createAWTControlInPDTab(lblWarning, "pdwarning",
+              __createAWTControl(lblWarning, "pdwarning",
                 ("You have selected the Public Domain Certification. "
                  "The Public Domain Certification should only be used "
                  "to certify "
@@ -519,7 +519,7 @@ class LicenseChooserDialog():
                  "dedicate a work to the public domain, it may not be valid "
                  "outside "
                  "of the United States."),
-                self.__makeRectangle(10, 25, 190, 100), 3)
+                self.__makeRectangle(10, 25, 190, 100), 3, self.pdTab)
 
             xpsLblWarning.setPropertyValue("MultiLine", True)
 
@@ -543,21 +543,21 @@ class LicenseChooserDialog():
             xpsTxtDeed.setPropertyValue("ReadOnly", True)
             xpsTxtDeed.setPropertyValue("VScroll", True)
             xpsTxtDeed.setPropertyValue("Text", pdLegalCode)
-            xpsTxtDeed = self.__createAWTControlInPDTab(xpsTxtDeed,
+            xpsTxtDeed = self.__createAWTControl(xpsTxtDeed,
                                                self.TXT_LEGAL_CODE_PD, None,
                                                self.__makeRectangle(
-                                                   10, 130, 190, 75), 3)
+                                                   10, 130, 190, 75), 3, self.pdTab)
 
             chkYes = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
 
             ##TODO: add internationalization support
-            xpsChkYes = self.__createAWTControlInPDTab(chkYes, self.CHK_YES_PD,
+            xpsChkYes = self.__createAWTControl(chkYes, self.CHK_YES_PD,
                                 ("I have read and understand the terms"
                                  " and intended legal effect of "
                                  "this tool, and hereby voluntarily"
                                  " elect to apply it to this work."),
-                                self.__makeRectangle(10, 210, 190, 30), 3)
+                                self.__makeRectangle(10, 210, 190, 30), 3, self.pdTab)
             xpsChkYes.setPropertyValue("MultiLine", True)
 
         except Exception, ex:
