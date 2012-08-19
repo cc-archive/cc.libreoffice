@@ -74,6 +74,7 @@ class LicenseChooserDialog():
     CC_TAB_NAME = "ccPage"
     CC0_TAB_NAME = "cc0Page"
     PD_TAB_NAME = "pdPage"
+    METADATA_TAB_NAME = "metadataPage"
 
     cancelled = True
 
@@ -128,7 +129,7 @@ class LicenseChooserDialog():
         return oRect
 
     def __createAWTControl(self, xpsProperties, ctrlName, ctrlCaption,
-                           posSize, step):
+                           posSize, step, targetModel):
         """Add AWT control components to the dialog.
 
         Arguments:
@@ -139,6 +140,7 @@ class LicenseChooserDialog():
         - `ctrlName`:String
         - `posSize`:Rectangle - https://gist.github.com/990143
         - `step`:integer
+        - `targetModel`:The model in which the element should be created .
         """
 
         #throw the exceptions
@@ -153,8 +155,8 @@ class LicenseChooserDialog():
             if ctrlCaption is not None:
                 xpsProperties.setPropertyValue("Label", ctrlCaption)
 
-            if (not self.dlgLicenseSelector.hasByName(ctrlName)):
-                self.dlgLicenseSelector.insertByName(ctrlName, xpsProperties)
+            if (not targetModel.hasByName(ctrlName)):
+                targetModel.insertByName(ctrlName, xpsProperties)
 
             return xpsProperties
 
@@ -906,7 +908,7 @@ class LicenseChooserDialog():
             faqButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
             xPSetFaqButton = self.__createAWTControl(faqButton, self.BTN_FAQ,
-                None, self.__makeRectangle(70, 260, 40, 14), 0)
+                None, self.__makeRectangle(70, 260, 40, 14), 0, self.dlgLicenseSelector)
             xPSetFaqButton.setPropertyValue("DefaultButton", True)
             xPSetFaqButton.setPropertyValue("Label", self.faqButtonLabel)
             #self.dlgLicenseSelector.insertByName("ss",faqButton)
@@ -915,7 +917,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlButtonModel")
             self.xPSetFinishButton = self.__createAWTControl(finishButton,
                                                              self.BTN_OK,
-                None, self.__makeRectangle(115, 260, 40, 14), 0)
+                None, self.__makeRectangle(115, 260, 40, 14), 0, self.dlgLicenseSelector)
             self.xPSetFinishButton.setPropertyValue("DefaultButton", True)
             self.xPSetFinishButton.setPropertyValue("Label",
                                                     self.finishButtonLabel)
@@ -925,7 +927,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlButtonModel")
             xPSetCancelButton = self.__createAWTControl(cancelButton,
                                                         self.BTN_CANCEL,
-                None, self.__makeRectangle(160, 260, 40, 14), 0)
+                None, self.__makeRectangle(160, 260, 40, 14), 0, self.dlgLicenseSelector)
             xPSetCancelButton.setPropertyValue("Name", self.BTN_CANCEL)
             xPSetCancelButton.setPropertyValue("Label", self.cancelButtonLabel)
 
