@@ -165,116 +165,6 @@ class LicenseChooserDialog():
             traceback.print_exc()
             raise ex
 
-    # def __createAWTControlInCC0Tab(self, xpsProperties, ctrlName, ctrlCaption,
-    #                                posSize, step):
-    #     """Add AWT control components to the dialog.
-
-    #     Arguments:
-    #     - `self`:
-    #     - `xpsProperties`:XPropertySet
-    #     - `ctrlName`:String
-    #     - `ctrlCaption`:String
-    #     - `ctrlName`:String
-    #     - `posSize`:Rectangle - https://gist.github.com/990143
-    #     - `step`:integer
-    #     """
-
-    #     #throw the exceptions
-    #     try:
-    #         xpsProperties.setPropertyValue("PositionX",  posSize.X)
-    #         xpsProperties.setPropertyValue("PositionY",  posSize.Y)
-    #         xpsProperties.setPropertyValue("Width",  posSize.Width)
-    #         xpsProperties.setPropertyValue("Height",  posSize.Height)
-    #         xpsProperties.setPropertyValue("Name", ctrlName)
-    #         #xpsProperties.setPropertyValue("Step", step)
-
-    #         if ctrlCaption is not None:
-    #             xpsProperties.setPropertyValue("Label", ctrlCaption)
-
-    #         if (not self.cc0Tab.hasByName(ctrlName)):
-    #             self.cc0Tab.insertByName(ctrlName, xpsProperties)
-    #             #print "Added "+ctrlName
-
-    #         return xpsProperties
-
-        # except Exception, ex:
-        #     print "Exception in LicenseChooserDialog.__createAWTControl: "
-        #     traceback.print_exc()
-        #     raise ex
-
-    # def __createAWTControlInPDTab(self, xpsProperties, ctrlName, ctrlCaption,
-    #                                posSize, step):
-    #     """Add AWT control components to the dialog.
-
-    #     Arguments:
-    #     - `self`:
-    #     - `xpsProperties`:XPropertySet
-    #     - `ctrlName`:String
-    #     - `ctrlCaption`:String
-    #     - `ctrlName`:String
-    #     - `posSize`:Rectangle - https://gist.github.com/990143
-    #     - `step`:integer
-    #     """
-
-    #     #throw the exceptions
-    #     try:
-    #         xpsProperties.setPropertyValue("PositionX",  posSize.X)
-    #         xpsProperties.setPropertyValue("PositionY",  posSize.Y)
-    #         xpsProperties.setPropertyValue("Width",  posSize.Width)
-    #         xpsProperties.setPropertyValue("Height",  posSize.Height)
-    #         xpsProperties.setPropertyValue("Name", ctrlName)
-    #         #xpsProperties.setPropertyValue("Step", step)
-
-    #         if ctrlCaption is not None:
-    #             xpsProperties.setPropertyValue("Label", ctrlCaption)
-
-    #         if (not self.pdTab.hasByName(ctrlName)):
-    #             self.pdTab.insertByName(ctrlName, xpsProperties)
-    #             #print "Added "+ctrlName
-
-    #         return xpsProperties
-
-    #     except Exception, ex:
-    #         print "Exception in LicenseChooserDialog.__createAWTControl: "
-    #         traceback.print_exc()
-    #         raise ex
-
-    # def __createAWTControlInCCTab(self, xpsProperties, ctrlName, ctrlCaption,
-    #                        posSize, step):
-    #     """Add AWT control components to the CC tab.
-
-    #     Arguments:
-    #     - `self`:
-    #     - `xpsProperties`:XPropertySet
-    #     - `ctrlName`:String
-    #     - `ctrlCaption`:String
-    #     - `ctrlName`:String
-    #     - `posSize`:Rectangle - https://gist.github.com/990143
-    #     - `step`:integer
-    #     """
-
-    #     #throw the exceptions
-    #     try:
-    #         xpsProperties.setPropertyValue("PositionX",  posSize.X)
-    #         xpsProperties.setPropertyValue("PositionY",  posSize.Y)
-    #         xpsProperties.setPropertyValue("Width",  posSize.Width)
-    #         xpsProperties.setPropertyValue("Height",  posSize.Height)
-    #         xpsProperties.setPropertyValue("Name", ctrlName)
-    #         #xpsProperties.setPropertyValue("Step", step)
-
-    #         if ctrlCaption is not None:
-    #             xpsProperties.setPropertyValue("Label", ctrlCaption)
-
-    #         if (not self.ccTab.hasByName(ctrlName)):
-    #             self.ccTab.insertByName(ctrlName, xpsProperties)
-    #             #print "Added "+ctrlName
-
-    #         return xpsProperties
-
-    #     except Exception, ex:
-    #         traceback.print_exc()
-    #         raise ex
-
     def __crateCC0LicenseTab(self):
         """Creates the CC0 license tab
         """
@@ -314,7 +204,8 @@ class LicenseChooserDialog():
                                  "associated claims and causes of action with "
                                  "respect to this work to the extent possible"
                                  " under the law."),
-                                self.__makeRectangle(10, 110, 190, 30), 2,self.cc0Tab)
+                                self.__makeRectangle(10, 110, 190, 30), 2,
+                                self.cc0Tab)
 
             xpsChkWaive.setPropertyValue("MultiLine", True)
 
@@ -356,7 +247,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             xpsLblJurisdictionList = self.__createAWTControl(
                 lblJurisdictionList, "lbltrritory",
-                "Territory", self.__makeRectangle(10, 230, 45, 15), 2, self.cc0Tab)
+                "Territory", self.__makeRectangle(10, 230, 45, 15), 2,
+                self.cc0Tab)
 
             #TODO: This list currently contains nothing. Add items to the list
             cmbTerritoryList = self.cc0Tab.createInstance(
@@ -383,7 +275,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             self.__createAWTControl(lblSelectedLicenseLabel,
                                     self.LBL_SELECTED_LICENSE_LABEL,
-                "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1, self.ccTab)
+                "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1,
+                self.ccTab)
             lblSelectedLicense = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
             xpsSelectedLicense = self.__createAWTControl(
@@ -397,7 +290,8 @@ class LicenseChooserDialog():
             #TODO:The next line needs localization support.
             self.__createAWTControl(lblAllowCommercialUse,
                                     self.LBL_ALLOW_COMERCIAL_USE,
-                "Commercial", self.__makeRectangle(15, 45, 100, 12), 1, self.ccTab)
+                "Commercial", self.__makeRectangle(15, 45, 100, 12), 1,
+                self.ccTab)
 
             radioCommercialYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
@@ -421,7 +315,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
             self.__createAWTControl(lblAllowModifications,
                                     self.LBL_ALLOW_MODIFICATIONS,
-                "Derivatives", self.__makeRectangle(15, 90, 100, 12), 1, self.ccTab)
+                "Derivatives", self.__makeRectangle(15, 90, 100, 12), 1,
+                self.ccTab)
             radioModificationsYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             xpsRadioModificationYes = self.__createAWTControl(
@@ -546,7 +441,8 @@ class LicenseChooserDialog():
             xpsTxtDeed = self.__createAWTControl(xpsTxtDeed,
                                                self.TXT_LEGAL_CODE_PD, None,
                                                self.__makeRectangle(
-                                                   10, 130, 190, 75), 3, self.pdTab)
+                                                   10, 130, 190, 75), 3,
+                                                   self.pdTab)
 
             chkYes = self.pdTab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
@@ -557,7 +453,8 @@ class LicenseChooserDialog():
                                  " and intended legal effect of "
                                  "this tool, and hereby voluntarily"
                                  " elect to apply it to this work."),
-                                self.__makeRectangle(10, 210, 190, 30), 3, self.pdTab)
+                                self.__makeRectangle(10, 210, 190, 30), 3,
+                                self.pdTab)
             xpsChkYes.setPropertyValue("MultiLine", True)
 
         except Exception, ex:
@@ -908,7 +805,8 @@ class LicenseChooserDialog():
             faqButton = self.dlgLicenseSelector.createInstance(
                 "com.sun.star.awt.UnoControlButtonModel")
             xPSetFaqButton = self.__createAWTControl(faqButton, self.BTN_FAQ,
-                None, self.__makeRectangle(70, 260, 40, 14), 0, self.dlgLicenseSelector)
+                None, self.__makeRectangle(70, 260, 40, 14), 0,
+                self.dlgLicenseSelector)
             xPSetFaqButton.setPropertyValue("DefaultButton", True)
             xPSetFaqButton.setPropertyValue("Label", self.faqButtonLabel)
             #self.dlgLicenseSelector.insertByName("ss",faqButton)
@@ -917,7 +815,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlButtonModel")
             self.xPSetFinishButton = self.__createAWTControl(finishButton,
                                                              self.BTN_OK,
-                None, self.__makeRectangle(115, 260, 40, 14), 0, self.dlgLicenseSelector)
+                None, self.__makeRectangle(115, 260, 40, 14), 0,
+                self.dlgLicenseSelector)
             self.xPSetFinishButton.setPropertyValue("DefaultButton", True)
             self.xPSetFinishButton.setPropertyValue("Label",
                                                     self.finishButtonLabel)
@@ -927,7 +826,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlButtonModel")
             xPSetCancelButton = self.__createAWTControl(cancelButton,
                                                         self.BTN_CANCEL,
-                None, self.__makeRectangle(160, 260, 40, 14), 0, self.dlgLicenseSelector)
+                None, self.__makeRectangle(160, 260, 40, 14), 0,
+                self.dlgLicenseSelector)
             xPSetCancelButton.setPropertyValue("Name", self.BTN_CANCEL)
             xPSetCancelButton.setPropertyValue("Label", self.cancelButtonLabel)
 
