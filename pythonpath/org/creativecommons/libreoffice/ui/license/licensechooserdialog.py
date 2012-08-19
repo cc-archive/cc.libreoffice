@@ -239,41 +239,41 @@ class LicenseChooserDialog():
     #         traceback.print_exc()
     #         raise ex
 
-    def __createAWTControlInCCTab(self, xpsProperties, ctrlName, ctrlCaption,
-                           posSize, step):
-        """Add AWT control components to the CC tab.
+    # def __createAWTControlInCCTab(self, xpsProperties, ctrlName, ctrlCaption,
+    #                        posSize, step):
+    #     """Add AWT control components to the CC tab.
 
-        Arguments:
-        - `self`:
-        - `xpsProperties`:XPropertySet
-        - `ctrlName`:String
-        - `ctrlCaption`:String
-        - `ctrlName`:String
-        - `posSize`:Rectangle - https://gist.github.com/990143
-        - `step`:integer
-        """
+    #     Arguments:
+    #     - `self`:
+    #     - `xpsProperties`:XPropertySet
+    #     - `ctrlName`:String
+    #     - `ctrlCaption`:String
+    #     - `ctrlName`:String
+    #     - `posSize`:Rectangle - https://gist.github.com/990143
+    #     - `step`:integer
+    #     """
 
-        #throw the exceptions
-        try:
-            xpsProperties.setPropertyValue("PositionX",  posSize.X)
-            xpsProperties.setPropertyValue("PositionY",  posSize.Y)
-            xpsProperties.setPropertyValue("Width",  posSize.Width)
-            xpsProperties.setPropertyValue("Height",  posSize.Height)
-            xpsProperties.setPropertyValue("Name", ctrlName)
-            #xpsProperties.setPropertyValue("Step", step)
+    #     #throw the exceptions
+    #     try:
+    #         xpsProperties.setPropertyValue("PositionX",  posSize.X)
+    #         xpsProperties.setPropertyValue("PositionY",  posSize.Y)
+    #         xpsProperties.setPropertyValue("Width",  posSize.Width)
+    #         xpsProperties.setPropertyValue("Height",  posSize.Height)
+    #         xpsProperties.setPropertyValue("Name", ctrlName)
+    #         #xpsProperties.setPropertyValue("Step", step)
 
-            if ctrlCaption is not None:
-                xpsProperties.setPropertyValue("Label", ctrlCaption)
+    #         if ctrlCaption is not None:
+    #             xpsProperties.setPropertyValue("Label", ctrlCaption)
 
-            if (not self.ccTab.hasByName(ctrlName)):
-                self.ccTab.insertByName(ctrlName, xpsProperties)
-                #print "Added "+ctrlName
+    #         if (not self.ccTab.hasByName(ctrlName)):
+    #             self.ccTab.insertByName(ctrlName, xpsProperties)
+    #             #print "Added "+ctrlName
 
-            return xpsProperties
+    #         return xpsProperties
 
-        except Exception, ex:
-            traceback.print_exc()
-            raise ex
+    #     except Exception, ex:
+    #         traceback.print_exc()
+    #         raise ex
 
     def __crateCC0LicenseTab(self):
         """Creates the CC0 license tab
@@ -381,100 +381,100 @@ class LicenseChooserDialog():
             #create the current license information
             lblSelectedLicenseLabel = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControlInCCTab(lblSelectedLicenseLabel,
+            self.__createAWTControl(lblSelectedLicenseLabel,
                                     self.LBL_SELECTED_LICENSE_LABEL,
-                "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1)
+                "Selected License:", self.__makeRectangle(10, 20, 50, 15), 1, self.ccTab)
             lblSelectedLicense = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsSelectedLicense = self.__createAWTControlInCCTab(
+            xpsSelectedLicense = self.__createAWTControl(
                 lblSelectedLicense, self.LBL_SELECTED_LICENSE,
-                None, self.__makeRectangle(60, 20, 145, 30), 1)
+                None, self.__makeRectangle(60, 20, 145, 30), 1, self.ccTab)
             xpsSelectedLicense.setPropertyValue("MultiLine", True)
 
             #Allow commercial uses of your work?
             lblAllowCommercialUse = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
             #TODO:The next line needs localization support.
-            self.__createAWTControlInCCTab(lblAllowCommercialUse,
+            self.__createAWTControl(lblAllowCommercialUse,
                                     self.LBL_ALLOW_COMERCIAL_USE,
-                "Commercial", self.__makeRectangle(15, 45, 100, 12), 1)
+                "Commercial", self.__makeRectangle(15, 45, 100, 12), 1, self.ccTab)
 
             radioCommercialYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
             #TODO:The next line needs localization support.
-            xpsRadioCommercialYes = self.__createAWTControlInCCTab(
+            xpsRadioCommercialYes = self.__createAWTControl(
                 radioCommercialYes, self.RDO_ALLOW_COMERCIAL_YES,
-                "Yes", self.__makeRectangle(20, 60, 30, 12), 1)
+                "Yes", self.__makeRectangle(20, 60, 30, 12), 1, self.ccTab)
             #TODO: Original line was  new Short((short) 1))
             xpsRadioCommercialYes.setPropertyValue("State", 1)
 
             radioCommercialNo = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioCommercialNo = self.__createAWTControlInCCTab(
+            xpsRadioCommercialNo = self.__createAWTControl(
                 radioCommercialNo, self.RDO_ALLOW_COMERCIAL_NO,
-                "No", self.__makeRectangle(20, 75, 30, 12), 1)
+                "No", self.__makeRectangle(20, 75, 30, 12), 1, self.ccTab)
             #TODO: Original line was  new Short((short) 0))
             xpsRadioCommercialNo.setPropertyValue("State", 0)
 
             #Allow modifications of your work?
             lblAllowModifications = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            self.__createAWTControlInCCTab(lblAllowModifications,
+            self.__createAWTControl(lblAllowModifications,
                                     self.LBL_ALLOW_MODIFICATIONS,
-                "Derivatives", self.__makeRectangle(15, 90, 100, 12), 1)
+                "Derivatives", self.__makeRectangle(15, 90, 100, 12), 1, self.ccTab)
             radioModificationsYes = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioModificationYes = self.__createAWTControlInCCTab(
+            xpsRadioModificationYes = self.__createAWTControl(
                 radioModificationsYes, self.RDO_ALLOW_MODIFICATIONS_YES,
-                "Yes", self.__makeRectangle(20, 105, 30, 12), 1)
+                "Yes", self.__makeRectangle(20, 105, 30, 12), 1, self.ccTab)
             #TODO: was new Short((short) 1)
             xpsRadioModificationYes.setPropertyValue("State", 1)
 
             radioModificationsShareAlike = self.ccTab.\
               createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioModificationsShareAlike = self.__createAWTControlInCCTab(
+            xpsRadioModificationsShareAlike = self.__createAWTControl(
                 radioModificationsShareAlike,
                 self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE,
                 "Yes, as long as others share alike", self.__makeRectangle(
-                    20, 120, 100, 12), 1)
+                    20, 120, 100, 12), 1, self.ccTab)
             #TODO: was new Short((short) 1)
             xpsRadioModificationsShareAlike.setPropertyValue("State", 0)
 
             radioModificationsNo = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlRadioButtonModel")
-            xpsRadioModificationsNo = self.__createAWTControlInCCTab(
+            xpsRadioModificationsNo = self.__createAWTControl(
                 radioModificationsNo, self.RDO_ALLOW_MODIFICATIONS_NO,
-                "No", self.__makeRectangle(20, 135, 30, 12), 1)
+                "No", self.__makeRectangle(20, 135, 30, 12), 1, self.ccTab)
             #TODO: was new Short((short) 1)
             xpsRadioModificationsNo.setPropertyValue("State", 0)
 
             #Create the jurisdiction drop-down list
             lblJurisdictionList = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblJurisdictionList = self.__createAWTControlInCCTab(
+            xpsLblJurisdictionList = self.__createAWTControl(
                 lblJurisdictionList, self.LBL_JURISDICTION_LIST,
                 "Jurisdiction", self.__makeRectangle(
-                    15, 150, 75, 15), 1)
+                    15, 150, 75, 15), 1, self.ccTab)
 
             cmbJurisdictionList = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlListBoxModel")
 
             cmbJurisdictionList.setPropertyValue("Dropdown", True)
             cmbJurisdictionList.setPropertyValue("MultiSelection", False)
-            self.__createAWTControlInCCTab(cmbJurisdictionList,
+            self.__createAWTControl(cmbJurisdictionList,
                                                 self.CMB_JURISDICTION,
-                None, self.__makeRectangle(90, 150, 60, 12), 1)
+                None, self.__makeRectangle(90, 150, 60, 12), 1, self.ccTab)
 
             hrLine = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedLineModel")
-            xpshrLine = self.__createAWTControlInCCTab(hrLine, "hrLine",
-                None, self.__makeRectangle(5, 165, 200, 5), 1)
+            xpshrLine = self.__createAWTControl(hrLine, "hrLine",
+                None, self.__makeRectangle(5, 165, 200, 5), 1, self.ccTab)
             xpshrLine.setPropertyValue("Orientation", 0)
 
             lblInstructions = self.ccTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
-            xpsLblInstructions = self.__createAWTControlInCCTab(
+            xpsLblInstructions = self.__createAWTControl(
                 lblInstructions, self.LBL_INSTRUCTIONS_CC,
                 ("With a Creative Commons license, you keep your copyright but"
                  " allow "
@@ -484,7 +484,7 @@ class LicenseChooserDialog():
                  "\n\nIf you want to offer your work with no conditions or you"
                  " want to certify a work as public domain, choose one of the "
                  "public domain tools.(CC0 & Public Domain)"),
-                 self.__makeRectangle(10, 175, 195, 80), 1)
+                 self.__makeRectangle(10, 175, 195, 80), 1, self.ccTab)
 
             xpsLblInstructions.setPropertyValue("MultiLine", True)
             fontDes = xpsLblInstructions.getPropertyValue("FontDescriptor")
