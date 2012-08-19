@@ -64,17 +64,22 @@ class LicenseChooserDialog():
     LBL_INSTRUCTIONS_CC = "lblInstructionsCC"
 
     LBL_INSTRUCTIONS_CC0 = "lblInstructionsCC0"
+    LBL_INFO_METADATA = "lblInstructionsMetadata"
     CHK_WAIVE = "chkWaive"
     TXT_LEGAL_CODE_CC0 = "txtLegalCodeCC0"
     TXT_LEGAL_CODE_PD = "txtLegalCodePD"
     CHK_YES_CC0 = "chkYesCC0"
     CHK_YES_PD = "chkYesPD"
+    CHK_YES_METADATA = "chkYesMetadata"
     CMB_TERRITORY = "cmbTerritory"
 
     CC_TAB_NAME = "ccPage"
     CC0_TAB_NAME = "cc0Page"
     PD_TAB_NAME = "pdPage"
     METADATA_TAB_NAME = "metadataPage"
+
+    ATTRIBUTE_WORK_TO_URL = "attributeWorkToUrl"
+    LBL_ATTRIBUTE_WORK_TO_URL = "attributeWorkToUrlLabel"
 
     cancelled = True
 
@@ -462,6 +467,60 @@ class LicenseChooserDialog():
             traceback.print_exc()
             raise ex
 
+    def __createMetadataTab(self, ):
+        """Creates the Metadata tab
+    """
+        
+        try:
+            infoLabelModel = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+
+            infoLabel = self.\
+              __createAWTControl(infoLabelModel, self.LBL_INFO_METADATA ,
+                ("This part is optional, but filling it out"
+                 " will add machine-readable metadata to the"
+                 " document and it will help others attribiute you!"),
+                self.__makeRectangle(10, 25, 190, 20), 3, self.metadataTab)
+
+            infoLabel.MultiLine = True
+            fontDes = infoLabel.FontDescriptor
+            fontDes.Weight = 150
+            infoLabel.FontDescriptor = fontDes
+
+
+            chkYesModel = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlCheckBoxModel")
+            chkYesModel.Enabled = True
+
+            ##TODO: add internationalization support
+            chkYes = self.__createAWTControl(chkYesModel, self.CHK_YES_METADATA,
+                                ("I want to add metadata"),
+                                self.__makeRectangle(10, 45, 100, 30), 3,
+                                self.metadataTab)
+
+            xpsTxtDeed = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlEditModel")
+            xpsTxtDeed.setPropertyValue("MultiLine", False)
+            xpsTxtDeed.setPropertyValue("ReadOnly", True)
+            xpsTxtDeed = self.__createAWTControl(xpsTxtDeed,
+                                               self.ATTRIBUTE_WORK_TO_URL, None,
+                                               self.__makeRectangle(
+                                                   80, 55, 100, 10), 3,
+                                                   self.metadataTab)
+
+            attWorktoUrlLblModel = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+
+            attWorktoUrlLbl = self.\
+              __createAWTControl(attWorktoUrlLblModel, self.LBL_ATTRIBUTE_WORK_TO_URL ,
+                ("Attribute work to URL"),
+                self.__makeRectangle(10, 55, 50, 20), 3, self.metadataTab)
+            
+        except Exception, e:
+            traceback.print_exc()
+            #raise e
+
+
     def __addListners(self, classType, controlName, listner, page=None):
         """Creates event listners
 
@@ -802,6 +861,7 @@ class LicenseChooserDialog():
             self.__crateCC0LicenseTab()
             self.__createCCLicenseTab()
             self.__cratePDLicenseTab()
+            self.__createMetadataTab()
 
             ##create the button model - FAQ and set the properties
             faqButton = self.dlgLicenseSelector.createInstance(
