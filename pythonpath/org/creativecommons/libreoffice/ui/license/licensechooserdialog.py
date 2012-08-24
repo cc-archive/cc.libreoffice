@@ -495,7 +495,7 @@ class LicenseChooserDialog():
             ##TODO: add internationalization support
             chkYes = self.__createAWTControl(chkYesModel, self.CHK_YES_METADATA,
                                 ("I want to add metadata"),
-                                self.__makeRectangle(10, 45, 100, 30), 3,
+                                self.__makeRectangle(10, 45, 100, 10), 3,
                                 self.metadataTab)
 
             xpsTxtDeed = self.metadataTab.createInstance(
@@ -514,7 +514,7 @@ class LicenseChooserDialog():
             attWorktoUrlLbl = self.\
               __createAWTControl(attWorktoUrlLblModel, self.LBL_ATTRIBUTE_WORK_TO_URL ,
                 ("Attribute work to URL"),
-                self.__makeRectangle(10, 55, 50, 20), 3, self.metadataTab)
+                self.__makeRectangle(10, 55, 60, 20), 3, self.metadataTab)
             
         except Exception, e:
             traceback.print_exc()
