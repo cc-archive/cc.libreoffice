@@ -108,6 +108,7 @@ class LoProgram(object):
                 for key, value in license.metadataDic.iteritems():
                     print key
                     print value
+                    docInfo.removeProperty(key)
                     docInfo.addProperty(key,
                                     MAYBEVOID, value)
                     print docInfo.getPropertyValue(key)

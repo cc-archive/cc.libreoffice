@@ -807,6 +807,11 @@ class LicenseChooserDialog():
 
         self.selectedJurisdiction = selected.jurisdiction
 
+        ##update the metadata tab
+        for key, value in selected.metadataDic.iteritems():
+            self.tab.getControl(self.METADATA_TAB_NAME).\
+              getControl(key).setText(value)
+            
         self.updateSelectedLicense()
 
     def __Array(self, *args):
@@ -838,6 +843,33 @@ class LicenseChooserDialog():
         tab.setTabProps(n, self.__Array(args))
         return page_model
 
+    def __setInitialLicense(self, ):
+        """Set the license information of the document initially
+        """
+        docProperties = self.xCurrentComponent.getDocumentInfo()
+
+        ##get the Metadata
+        inputs = [self.ATTRIBUTE_WORK_TO_URL, self.SOURCE_WORK_URL,
+                  self.MORE_PERMISSIONS_URL]
+
+        metadata = {}
+
+        for item in inputs:
+            if (docProperties.getPropertySetInfo().\
+                hasPropertyByName(item)):
+                metadata[item] = docProperties.\
+                    getPropertyValue(item)
+                
+
+        if (docProperties.getPropertySetInfo().\
+            hasPropertyByName("license")):
+            self.__setSelectedLicense(
+                License(str(docProperties.\
+                            getPropertyValue("license")), metadata))
+        else:
+            self.__setSelectedLicense(
+                License("http://creativecommons.org/licenses/by/3.0/", {}))
+            
     def getMetadataValues(self, ):
         """Returns the filled metadata values as a dictionary
     """
@@ -1049,15 +1081,7 @@ class LicenseChooserDialog():
                                self.CC0_TAB_NAME)
 
             ##Set the initial license
-            docProperties = self.xCurrentComponent.getDocumentInfo()
-            if (docProperties.getPropertySetInfo().\
-                hasPropertyByName("license")):
-                self.__setSelectedLicense(
-                    License(str(docProperties.\
-                                getPropertyValue("license")), {}))
-            else:
-                self.__setSelectedLicense(
-                    License("http://creativecommons.org/licenses/by/3.0/", {}))
+            self.__setInitialLicense()
 
             ##create a peer
             toolkit = self.xMultiComponentFactory.createInstanceWithContext(
