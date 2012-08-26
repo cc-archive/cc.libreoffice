@@ -18,11 +18,12 @@ class License():
     DCTerms = Namespace("http://purl.org/dc/terms/")
     DC = Namespace("http://purl.org/dc/elements/1.1/")
 
-    def __init__(self, license_uri, territory=None):
+    def __init__(self, license_uri, metadataDic, territory=None):
         """
         Arguments:
         - `license_uri`:String
         - `territory`:String
+        - `metadataDic`:A dictionary containing the metadata
         """
         self.license_uri = license_uri
         #self.licenseStore = store
@@ -95,3 +96,6 @@ class License():
             self.imageUrl =\
                ("http://i.creativecommons.org/l/" +\
                 self.getCode() + "/88x31.png")
+
+        ####Metadata####
+        self.metadataDic = metadataDic

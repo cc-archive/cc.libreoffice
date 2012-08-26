@@ -54,8 +54,8 @@ class LoProgram(object):
             (docInfo.getPropertySetInfo().hasPropertyByName(
                 self.TERRITORY))):
             try:
-                return License(docInfo.getPropertyValue(self.LICENSE_URI),
-                        docInfo.getPropertyValue(self.TERRITORY))
+                return License(docInfo.getPropertyValue(self.LICENSE_URI), {}, 
+                        territory = docInfo.getPropertyValue(self.TERRITORY))
 
             except WrappedTargetException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
@@ -71,7 +71,7 @@ class LoProgram(object):
         elif (docInfo.getPropertySetInfo().hasPropertyByName(
                 self.LICENSE_URI)):
             try:
-                return License(docInfo.getPropertyValue(self.LICENSE_URI))
+                return License(docInfo.getPropertyValue(self.LICENSE_URI), {})
             except WrappedTargetException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
                 traceback.print_exc()
@@ -89,6 +89,7 @@ class LoProgram(object):
 
         Arguments:
         - `license`:License
+        
         """
         #xDocumentInfoSupplier=self.component
         docInfo = self.component.getDocumentInfo()
@@ -103,6 +104,14 @@ class LoProgram(object):
                                     MAYBEVOID, "")
                 docInfo.addProperty(self.LICENSE_NAME,
                                     MAYBEVOID, "")
+                #iterate over metadata
+                print "in LoProgram - mmm"
+                for key, value in license.metadataDic.iteritems():
+                    print key
+                    print value
+                    docInfo.addProperty(key,
+                                    MAYBEVOID, value)
+                    print docInfo.getPropertyValue(key)
 
             except IllegalArgumentException, ex:
                 print "Exception in OOoProgram.setDocumentLicense: "

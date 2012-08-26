@@ -197,6 +197,7 @@ class CcLoAddin(unohelper.Base, XInitialization, XServiceInfo,
                 selected = dialog.getSelectedLicense()
                 document = self.getProgramWrapper()
 
+                #metadataDic = dialog.selectedMetadata
                 #store the license information in the document
                 document.setDocumentLicense(selected)
                 ##TODO: Add the line 290

@@ -104,6 +104,9 @@ class LicenseChooserDialog():
         #initialize selectedTerritory, useful when a territory is not selected
         self.selectedTerritory = None
 
+        #initialize the metadata dictionary
+        self.selectedMetadata = None
+
         #TODO-how about uno.createUnoStruct ?
     # The CoreReflection object.
     def __createUnoStruct(self, cTypeName):
@@ -501,7 +504,8 @@ class LicenseChooserDialog():
             xpsTxtDeed = self.metadataTab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
             xpsTxtDeed.setPropertyValue("MultiLine", False)
-            xpsTxtDeed.setPropertyValue("ReadOnly", True)
+            xpsTxtDeed.setPropertyValue("ReadOnly", False)
+            #xpsTxtDeed.Text = "F"
             xpsTxtDeed = self.__createAWTControl(xpsTxtDeed,
                                                self.ATTRIBUTE_WORK_TO_URL, None,
                                                self.__makeRectangle(
@@ -558,6 +562,10 @@ class LicenseChooserDialog():
     def close(self, ):
         """End the excution of the dialog
         """
+        #print "in close"
+        self.selectedMetadata = self.getMetadataValues()
+        #print "end close"
+        
         self.dialog.endExecute()
 
     def __getRadioButtonValue(self, rdoName):
@@ -778,6 +786,21 @@ class LicenseChooserDialog():
         tab.setTabProps(n, self.__Array(args))
         return page_model
 
+    def getMetadataValues(self, ):
+        """Returns the filled metadata values as a dictionary
+    """
+        metadataDic = {}
+        text = self.tab.getControl(self.METADATA_TAB_NAME).getControl(self.ATTRIBUTE_WORK_TO_URL).getText()
+
+        #if the text field is not empty
+        if text != "":
+            metadataDic[self.ATTRIBUTE_WORK_TO_URL] = text
+
+        return metadataDic
+        
+        
+        
+
     def showDialog(self):
         """Shows the LicenseChooserDialog
 
@@ -975,10 +998,10 @@ class LicenseChooserDialog():
             if (docProperties.getPropertySetInfo().\
                 hasPropertyByName("license")):
                 self.__setSelectedLicense(
-                    License(str(docProperties.getPropertyValue("license"))))
+                    License(str(docProperties.getPropertyValue("license")), {}))
             else:
                 self.__setSelectedLicense(
-                    License("http://creativecommons.org/licenses/by/3.0/"))
+                    License("http://creativecommons.org/licenses/by/3.0/", {}))
 
             ##create a peer
             toolkit = self.xMultiComponentFactory.createInstanceWithContext(
@@ -1061,6 +1084,9 @@ class LicenseChooserDialog():
             self.cmbTList.makeVisible(0)
 
             self.cmbTList.addItemListener(TerritorySelectListener(self))
+
+            self.getMetadataValues()
+            
             ##execute the dialog
             self.dialog .setVisible(True)
             self.dialog .execute()
@@ -1136,10 +1162,12 @@ class LicenseChooserDialog():
             type = self.dlgLicenseSelector.getPropertyValue("Step")
 
             if (type == 2):
-                #TODO:From where self.selectedTerritory set??
-                return licenseChooser.selectPDTools(self.selectedTerritory, 2)
+                
+                return licenseChooser.selectPDTools(self.selectedTerritory, 2,
+                                                    self.selectedMetadata)
             elif (type == 3):
-                return licenseChooser.selectPDTools(None, 3)
+                return licenseChooser.selectPDTools(None, 3,
+                                                    self.selectedMetadata)
             else:
                 return licenseChooser.selectLicense(
                     self.__getRadioButtonValue(
@@ -1149,7 +1177,7 @@ class LicenseChooserDialog():
                     self.__getRadioButtonValue(self.RDO_ALLOW_COMERCIAL_NO),
                     self.__getRadioButtonValue(
                         self.RDO_ALLOW_MODIFICATIONS_SHARE_ALIKE),
-                    self.selectedJurisdiction)
+                    self.selectedJurisdiction, self.selectedMetadata)
 
         except Exception, ex:
             traceback.print_exc()

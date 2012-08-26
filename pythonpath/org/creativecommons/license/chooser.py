@@ -100,13 +100,14 @@ class Chooser():
         return queryString
 
     def selectLicense(self, allowRemixing, prohibitCommercialUse,
-                        requireShareAlike, jurisdiction):
+                        requireShareAlike, jurisdiction, metadataDic):
         """Select the Creative Commons license for given parameters.
     Arguments:
     - `allowRemixing`:Boolean-Is remixing allowed
     - `prohibitCommercialUse`:Boolean-Commercial usage
     - `requireShareAlike`:Boolean-Requires  share alike
     - `jurisdiction`:Jurisdiction- Jurisdiction of the license
+    - `metadataDic`:A dictionary containing the metadata
     """
         #execute a simple query
         queryString = self.__makeLicenseQuery(
@@ -118,7 +119,7 @@ class Chooser():
             uriStr = str(uri[0])
             if "sampling" in uriStr:
                 continue
-            return License(uriStr)
+            return License(uriStr, metadataDic)
 
         return None
 
@@ -141,12 +142,13 @@ class Chooser():
 
         return queryString
 
-    def selectPDTools(self, territory, toolType):
+    def selectPDTools(self, territory, toolType, metadataDic):
         """Select the appropriate public deomain tool from the RDF.
 
         Arguments:
         - `territory`:String-Selected territory
         - `toolType`:int- Select between CC0(2) or PD(3)
+        - `metadataDic`:A dictionary containing the metadata
         """
         #execute a simple query
         queryString = self.__makePDToolQuery()
@@ -160,11 +162,11 @@ class Chooser():
             if (toolType == 2):
                 if "publicdomain" in uriStr:
                     if "zero" in uriStr:
-                        return License(uriStr, territory)
+                        return License(uriStr, metadataDic, territory=territory)
 
             if (toolType == 3):
                 if "publicdomain" in uriStr:
                     if "zero" not in uriStr:
-                        return License(uriStr)
+                        return License(uriStr, metadataDic)
 
         return None
