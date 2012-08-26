@@ -82,6 +82,8 @@ class LicenseChooserDialog():
     LBL_ATTRIBUTE_WORK_TO_URL = "attributeWorkToUrlLabel"
     SOURCE_WORK_URL = "sourceWorkUrl"
     LBL_SOURCE_WORK_URL = "sourceWorkUrlLabel"
+    MORE_PERMISSIONS_URL = "morePermissionsUrl"
+    LBL_MORE_PERMISSIONS_URL = "morePermissionsUrlLabel"
 
     cancelled = True
 
@@ -503,6 +505,7 @@ class LicenseChooserDialog():
                                 self.__makeRectangle(10, 44, 100, 10), 3,
                                 self.metadataTab)
 
+            ##Attribute work to URL
             attWorktoUrlTxt = self.metadataTab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
             attWorktoUrlTxt.setPropertyValue("MultiLine", False)
@@ -523,6 +526,7 @@ class LicenseChooserDialog():
                 ("Attribute work to URL"),
                 self.__makeRectangle(10, 55, 60, 20), 3, self.metadataTab)
 
+            ##Source work URL
             srcWorkUrlTxt = self.metadataTab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
             srcWorkUrlTxt.setPropertyValue("MultiLine", False)
@@ -541,6 +545,28 @@ class LicenseChooserDialog():
               __createAWTControl(srcWorkUrlLblModel, self.LBL_SOURCE_WORK_URL ,
                 ("Source work URL"),
                 self.__makeRectangle(10, 70, 60, 20), 3, self.metadataTab)
+
+            ##More permissions URL
+            mrePermskUrlTxt = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlEditModel")
+            mrePermskUrlTxt.setPropertyValue("MultiLine", False)
+            mrePermskUrlTxt.setPropertyValue("ReadOnly", False)
+            mrePermskUrlTxt.HelpText = ("A URL where a user can find information "
+                                        "about obtaining rights that are not already "
+                                        "permitted by the CC license.")
+            mrePermskUrlTxt = self.__createAWTControl(mrePermskUrlTxt,
+                                               self.MORE_PERMISSIONS_URL, None,
+                                               self.__makeRectangle(
+                                                   80, 85, 120, 10), 3,
+                                                   self.metadataTab)
+
+            mrePermsUrlLblModel = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+
+            mrePermsUrlLbl = self.\
+              __createAWTControl(mrePermsUrlLblModel, self.LBL_MORE_PERMISSIONS_URL ,
+                ("More permissions URL"),
+                self.__makeRectangle(10, 85, 60, 20), 3, self.metadataTab)
             
         except Exception, e:
             traceback.print_exc()
@@ -814,7 +840,8 @@ class LicenseChooserDialog():
         metadataDic = {}
 
         #The list of inputs to check
-        inputs = [self.ATTRIBUTE_WORK_TO_URL, self.SOURCE_WORK_URL]
+        inputs = [self.ATTRIBUTE_WORK_TO_URL, self.SOURCE_WORK_URL,
+                  self.MORE_PERMISSIONS_URL]
 
         for item in inputs:
             text = self.tab.getControl(self.METADATA_TAB_NAME).getControl(item).getText()
