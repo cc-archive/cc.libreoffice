@@ -162,7 +162,8 @@ class Chooser():
             if (toolType == 2):
                 if "publicdomain" in uriStr:
                     if "zero" in uriStr:
-                        return License(uriStr, metadataDic, territory=territory)
+                        return License(uriStr, metadataDic,
+                                       territory=territory)
 
             if (toolType == 3):
                 if "publicdomain" in uriStr:

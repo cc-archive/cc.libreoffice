@@ -54,8 +54,8 @@ class LoProgram(object):
             (docInfo.getPropertySetInfo().hasPropertyByName(
                 self.TERRITORY))):
             try:
-                return License(docInfo.getPropertyValue(self.LICENSE_URI), {}, 
-                        territory = docInfo.getPropertyValue(self.TERRITORY))
+                return License(docInfo.getPropertyValue(self.LICENSE_URI), {},
+                        territory=docInfo.getPropertyValue(self.TERRITORY))
 
             except WrappedTargetException, ex:
                 print "Exception in OOoProgram.getDocumentLicense: "
@@ -89,7 +89,6 @@ class LoProgram(object):
 
         Arguments:
         - `license`:License
-        
         """
         #xDocumentInfoSupplier=self.component
         docInfo = self.component.getDocumentInfo()

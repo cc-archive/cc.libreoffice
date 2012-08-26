@@ -477,13 +477,12 @@ class LicenseChooserDialog():
     def __createMetadataTab(self, ):
         """Creates the Metadata tab
     """
-        
         try:
             infoLabelModel = self.metadataTab.createInstance(
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             infoLabel = self.\
-              __createAWTControl(infoLabelModel, self.LBL_INFO_METADATA ,
+              __createAWTControl(infoLabelModel, self.LBL_INFO_METADATA,
                 ("This part is optional, but filling it out"
                  " will add machine-readable metadata to the"
                  " document and it will help others attribiute you!"),
@@ -494,13 +493,13 @@ class LicenseChooserDialog():
             fontDes.Weight = 150
             infoLabel.FontDescriptor = fontDes
 
-
             chkYesModel = self.metadataTab.createInstance(
                 "com.sun.star.awt.UnoControlCheckBoxModel")
             chkYesModel.Enabled = True
 
             ##TODO: add internationalization support
-            chkYes = self.__createAWTControl(chkYesModel, self.CHK_YES_METADATA,
+            chkYes = self.__createAWTControl(chkYesModel,
+                                             self.CHK_YES_METADATA,
                                 ("I want to add metadata"),
                                 self.__makeRectangle(10, 44, 100, 10), 3,
                                 self.metadataTab)
@@ -510,10 +509,12 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlEditModel")
             attWorktoUrlTxt.setPropertyValue("MultiLine", False)
             attWorktoUrlTxt.setPropertyValue("ReadOnly", False)
-            attWorktoUrlTxt.HelpText = ("The URL to which the work should be" 
-                                   "attributed. For example, the work's page on the author's site.")
+            attWorktoUrlTxt.HelpText = ("The URL to which the work should be"
+                                   "attributed. For example, the work's page"
+                                   " on the author's site.")
             attWorktoUrlTxt = self.__createAWTControl(attWorktoUrlTxt,
-                                               self.ATTRIBUTE_WORK_TO_URL, None,
+                                               self.ATTRIBUTE_WORK_TO_URL,
+                                               None,
                                                self.__makeRectangle(
                                                    80, 55, 120, 10), 3,
                                                    self.metadataTab)
@@ -522,7 +523,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             attWorktoUrlLbl = self.\
-              __createAWTControl(attWorktoUrlLblModel, self.LBL_ATTRIBUTE_WORK_TO_URL ,
+              __createAWTControl(attWorktoUrlLblModel,
+                                 self.LBL_ATTRIBUTE_WORK_TO_URL,
                 ("Attribute work to URL"),
                 self.__makeRectangle(10, 55, 60, 20), 3, self.metadataTab)
 
@@ -531,7 +533,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlEditModel")
             srcWorkUrlTxt.setPropertyValue("MultiLine", False)
             srcWorkUrlTxt.setPropertyValue("ReadOnly", False)
-            srcWorkUrlTxt.HelpText = ("The URL of the work upon which this work is based or derived.")
+            srcWorkUrlTxt.HelpText = ("The URL of the work upon which"
+                                      " this work is based or derived.")
             srcWorkUrlTxt = self.__createAWTControl(srcWorkUrlTxt,
                                                self.SOURCE_WORK_URL, None,
                                                self.__makeRectangle(
@@ -542,7 +545,7 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             srcWorkUrlLbl = self.\
-              __createAWTControl(srcWorkUrlLblModel, self.LBL_SOURCE_WORK_URL ,
+              __createAWTControl(srcWorkUrlLblModel, self.LBL_SOURCE_WORK_URL,
                 ("Source work URL"),
                 self.__makeRectangle(10, 70, 60, 20), 3, self.metadataTab)
 
@@ -551,8 +554,10 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlEditModel")
             mrePermskUrlTxt.setPropertyValue("MultiLine", False)
             mrePermskUrlTxt.setPropertyValue("ReadOnly", False)
-            mrePermskUrlTxt.HelpText = ("A URL where a user can find information "
-                                        "about obtaining rights that are not already "
+            mrePermskUrlTxt.HelpText = ("A URL where a user can find"
+                                        " information "
+                                        "about obtaining rights that"
+                                        " are not already "
                                         "permitted by the CC license.")
             mrePermskUrlTxt = self.__createAWTControl(mrePermskUrlTxt,
                                                self.MORE_PERMISSIONS_URL, None,
@@ -564,14 +569,14 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlFixedTextModel")
 
             mrePermsUrlLbl = self.\
-              __createAWTControl(mrePermsUrlLblModel, self.LBL_MORE_PERMISSIONS_URL ,
+              __createAWTControl(mrePermsUrlLblModel,
+                                 self.LBL_MORE_PERMISSIONS_URL,
                 ("More permissions URL"),
                 self.__makeRectangle(10, 85, 60, 20), 3, self.metadataTab)
-            
+
         except Exception, e:
             traceback.print_exc()
             #raise e
-
 
     def __addListners(self, classType, controlName, listner, page=None):
         """Creates event listners
@@ -613,7 +618,6 @@ class LicenseChooserDialog():
         #print "in close"
         self.selectedMetadata = self.getMetadataValues()
         #print "end close"
-        
         self.dialog.endExecute()
 
     def __getRadioButtonValue(self, rdoName):
@@ -844,16 +848,13 @@ class LicenseChooserDialog():
                   self.MORE_PERMISSIONS_URL]
 
         for item in inputs:
-            text = self.tab.getControl(self.METADATA_TAB_NAME).getControl(item).getText()
+            text = self.tab.getControl(self.METADATA_TAB_NAME).\
+              getControl(item).getText()
 
             #if the text field is not empty
             if text != "":
                 metadataDic[item] = text
-    
         return metadataDic
-        
-        
-        
 
     def showDialog(self):
         """Shows the LicenseChooserDialog
@@ -1052,7 +1053,8 @@ class LicenseChooserDialog():
             if (docProperties.getPropertySetInfo().\
                 hasPropertyByName("license")):
                 self.__setSelectedLicense(
-                    License(str(docProperties.getPropertyValue("license")), {}))
+                    License(str(docProperties.\
+                                getPropertyValue("license")), {}))
             else:
                 self.__setSelectedLicense(
                     License("http://creativecommons.org/licenses/by/3.0/", {}))
@@ -1140,7 +1142,7 @@ class LicenseChooserDialog():
             self.cmbTList.addItemListener(TerritorySelectListener(self))
 
             self.getMetadataValues()
-            
+
             ##execute the dialog
             self.dialog .setVisible(True)
             self.dialog .execute()
@@ -1216,7 +1218,6 @@ class LicenseChooserDialog():
             type = self.dlgLicenseSelector.getPropertyValue("Step")
 
             if (type == 2):
-                
                 return licenseChooser.selectPDTools(self.selectedTerritory, 2,
                                                     self.selectedMetadata)
             elif (type == 3):
