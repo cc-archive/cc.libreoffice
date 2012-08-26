@@ -80,6 +80,8 @@ class LicenseChooserDialog():
 
     ATTRIBUTE_WORK_TO_URL = "attributeWorkToUrl"
     LBL_ATTRIBUTE_WORK_TO_URL = "attributeWorkToUrlLabel"
+    SOURCE_WORK_URL = "sourceWorkUrl"
+    LBL_SOURCE_WORK_URL = "sourceWorkUrlLabel"
 
     cancelled = True
 
@@ -498,19 +500,19 @@ class LicenseChooserDialog():
             ##TODO: add internationalization support
             chkYes = self.__createAWTControl(chkYesModel, self.CHK_YES_METADATA,
                                 ("I want to add metadata"),
-                                self.__makeRectangle(10, 45, 100, 10), 3,
+                                self.__makeRectangle(10, 44, 100, 10), 3,
                                 self.metadataTab)
 
-            xpsTxtDeed = self.metadataTab.createInstance(
+            attWorktoUrlTxt = self.metadataTab.createInstance(
                 "com.sun.star.awt.UnoControlEditModel")
-            xpsTxtDeed.setPropertyValue("MultiLine", False)
-            xpsTxtDeed.setPropertyValue("ReadOnly", False)
-            xpsTxtDeed.HelpText = ("The URL to which the work should be" 
+            attWorktoUrlTxt.setPropertyValue("MultiLine", False)
+            attWorktoUrlTxt.setPropertyValue("ReadOnly", False)
+            attWorktoUrlTxt.HelpText = ("The URL to which the work should be" 
                                    "attributed. For example, the work's page on the author's site.")
-            xpsTxtDeed = self.__createAWTControl(xpsTxtDeed,
+            attWorktoUrlTxt = self.__createAWTControl(attWorktoUrlTxt,
                                                self.ATTRIBUTE_WORK_TO_URL, None,
                                                self.__makeRectangle(
-                                                   80, 55, 100, 10), 3,
+                                                   80, 55, 120, 10), 3,
                                                    self.metadataTab)
 
             attWorktoUrlLblModel = self.metadataTab.createInstance(
@@ -520,6 +522,25 @@ class LicenseChooserDialog():
               __createAWTControl(attWorktoUrlLblModel, self.LBL_ATTRIBUTE_WORK_TO_URL ,
                 ("Attribute work to URL"),
                 self.__makeRectangle(10, 55, 60, 20), 3, self.metadataTab)
+
+            srcWorkUrlTxt = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlEditModel")
+            srcWorkUrlTxt.setPropertyValue("MultiLine", False)
+            srcWorkUrlTxt.setPropertyValue("ReadOnly", False)
+            srcWorkUrlTxt.HelpText = ("The URL of the work upon which this work is based or derived.")
+            srcWorkUrlTxt = self.__createAWTControl(srcWorkUrlTxt,
+                                               self.SOURCE_WORK_URL, None,
+                                               self.__makeRectangle(
+                                                   80, 70, 120, 10), 3,
+                                                   self.metadataTab)
+
+            srcWorkUrlLblModel = self.metadataTab.createInstance(
+                "com.sun.star.awt.UnoControlFixedTextModel")
+
+            srcWorkUrlLbl = self.\
+              __createAWTControl(srcWorkUrlLblModel, self.LBL_SOURCE_WORK_URL ,
+                ("Source work URL"),
+                self.__makeRectangle(10, 70, 60, 20), 3, self.metadataTab)
             
         except Exception, e:
             traceback.print_exc()
@@ -791,12 +812,17 @@ class LicenseChooserDialog():
         """Returns the filled metadata values as a dictionary
     """
         metadataDic = {}
-        text = self.tab.getControl(self.METADATA_TAB_NAME).getControl(self.ATTRIBUTE_WORK_TO_URL).getText()
 
-        #if the text field is not empty
-        if text != "":
-            metadataDic[self.ATTRIBUTE_WORK_TO_URL] = text
+        #The list of inputs to check
+        inputs = [self.ATTRIBUTE_WORK_TO_URL, self.SOURCE_WORK_URL]
 
+        for item in inputs:
+            text = self.tab.getControl(self.METADATA_TAB_NAME).getControl(item).getText()
+
+            #if the text field is not empty
+            if text != "":
+                metadataDic[item] = text
+    
         return metadataDic
         
         
