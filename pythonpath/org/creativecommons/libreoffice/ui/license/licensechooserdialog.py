@@ -505,7 +505,8 @@ class LicenseChooserDialog():
                 "com.sun.star.awt.UnoControlEditModel")
             xpsTxtDeed.setPropertyValue("MultiLine", False)
             xpsTxtDeed.setPropertyValue("ReadOnly", False)
-            #xpsTxtDeed.Text = "F"
+            xpsTxtDeed.HelpText = ("The URL to which the work should be" 
+                                   "attributed. For example, the work's page on the author's site.")
             xpsTxtDeed = self.__createAWTControl(xpsTxtDeed,
                                                self.ATTRIBUTE_WORK_TO_URL, None,
                                                self.__makeRectangle(
